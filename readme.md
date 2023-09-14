@@ -7,7 +7,7 @@ make shell
   # inside container
   npm run dev
 ```
-Application will be running under [localhost:53852](localhost:3851) and [http://keating.blumilk.localhost/](http://keating.blumilk.localhost/) in Blumilk traefik environment. If you don't have a Blumilk traefik environment set up, follow the instructions in this [repository](https://github.com/blumilksoftware/environment).
+Application will be running under [localhost:53851](http://localhost:53851) and [http://keating.blumilk.localhost/](http://keating.blumilk.localhost/) in Blumilk traefik environment. If you don't have a Blumilk traefik environment set up, follow the instructions in this [repository](https://github.com/blumilksoftware/environment).
 
 
 ### Commands
@@ -57,6 +57,6 @@ npm run lintf
 
 | service  | container name               | default host port               |
 |:---------|------------------------------|---------------------------------|
-| app      | keating-app-dev     | [13851](http://localhost:53851) |
+| app      | keating-app-dev     | [53851](http://localhost:53851) |
 | database | keating-db-dev      | 53853                           |
 | redis    | keating-redis-dev   | 53852                           |
