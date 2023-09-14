@@ -10,4 +10,4 @@ $config = new Config(
     paths: $paths->add("codestyle.php"),
 );
 
-return $config->purgeMode()->config();
+return $config->config();

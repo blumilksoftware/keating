@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 return [
     "default" => env("BROADCAST_DRIVER", "null"),
-
     "connections" => [
         "pusher" => [
             "driver" => "pusher",
@@ -22,21 +21,17 @@ return [
             "client_options" => [
             ],
         ],
-
         "ably" => [
             "driver" => "ably",
             "key" => env("ABLY_KEY"),
         ],
-
         "redis" => [
             "driver" => "redis",
             "connection" => "default",
         ],
-
         "log" => [
             "driver" => "log",
         ],
-
         "null" => [
             "driver" => "null",
         ],
