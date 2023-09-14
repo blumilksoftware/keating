@@ -1,8 +1,8 @@
-FROM composer/composer:2.5.7-bin as composer-bin
+FROM composer/composer:2.6.2-bin as composer-bin
 
-FROM node:20.2.0-bullseye-slim as node
+FROM node:20.6.1-bullseye-slim as node
 
-FROM php:8.2.5-fpm-bullseye
+FROM php:8.2.10-fpm-bullseye
 
 COPY --from=composer-bin ./composer /usr/bin/composer
 
@@ -32,8 +32,8 @@ RUN ln --symbolic /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/
 RUN mv "${PHP_INI_DIR}/php.ini-development" "${PHP_INI_DIR}/php.ini"
 
 # For other versions check: http://nginx.org/packages/mainline/debian/pool/nginx/n/nginx/
-ARG NGINX_VERSION="1.25.0-1~bullseye"
-ARG PHPREDIS_VERSION=5.3.7
+ARG NGINX_VERSION="1.25.2-1~bullseye"
+ARG PHPREDIS_VERSION=6.0.0
 
 RUN apt-get update \
     && apt-get install --assume-yes gpg \
