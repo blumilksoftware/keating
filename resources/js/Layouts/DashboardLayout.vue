@@ -73,10 +73,7 @@ const sidebarOpen = ref(false)
               </TransitionChild>
               <!-- Sidebar component, swap this element with another sidebar if you like -->
               <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2">
-                <div class="flex h-16 shrink-0 items-center">
-                  <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=sky&shade=600" alt="Your Company">
-                </div>
-                <nav class="flex flex-1 flex-col">
+                <nav class="mt-6 flex flex-1 flex-col">
                   <ul role="list" class="flex flex-1 flex-col gap-y-7">
                     <li v-for="(section, i) in navigation" :key="i">
                       <div class="text-xs font-semibold leading-6 text-gray-400">
