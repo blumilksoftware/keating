@@ -67,7 +67,6 @@ defineProps({
           <article v-for="section in sections" :key="section.title" class="flex max-w-xl flex-col items-start justify-between">
             <div class="group relative">
               <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                <span class="absolute inset-0" />
                 {{ section.header }}
               </h3>
               <p v-for="(paragraph, i) in section.paragraphs" :key="i" class="mt-5 text-sm leading-6 text-gray-600">
