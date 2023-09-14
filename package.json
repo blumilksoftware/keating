@@ -1,5 +1,5 @@
 {
-    "name": "escooters",
+    "name": "keating",
     "private": true,
     "scripts": {
         "dev": "vite",
