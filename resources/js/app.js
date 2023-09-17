@@ -1,5 +1,6 @@
-import { createInertiaApp, Head, Link } from '@inertiajs/vue3'
+import { createInertiaApp, Head, Link } from '@inertiajs/inertia-vue3'
 import { createApp, h } from 'vue'
+import Toast from 'vue-toastification'
 import '../css/app.css'
 
 createInertiaApp({
@@ -16,6 +17,12 @@ createInertiaApp({
   setup({ el, App, props, plugin }) {
     return createApp({ render: () => h(App, props) })
       .use(plugin)
+      .use(Toast, {
+        position: 'bottom-right',
+        maxToast: 5,
+        timeout: 3000,
+        pauseOnFocusLoss: false,
+      })
       .component('InertiaLink', Link)
       .component('InertiaHead', Head)
       .mount(el)

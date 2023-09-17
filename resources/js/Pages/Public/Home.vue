@@ -1,5 +1,5 @@
 <script setup>
-import PublicLayout from '../../Layouts/PublicLayout.vue'
+import PublicLayout from '@/Layouts/PublicLayout.vue'
 
 defineProps({
   title: String,
