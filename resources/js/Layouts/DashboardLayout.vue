@@ -56,14 +56,25 @@ const sidebarOpen = ref(false)
   <div>
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog as="div" class="relative z-50 lg:hidden" @close="sidebarOpen = false">
-        <TransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="transition-opacity ease-linear duration-300" leave-from="opacity-100" leave-to="opacity-0">
+        <TransitionChild as="template" enter="transition-opacity ease-linear duration-300"
+                         enter-from="opacity-0" enter-to="opacity-100"
+                         leave="transition-opacity ease-linear duration-300" leave-from="opacity-100"
+                         leave-to="opacity-0"
+        >
           <div class="fixed inset-0 bg-gray-900/80" />
         </TransitionChild>
 
         <div class="fixed inset-0 flex">
-          <TransitionChild as="template" enter="transition ease-in-out duration-300 transform" enter-from="-translate-x-full" enter-to="translate-x-0" leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0" leave-to="-translate-x-full">
+          <TransitionChild as="template" enter="transition ease-in-out duration-300 transform"
+                           enter-from="-translate-x-full" enter-to="translate-x-0"
+                           leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0"
+                           leave-to="-translate-x-full"
+          >
             <DialogPanel class="relative mr-16 flex w-full max-w-xs flex-1">
-              <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
+              <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0"
+                               enter-to="opacity-100" leave="ease-in-out duration-300"
+                               leave-from="opacity-100" leave-to="opacity-0"
+              >
                 <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
                   <button type="button" class="-m-2.5 p-2.5" @click="sidebarOpen = false">
                     <span class="sr-only">Close sidebar</span>
@@ -81,8 +92,13 @@ const sidebarOpen = ref(false)
                       </div>
                       <ul role="list" class="-mx-2 space-y-1">
                         <li v-for="item in section.elements" :key="item.name">
-                          <a :href="item.href" :class="[item.current ? 'bg-gray-50 text-sky-600' : 'text-gray-700 hover:bg-gray-50 hover:text-sky-600', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
-                            <component :is="item.icon" :class="[item.current ? 'text-sky-600' : 'text-gray-400 group-hover:text-sky-600', 'h-6 w-6 shrink-0']" aria-hidden="true" />
+                          <a :href="item.href"
+                             :class="[item.current ? 'bg-gray-50 text-sky-600' : 'text-gray-700 hover:bg-gray-50 hover:text-sky-600', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']"
+                          >
+                            <component :is="item.icon"
+                                       :class="[item.current ? 'text-sky-600' : 'text-gray-400 group-hover:text-sky-600', 'h-6 w-6 shrink-0']"
+                                       aria-hidden="true"
+                            />
                             {{ item.name }}
                           </a>
                         </li>
@@ -108,18 +124,28 @@ const sidebarOpen = ref(false)
               </div>
               <ul role="list" class="-mx-2 space-y-1">
                 <li v-for="item in section.elements" :key="item.name">
-                  <a :href="item.href" :class="[item.current ? 'bg-gray-50 text-sky-600' : 'text-gray-700 hover:bg-gray-50 hover:text-sky-600', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
-                    <component :is="item.icon" :class="[item.current ? 'text-sky-600' : 'text-gray-400 group-hover:text-sky-600', 'h-6 w-6 shrink-0']" aria-hidden="true" />
+                  <a :href="item.href"
+                     :class="[item.current ? 'bg-gray-50 text-sky-600' : 'text-gray-700 hover:bg-gray-50 hover:text-sky-600', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']"
+                  >
+                    <component :is="item.icon"
+                               :class="[item.current ? 'text-sky-600' : 'text-gray-400 group-hover:text-sky-600', 'h-6 w-6 shrink-0']"
+                               aria-hidden="true"
+                    />
                     {{ item.name }}
                   </a>
                 </li>
               </ul>
             </li>
             <li class="-mx-6 mt-auto">
-              <a href="#" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
+              <InertiaLink
+                as="button"
+                method="post"
+                class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
+                href="/logout"
+              >
                 <PowerIcon class="h-6 w-6 text-gray-700" title="Wyloguj się" />
                 <span aria-hidden="true">Wyloguj się</span>
-              </a>
+              </InertiaLink>
             </li>
           </ul>
         </nav>
@@ -134,10 +160,14 @@ const sidebarOpen = ref(false)
       <div class="flex-1 text-sm font-semibold leading-6 text-gray-900">
         Dashboard
       </div>
-      <a href="#">
+      <InertiaLink
+        as="button"
+        method="post"
+        href="/logout"
+      >
         <span class="sr-only">Wyloguj się</span>
         <PowerIcon class="h-6 w-6 text-gray-700" title="Wyloguj się" />
-      </a>
+      </InertiaLink>
     </div>
 
     <main class="py-10 lg:pl-72">
