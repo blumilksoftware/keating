@@ -50,7 +50,11 @@ class StudentController extends Controller
             ->with("success", "Zaktualizowano studenta");
     }
 
-    public function destroy(): void
+    public function destroy(Student $student): RedirectResponse
     {
+        $student->delete();
+
+        return redirect()->back()
+            ->with("success", "Usunięto studenta");
     }
 }
