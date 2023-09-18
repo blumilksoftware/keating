@@ -42,11 +42,11 @@ class HomeController extends Controller
                 ],
             ],
             "counters" => [
-                ["id" => 1, "name" => 'lat prowadzenia zajęć dydaktycznych na uczelni', "value" => 7],
-                ["id" => 2, "name" => 'kursów prowadzonych w tym semestrze', "value" => 5],
-                ["id" => 3, "name" => 'studentów na wykładach i innych zajęciach', "value" => 345],
-                ["id" => 4, "name" => 'średnia ocena wystawiona przez studentów w ankiecie nt. jakości kształcenia', "value" => 4.93],
-            ]
+                ["id" => 1, "name" => "lat prowadzenia zajęć dydaktycznych na uczelni", "value" => 7],
+                ["id" => 2, "name" => "kursów prowadzonych w tym semestrze", "value" => 5],
+                ["id" => 3, "name" => "studentów na wykładach i innych zajęciach", "value" => 345],
+                ["id" => 4, "name" => "średnia ocena wystawiona przez studentów w ankiecie nt. jakości kształcenia", "value" => 4.93],
+            ],
         ]);
     }
 }
