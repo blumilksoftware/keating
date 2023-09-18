@@ -1,9 +1,15 @@
 <script setup>
 import PublicLayout from '../../Layouts/PublicLayout.vue'
+import {
+  EnvelopeIcon
+} from '@heroicons/vue/24/outline'
+import BackgroundGrid from "../../Components/BackgroundGrid.vue";
+import SectionHeader from "../../Components/SectionHeader.vue";
 
 defineProps({
   title: String,
   name: String,
+  email: String,
   department: String,
   university: String,
   universityLogo: String,
@@ -15,23 +21,8 @@ defineProps({
 <template>
   <PublicLayout>
     <div class="relative isolate bg-white pt-14">
-      <svg
-        class="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
-        aria-hidden="true">
-        <defs>
-          <pattern id="83fd4e5a-9d52-42fc-97b6-718e5d7ee527" width="200" height="200" x="50%" y="-1"
-                   patternUnits="userSpaceOnUse">
-            <path d="M100 200V.5M.5 .5H200" fill="none"/>
-          </pattern>
-        </defs>
-        <svg x="50%" y="-1" class="overflow-visible fill-gray-50">
-          <path
-            d="M-100.5 0h201v201h-201Z M699.5 0h201v201h-201Z M499.5 400h201v201h-201Z M-300.5 600h201v201h-201Z"
-            stroke-width="0"/>
-        </svg>
-        <rect width="100%" height="100%" stroke-width="0" fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)"/>
-      </svg>
-      <img src="/cwup.png" alt="" class="w-[50%] absolute right-0 opacity-10">
+      <BackgroundGrid></BackgroundGrid>
+      <img src="/cwup.png" alt="" class="absolute hidden lg:block opacity-10 w-[50%] right-0 lg:mt-16 xl:mt-10 xl:mt-0 2xl:mt-0">
       <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-32">
         <div class="mx-auto max-w-7xl text-center lg:mx-0 lg:flex-auto">
           <h1 class="mx-auto mt-10 max-w-4xl text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
@@ -50,31 +41,12 @@ defineProps({
     </div>
 
     <div class="relative isolate bg-gradient-to-r from-gray-50 to-gray-100 py-24 sm:py-32">
-      <svg
-        class="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_left,white,transparent)]"
-        aria-hidden="true">
-        <defs>
-          <pattern id="83fd4e5a-9d52-42fc-97b6-718e5d7ee527" width="200" height="200" x="50%" y="-1"
-                   patternUnits="userSpaceOnUse">
-            <path d="M100 200V.5M.5 .5H200" fill="none"/>
-          </pattern>
-        </defs>
-        <svg x="50%" y="-1" class="overflow-visible fill-gray-50">
-          <path
-            d="M-100.5 0h201v201h-201Z M699.5 0h201v201h-201Z M499.5 400h201v201h-201Z M-300.5 600h201v201h-201Z"
-            stroke-width="0"/>
-        </svg>
-        <rect width="100%" height="100%" stroke-width="0" fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)"/>
-      </svg>
+      <BackgroundGrid mask-direction="left"></BackgroundGrid>
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl lg:mx-0">
-          <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            O mnie
-          </h2>
-          <p class="mt-1 text-lg leading-8 text-gray-600">
-            Kilka słów o mnie.
-          </p>
-        </div>
+        <SectionHeader>
+          <template v-slot:header>O mnie</template>
+          <template v-slot:subheader>Kilka słów o mnie.</template>
+        </SectionHeader>
         <div
           class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 pt-10 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           <article v-for="section in sections" :key="section.title"
@@ -108,20 +80,17 @@ defineProps({
       </div>
     </div>
 
-    <div class="bg-white py-16 sm:py-24 lg:py-32">
-      <div class="w-full flex gap-16 items-center">
-        <div class="w-2/5 flex flex-col gap-1 text-right">
-          <h2 class="text-4xl font-bold inline sm:block lg:inline xl:block">Jakiekolwiek pytania?</h2>
-          <h3 class="text-xl font-semibold inline sm:block lg:inline xl:block">Wystarczy napisać mejla.</h3>
-        </div>
-        <div class="flex-1">
-          <a href="mailto:krzysztof.rewak@collegiumwitelona.pl" class="flex items-end justify-content">
-            <span class="text-5xl font-bold">
-              krzysztof.rewak
-            </span>
-            <span class="text-3xl">
-              @collegiumwitelona.pl
-            </span>
+    <div class="relative isolate bg-white py-24 sm:py-32">
+      <BackgroundGrid></BackgroundGrid>
+      <div class="mx-auto max-w-7xl px-6 xl:px-8 xl:grid xl:grid-cols-2">
+        <SectionHeader>
+          <template v-slot:header>Kontakt</template>
+          <template v-slot:subheader>Więcej szczegółów w zakładce Kontakt.</template>
+        </SectionHeader>
+        <div class="py-12 xl:py-0 mx-auto max-w-2xl xl:mx-0 flex">
+          <a :href="'mailto:' + email" class="w-full text-xl font-bold tracking-tight text-gray-900 text-center sm:text-2xl flex items-center justify-center">
+            <EnvelopeIcon class="w-12 mr-2"></EnvelopeIcon>
+            {{ email.split('@')[0] }}<span class="font-normal">@{{ email.split('@')[1] }}</span>
           </a>
         </div>
       </div>

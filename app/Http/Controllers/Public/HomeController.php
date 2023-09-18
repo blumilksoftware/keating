@@ -14,6 +14,7 @@ class HomeController extends Controller
         return inertia("Public/Home", [
             "title" => "mgr inż.",
             "name" => "Krzysztof Rewak",
+            "email" => "krzysztof.rewak@collegiumwitelona.pl",
             "department" => "Zakład Informatyki, Wydział Nauk Technicznych i Ekonomicznych",
             "university" => "Collegium Witelona Uczelnia Państwowa",
             "universityLogo" => "https://irg2023.collegiumwitelona.pl/assets/logos/cwup.png",
@@ -43,7 +44,7 @@ class HomeController extends Controller
             "counters" => [
                 ["id" => 1, "name" => 'lat prowadzenia zajęć dydaktycznych na uczelni', "value" => 7],
                 ["id" => 2, "name" => 'kursów prowadzonych w tym semestrze', "value" => 5],
-                ["id" => 3, "name" => 'studentów spotkanych na wykładach i innych zajęciach', "value" => 345],
+                ["id" => 3, "name" => 'studentów na wykładach i innych zajęciach', "value" => 345],
                 ["id" => 4, "name" => 'średnia ocena wystawiona przez studentów w ankiecie nt. jakości kształcenia', "value" => 4.93],
             ]
         ]);
