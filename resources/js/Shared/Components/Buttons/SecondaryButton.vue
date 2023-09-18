@@ -19,7 +19,7 @@ defineProps({
 </script>
 
 <template>
-  <Button class="bg-gray-700 text-white hover:bg-gray-600 focus:ring-gray-700" :disabled="disabled" :href="href" :method="method">
+  <Button class="!hover:bg-gray-600 !focus:ring-gray-700 !bg-gray-700 text-white" :disabled="disabled" :href="href" :method="method">
     <slot />
   </Button>
 </template>

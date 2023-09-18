@@ -9,23 +9,27 @@ import SecondaryButton from '@/Shared/Components/Buttons/SecondaryButton.vue'
 import { useForm } from '@inertiajs/inertia-vue3'
 import FormError from '@/Shared/Forms/FormError.vue'
 
-const form = useForm({
-  name: '',
-  surname: '',
-  index_number: '',
+const props = defineProps({
+  student: Object,
 })
 
-function createStudent() {
-  form.post('/students')
+const form = useForm({
+  name: props.student.name,
+  surname: props.student.surname,
+  index_number: props.student.index_number,
+})
+
+function updateStudent() {
+  form.patch(`/students/${props.student.id}`)
 }
 </script>
 
 <template>
   <DashboardLayout>
     <h3 class="text-base font-semibold leading-6 text-gray-900">
-      Dodawanie studenta
+      Edycja studenta
     </h3>
-    <form @submit.prevent="createStudent">
+    <form @submit.prevent="updateStudent">
       <Section class="mt-3">
         <div class="flex justify-between">
           <FormGroup>
@@ -55,7 +59,7 @@ function createStudent() {
             Cofnij
           </SecondaryButton>
           <SubmitButton>
-            Utwórz
+            Zapisz
           </SubmitButton>
         </div>
       </Section>
