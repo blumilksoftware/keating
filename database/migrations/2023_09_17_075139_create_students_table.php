@@ -13,7 +13,7 @@ return new class() extends Migration {
             $table->ulid("id")->primary();
             $table->string("name");
             $table->string("surname");
-            $table->integer("index_number");
+            $table->string("index_number")->unique();
             $table->timestamps();
         });
     }

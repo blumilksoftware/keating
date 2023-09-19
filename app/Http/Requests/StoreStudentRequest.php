@@ -13,7 +13,7 @@ class StoreStudentRequest extends FormRequest
         return [
             "name" => ["required", "max:255"],
             "surname" => ["required", "max:255"],
-            "index_number" => ["required", "numeric", "max:999999", "unique:students,index_number"],
+            "index_number" => ["required", "max:255", "unique:students,index_number"],
         ];
     }
 }

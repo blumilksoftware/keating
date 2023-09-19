@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { Link } from '@inertiajs/vue3'
+import { Link } from '@inertiajs/inertia-vue3'
 import { Dialog, DialogPanel } from '@headlessui/vue'
 import { EllipsisHorizontalIcon, Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 

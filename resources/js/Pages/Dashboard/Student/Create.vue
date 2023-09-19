@@ -16,7 +16,7 @@ const form = useForm({
 })
 
 function createStudent() {
-  form.post('/students')
+  form.post('/dashboard/students')
 }
 </script>
 
@@ -44,14 +44,14 @@ function createStudent() {
           </FormGroup>
           <FormGroup>
             <FormLabel for="index_number">
-              Indeks
+              Numer indeksu
             </FormLabel>
             <TextInput id="index_number" v-model="form.index_number" type="number" min="1" :error="form.errors.index_number" />
             <FormError :error="form.errors.index_number" class="mt-2" />
           </FormGroup>
         </div>
         <div class="flex justify-end space-x-3 py-3">
-          <SecondaryButton href="/students">
+          <SecondaryButton href="/dashboard/students">
             Cofnij
           </SecondaryButton>
           <SubmitButton>
