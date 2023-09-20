@@ -10,4 +10,8 @@ module.exports = {
     plugins: [
         require('@tailwindcss/forms'),
     ],
+    safelist: [
+        '[mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]',
+        '[mask-image:radial-gradient(100%_100%_at_top_left,white,transparent)]',
+    ],
 }
