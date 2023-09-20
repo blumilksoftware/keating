@@ -35,7 +35,7 @@ const navigation = [
   {
     title: 'Ogólne',
     elements: [
-      { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
+      { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
       { name: 'Ustawienia', href: '#', icon: Cog6ToothIcon, current: false },
       { name: 'Aktualności', href: '#', icon: NewspaperIcon, current: false },
       { name: 'FAQ', href: '#', icon: QuestionMarkCircleIcon, current: false },
@@ -45,7 +45,7 @@ const navigation = [
   {
     title: 'Uczelnia',
     elements: [
-      { name: 'Studenci', href: '#', icon: UsersIcon, current: false },
+      { name: 'Studenci', href: '/dashboard/students', icon: UsersIcon, current: false },
       { name: 'Kursy w semestrze', href: '#', icon: BookmarkSquareIcon, current: false },
     ],
   },
@@ -111,10 +111,10 @@ watch(() => props.flash, (flash) => {
                       </div>
                       <ul role="list" class="-mx-2 space-y-1">
                         <li v-for="item in section.elements" :key="item.name">
-                          <a :href="item.href" :class="[item.current ? 'bg-gray-50 text-sky-600' : 'text-gray-700 hover:bg-gray-50 hover:text-sky-600', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
+                          <InertiaLink :href="item.href" :class="[item.current ? 'bg-gray-50 text-sky-600' : 'text-gray-700 hover:bg-gray-50 hover:text-sky-600', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
                             <component :is="item.icon" :class="[item.current ? 'text-sky-600' : 'text-gray-400 group-hover:text-sky-600', 'h-6 w-6 shrink-0']" aria-hidden="true" />
                             {{ item.name }}
-                          </a>
+                          </InertiaLink>
                         </li>
                       </ul>
                     </li>
@@ -138,18 +138,22 @@ watch(() => props.flash, (flash) => {
               </div>
               <ul role="list" class="-mx-2 space-y-1">
                 <li v-for="item in section.elements" :key="item.name">
-                  <a :href="item.href" :class="[item.current ? 'bg-gray-50 text-sky-600' : 'text-gray-700 hover:bg-gray-50 hover:text-sky-600', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
+                  <InertiaLink :href="item.href" :class="[item.current ? 'bg-gray-50 text-sky-600' : 'text-gray-700 hover:bg-gray-50 hover:text-sky-600', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
                     <component :is="item.icon" :class="[item.current ? 'text-sky-600' : 'text-gray-400 group-hover:text-sky-600', 'h-6 w-6 shrink-0']" aria-hidden="true" />
                     {{ item.name }}
-                  </a>
+                  </InertiaLink>
                 </li>
               </ul>
             </li>
-            <li class="-mx-6 mt-auto">
-              <a href="#" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
+            <li class="-mx-6 mb-3 mt-auto">
+              <InertiaLink href="/" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
+                <HomeIcon class="h-6 w-6 text-gray-700" title="Strona główna" />
+                <span aria-hidden="true">Strona główna</span>
+              </InertiaLink>
+              <InertiaLink href="#" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
                 <PowerIcon class="h-6 w-6 text-gray-700" title="Wyloguj się" />
                 <span aria-hidden="true">Wyloguj się</span>
-              </a>
+              </InertiaLink>
             </li>
           </ul>
         </nav>
@@ -164,6 +168,10 @@ watch(() => props.flash, (flash) => {
       <div class="flex-1 text-sm font-semibold leading-6 text-gray-900">
         Dashboard
       </div>
+      <InertiaLink href="/">
+        <span class="sr-only">Strona główna</span>
+        <HomeIcon class="h-6 w-6 text-gray-700" title="Strona główna" />
+      </InertiaLink>
       <a href="#">
         <span class="sr-only">Wyloguj się</span>
         <PowerIcon class="h-6 w-6 text-gray-700" title="Wyloguj się" />
