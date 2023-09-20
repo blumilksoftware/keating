@@ -1,5 +1,5 @@
 <script setup>
-import DashboardLayout from '../../Layouts/DashboardLayout.vue'
+import DashboardLayout from '@/Layouts/DashboardLayout.vue'
 
 defineProps({
   counters: Array,

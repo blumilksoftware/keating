@@ -18,6 +18,18 @@ import {
   CodeBracketSquareIcon,
   Cog6ToothIcon,
 } from '@heroicons/vue/24/outline'
+import { watch } from 'vue'
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
+const props = defineProps({
+  flash: {
+    type: Object,
+    default () {
+      return Object
+    },
+  },
+})
 
 const navigation = [
   {
@@ -50,6 +62,24 @@ const navigation = [
 ]
 
 const sidebarOpen = ref(false)
+
+watch(() => props.flash, (flash) => {
+  if (!flash) {
+    return
+  }
+
+  if (flash.success) {
+    toast.success(flash.success)
+  }
+
+  if (flash.info) {
+    toast.info(flash.info)
+  }
+
+  if (flash.error) {
+    toast.error(flash.error)
+  }
+}, { immediate: true })
 </script>
 
 <template>
