@@ -1,18 +1,17 @@
 <script setup>
-import { computed } from 'vue'
-
-const props = defineProps({
+defineProps({
   maskDirection: {
     type: String,
     default: 'right',
   },
 })
-
-const maskImage = computed(() => '[mask-image:radial-gradient(100%_100%_at_top_' + props.maskDirection + ',white,transparent)]')
 </script>
 
 <template>
-  <svg class="absolute inset-0 -z-10 h-full w-full stroke-gray-200" :class="maskImage" aria-hidden="true">
+  <svg class="absolute inset-0 -z-10 h-full w-full stroke-gray-200"
+       :class="'[mask-image:radial-gradient(100%_100%_at_top_' + maskDirection + ',white,transparent)]'"
+       aria-hidden="true"
+  >
     <defs>
       <pattern id="83fd4e5a-9d52-42fc-97b6-718e5d7ee527" width="200" height="200" x="50%" y="-1"
                patternUnits="userSpaceOnUse"
