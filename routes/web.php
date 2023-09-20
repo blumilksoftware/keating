@@ -13,8 +13,14 @@ use Illuminate\Support\Facades\Route;
 Route::get("/", HomeController::class);
 Route::get("/aktualnosci", NewsController::class);
 
-Route::prefix("dashboard")->group(function (): void {
-    Route::get("/", DashboardController::class);
+Route::middleware("guest")->group(function (): void {
+    Route::get("/login", [LoginController::class, "create"])->name("login");
+    Route::post("/login", [LoginController::class, "store"]);
+});
+
+Route::middleware("auth")->prefix("dashboard")->group(function (): void {
+    Route::get("/", DashboardController::class)->name("dashboard");
+    Route::post("/logout", LogoutController::class);
     Route::controller(StudentController::class)->group(function (): void {
         Route::get("/students", "index")->name("students.index");
         Route::get("/students/create", "create")->name("students.create");
@@ -25,12 +31,5 @@ Route::prefix("dashboard")->group(function (): void {
     });
 });
 
-Route::middleware("guest")->group(function (): void {
-    Route::get("/login", [LoginController::class, "create"])->name("login");
-    Route::post("/login", [LoginController::class, "store"]);
-});
 
-Route::middleware("auth")->group(function (): void {
-    Route::get("/dashboard", DashboardController::class)->name("dashboard");
-    Route::post("/logout", LogoutController::class);
-});
+

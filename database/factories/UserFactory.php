@@ -22,7 +22,7 @@ class UserFactory extends Factory
     {
         return [
             "name" => fake()->name(),
-            "email" => "user@example.com",
+            "email" => fake()->email(),
             "password" => Hash::make("password"),
         ];
     }

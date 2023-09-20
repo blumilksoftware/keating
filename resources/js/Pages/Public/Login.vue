@@ -1,6 +1,6 @@
 <script setup>
 import PublicLayout from '../../Layouts/PublicLayout.vue'
-import { useForm } from '@inertiajs/vue3'
+import { useForm } from '@inertiajs/inertia-vue3'
 
 defineProps({
   universityLogo: String,

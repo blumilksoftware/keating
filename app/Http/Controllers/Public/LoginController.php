@@ -15,6 +15,8 @@ class LoginController extends Controller
     public function create(): Response
     {
         return inertia("Public/Login", [
+            "department" => "Zakład Informatyki, Wydział Nauk Technicznych i Ekonomicznych",
+            "university" => "Collegium Witelona Uczelnia Państwowa",
             "universityLogo" => "https://irg2023.collegiumwitelona.pl/assets/logos/cwup.png",
         ]);
     }
