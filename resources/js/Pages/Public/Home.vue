@@ -1,10 +1,10 @@
 <script setup>
-import PublicLayout from '../../Layouts/PublicLayout.vue'
+import PublicLayout from '@/Layouts/PublicLayout.vue'
 import {
   EnvelopeIcon,
 } from '@heroicons/vue/24/outline'
-import BackgroundGrid from '../../Components/BackgroundGrid.vue'
-import SectionHeader from '../../Components/SectionHeader.vue'
+import BackgroundGrid from '@/Components/BackgroundGrid.vue'
+import SectionHeader from '@/Components/SectionHeader.vue'
 
 defineProps({
   title: String,
