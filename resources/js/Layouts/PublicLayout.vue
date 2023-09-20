@@ -2,7 +2,6 @@
 import {ref} from 'vue'
 import {Link} from '@inertiajs/inertia-vue3'
 import {Dialog, DialogPanel} from '@headlessui/vue'
-import {computed} from 'vue'
 import {EllipsisHorizontalIcon, Bars3Icon, XMarkIcon} from '@heroicons/vue/24/outline'
 
 const navigation = [
@@ -16,9 +15,6 @@ const navigation = [
 
 const mobileMenuOpen = ref(false)
 
-const page = usePage()
-
-const user = computed(() => page.props.auth.user)
 </script>
 
 <template>

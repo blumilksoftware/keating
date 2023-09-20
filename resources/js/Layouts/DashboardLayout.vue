@@ -17,6 +17,7 @@ import {
   ClipboardIcon,
   CodeBracketSquareIcon,
   Cog6ToothIcon,
+  LockOpenIcon,
 } from '@heroicons/vue/24/outline'
 import { watch } from 'vue'
 import { useToast } from 'vue-toastification'
@@ -37,6 +38,7 @@ const navigation = [
     elements: [
       { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
       { name: 'Ustawienia', href: '#', icon: Cog6ToothIcon, current: false },
+      { name: 'Aktualizacja hasła', href: '#', icon: LockOpenIcon, current: false },
       { name: 'Aktualności', href: '#', icon: NewspaperIcon, current: false },
       { name: 'FAQ', href: '#', icon: QuestionMarkCircleIcon, current: false },
       { name: 'Formy kontaktu', href: '#', icon: AtSymbolIcon, current: false },
