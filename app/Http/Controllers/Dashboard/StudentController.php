@@ -8,15 +8,29 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Response;
 
 class StudentController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $searchText = $request->query("search");
+        $students = Student::query()
+            ->when(
+                $searchText !== null,
+                fn(Builder $query): Builder => $query
+                    ->where("name", "ILIKE", "%$searchText%")
+                    ->orWhere("surname", "ILIKE", "%$searchText%")
+                    ->orWhere("index_number", "LIKE", "%$searchText%"),
+            )
+            ->paginate()
+            ->withQueryString();
+
         return inertia("Dashboard/Student/Index", [
-            "students" => Student::query()->paginate(),
+            "students" => $students,
         ]);
     }
 
