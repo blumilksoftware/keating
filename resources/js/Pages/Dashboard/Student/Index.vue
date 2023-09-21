@@ -9,14 +9,30 @@ import Section from '@/Shared/Components/Section.vue'
 import Button from '@/Shared/Components/Buttons/Button.vue'
 import EmptyState from '@/Shared/Components/EmptyState.vue'
 import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { Inertia } from '@inertiajs/inertia'
+import { debounce } from 'lodash'
+import TextInput from '@/Shared/Forms/TextInput.vue'
+import { useForm } from '@inertiajs/inertia-vue3'
 
-defineProps({
+const props = defineProps({
   students: Object,
+  search: String,
 })
 const showModal = ref(false)
 const studentToDeleteId = ref(0)
+const form = useForm({
+  search: props.search,
+})
 
+watch(form, debounce(() => {
+  Inertia.get('/dashboard/students', {
+    search: form.search,
+  }, {
+    preserveState: true,
+    replace: true,
+  })
+}, 300), { deep: true })
 </script>
 
 <template>
@@ -29,6 +45,7 @@ const studentToDeleteId = ref(0)
         Dodaj
       </Button>
     </div>
+    <TextInput id="filter" v-model="form.search" placeholder="Szukaj" type="search" class="max-w-xs" />
     <div v-if="students.data.length">
       <TableWrapper class="mt-2">
         <template #header>
