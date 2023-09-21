@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\PasswordUpdateController;
 use App\Http\Controllers\Dashboard\StudentController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\NewsController;
@@ -20,6 +21,8 @@ Route::middleware("guest")->group(function (): void {
 
 Route::middleware("auth")->prefix("dashboard")->group(function (): void {
     Route::get("/", DashboardController::class)->name("dashboard");
+    Route::get("/password", [PasswordUpdateController::class, "edit"])->name("password.edit");
+    Route::post("/password/update", [PasswordUpdateController::class, "update"])->name("password.update");
     Route::post("/logout", LogoutController::class);
     Route::controller(StudentController::class)->group(function (): void {
         Route::get("/students", "index")->name("students.index");
