@@ -9,7 +9,8 @@ use App\Http\Controllers\Public\NewsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/", HomeController::class);
-Route::get("/aktualnosci", NewsController::class);
+Route::get("/aktualnosci", [NewsController::class, "index"]);
+Route::get("/aktualnosci/{slug}", [NewsController::class, "get"]);
 
 Route::prefix("dashboard")->group(function (): void {
     Route::get("/", DashboardController::class);
