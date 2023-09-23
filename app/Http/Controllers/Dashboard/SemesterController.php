@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Actions\ActivateSemesterAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SemesterRequest;
 use App\Http\Resources\SemesterResource;
@@ -58,5 +59,13 @@ class SemesterController extends Controller
 
         return redirect()->back()
             ->with("success", "Usunięto semestr");
+    }
+
+    public function toggleActive(Semester $semester, ActivateSemesterAction $activateSemesterAction): RedirectResponse
+    {
+        $activateSemesterAction->execute($semester);
+
+        return redirect()->back()
+            ->with("success", "Semestr aktywny");
     }
 }

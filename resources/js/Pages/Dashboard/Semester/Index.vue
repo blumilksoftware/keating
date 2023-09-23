@@ -8,6 +8,7 @@ import Button from '@/Shared/Components/Buttons/Button.vue'
 import EmptyState from '@/Shared/Components/EmptyState.vue'
 import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
 import { ref } from 'vue'
+import {Method} from "@inertiajs/inertia";
 
 const props = defineProps({
   semesters: Object,
@@ -46,7 +47,10 @@ const semesterToDeleteId = ref(0)
               {{ semester.status_label }}
             </TableCell>
             <TableCell class="text-right">
-              <InertiaLink :href="`/dashboard/semesters/${semester.id}/edit`">
+              <InertiaLink as="button" v-if="semester.status !== 'active'" :method="Method.POST" :href="`/dashboard/semesters/${semester.id}/activate`">
+                Aktywuj
+              </InertiaLink>
+              <InertiaLink class="ml-3" :href="`/dashboard/semesters/${semester.id}/edit`">
                 Edycja
               </InertiaLink>
               <button class="ml-3 text-red-600" @click="[showModal = true, semesterToDeleteId = semester.id]">

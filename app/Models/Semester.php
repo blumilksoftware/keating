@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Enums\SemesterStatus;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property SemesterStatus $status
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @method static Builder host()
  */
 class Semester extends Model
 {
@@ -29,4 +31,17 @@ class Semester extends Model
     protected $casts = [
         "status" => SemesterStatus::class,
     ];
+
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where("status", SemesterStatus::ACTIVE->value);
+    }
+
+    /**
+     * @return ?Semester
+     */
+    public static function getActive(): ?Model
+    {
+        return self::query()->active()->first();
+    }
 }

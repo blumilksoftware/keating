@@ -16,6 +16,7 @@ class SemesterResource extends JsonResource
         $semester = $this;
 
         return [
+            "id" => $semester->id,
             "name" => $semester->name,
             "status" => $semester->status,
             "status_label" => $semester->status->getLabel(),
