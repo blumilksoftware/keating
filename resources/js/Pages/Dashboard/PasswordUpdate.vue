@@ -16,7 +16,12 @@ const form = useForm({
 })
 
 function updatePassword() {
-  form.post(`/dashboard/password/update`)
+  form.put('/dashboard/password/update', {
+    preserveScroll: true,
+    onSuccess: () => {
+      form.reset()
+    },
+  })
 }
 </script>
 
@@ -32,21 +37,21 @@ function updatePassword() {
             <FormLabel for="current_password">
               Aktualne hasło
             </FormLabel>
-            <TextInput id="current_password" v-model="form.current_password" :error="form.errors.current_password" type="password"/>
+            <TextInput id="current_password" v-model="form.current_password" :error="form.errors.current_password" type="password" />
             <FormError :error="form.errors.current_password" class="mt-2" />
           </FormGroup>
           <FormGroup>
             <FormLabel for="password">
               Nowe hasło
             </FormLabel>
-            <TextInput id="password" v-model="form.password" :error="form.errors.password" type="password"/>
+            <TextInput id="password" v-model="form.password" :error="form.errors.password" type="password" />
             <FormError :error="form.errors.password" class="mt-2" />
           </FormGroup>
           <FormGroup>
             <FormLabel for="password_confirmation">
               Potwierdź nowe hasło
             </FormLabel>
-            <TextInput id="password_confirmation" v-model="form.password_confirmation" :error="form.errors.password_confirmation" type="password"/>
+            <TextInput id="password_confirmation" v-model="form.password_confirmation" :error="form.errors.password_confirmation" type="password" />
             <FormError :error="form.errors.password_confirmation" class="mt-2" />
           </FormGroup>
         </div>
