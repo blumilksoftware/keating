@@ -54,7 +54,7 @@ const navigation = [
     elements: [
       { name: 'Kursy', href: '#', icon: BriefcaseIcon, current: false },
       { name: 'Kierunki i specjalności', href: '#', icon: MagnifyingGlassIcon, current: false },
-      { name: 'Semestry', href: '#', icon: ClipboardIcon, current: false },
+      { name: 'Semestry', href: '/dashboard/semesters', icon: ClipboardIcon, current: false },
       { name: 'Formy zajęć', href: '#', icon: CodeBracketSquareIcon, current: false },
       { name: 'Tryby studiów', href: '#', icon: ClockIcon, current: false },
     ],
