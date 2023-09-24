@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
   Bars3Icon,
@@ -18,17 +17,12 @@ import {
   CodeBracketSquareIcon,
   Cog6ToothIcon,
 } from '@heroicons/vue/24/outline'
-import { watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useToast } from 'vue-toastification'
 
 const toast = useToast()
 const props = defineProps({
-  flash: {
-    type: Object,
-    default () {
-      return Object
-    },
-  },
+  flash: Object,
 })
 
 const navigation = [

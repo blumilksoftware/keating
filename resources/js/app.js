@@ -18,7 +18,7 @@ createInertiaApp({
     return createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(Toast, {
-        position: 'bottom-right',
+        position: 'top-right',
         maxToast: 5,
         timeout: 3000,
         pauseOnFocusLoss: false,

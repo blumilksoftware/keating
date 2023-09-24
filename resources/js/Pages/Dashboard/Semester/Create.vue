@@ -26,7 +26,7 @@ function createSemester() {
     <form @submit.prevent="createSemester">
       <Section class="mt-3">
         <div class="flex justify-between">
-          <FormGroup>
+          <FormGroup :full-width="false">
             <FormLabel for="name">
               Nazwa
             </FormLabel>
