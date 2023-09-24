@@ -7,28 +7,20 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property string $id
- * @property string $name
  * @property string $email
- * @property string $password
+ * @property string $github_handle
+ * @property string $alternative_channel
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class User extends Authenticatable
+class ContactInfo extends Model
 {
     use HasFactory;
-    use Notifiable;
     use HasUlids;
 
     protected $guarded = [];
-    protected $hidden = [
-        "password",
-    ];
-    protected $casts = [
-        "password" => "hashed",
-    ];
 }

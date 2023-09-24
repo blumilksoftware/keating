@@ -9,17 +9,17 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     public function up(): void
     {
-        Schema::create("users", function (Blueprint $table): void {
+        Schema::create("contact_infos", function (Blueprint $table): void {
             $table->ulid("id")->primary();
-            $table->string("name");
-            $table->string("email")->unique();
-            $table->string("password");
+            $table->string("email");
+            $table->string("github_handle")->nullable();
+            $table->string("alternative_channel")->nullable();
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists("users");
+        Schema::dropIfExists("contact_infos");
     }
 };
