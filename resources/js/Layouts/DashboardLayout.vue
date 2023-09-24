@@ -152,7 +152,7 @@ watch(() => props.flash, (flash) => {
                 <HomeIcon class="h-6 w-6 text-gray-700" title="Strona główna" />
                 <span aria-hidden="true">Strona główna</span>
               </InertiaLink>
-              <InertiaLink href="/logout" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
+              <InertiaLink href="/dashboard/logout" method="post" as="button" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
                 <PowerIcon class="h-6 w-6 text-gray-700" title="Wyloguj się" />
                 <span aria-hidden="true">Wyloguj się</span>
               </InertiaLink>
@@ -174,7 +174,7 @@ watch(() => props.flash, (flash) => {
         <span class="sr-only">Strona główna</span>
         <HomeIcon class="h-6 w-6 text-gray-700" title="Strona główna" />
       </InertiaLink>
-      <InertiaLink href="/logout">
+      <InertiaLink href="/dashboard/logout" method="post" as="button">
         <span class="sr-only">Wyloguj się</span>
         <PowerIcon class="h-6 w-6 text-gray-700" title="Wyloguj się" />
       </InertiaLink>

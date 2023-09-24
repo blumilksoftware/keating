@@ -33,7 +33,7 @@ class PasswordUpdateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->put("/dashboard/password/update", [
+            ->patch("/dashboard/password", [
                 "current_password" => "password",
                 "password" => "new-password",
                 "password_confirmation" => "new-password",
@@ -48,7 +48,7 @@ class PasswordUpdateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->put("/dashboard/password/update", [
+            ->patch("/dashboard/password", [
                 "current_password" => "wrong-password",
                 "password" => "new-password",
                 "password_confirmation" => "new-password",

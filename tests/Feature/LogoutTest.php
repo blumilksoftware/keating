@@ -14,7 +14,7 @@ class LogoutTest extends TestCase
 
     public function testUserCannotLogoutIfIsGuest(): void
     {
-        $this->post("/logout")
+        $this->post("/dashboard/logout")
             ->assertRedirectToRoute("login");
     }
 
@@ -26,7 +26,7 @@ class LogoutTest extends TestCase
 
         $this->assertAuthenticatedAs($user);
 
-        $this->post("/logout")
+        $this->post("/dashboard/logout")
             ->assertRedirectToRoute("main");
 
         $this->assertGuest();
