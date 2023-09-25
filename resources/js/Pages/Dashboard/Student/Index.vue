@@ -8,13 +8,13 @@ import Pagination from '@/Shared/Components/Pagination.vue'
 import Button from '@/Shared/Components/Buttons/Button.vue'
 import EmptyState from '@/Shared/Components/EmptyState.vue'
 import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
-import {ref, watch} from 'vue'
-import {Inertia} from '@inertiajs/inertia'
-import {debounce} from 'lodash'
+import { ref, watch } from 'vue'
+import { Inertia } from '@inertiajs/inertia'
+import { debounce } from 'lodash'
 import TextInput from '@/Shared/Forms/TextInput.vue'
-import {useForm} from '@inertiajs/inertia-vue3'
-import {Cog6ToothIcon, XCircleIcon} from "@heroicons/vue/24/outline"
-import ManagementHeader from "../../../Shared/Components/ManagementHeader.vue";
+import { useForm } from '@inertiajs/inertia-vue3'
+import { Cog6ToothIcon, XCircleIcon } from '@heroicons/vue/24/outline'
+import ManagementHeader from '../../../Shared/Components/ManagementHeader.vue'
 
 const props = defineProps({
   students: Object,
@@ -35,14 +35,16 @@ watch(form, debounce(() => {
     preserveState: true,
     replace: true,
   })
-}, 300), {deep: true})
+}, 300), { deep: true })
 </script>
 
 <template>
   <DashboardLayout>
     <div v-if="students.data.length" class="flex flex-col gap-8">
       <ManagementHeader>
-        <template #header>Zarządzanie studentami</template>
+        <template #header>
+          Zarządzanie studentami
+        </template>
         <template #statistics>
           <div class="mt-2 flex items-center text-sm text-gray-500">
             liczba studentów w bazie: {{ total }}
@@ -55,10 +57,10 @@ watch(form, debounce(() => {
           </div>
         </template>
         <template #actions>
-          <TextInput id="filter" v-model="form.search" placeholder="Szukaj" type="search" class="max-w-lg"/>
+          <TextInput id="filter" v-model="form.search" placeholder="Szukaj" type="search" class="max-w-lg" />
           <span class="hidden sm:block">
             <Button :href="`/dashboard/students/create`">
-             Dodaj
+              Dodaj
             </Button>
           </span>
         </template>
@@ -78,11 +80,11 @@ watch(form, debounce(() => {
           <TableHeader class="w-1/5">
             Nazwisko
           </TableHeader>
-          <TableHeader/>
+          <TableHeader />
         </template>
         <template #body>
           <TableRow v-for="student in students.data" :key="student.id">
-            <TableCell class="opacity-75 pr-12">
+            <TableCell class="pr-12 opacity-75">
               {{ student.id }}
             </TableCell>
             <TableCell>
@@ -96,20 +98,20 @@ watch(form, debounce(() => {
             </TableCell>
             <TableCell class="text-right">
               <Button :href="`students/${student.id}/edit`">
-                <Cog6ToothIcon class="w-6"/>
+                <Cog6ToothIcon class="w-6" />
               </Button>
               <Button class="text-red-600" @click="[showModal = true, studentToDeleteId = student.id]">
-                <XCircleIcon class="w-6"/>
+                <XCircleIcon class="w-6" />
               </Button>
             </TableCell>
           </TableRow>
         </template>
       </TableWrapper>
 
-      <Pagination :pagination="students"/>
+      <Pagination :pagination="students" />
     </div>
 
-    <EmptyState v-else class="mt-3"/>
+    <EmptyState v-else class="mt-3" />
   </DashboardLayout>
-  <RemoveModal :show="showModal" :href="`/dashboard/students/${studentToDeleteId}`" @close="showModal = false"/>
+  <RemoveModal :show="showModal" :href="`/dashboard/students/${studentToDeleteId}`" @close="showModal = false" />
 </template>

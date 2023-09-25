@@ -25,7 +25,7 @@ const value = computed({
          :class="[props.error
                     ? 'text-red-900 placeholder:text-red-300 sm:text-sm sm:leading-6'
                     : 'text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6',
-                  'block w-full rounded shadow-sm border-0 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6'
+                  'block w-full rounded border-0 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6'
          ]"
   >
 </template>
