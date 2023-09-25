@@ -23,9 +23,9 @@ const value = computed({
 <template>
   <input v-bind="$attrs" v-model="value"
          :class="[props.error
-                    ? 'border-red-500 text-red-500 focus:border-red-300'
-                    : 'text-black-700 hover:border-black-700 border-gray-500 focus:border-black',
-                  '!mb-[1px] block w-full border-0 border-b p-2 text-sm font-medium hover:!mb-[1px] hover:border-b-2 focus:!mb-[1px] focus:border-b-2 focus:ring-0 focus:ring-offset-0'
+                    ? 'text-red-900 placeholder:text-red-300 sm:text-sm sm:leading-6'
+                    : 'text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6',
+                  'block w-full rounded border-0 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6'
          ]"
   >
 </template>
