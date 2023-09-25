@@ -17,6 +17,7 @@ import {
   ClipboardIcon,
   CodeBracketSquareIcon,
   Cog6ToothIcon,
+  LockOpenIcon,
 } from '@heroicons/vue/24/outline'
 import { watch } from 'vue'
 import { useToast } from 'vue-toastification'
@@ -37,6 +38,7 @@ const navigation = [
     elements: [
       { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
       { name: 'Ustawienia', href: '#', icon: Cog6ToothIcon, current: false },
+      { name: 'Aktualizacja hasła', href: '/dashboard/password', icon: LockOpenIcon, current: false },
       { name: 'Aktualności', href: '#', icon: NewspaperIcon, current: false },
       { name: 'FAQ', href: '#', icon: QuestionMarkCircleIcon, current: false },
       { name: 'Formy kontaktu', href: '#', icon: AtSymbolIcon, current: false },
@@ -150,7 +152,7 @@ watch(() => props.flash, (flash) => {
                 <HomeIcon class="h-6 w-6 text-gray-700" title="Strona główna" />
                 <span aria-hidden="true">Strona główna</span>
               </InertiaLink>
-              <InertiaLink href="#" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
+              <InertiaLink href="/dashboard/logout" method="post" as="button" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
                 <PowerIcon class="h-6 w-6 text-gray-700" title="Wyloguj się" />
                 <span aria-hidden="true">Wyloguj się</span>
               </InertiaLink>
@@ -172,10 +174,10 @@ watch(() => props.flash, (flash) => {
         <span class="sr-only">Strona główna</span>
         <HomeIcon class="h-6 w-6 text-gray-700" title="Strona główna" />
       </InertiaLink>
-      <a href="#">
+      <InertiaLink href="/dashboard/logout" method="post" as="button">
         <span class="sr-only">Wyloguj się</span>
         <PowerIcon class="h-6 w-6 text-gray-700" title="Wyloguj się" />
-      </a>
+      </InertiaLink>
     </div>
 
     <main class="py-10 lg:pl-72">
