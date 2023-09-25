@@ -2,7 +2,6 @@
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
   Bars3Icon,
-  ClockIcon,
   BriefcaseIcon,
   HomeIcon,
   PowerIcon,
@@ -14,7 +13,6 @@ import {
   BookmarkSquareIcon,
   MagnifyingGlassIcon,
   ClipboardIcon,
-  CodeBracketSquareIcon,
   Cog6ToothIcon,
   LockOpenIcon,
 } from '@heroicons/vue/24/outline'
@@ -51,8 +49,6 @@ const navigation = [
       { name: 'Kursy', href: '#', icon: BriefcaseIcon, current: false },
       { name: 'Kierunki i specjalności', href: '#', icon: MagnifyingGlassIcon, current: false },
       { name: 'Semestry', href: '/dashboard/semesters', icon: ClipboardIcon, current: false },
-      { name: 'Formy zajęć', href: '#', icon: CodeBracketSquareIcon, current: false },
-      { name: 'Tryby studiów', href: '#', icon: ClockIcon, current: false },
     ],
   },
 ]

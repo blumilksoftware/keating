@@ -9,6 +9,8 @@ import EmptyState from '@/Shared/Components/EmptyState.vue'
 import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
 import { ref } from 'vue'
 import { Method } from '@inertiajs/inertia'
+import ManagementHeader from '../../../Shared/Components/ManagementHeader.vue'
+import { Cog6ToothIcon, XCircleIcon, CheckIcon } from '@heroicons/vue/24/outline'
 
 defineProps({
   semesters: Object,
@@ -19,27 +21,31 @@ const semesterToDeleteId = ref(0)
 
 <template>
   <DashboardLayout>
-    <div class="flex justify-between">
-      <h3 class="text-base font-semibold leading-6 text-gray-900">
-        Lista semestrów
-      </h3>
-      <Button :href="`/dashboard/semesters/create`">
-        Dodaj
-      </Button>
-    </div>
-    <div v-if="semesters.data.length">
+    <div v-if="semesters.data.length" class="flex flex-col gap-8">
+      <ManagementHeader>
+        <template #header>
+          Zarządzanie semestrami
+        </template>
+        <template #actions>
+          <span class="hidden sm:block">
+            <Button :href="`/dashboard/semesters/create`">
+              Dodaj
+            </Button>
+          </span>
+        </template>
+      </ManagementHeader>
       <TableWrapper class="mt-2">
         <template #header>
-          <TableHeader>
+          <TableHeader class="w-1/5">
             Nazwa
           </TableHeader>
-          <TableHeader>
+          <TableHeader class="w-1/5">
             Status
           </TableHeader>
-          <TableHeader class="sm:w-2/10 w-1/3" />
+          <TableHeader />
         </template>
         <template #body>
-          <TableRow v-for="semester in semesters.data" :key="semester.id">
+          <TableRow v-for="semester in semesters.data" :key="semester.id" :class="semester.status === 'active' ? 'bg-green-50' : ''">
             <TableCell>
               {{ semester.name }}
             </TableCell>
@@ -47,15 +53,15 @@ const semesterToDeleteId = ref(0)
               {{ semester.status_label }}
             </TableCell>
             <TableCell class="text-right">
-              <InertiaLink v-if="semester.status !== 'active'" as="button" :method="Method.POST" :href="`/dashboard/semesters/${semester.id}/activate`">
-                Aktywuj
-              </InertiaLink>
-              <InertiaLink class="ml-3" :href="`/dashboard/semesters/${semester.id}/edit`">
-                Edycja
-              </InertiaLink>
-              <button class="ml-3 text-red-600" @click="[showModal = true, semesterToDeleteId = semester.id]">
-                Usuń
-              </button>
+              <Button v-if="semester.status !== 'active'" :method="Method.POST" :href="`/dashboard/semesters/${semester.id}/activate`">
+                <CheckIcon class="w-6" />
+              </Button>
+              <Button :href="`/dashboard/semesters/${semester.id}/edit`">
+                <Cog6ToothIcon class="w-6" />
+              </Button>
+              <Button class="text-red-600" @click="[showModal = true, semesterToDeleteId = semester.id]">
+                <XCircleIcon class="w-6" />
+              </Button>
             </TableCell>
           </TableRow>
         </template>

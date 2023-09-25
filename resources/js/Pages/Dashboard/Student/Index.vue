@@ -15,6 +15,7 @@ import TextInput from '@/Shared/Forms/TextInput.vue'
 import { useForm } from '@inertiajs/inertia-vue3'
 import { Cog6ToothIcon, XCircleIcon } from '@heroicons/vue/24/outline'
 import ManagementHeader from '../../../Shared/Components/ManagementHeader.vue'
+import SecondaryButton from '../../../Shared/Components/Buttons/SecondaryButton.vue'
 
 const props = defineProps({
   students: Object,
@@ -111,7 +112,11 @@ watch(form, debounce(() => {
       <Pagination :pagination="students" />
     </div>
 
-    <EmptyState v-else class="mt-3" />
+    <EmptyState v-else class="mt-3">
+      <SecondaryButton v-if="students.data.length" :href="`/dashboard/students/create`" class="mt-3">
+        Dodaj studenta
+      </SecondaryButton>
+    </EmptyState>
   </DashboardLayout>
   <RemoveModal :show="showModal" :href="`/dashboard/students/${studentToDeleteId}`" @close="showModal = false" />
 </template>

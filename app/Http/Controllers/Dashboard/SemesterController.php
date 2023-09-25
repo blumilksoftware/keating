@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SemesterRequest;
 use App\Http\Resources\SemesterResource;
 use App\Models\Semester;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 
@@ -63,9 +64,14 @@ class SemesterController extends Controller
 
     public function toggleActive(Semester $semester, ActivateSemesterAction $activateSemesterAction): RedirectResponse
     {
-        $activateSemesterAction->execute($semester);
+        try {
+            $activateSemesterAction->execute($semester);
 
-        return redirect()->back()
-            ->with("success", "Semestr aktywny");
+            return redirect()->back()
+                ->with("success", "Semestr aktywny");
+        } catch (Exception $e) {
+            return redirect()->back()
+                ->with("error", "Wystąpił nieoczekiwany problem");
+        }
     }
 }
