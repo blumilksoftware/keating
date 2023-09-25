@@ -14,13 +14,12 @@ const props = defineProps({
 })
 
 const form = useForm({
-  email: props.contactInfo.email,
-  github_handle: props.contactInfo.github_handle,
-  alternative_channel: props.contactInfo.alternative_channel,
+  label: props.contactInfo.label,
+  link: props.contactInfo.link,
 })
 
-function updateContact() {
-  form.patch(`/dashboard/contact-info`)
+function updateContactInfo() {
+  form.patch(`/dashboard/contact-infos/${props.contactInfo.id}`)
 }
 </script>
 
@@ -29,33 +28,26 @@ function updateContact() {
     <h3 class="text-base font-semibold leading-6 text-gray-900">
       Edycja form kontaktu
     </h3>
-    <form @submit.prevent="updateContact">
+    <form @submit.prevent="updateContactInfo">
       <Section class="mt-3">
         <div class="flex justify-between">
           <FormGroup>
-            <FormLabel for="email">
-              E-mail uczelniany
+            <FormLabel for="label">
+              Etykieta
             </FormLabel>
-            <TextInput id="email" v-model="form.email" :error="form.errors.email" type="email" />
-            <FormError :error="form.errors.email" class="mt-2" />
+            <TextInput id="label" v-model="form.label" :error="form.errors.label" type="label" />
+            <FormError :error="form.errors.label" class="mt-2" />
           </FormGroup>
           <FormGroup>
-            <FormLabel for="github_handle">
-              Github link
+            <FormLabel for="link">
+              Link do kontaktu
             </FormLabel>
-            <TextInput id="github_handle" v-model="form.github_handle" :error="form.errors.github_handle" />
-            <FormError :error="form.errors.github_handle" class="mt-2" />
-          </FormGroup>
-          <FormGroup>
-            <FormLabel for="alternative_channel">
-              Alternatywny kontakt
-            </FormLabel>
-            <TextInput id="alternative_channel" v-model="form.alternative_channel" :error="form.errors.alternative_channel" />
-            <FormError :error="form.errors.alternative_channel" class="mt-2" />
+            <TextInput id="link" v-model="form.link" :error="form.errors.link" />
+            <FormError :error="form.errors.link" class="mt-2" />
           </FormGroup>
         </div>
         <div class="flex justify-end space-x-3 py-3">
-          <SecondaryButton href="/dashboard">
+          <SecondaryButton href="/dashboard/contact-infos">
             Cofnij
           </SecondaryButton>
           <SubmitButton>

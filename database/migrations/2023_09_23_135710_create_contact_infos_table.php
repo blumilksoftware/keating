@@ -11,9 +11,8 @@ return new class() extends Migration {
     {
         Schema::create("contact_infos", function (Blueprint $table): void {
             $table->ulid("id")->primary();
-            $table->string("email");
-            $table->string("github_handle")->nullable();
-            $table->string("alternative_channel")->nullable();
+            $table->string("label");
+            $table->string("link");
             $table->timestamps();
         });
     }

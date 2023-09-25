@@ -15,9 +15,8 @@ class ContactInfoFactory extends Factory
     public function definition(): array
     {
         return [
-            "email" => fake()->unique()->email(),
-            "github_handle" => fake()->optional()->url(),
-            "alternative_channel" => fake()->optional()->url(),
+            "label" => fake()->domainWord(),
+            "link" => fake()->url(),
         ];
     }
 }

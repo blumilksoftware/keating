@@ -41,7 +41,7 @@ const navigation = [
       { name: 'Aktualizacja hasła', href: '/dashboard/password', icon: LockOpenIcon, current: false },
       { name: 'Aktualności', href: '#', icon: NewspaperIcon, current: false },
       { name: 'FAQ', href: '#', icon: QuestionMarkCircleIcon, current: false },
-      { name: 'Formy kontaktu', href: '/dashboard/contact-info', icon: AtSymbolIcon, current: false },
+      { name: 'Formy kontaktu', href: '/dashboard/contact-infos', icon: AtSymbolIcon, current: false },
     ],
   },
   {
