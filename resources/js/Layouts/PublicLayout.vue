@@ -36,10 +36,11 @@ const mobileMenuOpen = ref(false)
           </Link>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link href="#" class="text-sm font-semibold leading-6 text-gray-900">
-            Logowanie <span
-              aria-hidden="true"
-            >&rarr;</span>
+          <Link v-if="$page.props.auth.user" href="/dashboard" class="text-sm font-semibold leading-6 text-gray-900">
+            Dashboard <span aria-hidden="true">&rarr;</span>
+          </Link>
+          <Link v-else href="/login" class="text-sm font-semibold leading-6 text-gray-900">
+            Logowanie <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>
       </nav>
@@ -64,7 +65,12 @@ const mobileMenuOpen = ref(false)
                 </Link>
               </div>
               <div class="py-6">
-                <Link href="#"
+                <Link v-if="$page.props.auth.user" href="/dashboard"
+                      class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Dashboard
+                </Link>
+                <Link v-else href="/login"
                       class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Logowanie
@@ -86,7 +92,8 @@ const mobileMenuOpen = ref(false)
           <p class="text-center text-xs leading-5 text-gray-500">
             2023
             <EllipsisHorizontalIcon class="mx-2 inline-block w-6" />
-            <a class="font-semibold" href="https://github.com/blumilksoftware/keating" target="_blank">keating management system</a>
+            <a class="font-semibold" href="https://github.com/blumilksoftware/keating" target="_blank">keating
+              management system</a>
             developed at
             <a class="font-semibold" href="https://blumilk.pl/" target="_blank">Blumilk</a>
           </p>
