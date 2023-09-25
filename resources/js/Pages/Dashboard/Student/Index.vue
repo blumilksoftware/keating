@@ -13,11 +13,14 @@ import {Inertia} from '@inertiajs/inertia'
 import {debounce} from 'lodash'
 import TextInput from '@/Shared/Forms/TextInput.vue'
 import {useForm} from '@inertiajs/inertia-vue3'
+import {Cog6ToothIcon, XCircleIcon} from "@heroicons/vue/24/outline"
+import ManagementHeader from "../../../Shared/Components/ManagementHeader.vue";
 
 const props = defineProps({
   students: Object,
   search: String,
   total: Number,
+  lastUpdate: String,
 })
 const showModal = ref(false)
 const studentToDeleteId = ref(0)
@@ -38,63 +41,65 @@ watch(form, debounce(() => {
 <template>
   <DashboardLayout>
     <div v-if="students.data.length" class="flex flex-col gap-8">
-      <div class="lg:flex lg:items-center lg:justify-between">
-        <div class="min-w-0 flex-1">
-          <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-            Zarządzanie studentami
-          </h2>
-          <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
-            <div class="mt-2 flex items-center text-sm text-gray-500">
-              liczba studentów w bazie: {{ total }}
-            </div>
-            <div class="mt-2 flex items-center text-sm text-gray-500">
-              liczba studentów: {{ students.total }}
-            </div>
-            <div class="mt-2 flex items-center text-sm text-gray-500">
-              ostatnia zmiana: wczoraj
-            </div>
+      <ManagementHeader>
+        <template #header>Zarządzanie studentami</template>
+        <template #statistics>
+          <div class="mt-2 flex items-center text-sm text-gray-500">
+            liczba studentów w bazie: {{ total }}
           </div>
-        </div>
-        <div class="flex lg:ml-4 gap-4">
-          <TextInput id="filter" v-model="form.search" placeholder="Szukaj" type="search" class="max-w-xs"/>
+          <div class="mt-2 flex items-center text-sm text-gray-500">
+            liczba studentów: {{ students.total }}
+          </div>
+          <div class="mt-2 flex items-center text-sm text-gray-500">
+            ostatnia zmiana: {{ lastUpdate }}
+          </div>
+        </template>
+        <template #actions>
+          <TextInput id="filter" v-model="form.search" placeholder="Szukaj" type="search" class="max-w-lg"/>
           <span class="hidden sm:block">
             <Button :href="`/dashboard/students/create`">
              Dodaj
             </Button>
           </span>
-        </div>
-      </div>
+        </template>
+      </ManagementHeader>
 
       <TableWrapper>
         <template #header>
-          <TableHeader>
-            Imię
+          <TableHeader class="w-1/6">
+            ID
           </TableHeader>
-          <TableHeader>
-            Nazwisko
-          </TableHeader>
-          <TableHeader>
+          <TableHeader class="w-1/6">
             Numer indeksu
           </TableHeader>
-          <TableHeader class="sm:w-2/10 w-1/3"/>
+          <TableHeader class="w-1/5">
+            Imię
+          </TableHeader>
+          <TableHeader class="w-1/5">
+            Nazwisko
+          </TableHeader>
+          <TableHeader/>
         </template>
         <template #body>
           <TableRow v-for="student in students.data" :key="student.id">
+            <TableCell class="opacity-75 pr-12">
+              {{ student.id }}
+            </TableCell>
+            <TableCell>
+              {{ student.index_number }}
+            </TableCell>
             <TableCell>
               {{ student.name }}
             </TableCell>
             <TableCell>
               {{ student.surname }}
             </TableCell>
-            <TableCell>
-              {{ student.index_number }}
-            </TableCell>
             <TableCell class="text-right">
               <Button :href="`students/${student.id}/edit`">
-                Edycja
+                <Cog6ToothIcon class="w-6"/>
               </Button>
               <Button class="text-red-600" @click="[showModal = true, studentToDeleteId = student.id]">
-                Usuń
+                <XCircleIcon class="w-6"/>
               </Button>
             </TableCell>
           </TableRow>

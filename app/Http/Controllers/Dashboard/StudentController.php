@@ -32,6 +32,7 @@ class StudentController extends Controller
         return inertia("Dashboard/Student/Index", [
             "students" => $students,
             "total" => Student::query()->count(),
+            "lastUpdate" => Student::query()->orderByDesc("updated_at")->first()?->updated_at->diffForHumans(),
         ]);
     }
 
