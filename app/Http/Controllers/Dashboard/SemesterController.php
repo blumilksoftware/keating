@@ -16,7 +16,7 @@ class SemesterController extends Controller
 {
     public function index(): Response
     {
-        $semesters = Semester::all();
+        $semesters = Semester::all()->sortByDesc("created_at");
 
         return inertia("Dashboard/Semester/Index", [
             "semesters" => SemesterResource::collection($semesters),
