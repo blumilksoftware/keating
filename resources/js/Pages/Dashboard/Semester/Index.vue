@@ -9,7 +9,7 @@ import EmptyState from '@/Shared/Components/EmptyState.vue'
 import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
 import { ref } from 'vue'
 import { Method } from '@inertiajs/inertia'
-import ManagementHeader from '../../../Shared/Components/ManagementHeader.vue'
+import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import { Cog6ToothIcon, XCircleIcon, CheckIcon } from '@heroicons/vue/24/outline'
 
 defineProps({
