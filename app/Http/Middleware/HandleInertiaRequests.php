@@ -14,7 +14,7 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             "auth" => $this->getAuthData($request),
-            "flash" => $this->getFlashedData($request),
+            "flash" => $this->getFlashData($request),
         ]);
     }
 
@@ -25,7 +25,7 @@ class HandleInertiaRequests extends Middleware
         ];
     }
 
-    protected function getFlashedData(Request $request): Closure
+    protected function getFlashData(Request $request): Closure
     {
         return fn(): array => [
             "success" => $request->session()->get("success"),
