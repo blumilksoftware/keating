@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Actions;
 
-use App\Enums\SemesterStatus;
 use App\Models\Semester;
 use Exception;
 use Illuminate\Database\ConnectionInterface;
@@ -23,8 +22,8 @@ class ActivateSemesterAction
         try {
             $this->db->beginTransaction();
 
-            Semester::getActive()?->update(["status" => SemesterStatus::INACTIVE]);
-            $semester->update(["status" => SemesterStatus::ACTIVE]);
+            Semester::getActive()?->update(["active" => 0]);
+            $semester->update(["active" => 1]);
 
             $this->db->commit();
         } catch (Exception $exception) {

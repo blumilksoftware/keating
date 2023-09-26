@@ -73,27 +73,27 @@ class SemesterTest extends TestCase
 
     public function testSemesterCanBeSetToActiveStatus(): void
     {
-        $semester = Semester::factory()->create(["status" => 0]);
-        $this->assertSame(0, $semester->status->value);
+        $semester = Semester::factory()->create(["active" => 0]);
+        $this->assertFalse($semester->active);
 
         $this->post("/dashboard/semesters/{$semester->id}/activate");
 
         $semester->refresh();
-        $this->assertSame(1, $semester->status->value);
+        $this->assertTrue($semester->active);
     }
 
     public function testOnlyOneSemesterCanBeActive(): void
     {
-        $inactiveSemester = Semester::factory()->create(["status" => 0]);
-        $activeSemester = Semester::factory()->create(["status" => 1]);
-        $this->assertSame(0, $inactiveSemester->status->value);
-        $this->assertSame(1, $activeSemester->status->value);
+        $inactiveSemester = Semester::factory()->create(["active" => 0]);
+        $activeSemester = Semester::factory()->create(["active" => 1]);
+        $this->assertFalse($inactiveSemester->active);
+        $this->assertTrue($activeSemester->active);
 
         $this->post("/dashboard/semesters/{$inactiveSemester->id}/activate");
 
         $inactiveSemester->refresh();
         $activeSemester->refresh();
-        $this->assertSame(1, $inactiveSemester->status->value);
-        $this->assertSame(0, $activeSemester->status->value);
+        $this->assertTrue($inactiveSemester->active);
+        $this->assertFalse($activeSemester->active);
     }
 }

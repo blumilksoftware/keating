@@ -12,7 +12,7 @@ return new class() extends Migration {
         Schema::create("semesters", function (Blueprint $table): void {
             $table->ulid("id")->primary();
             $table->string("name");
-            $table->enum("status", [1, 0])->default(0);
+            $table->boolean("active")->default(0);
             $table->timestamps();
         });
     }

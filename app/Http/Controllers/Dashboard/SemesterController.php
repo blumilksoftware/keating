@@ -7,7 +7,6 @@ namespace App\Http\Controllers\Dashboard;
 use App\Actions\ActivateSemesterAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SemesterRequest;
-use App\Http\Resources\SemesterResource;
 use App\Models\Semester;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +19,7 @@ class SemesterController extends Controller
         $semesters = Semester::query()->orderByDesc("created_at")->get();
 
         return inertia("Dashboard/Semester/Index", [
-            "semesters" => SemesterResource::collection($semesters),
+            "semesters" => $semesters,
         ]);
     }
 

@@ -21,7 +21,7 @@ const semesterToDeleteId = ref(0)
 
 <template>
   <DashboardLayout>
-    <div v-if="semesters.data.length" class="flex flex-col gap-8">
+    <div v-if="semesters.length" class="flex flex-col gap-8">
       <ManagementHeader>
         <template #header>
           Zarządzanie semestrami
@@ -45,15 +45,15 @@ const semesterToDeleteId = ref(0)
           <TableHeader />
         </template>
         <template #body>
-          <TableRow v-for="semester in semesters.data" :key="semester.id" :class="semester.status === 'active' ? 'bg-green-50' : ''">
+          <TableRow v-for="semester in semesters" :key="semester.id" :class="semester.active === true ? 'bg-green-50' : ''">
             <TableCell>
               {{ semester.name }}
             </TableCell>
             <TableCell>
-              {{ semester.statusLabel }}
+              {{ semester.active ? "aktywny" : "nieaktywny" }}
             </TableCell>
             <TableCell class="text-right">
-              <Button v-if="semester.status !== 'active'" :method="Method.POST" :href="`/dashboard/semesters/${semester.id}/activate`">
+              <Button v-if="semester.status !== true" :method="Method.POST" :href="`/dashboard/semesters/${semester.id}/activate`">
                 <CheckIcon class="w-6" />
               </Button>
               <Button :href="`/dashboard/semesters/${semester.id}/edit`">
