@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property SemesterStatus $status
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @method static Builder active()
  */
 class Semester extends Model
 {
