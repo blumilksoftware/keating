@@ -5,7 +5,7 @@ import SubmitButton from '@/Shared/Components/Buttons/SubmitButton.vue'
 import FormGroup from '@/Shared/Forms/FormGroup.vue'
 import FormLabel from '@/Shared/Forms/FormLabel.vue'
 import TextInput from '@/Shared/Forms/TextInput.vue'
-import {useForm} from '@inertiajs/inertia-vue3'
+import { useForm } from '@inertiajs/inertia-vue3'
 import FormError from '@/Shared/Forms/FormError.vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
@@ -40,14 +40,14 @@ function createSemester() {
               <FormLabel for="id">
                 Id
               </FormLabel>
-              <TextInput class="opacity-75" placeholder="autogenerowany ulid" autocomplete="off" disabled/>
+              <TextInput class="opacity-75" placeholder="autogenerowany ulid" autocomplete="off" disabled />
             </FormGroup>
             <FormGroup>
               <FormLabel for="name">
                 Nazwa
               </FormLabel>
-              <TextInput id="name" v-model="form.name" :error="form.errors.name" autocomplete="off"/>
-              <FormError :error="form.errors.name"/>
+              <TextInput id="name" v-model="form.name" :error="form.errors.name" autocomplete="off" />
+              <FormError :error="form.errors.name" />
             </FormGroup>
             <div class="mt-4 flex justify-end">
               <SubmitButton>

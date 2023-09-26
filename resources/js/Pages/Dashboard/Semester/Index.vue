@@ -7,11 +7,11 @@ import TableCell from '@/Shared/Components/Table/TableCell.vue'
 import Button from '@/Shared/Components/Buttons/Button.vue'
 import EmptyState from '@/Shared/Components/EmptyState.vue'
 import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
-import {ref} from 'vue'
-import {Method} from '@inertiajs/inertia'
+import { ref } from 'vue'
+import { Method } from '@inertiajs/inertia'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
-import {Cog6ToothIcon, XCircleIcon, CheckIcon} from '@heroicons/vue/24/outline'
+import { Cog6ToothIcon, XCircleIcon, CheckIcon } from '@heroicons/vue/24/outline'
 
 defineProps({
   semesters: Object,
@@ -57,11 +57,12 @@ const semesterToDeleteId = ref(0)
             <TableHeader class="w-1/5">
               Status
             </TableHeader>
-            <TableHeader/>
+            <TableHeader />
           </template>
           <template #body>
             <TableRow v-for="semester in semesters" :key="semester.id"
-                      :class="semester.active === true ? 'bg-green-50' : ''">
+                      :class="semester.active === true ? 'bg-green-50' : ''"
+            >
               <TableCell class="pr-12 opacity-75">
                 {{ semester.id }}
               </TableCell>
@@ -73,14 +74,15 @@ const semesterToDeleteId = ref(0)
               </TableCell>
               <TableCell class="flex justify-end gap-2">
                 <Button v-if="semester.status !== true" :method="Method.POST"
-                        :href="`/dashboard/semesters/${semester.id}/activate`">
-                  <CheckIcon class="w-5"/>
+                        :href="`/dashboard/semesters/${semester.id}/activate`"
+                >
+                  <CheckIcon class="w-5" />
                 </Button>
                 <Button :href="`/dashboard/semesters/${semester.id}/edit`">
-                  <Cog6ToothIcon class="w-5"/>
+                  <Cog6ToothIcon class="w-5" />
                 </Button>
                 <Button class="text-red-600" @click="[showModal = true, semesterToDeleteId = semester.id]">
-                  <XCircleIcon class="w-5"/>
+                  <XCircleIcon class="w-5" />
                 </Button>
               </TableCell>
             </TableRow>
@@ -91,5 +93,5 @@ const semesterToDeleteId = ref(0)
     </div>
   </DashboardLayout>
 
-  <RemoveModal :show="showModal" :href="`/dashboard/semesters/${semesterToDeleteId}`" @close="showModal = false"/>
+  <RemoveModal :show="showModal" :href="`/dashboard/semesters/${semesterToDeleteId}`" @close="showModal = false" />
 </template>
