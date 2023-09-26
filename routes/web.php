@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\ContactInfoController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\LogoutController;
 use App\Http\Controllers\Dashboard\PasswordUpdateController;
+use App\Http\Controllers\Dashboard\SemesterController;
 use App\Http\Controllers\Dashboard\StudentController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\LoginController;
@@ -40,5 +41,14 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::get("/students/{student}/edit", "edit")->name("students.edit");
         Route::patch("/students/{student}", "update")->name("students.update");
         Route::delete("/students/{student}", "destroy")->name("students.destroy");
+    });
+    Route::controller(SemesterController::class)->group(function (): void {
+        Route::get("/semesters", "index")->name("semesters.index");
+        Route::get("/semesters/create", "create")->name("semesters.create");
+        Route::post("/semesters", "store")->name("semesters.store");
+        Route::get("/semesters/{semester}/edit", "edit")->name("semesters.edit");
+        Route::patch("/semesters/{semester}", "update")->name("semesters.update");
+        Route::delete("/semesters/{semester}", "destroy")->name("semesters.destroy");
+        Route::post("/semesters/{semester}/activate", "toggleActive")->name("semesters.toggle.active");
     });
 });

@@ -1,9 +1,7 @@
 <script setup>
-import { ref } from 'vue'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
   Bars3Icon,
-  ClockIcon,
   BriefcaseIcon,
   HomeIcon,
   PowerIcon,
@@ -15,21 +13,15 @@ import {
   BookmarkSquareIcon,
   MagnifyingGlassIcon,
   ClipboardIcon,
-  CodeBracketSquareIcon,
   Cog6ToothIcon,
   LockOpenIcon,
 } from '@heroicons/vue/24/outline'
-import { watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useToast } from 'vue-toastification'
 
 const toast = useToast()
 const props = defineProps({
-  flash: {
-    type: Object,
-    default () {
-      return Object
-    },
-  },
+  flash: Object,
 })
 
 const navigation = [
@@ -56,9 +48,7 @@ const navigation = [
     elements: [
       { name: 'Kursy', href: '#', icon: BriefcaseIcon, current: false },
       { name: 'Kierunki i specjalności', href: '#', icon: MagnifyingGlassIcon, current: false },
-      { name: 'Semestry', href: '#', icon: ClipboardIcon, current: false },
-      { name: 'Formy zajęć', href: '#', icon: CodeBracketSquareIcon, current: false },
-      { name: 'Tryby studiów', href: '#', icon: ClockIcon, current: false },
+      { name: 'Semestry', href: '/dashboard/semesters', icon: ClipboardIcon, current: false },
     ],
   },
 ]
