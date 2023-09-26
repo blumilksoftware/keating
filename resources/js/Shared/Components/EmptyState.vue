@@ -5,11 +5,11 @@ defineProps({
 </script>
 
 <template>
-  <div class="w-full bg-white py-16 text-center sm:rounded-lg">
+  <div class="w-full bg-white p-8 text-center sm:rounded-lg">
     <slot />
-    <div class="mt-2 text-gray-600">
+    <div class="text-sm text-gray-600">
       <p>
-        {{ (customTitle ?? 'Brak danych') }}
+        {{ (customTitle ?? 'Brak danych.') }}
       </p>
     </div>
   </div>
