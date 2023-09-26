@@ -46,7 +46,7 @@ const semesterToDeleteId = ref(0)
         </template>
       </ManagementHeader>
       <div v-if="semesters.length" class="flex flex-col gap-8">
-        <TableWrapper class="mt-2">
+        <TableWrapper>
           <template #header>
             <TableHeader class="w-1/6">
               ID
