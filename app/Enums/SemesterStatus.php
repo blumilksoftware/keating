@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum SemesterStatus: string
+enum SemesterStatus: int
 {
-    case ACTIVE = "active";
-    case INACTIVE = "inactive";
+    case ACTIVE = 1;
+    case INACTIVE = 0;
 
     public function getLabel(): string
     {
         return match ($this->value) {
-            "active" => "aktywny",
-            "inactive" => "nieaktywny",
+            1 => "aktywny",
+            0 => "nieaktywny",
         };
     }
 }

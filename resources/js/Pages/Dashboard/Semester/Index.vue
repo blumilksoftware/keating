@@ -50,7 +50,7 @@ const semesterToDeleteId = ref(0)
               {{ semester.name }}
             </TableCell>
             <TableCell>
-              {{ semester.status_label }}
+              {{ semester.statusLabel }}
             </TableCell>
             <TableCell class="text-right">
               <Button v-if="semester.status !== 'active'" :method="Method.POST" :href="`/dashboard/semesters/${semester.id}/activate`">

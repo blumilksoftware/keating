@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property SemesterStatus $status
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @method static Builder host()
+ * @method static Builder active()
  */
 class Semester extends Model
 {
@@ -42,6 +42,6 @@ class Semester extends Model
      */
     public static function getActive(): ?Model
     {
-        return self::query()->active()->first();
+        return self::active()->first();
     }
 }

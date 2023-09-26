@@ -19,7 +19,7 @@ class SemesterResource extends JsonResource
             "id" => $semester->id,
             "name" => $semester->name,
             "status" => $semester->status,
-            "status_label" => $semester->status->getLabel(),
+            "statusLabel" => $semester->status->getLabel(),
         ];
     }
 }
