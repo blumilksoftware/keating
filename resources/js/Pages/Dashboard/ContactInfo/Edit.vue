@@ -5,9 +5,10 @@ import SubmitButton from '@/Shared/Components/Buttons/SubmitButton.vue'
 import FormGroup from '@/Shared/Forms/FormGroup.vue'
 import FormLabel from '@/Shared/Forms/FormLabel.vue'
 import TextInput from '@/Shared/Forms/TextInput.vue'
-import SecondaryButton from '@/Shared/Components/Buttons/SecondaryButton.vue'
 import { useForm } from '@inertiajs/inertia-vue3'
 import FormError from '@/Shared/Forms/FormError.vue'
+import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
+import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 
 const props = defineProps({
   contactInfo: Object,
@@ -15,7 +16,7 @@ const props = defineProps({
 
 const form = useForm({
   label: props.contactInfo.label,
-  link: props.contactInfo.link,
+  identifier: props.contactInfo.identifier,
 })
 
 function updateContactInfo() {
@@ -25,36 +26,50 @@ function updateContactInfo() {
 
 <template>
   <DashboardLayout>
-    <h3 class="text-base font-semibold leading-6 text-gray-900">
-      Edycja form kontaktu
-    </h3>
-    <form @submit.prevent="updateContactInfo">
-      <Section class="mt-3">
-        <div class="flex justify-between">
-          <FormGroup>
-            <FormLabel for="label">
-              Etykieta
-            </FormLabel>
-            <TextInput id="label" v-model="form.label" :error="form.errors.label" type="label" />
-            <FormError :error="form.errors.label" class="mt-2" />
-          </FormGroup>
-          <FormGroup>
-            <FormLabel for="link">
-              Link do kontaktu
-            </FormLabel>
-            <TextInput id="link" v-model="form.link" :error="form.errors.link" />
-            <FormError :error="form.errors.link" class="mt-2" />
-          </FormGroup>
-        </div>
-        <div class="flex justify-end space-x-3 py-3">
-          <SecondaryButton href="/dashboard/contact-infos">
-            Cofnij
-          </SecondaryButton>
-          <SubmitButton>
-            Zapisz
-          </SubmitButton>
-        </div>
-      </Section>
-    </form>
+    <div class="flex flex-col gap-8">
+      <ManagementHeader>
+        <template #header>
+          Zarządzanie formami kontaktu
+        </template>
+        <template #statistics>
+          <ManagementHeaderItem>
+            Formularz edycji formy kontaktu {{ contactInfo.label }}
+          </ManagementHeaderItem>
+        </template>
+      </ManagementHeader>
+
+      <form class="grid grid-cols-2" @submit.prevent="updateContactInfo">
+        <Section>
+          <div class="flex flex-col justify-between gap-4">
+            <FormGroup>
+              <FormLabel for="id">
+                Id
+              </FormLabel>
+              <TextInput class="opacity-75" placeholder="autogenerowany ulid" autocomplete="off" disabled />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="label">
+                Etykieta
+              </FormLabel>
+              <TextInput id="label" v-model="form.label" :error="form.errors.label" autocomplete="off" />
+              <FormError :error="form.errors.label" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="identifier">
+                Email / link do kontaktu
+              </FormLabel>
+              <TextInput id="identifier" v-model="form.identifier" :error="form.errors.identifier" autocomplete="off" />
+              <FormError :error="form.errors.identifier" />
+            </FormGroup>
+            <div class="mt-4 flex justify-end">
+              <SubmitButton>
+                Zapisz
+              </SubmitButton>
+            </div>
+          </div>
+        </Section>
+      </form>
+    </div>
   </DashboardLayout>
 </template>
+

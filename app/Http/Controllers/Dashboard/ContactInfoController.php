@@ -16,16 +16,9 @@ class ContactInfoController extends Controller
 {
     public function index(Request $request): Response
     {
-        $searchText = $request->query("search");
         $contactInfos = ContactInfo::query()
-            ->when(
-                $searchText !== null,
-                fn(Builder $query): Builder => $query
-                    ->where("label", "ILIKE", "%$searchText%")
-                    ->orWhere("link", "ILIKE", "%$searchText%")
-            )
-            ->paginate()
-            ->withQueryString();
+            ->orderByDesc("created_at")
+            ->get();
 
         return inertia("Dashboard/ContactInfo/Index", [
             "contactInfos" => $contactInfos,

@@ -12,8 +12,8 @@ return new class() extends Migration {
         Schema::create("contact_infos", function (Blueprint $table): void {
             $table->ulid("id")->primary();
             $table->string("label");
-            $table->string("link");
-            $table->string("icon");
+            $table->string("identifier");
+            $table->string("icon")->nullable();
             $table->timestamps();
         });
     }

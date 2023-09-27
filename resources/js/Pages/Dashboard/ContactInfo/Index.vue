@@ -8,104 +8,85 @@ import Pagination from '@/Shared/Components/Pagination.vue'
 import Button from '@/Shared/Components/Buttons/Button.vue'
 import EmptyState from '@/Shared/Components/EmptyState.vue'
 import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
-import { ref, watch } from 'vue'
-import { Inertia } from '@inertiajs/inertia'
-import { debounce } from 'lodash'
-import TextInput from '@/Shared/Forms/TextInput.vue'
-import { useForm } from '@inertiajs/inertia-vue3'
+import { ref } from 'vue'
 import { Cog6ToothIcon, XCircleIcon } from '@heroicons/vue/24/outline'
-import ManagementHeader from '../../../Shared/Components/ManagementHeader.vue'
-
-const props = defineProps({
+import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
+import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
+defineProps({
   contactInfos: Object,
-  search: String,
   total: Number,
   lastUpdate: String,
 })
 const showModal = ref(false)
 const contactInfoToDeleteId = ref(0)
-const form = useForm({
-  search: props.search,
-})
 
-watch(form, debounce(() => {
-  Inertia.get('/dashboard/contact-infos', {
-    search: form.search,
-  }, {
-    preserveState: true,
-    replace: true,
-  })
-}, 300), { deep: true })
 </script>
 
 <template>
   <DashboardLayout>
-    <div v-if="contactInfos.data.length" class="flex flex-col gap-8">
+    <div class="flex flex-col gap-8">
       <ManagementHeader>
         <template #header>
           Zarządzanie formami kontaktu
         </template>
         <template #statistics>
-          <div class="mt-2 flex items-center text-sm text-gray-500">
-            liczba form kontaktu w bazie: {{ total }}
-          </div>
-          <div class="mt-2 flex items-center text-sm text-gray-500">
-            liczba form kontaktu: {{ contactInfos.total }}
-          </div>
-          <div class="mt-2 flex items-center text-sm text-gray-500">
-            ostatnia zmiana: {{ lastUpdate }}
-          </div>
+          <ManagementHeaderItem>
+            Liczba form kontaktu w bazie: {{ total }}
+          </ManagementHeaderItem>
+          <ManagementHeaderItem v-if="contactInfos.total">
+            Liczba form kontaktu w tabeli: {{ contactInfos.total }}
+          </ManagementHeaderItem>
+          <ManagementHeaderItem v-if="lastUpdate">
+            Ostatnie zmiany: {{ lastUpdate }}
+          </ManagementHeaderItem>
         </template>
         <template #actions>
-          <TextInput id="filter" v-model="form.search" placeholder="Szukaj" type="search" class="max-w-lg" />
-          <span class="hidden sm:block">
-            <Button :href="`/dashboard/contact-infos/create`">
-              Dodaj
-            </Button>
-          </span>
+          <Button :href="`/dashboard/contact-infos/create`">
+            Dodaj
+          </Button>
         </template>
       </ManagementHeader>
-
-      <TableWrapper>
-        <template #header>
-          <TableHeader class="w-1/6">
-            ID
-          </TableHeader>
-          <TableHeader class="w-1/5">
-            Etykieta
-          </TableHeader>
-          <TableHeader class="w-1/5">
-            Link
-          </TableHeader>
-          <TableHeader />
-        </template>
-        <template #body>
-          <TableRow v-for="contactInfo in contactInfos.data" :key="contactInfo.id">
-            <TableCell class="pr-12 opacity-75">
-              {{ contactInfo.id }}
-            </TableCell>
-            <TableCell>
-              {{ contactInfo.label }}
-            </TableCell>
-            <TableCell>
-              {{ contactInfo.link }}
-            </TableCell>
-            <TableCell class="text-right">
-              <Button :href="`contact-infos/${contactInfo.id}/edit`">
-                <Cog6ToothIcon class="w-6" />
-              </Button>
-              <Button class="text-red-600" @click="[showModal = true, contactInfoToDeleteId = contactInfo.id]">
-                <XCircleIcon class="w-6" />
-              </Button>
-            </TableCell>
-          </TableRow>
-        </template>
-      </TableWrapper>
-
-      <Pagination :pagination="contactInfos" />
+      <div v-if="contactInfos.length" class="flex flex-col gap-8">
+        <TableWrapper>
+          <template #header>
+            <TableHeader class="w-1/5">
+              ID
+            </TableHeader>
+            <TableHeader class="w-1/5">
+              Etykieta
+            </TableHeader>
+            <TableHeader class="w-1/5">
+              Email / Link
+            </TableHeader>
+            <TableHeader />
+          </template>
+          <template #body>
+            <TableRow v-for="contact in contactInfos" :key="contact.id">
+              <TableCell class="pr-12 opacity-75">
+                {{ contact.id }}
+              </TableCell>
+              <TableCell>
+                {{ contact.label }}
+              </TableCell>
+              <TableCell>
+                {{ contact.identifier }}
+              </TableCell>
+              <TableCell class="flex justify-end gap-2">
+                <Button :href="`contact-infos/${contact.id}/edit`">
+                  <Cog6ToothIcon class="w-5" />
+                </Button>
+                <Button class="text-red-600" @click="[showModal = true, contactInfoToDeleteId = contact.id]">
+                  <XCircleIcon class="w-5" />
+                </Button>
+              </TableCell>
+            </TableRow>
+          </template>
+        </TableWrapper>
+        <Pagination :pagination="contactInfos" />
+      </div>
+      <EmptyState v-else />
     </div>
-
-    <EmptyState v-else class="mt-3" />
   </DashboardLayout>
+
   <RemoveModal :show="showModal" :href="`/dashboard/contact-infos/${contactInfoToDeleteId}`" @close="showModal = false" />
 </template>

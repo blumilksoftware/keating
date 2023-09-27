@@ -12,7 +12,7 @@ class ContactInfoRequest extends FormRequest
     {
         return [
             "label" => ["required", "string", "max:255"],
-            "link" => ["required", "url", "max:255"],
+            "identifier" => ["required", "string", "max:255"],
         ];
     }
 }
