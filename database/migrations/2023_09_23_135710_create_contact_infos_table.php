@@ -13,6 +13,7 @@ return new class() extends Migration {
             $table->ulid("id")->primary();
             $table->string("label");
             $table->string("link");
+            $table->string("icon");
             $table->timestamps();
         });
     }
