@@ -16,10 +16,14 @@ class SemesterController extends Controller
 {
     public function index(): Response
     {
-        $semesters = Semester::query()->orderByDesc("created_at")->get();
+        $semesters = Semester::query()
+            ->orderByDesc("created_at")
+            ->get();
 
         return inertia("Dashboard/Semester/Index", [
             "semesters" => $semesters,
+            "total" => Semester::query()->count(),
+            "lastUpdate" => Semester::query()->orderByDesc("updated_at")->first()?->updated_at->diffForHumans(),
         ]);
     }
 
