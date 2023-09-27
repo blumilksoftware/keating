@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\LogoutController;
 use App\Http\Controllers\Dashboard\PasswordUpdateController;
 use App\Http\Controllers\Dashboard\SemesterController;
 use App\Http\Controllers\Dashboard\StudentController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\LoginController;
 use App\Http\Controllers\Public\NewsController;
@@ -41,5 +42,13 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::patch("/semesters/{semester}", "update")->name("semesters.update");
         Route::delete("/semesters/{semester}", "destroy")->name("semesters.destroy");
         Route::post("/semesters/{semester}/activate", "toggleActive")->name("semesters.toggle.active");
+    });
+    Route::controller(FaqController::class)->group(function (): void {
+        Route::get("/faqs", "index")->name("faq.index");
+        Route::get("/faqs/create", "create")->name("faq.create");
+        Route::post("/faqs", "store")->name("faq.store");
+        Route::get("/faqs/{faq}/edit", "edit")->name("faq.edit");
+        Route::patch("/faqs/{faq}", "update")->name("faq.update");
+        Route::delete("/faqs/{faq}", "destroy")->name("faq.destroy");
     });
 });
