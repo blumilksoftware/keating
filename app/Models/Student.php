@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property string $id
- * @property string $name
+ * @property string $first_name
  * @property string $surname
  * @property string $index_number
  * @property Carbon $created_at
@@ -23,7 +23,7 @@ class Student extends Model
     use HasUlids;
 
     protected $fillable = [
-        "name",
+        "first_name",
         "surname",
         "index_number",
     ];

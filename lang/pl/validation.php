@@ -117,8 +117,10 @@ return [
     "custom" => [
     ],
     "attributes" => [
-        "name" => "imię",
+        "name" => "nazwa",
+        "first_name" => "imię",
         "surname" => "nazwisko",
         "index_number" => "numer indeksu",
+        "abbreviation" => "skrótowiec",
     ],
 ];
