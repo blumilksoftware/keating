@@ -44,11 +44,11 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::post("/semesters/{semester}/activate", "toggleActive")->name("semesters.toggle.active");
     });
     Route::controller(FaqController::class)->group(function (): void {
-        Route::get("/faqs", "index")->name("faq.index");
-        Route::get("/faqs/create", "create")->name("faq.create");
-        Route::post("/faqs", "store")->name("faq.store");
-        Route::get("/faqs/{faq}/edit", "edit")->name("faq.edit");
-        Route::patch("/faqs/{faq}", "update")->name("faq.update");
-        Route::delete("/faqs/{faq}", "destroy")->name("faq.destroy");
+        Route::get("/faqs", "index")->name("faqs.index");
+        Route::get("/faqs/create", "create")->name("faqs.create");
+        Route::post("/faqs", "store")->name("faqs.store");
+        Route::get("/faqs/{faq}/edit", "edit")->name("faqs.edit");
+        Route::patch("/faqs/{faq}", "update")->name("faqs.update");
+        Route::delete("/faqs/{faq}", "destroy")->name("faqs.destroy");
     });
 });

@@ -51,10 +51,7 @@ const faqToDeleteId = ref(0)
               ID
             </TableHeader>
             <TableHeader class="w-1/5">
-              Nazwa
-            </TableHeader>
-            <TableHeader class="w-1/5">
-              Status
+              Pytanie
             </TableHeader>
             <TableHeader />
           </template>
@@ -67,7 +64,7 @@ const faqToDeleteId = ref(0)
                 {{ faq.question }}
               </TableCell>
               <TableCell class="flex justify-end gap-2">
-                <Button :href="`/dashboard/semesters/${faq.id}/edit`">
+                <Button :href="`/dashboard/faqs/${faq.id}/edit`">
                   <Cog6ToothIcon class="w-5" />
                 </Button>
                 <Button class="text-red-600" @click="[showModal = true, faqToDeleteId = faq.id]">

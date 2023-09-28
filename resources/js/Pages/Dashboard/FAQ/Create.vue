@@ -17,7 +17,7 @@ const form = useForm({
 })
 
 function createFAQ() {
-  form.post('/dashboard/semesters')
+  form.post('/dashboard/faqs')
 }
 </script>
 

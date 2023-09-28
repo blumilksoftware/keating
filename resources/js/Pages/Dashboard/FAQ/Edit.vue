@@ -21,7 +21,7 @@ const form = useForm({
 })
 
 function createFAQ() {
-  form.patch('/dashboard/semesters/${props.faq.id}')
+  form.patch('/dashboard/faqs/${props.faq.id}')
 }
 </script>
 
