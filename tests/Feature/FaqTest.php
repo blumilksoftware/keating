@@ -82,6 +82,7 @@ class FaqTest extends TestCase
         $this->assertDatabaseCount("faqs", 1);
 
         $this->delete("/dashboard/faqs/$faq->id");
+
         $this->assertDatabaseCount("faqs", 0);
     }
 }
