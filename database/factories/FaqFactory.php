@@ -19,5 +19,4 @@ class FaqFactory extends Factory
             "answer" => fake()->realText(),
         ];
     }
-
 }

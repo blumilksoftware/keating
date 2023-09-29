@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use App\Models\Faq;
@@ -25,7 +27,7 @@ class FaqTest extends TestCase
         $this->assertDatabaseCount("faqs", 0);
 
         $this->post("/dashboard/faqs", [
-           "question" => "Example question ?",
+            "question" => "Example question ?",
             "answer" => "Content of the wiki",
         ])->assertSessionHasNoErrors();
 
@@ -63,6 +65,17 @@ class FaqTest extends TestCase
         $this->assertDatabaseCount("faqs", 0);
     }
 
+    public function testSemesterCannotBeCreatedWithoutData(): void
+    {
+        $this->post("/dashboard/faqs", [
+        ])->assertSessionHasErrors([
+            "question",
+            "answer",
+        ]);
+
+        $this->assertDatabaseCount("faqs", 0);
+    }
+
     public function testFaqCanBeDeleted(): void
     {
         $faq = Faq::factory()->create();
@@ -70,6 +83,5 @@ class FaqTest extends TestCase
 
         $this->delete("/dashboard/faqs/$faq->id");
         $this->assertDatabaseCount("faqs", 0);
-
     }
 }
