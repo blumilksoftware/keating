@@ -20,8 +20,8 @@ const form = useForm({
   answer: props.faq.answer,
 })
 
-function createFAQ() {
-  form.patch('/dashboard/faqs/${props.faq.id}')
+function editFAQ() {
+  form.patch(`/dashboard/faqs/${props.faq.id}`)
 }
 </script>
 
@@ -39,7 +39,7 @@ function createFAQ() {
         </template>
       </ManagementHeader>
 
-      <form class="grid grid-cols-2" @submit.prevent="createFAQ">
+      <form class="grid grid-cols-2" @submit.prevent="editFAQ">
         <Section>
           <div class="flex flex-col justify-between gap-4">
             <FormGroup>
@@ -64,7 +64,7 @@ function createFAQ() {
             </FormGroup>
             <div class="mt-4 flex justify-end">
               <SubmitButton>
-                Utwórz
+                Zapisz
               </SubmitButton>
             </div>
           </div>

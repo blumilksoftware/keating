@@ -50,7 +50,7 @@ class FaqController extends Controller
         $faq->update($request->validated());
 
         return redirect()
-            ->route("faq.index")
+            ->route("faqs.index")
             ->with("success", "Zaktualizowano FAQ");
     }
 
