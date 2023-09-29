@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\FieldController;
 use App\Http\Controllers\Dashboard\LogoutController;
 use App\Http\Controllers\Dashboard\PasswordUpdateController;
 use App\Http\Controllers\Dashboard\SemesterController;
@@ -42,6 +43,14 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::patch("/semesters/{semester}", "update")->name("semesters.update");
         Route::delete("/semesters/{semester}", "destroy")->name("semesters.destroy");
         Route::post("/semesters/{semester}/activate", "toggleActive")->name("semesters.toggle.active");
+    });
+    Route::controller(FieldController::class)->group(function (): void {
+        Route::get("/fields", "index")->name("fields.index");
+        Route::get("/fields/create", "create")->name("fields.create");
+        Route::post("/fields", "store")->name("fields.store");
+        Route::get("/fields/{field}/edit", "edit")->name("fields.edit");
+        Route::patch("/fields/{field}", "update")->name("fields.update");
+        Route::delete("/fields/{field}", "destroy")->name("fields.destroy");
     });
     Route::controller(FaqController::class)->group(function (): void {
         Route::get("/faqs", "index")->name("faqs.index");
