@@ -15,7 +15,7 @@ const props = defineProps({
 })
 
 const form = useForm({
-  name: props.student.name,
+  first_name: props.student.first_name,
   surname: props.student.surname,
   index_number: props.student.index_number,
 })
@@ -34,7 +34,7 @@ function updateStudent() {
         </template>
         <template #statistics>
           <ManagementHeaderItem>
-            Formularz edycji studenta {{ props.student.name }} {{ props.student.surname }} (#{{ student.index_number }})
+            Formularz edycji studenta {{ props.student.first_name }} {{ props.student.surname }} (#{{ student.index_number }})
           </ManagementHeaderItem>
         </template>
       </ManagementHeader>
@@ -49,11 +49,11 @@ function updateStudent() {
               <TextInput class="opacity-75" :placeholder="student.id" autocomplete="off" disabled />
             </FormGroup>
             <FormGroup>
-              <FormLabel for="name">
+              <FormLabel for="first_name">
                 Imię
               </FormLabel>
-              <TextInput id="name" v-model="form.name" :error="form.errors.name" />
-              <FormError :error="form.errors.name" />
+              <TextInput id="first_name" v-model="form.first_name" :error="form.errors.first_name" />
+              <FormError :error="form.errors.first_name" />
             </FormGroup>
             <FormGroup>
               <FormLabel for="surname">

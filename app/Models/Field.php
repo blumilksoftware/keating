@@ -11,20 +11,18 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property string $id
- * @property string $first_name
- * @property string $surname
- * @property string $index_number
+ * @property string $name
+ * @property string $abbreviation
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Student extends Model
+class Field extends Model
 {
     use HasFactory;
     use HasUlids;
 
     protected $fillable = [
-        "first_name",
-        "surname",
-        "index_number",
+        "name",
+        "abbreviation",
     ];
 }
