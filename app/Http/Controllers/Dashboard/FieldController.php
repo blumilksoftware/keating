@@ -15,7 +15,7 @@ class FieldController extends Controller
     public function index(): Response
     {
         $fields = Field::query()
-            ->orderByDesc("abbreviation")
+            ->orderBy("abbreviation")
             ->get();
 
         return inertia("Dashboard/Field/Index", [
