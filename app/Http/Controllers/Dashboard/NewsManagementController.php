@@ -10,7 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
 
-class NewsController extends Controller
+class NewsManagementController extends Controller
 {
     public function index(Request $request): Response
     {

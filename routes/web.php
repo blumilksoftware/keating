@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\LogoutController;
 use App\Http\Controllers\Dashboard\PasswordUpdateController;
 use App\Http\Controllers\Dashboard\SemesterController;
 use App\Http\Controllers\Dashboard\StudentController;
+use App\Http\Controllers\Dashboard\NewsManagementController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\LoginController;
 use App\Http\Controllers\Public\NewsController;
@@ -59,5 +60,13 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::get("/faqs/{faq}/edit", "edit")->name("faqs.edit");
         Route::patch("/faqs/{faq}", "update")->name("faqs.update");
         Route::delete("/faqs/{faq}", "destroy")->name("faqs.destroy");
+    });
+    Route::controller(NewsManagementController::class)->group(function (): void {
+        Route::get("/news", "index")->name("news.index");
+        Route::get("/news/create", "create")->name("news.create");
+        Route::post("/news", "store")->name("news.store");
+        Route::get("/news/{news}/edit", "edit")->name("news.edit");
+        Route::patch("/news/{news}", "update")->name("news.update");
+        Route::delete("/news/{news}", "destroy")->name("news.destroy");
     });
 });

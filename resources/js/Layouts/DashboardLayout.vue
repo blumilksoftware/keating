@@ -31,7 +31,7 @@ const navigation = [
       { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
       { name: 'Ustawienia', href: '#', icon: Cog6ToothIcon, current: false },
       { name: 'Aktualizacja hasła', href: '/dashboard/password', icon: LockOpenIcon, current: false },
-      { name: 'Aktualności', href: '#', icon: NewspaperIcon, current: false },
+      { name: 'Aktualności', href: '/dashboard/news', icon: NewspaperIcon, current: false },
       { name: 'FAQ', href: '/dashboard/faqs', icon: QuestionMarkCircleIcon, current: false },
       { name: 'Formy kontaktu', href: '#', icon: AtSymbolIcon, current: false },
     ],
