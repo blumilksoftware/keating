@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Enums\Icons;
 use App\Models\ContactInfo;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,18 +20,16 @@ class ContactInfoTest extends TestCase
         parent::setUp();
 
         $this->user = User::factory()->create();
-        $this->contactInfo = ContactInfo::factory()->create([
-            "github_handle" => null,
-            "alternative_channel" => null
-        ]);
+        $this->contactInfo = ContactInfo::factory()->create();
+        $this->actingAs($this->user);
     }
 
     public function testContactInfoCanBeUpdated(): void
     {
         $this->assertDatabaseMissing("contact_infos", [
-            "email" => "user@collegiumwitelona.pl",
-            "github_handle" => "https://test@test.pl",
-            "alternative_channel" => "https://test@test.pl",
+            "label" => "user@collegiumwitelona.pl",
+            "link" => "https://test@test.pl",
+            "icon" => Icons::Envelope->value,
         ]);
 
         $this->actingAs($this->user)->patch("/dashboard/contact-info", [

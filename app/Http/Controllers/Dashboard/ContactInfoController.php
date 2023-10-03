@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Enums\Icons;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactInfoRequest;
 use App\Models\ContactInfo;
+use Exception;
+use Spatie\LaravelOptions\Options;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -29,7 +32,9 @@ class ContactInfoController extends Controller
 
     public function create(): Response
     {
-        return inertia("Dashboard/ContactInfo/Create");
+        return inertia("Dashboard/ContactInfo/Create", [
+            "icons" => Options::forEnum(Icons::class)->toArray(),
+        ]);
     }
 
     public function store(ContactInfoRequest $request): RedirectResponse
@@ -45,6 +50,7 @@ class ContactInfoController extends Controller
     {
         return inertia("Dashboard/ContactInfo/Edit", [
             "contactInfo" => $contactInfo,
+            "icons" => Options::forEnum(Icons::class)->toArray(),
         ]);
     }
 

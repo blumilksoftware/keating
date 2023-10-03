@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Enums\Icons;
 use App\Models\ContactInfo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,6 +18,7 @@ class ContactInfoFactory extends Factory
         return [
             "label" => fake()->domainWord(),
             "link" => fake()->url(),
+            "icon" => fake()->randomElement(Icons::class),
         ];
     }
 }
