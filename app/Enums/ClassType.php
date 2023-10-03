@@ -32,7 +32,7 @@ enum ClassType: string
             "lecture" => __("W"),
             "seminar" => __("S"),
             "workshop" => __("WT"),
-            "exercises" => __("ĆW"),
+            "exercises" => __("C"),
             "project" => __("P"),
         ];
     }
