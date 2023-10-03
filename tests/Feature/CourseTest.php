@@ -27,7 +27,7 @@ class CourseTest extends TestCase
         $this->post("/dashboard/courses", [
             "name" => "Course",
             "abbreviation" => "C",
-            "semester" => "II",
+            "semester" => 2,
             "type" => "laboratory",
             "form" => "stationary",
         ])->assertSessionHasNoErrors();
@@ -40,7 +40,7 @@ class CourseTest extends TestCase
         $this->assertDatabaseMissing("courses", [
             "name" => "Course",
             "abbreviation" => "C",
-            "semester" => "II",
+            "semester" => 2,
             "type" => "laboratory",
             "form" => "stationary",
         ]);
@@ -48,7 +48,7 @@ class CourseTest extends TestCase
         $this->patch("/dashboard/courses/{$semester->id}", [
             "name" => "Course",
             "abbreviation" => "C",
-            "semester" => "II",
+            "semester" => 2,
             "type" => "laboratory",
             "form" => "stationary",
         ])->assertSessionHasNoErrors();
@@ -56,7 +56,7 @@ class CourseTest extends TestCase
         $this->assertDatabaseHas("courses", [
             "name" => "Course",
             "abbreviation" => "C",
-            "semester" => "II",
+            "semester" => 2,
             "type" => "laboratory",
             "form" => "stationary",
         ]);

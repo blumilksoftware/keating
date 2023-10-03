@@ -16,7 +16,7 @@ use Stevebauman\Purify\Facades\Purify;
  * @property string $name
  * @property string $abbreviation
  * @property string $description
- * @property string $semester
+ * @property int $semester
  * @property string $type
  * @property string $form
  * @property Carbon $created_at
@@ -35,6 +35,22 @@ class Course extends Model
         "type",
         "form",
     ];
+
+    public function getRomanizedSemester(): string
+    {
+        return match ($this->semester) {
+            1 => __("I"),
+            2 => __("II"),
+            3 => __("III"),
+            4 => __("IV"),
+            5 => __("V"),
+            6 => __("VI"),
+            7 => __("VII"),
+            8 => __("VIII"),
+            9 => __("IX"),
+            default => __("X"),
+        };
+    }
 
     protected function description(): Attribute
     {

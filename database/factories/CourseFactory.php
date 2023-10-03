@@ -6,7 +6,6 @@ namespace Database\Factories;
 
 use App\Enums\ClassType;
 use App\Enums\StudyForm;
-use App\Models\Semester;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CourseFactory extends Factory
@@ -17,7 +16,7 @@ class CourseFactory extends Factory
             "name" => fake()->asciify("******"),
             "abbreviation" => fake()->asciify("*"),
             "description" => fake()->text,
-            "semester" => Semester::factory()->create()->name,
+            "semester" => fake()->numberBetween(1, 10),
             "type" => ClassType::LABORATORY->value,
             "form" => StudyForm::STATIONARY->value,
         ];

@@ -13,7 +13,6 @@ import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 import TextAreaEditor from '@/Shared/Forms/TextAreaEditor.vue'
 
 defineProps({
-  semesters: Array,
   classTypes: Array,
   studyForms: Array,
 })
@@ -73,7 +72,7 @@ function createCourse() {
               <FormLabel for="semester">
                 Semestr
               </FormLabel>
-              <Select id="semester" v-model="form.semester" :error="form.errors.semester" :options="semesters" label="label" item-value="value" />
+              <TextInput id="semester" v-model="form.semester" type="number" min="1" max="10" :error="form.errors.semester" autocomplete="off" />
               <FormError :error="form.errors.semester" />
             </FormGroup>
             <FormGroup>

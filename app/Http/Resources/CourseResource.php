@@ -22,7 +22,7 @@ class CourseResource extends JsonResource
             "name" => $course->name,
             "abbreviation" => $course->abbreviation,
             "description" => $course->description,
-            "semester" => $course->semester,
+            "semester" => $course->getRomanizedSemester(),
             "type" => ClassType::labels()[$course->type],
             "form" => StudyForm::labels()[$course->form],
         ];

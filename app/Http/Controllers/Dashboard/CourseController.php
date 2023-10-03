@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Dashboard;
 
 use App\Enums\ClassType;
-use App\Enums\Semester;
 use App\Enums\StudyForm;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
@@ -33,7 +32,6 @@ class CourseController extends Controller
     public function create(): Response
     {
         return inertia("Dashboard/Course/Create", [
-            "semesters" => Options::forEnum(Semester::class)->toArray(),
             "classTypes" => Options::forEnum(ClassType::class)->toArray(),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
         ]);
@@ -52,7 +50,6 @@ class CourseController extends Controller
     {
         return inertia("Dashboard/Course/Edit", [
             "course" => $course,
-            "semesters" => Options::forEnum(Semester::class)->toArray(),
             "classTypes" => Options::forEnum(ClassType::class)->toArray(),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
         ]);
