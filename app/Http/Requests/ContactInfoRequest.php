@@ -15,7 +15,7 @@ class ContactInfoRequest extends FormRequest
         return [
             "label" => ["required", "string", "max:255"],
             "identifier" => ["required", "string", "max:255"],
-            "icon" => ["nullable", new Enum(Icons::class)]
+            "icon" => ["required", new Enum(Icons::class)],
         ];
     }
 }

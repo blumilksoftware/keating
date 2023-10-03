@@ -8,12 +8,10 @@ use App\Enums\Icons;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactInfoRequest;
 use App\Models\ContactInfo;
-use Exception;
-use Spatie\LaravelOptions\Options;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use Spatie\LaravelOptions\Options;
 
 class ContactInfoController extends Controller
 {

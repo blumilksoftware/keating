@@ -17,7 +17,7 @@ class ContactInfoFactory extends Factory
     {
         return [
             "label" => fake()->domainWord(),
-            "link" => fake()->url(),
+            "identifier" => fake()->url(),
             "icon" => fake()->randomElement(Icons::class),
         ];
     }

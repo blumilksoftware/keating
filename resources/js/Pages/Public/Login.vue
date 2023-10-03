@@ -29,7 +29,7 @@ function attemptLogin() {
           <div class="sm:mx-auto sm:w-full sm:max-w-[480px]">
             <div class="px-6 py-7 sm:px-12">
               <form
-                class="space-y-6 z-10"
+                class="z-10 space-y-6"
                 @submit.prevent="attemptLogin"
               >
                 <div
@@ -44,7 +44,7 @@ function attemptLogin() {
                   >Email</label>
                   <div class="mt-2">
                     <input id="email" v-model="loginForm.email" name="email" type="email" autocomplete="email" required
-                           class="block w-full top rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
+                           class="top block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
                     >
                   </div>
                 </div>
@@ -52,7 +52,7 @@ function attemptLogin() {
                   <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Hasło</label>
                   <div class="mt-2">
                     <input id="password" v-model="loginForm.password" name="password" type="password"
-                           class="block w-full z-50 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
+                           class="z-50 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
                     >
                   </div>
                 </div>

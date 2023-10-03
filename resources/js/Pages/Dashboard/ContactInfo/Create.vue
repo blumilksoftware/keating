@@ -18,7 +18,7 @@ defineProps({
 const form = useForm({
   label: '',
   identifier: '',
-  icon: ''
+  icon: '',
 })
 
 function createContactInfo() {
