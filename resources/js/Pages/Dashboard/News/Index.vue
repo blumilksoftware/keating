@@ -82,24 +82,24 @@ watch(form, debounce(() => {
             <TableHeader />
           </template>
           <template #body>
-            <TableRow v-for="news in news.data" :key="news.id">
+            <TableRow v-for="article in news.data" :key="article.id">
               <TableCell class="pr-12 opacity-75">
-                {{ news.id }}
+                {{ article.id }}
               </TableCell>
               <TableCell>
-                {{ news.title }}
+                {{ article.title }}
               </TableCell>
               <TableCell>
-                {{ news.slug }}
+                {{ article.slug }}
               </TableCell>
               <TableCell>
-                {{ news.published_at }}
+                {{ article.published_at }}
               </TableCell>
               <TableCell class="flex justify-end gap-2">
-                <Button :href="`news/${news.id}/edit`">
+                <Button :href="`news/${article.id}/edit`">
                   <Cog6ToothIcon class="w-5" />
                 </Button>
-                <Button class="text-red-600" @click="[showModal = true, newsToDeleteId = news.id]">
+                <Button class="text-red-600" @click="[showModal = true, newsToDeleteId = article.id]">
                   <XCircleIcon class="w-5" />
                 </Button>
               </TableCell>

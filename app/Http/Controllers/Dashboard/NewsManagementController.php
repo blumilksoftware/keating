@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
@@ -19,7 +21,7 @@ class NewsManagementController extends Controller
             ->when(
                 $searchText !== null,
                 fn(Builder $query): Builder => $query
-                    ->where("title", "ILIKE", "%$searchText%")
+                    ->where("title", "ILIKE", "%$searchText%"),
             )
             ->paginate()
             ->withQueryString();
