@@ -43,7 +43,7 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::get("/semesters/{semester}/edit", "edit")->name("semesters.edit");
         Route::patch("/semesters/{semester}", "update")->name("semesters.update");
         Route::delete("/semesters/{semester}", "destroy")->name("semesters.destroy");
-        Route::post("/semesters/{semester}/activate", "toggleActive")->name("semesters.toggle.active");
+        Route::post("/semesters/{semester}/toggle-active", "toggleActive")->name("semesters.toggle.active");
     });
     Route::controller(FieldController::class)->group(function (): void {
         Route::get("/fields", "index")->name("fields.index");

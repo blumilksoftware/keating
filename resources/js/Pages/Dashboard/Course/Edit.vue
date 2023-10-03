@@ -1,6 +1,7 @@
 <script setup>
 import DashboardLayout from '@/Layouts/DashboardLayout.vue'
 import Section from '@/Shared/Components/Section.vue'
+import Select from '@/Shared/Forms/Select.vue'
 import SubmitButton from '@/Shared/Components/Buttons/SubmitButton.vue'
 import FormGroup from '@/Shared/Forms/FormGroup.vue'
 import FormLabel from '@/Shared/Forms/FormLabel.vue'
@@ -14,6 +15,9 @@ import TextAreaEditor from '../../../Shared/Forms/TextAreaEditor.vue'
 
 const props = defineProps({
   course: Object,
+  semesters: Array,
+  classTypes: Array,
+  studyForms: Array,
 })
 
 
@@ -22,6 +26,8 @@ const form = useForm({
   abbreviation: props.course.abbreviation,
   description: props.course.description,
   semester: props.course.semester,
+  type: props.course.type,
+  form: props.course.form,
 })
 
 function updateCourse() {
@@ -70,8 +76,22 @@ function updateCourse() {
               <FormLabel for="semester">
                 Semestr
               </FormLabel>
-              <TextInput id="semester" v-model="form.semester" :error="form.errors.semester" autocomplete="off" />
+              <Select id="semester" v-model="form.semester" :error="form.errors.semester" :options="semesters" :item-value="'name'" />
               <FormError :error="form.errors.semester" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="type">
+                Typ zajęć
+              </FormLabel>
+              <Select id="type" v-model="form.type" :error="form.errors.type" :options="classTypes" label="label" item-value="value" />
+              <FormError :error="form.errors.type" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="type">
+                Tryb zajęć
+              </FormLabel>
+              <Select id="type" v-model="form.form" :error="form.errors.form" :options="studyForms" label="label" item-value="value" />
+              <FormError :error="form.errors.type" />
             </FormGroup>
             <FormGroup>
               <FormLabel for="description">
@@ -82,7 +102,7 @@ function updateCourse() {
             </FormGroup>
             <div class="mt-4 flex justify-end">
               <SubmitButton>
-                Utwórz
+                Zapisz
               </SubmitButton>
             </div>
           </div>

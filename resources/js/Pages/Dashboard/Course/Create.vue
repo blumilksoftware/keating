@@ -4,18 +4,27 @@ import Section from '@/Shared/Components/Section.vue'
 import SubmitButton from '@/Shared/Components/Buttons/SubmitButton.vue'
 import FormGroup from '@/Shared/Forms/FormGroup.vue'
 import FormLabel from '@/Shared/Forms/FormLabel.vue'
+import Select from '@/Shared/Forms/Select.vue'
 import TextInput from '@/Shared/Forms/TextInput.vue'
 import { useForm } from '@inertiajs/inertia-vue3'
 import FormError from '@/Shared/Forms/FormError.vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
-import TextAreaEditor from '../../../Shared/Forms/TextAreaEditor.vue'
+import TextAreaEditor from '@/Shared/Forms/TextAreaEditor.vue'
+
+defineProps({
+  semesters: Array,
+  classTypes: Array,
+  studyForms: Array,
+})
 
 const form = useForm({
   name: '',
   abbreviation: '',
   description: '',
   semester: '',
+  type: '',
+  form: '',
 })
 
 function createCourse() {
@@ -64,8 +73,22 @@ function createCourse() {
               <FormLabel for="semester">
                 Semestr
               </FormLabel>
-              <TextInput id="semester" v-model="form.semester" :error="form.errors.semester" autocomplete="off" />
+              <Select id="semester" v-model="form.semester" :error="form.errors.semester" :options="semesters" item-value="name" />
               <FormError :error="form.errors.semester" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="type">
+                Typ zajęć
+              </FormLabel>
+              <Select id="type" v-model="form.type" :error="form.errors.type" :options="classTypes" label="label" item-value="value" />
+              <FormError :error="form.errors.type" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="type">
+                Tryb zajęć
+              </FormLabel>
+              <Select id="type" v-model="form.form" :error="form.errors.form" :options="studyForms" label="label" item-value="value" />
+              <FormError :error="form.errors.type" />
             </FormGroup>
             <FormGroup>
               <FormLabel for="description">

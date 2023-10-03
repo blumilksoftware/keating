@@ -17,6 +17,8 @@ use Stevebauman\Purify\Facades\Purify;
  * @property string $abbreviation
  * @property string $description
  * @property string $semester
+ * @property string $type
+ * @property string $form
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
@@ -30,6 +32,8 @@ class Course extends Model
         "abbreviation",
         "description",
         "semester",
+        "type",
+        "form",
     ];
 
     protected function description(): Attribute
