@@ -17,6 +17,7 @@ const props = defineProps({
 
 const form = useForm({
   title: props.news.title,
+  slug: props.news.slug,
   content: props.news.content,
 })
 
@@ -54,6 +55,13 @@ function updateNews() {
               </FormLabel>
               <TextInput id="title" v-model="form.title" :error="form.errors.title" autocomplete="off" />
               <FormError :error="form.errors.title" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="slug">
+                Slug
+              </FormLabel>
+              <TextInput id="slug" v-model="form.slug" :error="form.errors.slug" autocomplete="off" />
+              <FormError :error="form.errors.slug" />
             </FormGroup>
             <FormGroup>
               <FormLabel for="content">
