@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Models\Faq;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class StudentFactory extends Factory
+/**
+ * @extends Factory<Faq>
+ */
+class FaqFactory extends Factory
 {
     public function definition(): array
     {
         return [
-            "first_name" => fake()->name(),
-            "surname" => fake()->lastName(),
-            "index_number" => fake()->unique()->numberBetween(1, 10000),
+            "question" => fake()->sentence(),
+            "answer" => fake()->realText(),
         ];
     }
 }

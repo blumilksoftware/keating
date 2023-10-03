@@ -9,15 +9,15 @@ import { useForm } from '@inertiajs/inertia-vue3'
 import FormError from '@/Shared/Forms/FormError.vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
+import TextAreaEditor from '../../../Shared/Forms/TextAreaEditor.vue'
 
 const form = useForm({
-  first_name: '',
-  surname: '',
-  index_number: '',
+  question: '',
+  answer: '',
 })
 
-function createStudent() {
-  form.post('/dashboard/students')
+function createFAQ() {
+  form.post('/dashboard/faqs')
 }
 </script>
 
@@ -26,16 +26,16 @@ function createStudent() {
     <div class="flex flex-col gap-8">
       <ManagementHeader>
         <template #header>
-          Zarządzanie studentami
+          Zarządzanie FAQ
         </template>
         <template #statistics>
           <ManagementHeaderItem>
-            Formularz dodawania nowego studenta
+            Formularz dodawania nowego FAQ
           </ManagementHeaderItem>
         </template>
       </ManagementHeader>
 
-      <form class="grid grid-cols-2" @submit.prevent="createStudent">
+      <form class="grid grid-cols-2" @submit.prevent="createFAQ">
         <Section>
           <div class="flex flex-col justify-between gap-4">
             <FormGroup>
@@ -45,25 +45,18 @@ function createStudent() {
               <TextInput class="opacity-75" placeholder="autogenerowany ulid" autocomplete="off" disabled />
             </FormGroup>
             <FormGroup>
-              <FormLabel for="first_name">
-                Imię
+              <FormLabel for="question">
+                Pytanie
               </FormLabel>
-              <TextInput id="first_name" v-model="form.first_name" :error="form.errors.first_name" autocomplete="off" />
-              <FormError :error="form.errors.first_name" />
+              <TextInput id="question" v-model="form.question" :error="form.errors.question" autocomplete="off" />
+              <FormError :error="form.errors.question" />
             </FormGroup>
             <FormGroup>
-              <FormLabel for="surname">
-                Nazwisko
+              <FormLabel for="answer">
+                Odpowiedź
               </FormLabel>
-              <TextInput id="surname" v-model="form.surname" :error="form.errors.surname" autocomplete="off" />
-              <FormError :error="form.errors.surname" />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel for="index_number">
-                Numer indeksu
-              </FormLabel>
-              <TextInput id="index_number" v-model="form.index_number" type="number" min="1" :error="form.errors.index_number" autocomplete="off" />
-              <FormError :error="form.errors.index_number" />
+              <TextAreaEditor id="answer" v-model="form.answer" />
+              <FormError :error="form.errors.answer" />
             </FormGroup>
             <div class="mt-4 flex justify-end">
               <SubmitButton>

@@ -32,7 +32,7 @@ const navigation = [
       { name: 'Ustawienia', href: '#', icon: Cog6ToothIcon, current: false },
       { name: 'Aktualizacja hasła', href: '/dashboard/password', icon: LockOpenIcon, current: false },
       { name: 'Aktualności', href: '#', icon: NewspaperIcon, current: false },
-      { name: 'FAQ', href: '#', icon: QuestionMarkCircleIcon, current: false },
+      { name: 'FAQ', href: '/dashboard/faqs', icon: QuestionMarkCircleIcon, current: false },
       { name: 'Formy kontaktu', href: '/dashboard/contact-infos', icon: AtSymbolIcon, current: false },
     ],
   },
@@ -47,7 +47,7 @@ const navigation = [
     title: 'Słowniki',
     elements: [
       { name: 'Kursy', href: '#', icon: BriefcaseIcon, current: false },
-      { name: 'Kierunki i specjalności', href: '#', icon: MagnifyingGlassIcon, current: false },
+      { name: 'Kierunki i specjalności', href: '/dashboard/fields', icon: MagnifyingGlassIcon, current: false },
       { name: 'Semestry', href: '/dashboard/semesters', icon: ClipboardIcon, current: false },
     ],
   },

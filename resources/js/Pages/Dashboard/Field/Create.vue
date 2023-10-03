@@ -11,13 +11,12 @@ import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 
 const form = useForm({
-  first_name: '',
-  surname: '',
-  index_number: '',
+  name: '',
+  abbreviation: '',
 })
 
-function createStudent() {
-  form.post('/dashboard/students')
+function createField() {
+  form.post('/dashboard/fields')
 }
 </script>
 
@@ -26,16 +25,16 @@ function createStudent() {
     <div class="flex flex-col gap-8">
       <ManagementHeader>
         <template #header>
-          Zarządzanie studentami
+          Zarządzanie kierunkami i specjalnościami
         </template>
         <template #statistics>
           <ManagementHeaderItem>
-            Formularz dodawania nowego studenta
+            Formularz dodawania nowego kierunku lub specjalności
           </ManagementHeaderItem>
         </template>
       </ManagementHeader>
 
-      <form class="grid grid-cols-2" @submit.prevent="createStudent">
+      <form class="grid grid-cols-2" @submit.prevent="createField">
         <Section>
           <div class="flex flex-col justify-between gap-4">
             <FormGroup>
@@ -45,25 +44,18 @@ function createStudent() {
               <TextInput class="opacity-75" placeholder="autogenerowany ulid" autocomplete="off" disabled />
             </FormGroup>
             <FormGroup>
-              <FormLabel for="first_name">
-                Imię
+              <FormLabel for="name">
+                Nazwa
               </FormLabel>
-              <TextInput id="first_name" v-model="form.first_name" :error="form.errors.first_name" autocomplete="off" />
-              <FormError :error="form.errors.first_name" />
+              <TextInput id="name" v-model="form.name" :error="form.errors.name" autocomplete="off" />
+              <FormError :error="form.errors.name" />
             </FormGroup>
             <FormGroup>
-              <FormLabel for="surname">
-                Nazwisko
+              <FormLabel for="abbreviation">
+                Skrótowiec
               </FormLabel>
-              <TextInput id="surname" v-model="form.surname" :error="form.errors.surname" autocomplete="off" />
-              <FormError :error="form.errors.surname" />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel for="index_number">
-                Numer indeksu
-              </FormLabel>
-              <TextInput id="index_number" v-model="form.index_number" type="number" min="1" :error="form.errors.index_number" autocomplete="off" />
-              <FormError :error="form.errors.index_number" />
+              <TextInput id="abbreviation" v-model="form.abbreviation" :error="form.errors.abbreviation" autocomplete="off" />
+              <FormError :error="form.errors.abbreviation" />
             </FormGroup>
             <div class="mt-4 flex justify-end">
               <SubmitButton>
