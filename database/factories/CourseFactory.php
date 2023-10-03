@@ -17,8 +17,8 @@ class CourseFactory extends Factory
             "abbreviation" => fake()->asciify("*"),
             "description" => fake()->text,
             "semester" => fake()->numberBetween(1, 10),
-            "type" => ClassType::LABORATORY->value,
-            "form" => StudyForm::STATIONARY->value,
+            "type" => ClassType::Laboratory->value,
+            "form" => StudyForm::Stationary->value,
         ];
     }
 }

@@ -6,8 +6,8 @@ namespace App\Enums;
 
 enum StudyForm: string
 {
-    case STATIONARY = "stationary";
-    case PART_TIME = "part-time";
+    case Stationary = "stationary";
+    case PartTime = "part-time";
 
     public static function labels(): array
     {

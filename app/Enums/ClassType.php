@@ -6,12 +6,12 @@ namespace App\Enums;
 
 enum ClassType: string
 {
-    case LABORATORY = "laboratory";
+    case Laboratory = "laboratory";
     case LECTURE = "lecture";
-    case SEMINAR = "seminar";
-    case WORKSHOP = "workshop";
-    case EXERCISES = "exercises";
-    case PROJECT = "project";
+    case Seminar = "seminar";
+    case Workshop = "workshop";
+    case Exercises = "exercises";
+    case Project = "project";
 
     public static function labels(): array
     {
