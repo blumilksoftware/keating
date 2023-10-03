@@ -11,7 +11,7 @@ import { ref } from 'vue'
 import { Method } from '@inertiajs/inertia'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
-import { Cog6ToothIcon, XCircleIcon, CheckIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { Cog6ToothIcon, XCircleIcon, CheckIcon } from '@heroicons/vue/24/outline'
 
 defineProps({
   semesters: Object,
@@ -76,8 +76,7 @@ const semesterToDeleteId = ref(0)
                 <Button v-if="semester.status !== true" :method="Method.POST"
                         :href="`/dashboard/semesters/${semester.id}/activate`"
                 >
-                  <XMarkIcon v-if="semester.active" class="w-5" />
-                  <CheckIcon v-else class="w-5" />
+                  <CheckIcon class="w-5" />
                 </Button>
                 <Button :href="`/dashboard/semesters/${semester.id}/edit`">
                   <Cog6ToothIcon class="w-5" />

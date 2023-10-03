@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Actions\ActivateSemesterAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SemesterRequest;
 use App\Models\Semester;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 
@@ -63,11 +65,16 @@ class SemesterController extends Controller
             ->with("success", "Usunięto semestr");
     }
 
-    public function toggleActive(Semester $semester): RedirectResponse
+    public function toggleActive(Semester $semester, ActivateSemesterAction $activateSemesterAction): RedirectResponse
     {
-        $semester->update(["active" => !$semester->active]);
+        try {
+            $activateSemesterAction->execute($semester);
 
-        return redirect()->back()
-            ->with("success", "Semestr aktywny");
+            return redirect()->back()
+                ->with("success", "Semestr aktywny");
+        } catch (Exception $e) {
+            return redirect()->back()
+                ->with("error", "Wystąpił nieoczekiwany problem");
+        }
     }
 }

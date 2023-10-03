@@ -76,7 +76,7 @@ function updateCourse() {
               <FormLabel for="semester">
                 Semestr
               </FormLabel>
-              <Select id="semester" v-model="form.semester" :error="form.errors.semester" :options="semesters" :item-value="'name'" />
+              <Select id="semester" v-model="form.semester" :error="form.errors.semester" :options="semesters" label="label" item-value="value" />
               <FormError :error="form.errors.semester" />
             </FormGroup>
             <FormGroup>

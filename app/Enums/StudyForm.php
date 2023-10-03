@@ -20,6 +20,7 @@ enum StudyForm: string
     public static function abbreviationLabels(): array
     {
         return [
+            "stationary" => __("S"),
             "part-time" => __("N"),
         ];
     }

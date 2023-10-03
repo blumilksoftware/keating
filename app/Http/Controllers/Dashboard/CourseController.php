@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Dashboard;
 
 use App\Enums\ClassType;
+use App\Enums\Semester;
 use App\Enums\StudyForm;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
 use App\Http\Resources\CourseResource;
 use App\Models\Course;
-use App\Models\Semester;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 use Spatie\LaravelOptions\Options;
@@ -33,7 +33,7 @@ class CourseController extends Controller
     public function create(): Response
     {
         return inertia("Dashboard/Course/Create", [
-            "semesters" => Semester::all(["id", "name"]),
+            "semesters" => Options::forEnum(Semester::class)->toArray(),
             "classTypes" => Options::forEnum(ClassType::class)->toArray(),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
         ]);
@@ -52,7 +52,7 @@ class CourseController extends Controller
     {
         return inertia("Dashboard/Course/Edit", [
             "course" => $course,
-            "semesters" => Semester::all(["id", "name"]),
+            "semesters" => Options::forEnum(Semester::class)->toArray(),
             "classTypes" => Options::forEnum(ClassType::class)->toArray(),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
         ]);

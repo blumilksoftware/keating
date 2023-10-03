@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Feature;
 
 use App\Models\Course;
-use App\Models\Semester;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
@@ -20,7 +19,6 @@ class CourseTest extends TestCase
         parent::setUp();
 
         $this->user = User::factory()->create();
-        $this->semester = Semester::factory()->create();
         $this->actingAs($this->user);
     }
 
@@ -29,7 +27,7 @@ class CourseTest extends TestCase
         $this->post("/dashboard/courses", [
             "name" => "Course",
             "abbreviation" => "C",
-            "semester" => $this->semester->name,
+            "semester" => "II",
             "type" => "laboratory",
             "form" => "stationary",
         ])->assertSessionHasNoErrors();
@@ -42,7 +40,7 @@ class CourseTest extends TestCase
         $this->assertDatabaseMissing("courses", [
             "name" => "Course",
             "abbreviation" => "C",
-            "semester" => $this->semester->name,
+            "semester" => "II",
             "type" => "laboratory",
             "form" => "stationary",
         ]);
@@ -50,7 +48,7 @@ class CourseTest extends TestCase
         $this->patch("/dashboard/courses/{$semester->id}", [
             "name" => "Course",
             "abbreviation" => "C",
-            "semester" => $this->semester->name,
+            "semester" => "II",
             "type" => "laboratory",
             "form" => "stationary",
         ])->assertSessionHasNoErrors();
@@ -58,7 +56,7 @@ class CourseTest extends TestCase
         $this->assertDatabaseHas("courses", [
             "name" => "Course",
             "abbreviation" => "C",
-            "semester" => $this->semester->name,
+            "semester" => "II",
             "type" => "laboratory",
             "form" => "stationary",
         ]);
