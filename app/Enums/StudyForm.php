@@ -16,4 +16,11 @@ enum StudyForm: string
             "part-time" => __("part-time"),
         ];
     }
+
+    public static function abbreviationLabels(): array
+    {
+        return [
+            "part-time" => __("N"),
+        ];
+    }
 }

@@ -8,6 +8,7 @@ use App\Enums\ClassType;
 use App\Enums\StudyForm;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
+use App\Http\Resources\CourseResource;
 use App\Models\Course;
 use App\Models\Semester;
 use Illuminate\Http\RedirectResponse;
@@ -23,7 +24,7 @@ class CourseController extends Controller
             ->get();
 
         return inertia("Dashboard/Course/Index", [
-            "courses" => $courses,
+            "courses" => CourseResource::collection($courses),
             "total" => Course::query()->count(),
             "lastUpdate" => Course::query()->orderByDesc("updated_at")->first()?->updated_at->diffForHumans(),
         ]);

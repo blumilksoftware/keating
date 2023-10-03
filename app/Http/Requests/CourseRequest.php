@@ -17,7 +17,7 @@ class CourseRequest extends FormRequest
             "name" => ["required", "max:255"],
             "abbreviation" => ["required", "max:255"],
             "description" => ["nullable", "max:65000"],
-            "semester" => ["required", "max:255"],
+            "semester" => ["required", "exists:semesters,name"],
             "type" => ["required", new Enum(ClassType::class)],
             "form" => ["required", new Enum(StudyForm::class)],
         ];

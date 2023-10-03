@@ -1,6 +1,10 @@
 {
     "lecture": "wykład",
     "laboratory": "laboratorium",
+    "seminar": "seminarium",
+    "workshop": "warsztat",
+    "exercises": "ćwiczenia",
+    "project": "projekt",
     "stationary": "stacjonarny",
     "part-time": "niestacjonarny"
 }

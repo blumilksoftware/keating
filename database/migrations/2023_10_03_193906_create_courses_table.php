@@ -15,8 +15,8 @@ return new class() extends Migration {
             $table->string("name");
             $table->longText("description");
             $table->string("semester");
-            $table->string("type");
-            $table->string("form");
+            $table->enum("type", ["lecture", "laboratory", "seminar", "workshop", "exercises", "project"]);
+            $table->enum("form", ["stationary", "part-time"]);
             $table->timestamps();
         });
     }
