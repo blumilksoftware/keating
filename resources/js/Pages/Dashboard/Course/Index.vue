@@ -62,9 +62,6 @@ const courseToDeleteId = ref(0)
             <TableHeader class="w-1/6">
               Forma
             </TableHeader>
-            <TableHeader class="w-1/6">
-              Tryb
-            </TableHeader>
             <TableHeader />
           </template>
           <template #body>
@@ -83,9 +80,6 @@ const courseToDeleteId = ref(0)
               </TableCell>
               <TableCell>
                 {{ course.type }}
-              </TableCell>
-              <TableCell>
-                {{ course.form }}
               </TableCell>
               <TableCell class="flex justify-end gap-2">
                 <Button :href="`/dashboard/courses/${course.id}/edit`">

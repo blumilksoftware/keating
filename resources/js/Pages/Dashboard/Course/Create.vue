@@ -14,7 +14,6 @@ import TextAreaEditor from '@/Shared/Forms/TextAreaEditor.vue'
 
 defineProps({
   classTypes: Array,
-  studyForms: Array,
 })
 
 const form = useForm({
@@ -80,13 +79,6 @@ function createCourse() {
                 Typ zajęć
               </FormLabel>
               <Select id="type" v-model="form.type" :error="form.errors.type" :options="classTypes" label="label" item-value="value" />
-              <FormError :error="form.errors.type" />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel for="type">
-                Tryb zajęć
-              </FormLabel>
-              <Select id="type" v-model="form.form" :error="form.errors.form" :options="studyForms" label="label" item-value="value" />
               <FormError :error="form.errors.type" />
             </FormGroup>
             <FormGroup>

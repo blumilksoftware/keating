@@ -16,7 +16,6 @@ return new class() extends Migration {
             $table->longText("description");
             $table->integer("semester");
             $table->string("type");
-            $table->string("form");
             $table->timestamps();
         });
     }

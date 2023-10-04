@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Resources;
 
 use App\Enums\ClassType;
-use App\Enums\StudyForm;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -24,7 +23,6 @@ class CourseResource extends JsonResource
             "description" => $course->description,
             "semester" => $course->getRomanizedSemester(),
             "type" => ClassType::labels()[$course->type],
-            "form" => StudyForm::labels()[$course->form],
         ];
     }
 }

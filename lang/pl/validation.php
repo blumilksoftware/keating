@@ -122,5 +122,7 @@ return [
         "surname" => "nazwisko",
         "index_number" => "numer indeksu",
         "abbreviation" => "skrótowiec",
+        "form" => "tryb studiów",
+        "type" => "typ zajęć",
     ],
 ];

@@ -16,7 +16,6 @@ import TextAreaEditor from '../../../Shared/Forms/TextAreaEditor.vue'
 const props = defineProps({
   course: Object,
   classTypes: Array,
-  studyForms: Array,
 })
 
 
@@ -26,7 +25,6 @@ const form = useForm({
   description: props.course.description,
   semester: props.course.semester,
   type: props.course.type,
-  form: props.course.form,
 })
 
 function updateCourse() {
@@ -43,7 +41,7 @@ function updateCourse() {
         </template>
         <template #statistics>
           <ManagementHeaderItem>
-            Formularz dodawania nowego kursu
+            Formularz edycji istniejącego kursu
           </ManagementHeaderItem>
         </template>
       </ManagementHeader>
@@ -83,13 +81,6 @@ function updateCourse() {
                 Typ zajęć
               </FormLabel>
               <Select id="type" v-model="form.type" :error="form.errors.type" :options="classTypes" label="label" item-value="value" />
-              <FormError :error="form.errors.type" />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel for="type">
-                Tryb zajęć
-              </FormLabel>
-              <Select id="type" v-model="form.form" :error="form.errors.form" :options="studyForms" label="label" item-value="value" />
               <FormError :error="form.errors.type" />
             </FormGroup>
             <FormGroup>
