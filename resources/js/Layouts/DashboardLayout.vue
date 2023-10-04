@@ -46,7 +46,7 @@ const navigation = [
   {
     title: 'Słowniki',
     elements: [
-      { name: 'Kursy', href: '#', icon: BriefcaseIcon, current: false },
+      { name: 'Kursy', href: '/dashboard/courses', icon: BriefcaseIcon, current: false },
       { name: 'Kierunki i specjalności', href: '/dashboard/fields', icon: MagnifyingGlassIcon, current: false },
       { name: 'Semestry', href: '/dashboard/semesters', icon: ClipboardIcon, current: false },
     ],
