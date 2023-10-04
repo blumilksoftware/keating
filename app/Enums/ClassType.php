@@ -7,7 +7,7 @@ namespace App\Enums;
 enum ClassType: string
 {
     case Laboratory = "laboratory";
-    case LECTURE = "lecture";
+    case Lecture = "lecture";
     case Seminar = "seminar";
     case Workshop = "workshop";
     case Exercises = "exercises";
