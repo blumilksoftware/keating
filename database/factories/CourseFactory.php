@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use App\Enums\ClassType;
-use App\Enums\StudyForm;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CourseFactory extends Factory
@@ -18,7 +17,6 @@ class CourseFactory extends Factory
             "description" => fake()->text,
             "semester" => fake()->numberBetween(1, 10),
             "type" => ClassType::Laboratory->value,
-            "form" => StudyForm::Stationary->value,
         ];
     }
 }

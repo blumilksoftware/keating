@@ -29,7 +29,6 @@ class CourseTest extends TestCase
             "abbreviation" => "C",
             "semester" => 2,
             "type" => "laboratory",
-            "form" => "stationary",
         ])->assertSessionHasNoErrors();
     }
 
@@ -42,7 +41,6 @@ class CourseTest extends TestCase
             "abbreviation" => "C",
             "semester" => 2,
             "type" => "laboratory",
-            "form" => "stationary",
         ]);
 
         $this->patch("/dashboard/courses/{$semester->id}", [
@@ -50,7 +48,6 @@ class CourseTest extends TestCase
             "abbreviation" => "C",
             "semester" => 2,
             "type" => "laboratory",
-            "form" => "stationary",
         ])->assertSessionHasNoErrors();
 
         $this->assertDatabaseHas("courses", [
@@ -58,7 +55,6 @@ class CourseTest extends TestCase
             "abbreviation" => "C",
             "semester" => 2,
             "type" => "laboratory",
-            "form" => "stationary",
         ]);
     }
 
@@ -69,13 +65,11 @@ class CourseTest extends TestCase
             "abbreviation" => Str::random(256),
             "semester" => "bad",
             "type" => "lab",
-            "form" => "s",
         ])->assertSessionHasErrors([
             "name",
             "abbreviation",
             "semester",
             "type",
-            "form",
         ]);
 
         $this->assertDatabaseCount("courses", 0);
