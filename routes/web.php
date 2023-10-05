@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Dashboard\ContactInfoController;
 use App\Http\Controllers\Dashboard\CourseController;
+use App\Http\Controllers\Dashboard\CourseSemesterController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\FieldController;
 use App\Http\Controllers\Dashboard\LogoutController;
@@ -77,5 +78,13 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::get("/courses/{course}/edit", "edit")->name("courses.edit");
         Route::patch("/courses/{course}", "update")->name("courses.update");
         Route::delete("/courses/{course}", "destroy")->name("courses.destroy");
+    });
+    Route::controller(CourseSemesterController::class)->group(function (): void {
+        Route::get("/course-semester", "index")->name("course.semester.index");
+        Route::get("/course-semester/create", "create")->name("course.semester.create");
+        Route::post("/course-semester", "store")->name("course.semester.store");
+        Route::get("/course-semester/{course}/edit", "edit")->name("course.semester.edit");
+        Route::patch("/course-semester/{course}", "update")->name("course.semester.update");
+        Route::delete("/course-semester/{course}", "destroy")->name("course.semester.destroy");
     });
 });

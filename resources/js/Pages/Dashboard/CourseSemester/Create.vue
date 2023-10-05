@@ -13,19 +13,20 @@ import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 import TextAreaEditor from '@/Shared/Forms/TextAreaEditor.vue'
 
 defineProps({
+  courses: Array,
+  semesters: Array,
   classTypes: Array,
 })
 
 const form = useForm({
   name: '',
-  abbreviation: '',
-  description: '',
+  course: '',
   semester: '',
-  type: '',
+  form: '',
 })
 
 function createCourse() {
-  form.post('/dashboard/courses')
+  form.post('/dashboard/courses-semester')
 }
 </script>
 
@@ -34,11 +35,11 @@ function createCourse() {
     <div class="flex flex-col gap-8">
       <ManagementHeader>
         <template #header>
-          Zarządzanie kursami
+          Zarządzanie kursami w semestrze
         </template>
         <template #statistics>
           <ManagementHeaderItem>
-            Formularz dodawania nowego kursu
+            Formularz dodawania nowego kursu w semestrze
           </ManagementHeaderItem>
         </template>
       </ManagementHeader>
@@ -60,32 +61,25 @@ function createCourse() {
               <FormError :error="form.errors.name" />
             </FormGroup>
             <FormGroup>
-              <FormLabel for="abbreviation">
-                Skrótowiec
+              <FormLabel for="semester">
+                Kurs
               </FormLabel>
-              <TextInput id="abbreviation" v-model="form.abbreviation" :error="form.errors.abbreviation" autocomplete="off" />
-              <FormError :error="form.errors.abbreviation" />
+              <Select id="type" v-model="form.course" :error="form.errors.course" :options="courses" label="name" item-value="id" />
+              <FormError :error="form.errors.course" />
             </FormGroup>
             <FormGroup>
               <FormLabel for="semester">
                 Semestr
               </FormLabel>
-              <TextInput id="semester" v-model="form.semester" type="number" min="1" max="10" :error="form.errors.semester" autocomplete="off" />
+              <Select id="type" v-model="form.semester" :error="form.errors.semester" :options="semesters" label="name" item-value="id" />
               <FormError :error="form.errors.semester" />
             </FormGroup>
             <FormGroup>
               <FormLabel for="type">
-                Typ zajęć
+                Tryb studiów
               </FormLabel>
-              <Select id="type" v-model="form.type" :error="form.errors.type" :options="classTypes" label="label" item-value="value" />
-              <FormError :error="form.errors.type" />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel for="description">
-                Opis
-              </FormLabel>
-              <TextAreaEditor id="description" v-model="form.description" :error="form.errors.description" autocomplete="off" />
-              <FormError :error="form.errors.description" />
+              <Select id="type" v-model="form.form" :error="form.errors.form" :options="studyForm" label="label" item-value="value" />
+              <FormError :error="form.errors.form" />
             </FormGroup>
             <div class="mt-4 flex justify-end">
               <SubmitButton>

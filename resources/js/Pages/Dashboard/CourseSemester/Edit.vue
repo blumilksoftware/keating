@@ -1,31 +1,34 @@
 <script setup>
 import DashboardLayout from '@/Layouts/DashboardLayout.vue'
 import Section from '@/Shared/Components/Section.vue'
+import Select from '@/Shared/Forms/Select.vue'
 import SubmitButton from '@/Shared/Components/Buttons/SubmitButton.vue'
 import FormGroup from '@/Shared/Forms/FormGroup.vue'
 import FormLabel from '@/Shared/Forms/FormLabel.vue'
-import Select from '@/Shared/Forms/Select.vue'
 import TextInput from '@/Shared/Forms/TextInput.vue'
 import { useForm } from '@inertiajs/inertia-vue3'
 import FormError from '@/Shared/Forms/FormError.vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
-import TextAreaEditor from '@/Shared/Forms/TextAreaEditor.vue'
+import TextAreaEditor from '../../../Shared/Forms/TextAreaEditor.vue'
 
-defineProps({
+
+const props = defineProps({
+  course: Object,
   classTypes: Array,
 })
 
+
 const form = useForm({
-  name: '',
-  abbreviation: '',
-  description: '',
-  semester: '',
-  type: '',
+  name: props.course.name,
+  abbreviation: props.course.abbreviation,
+  description: props.course.description,
+  semester: props.course.semester,
+  type: props.course.type,
 })
 
-function createCourse() {
-  form.post('/dashboard/courses')
+function updateCourse() {
+  form.patch(`/dashboard/courses/${props.course.id}`)
 }
 </script>
 
@@ -38,12 +41,12 @@ function createCourse() {
         </template>
         <template #statistics>
           <ManagementHeaderItem>
-            Formularz dodawania nowego kursu
+            Formularz edycji istniejącego kursu
           </ManagementHeaderItem>
         </template>
       </ManagementHeader>
 
-      <form class="grid grid-cols-2" @submit.prevent="createCourse">
+      <form class="grid grid-cols-2" @submit.prevent="updateCourse">
         <Section>
           <div class="flex flex-col justify-between gap-4">
             <FormGroup>
@@ -89,7 +92,7 @@ function createCourse() {
             </FormGroup>
             <div class="mt-4 flex justify-end">
               <SubmitButton>
-                Utwórz
+                Zapisz
               </SubmitButton>
             </div>
           </div>
