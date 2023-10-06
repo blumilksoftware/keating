@@ -97,5 +97,6 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
     });
     Route::controller(GroupStudentController::class)->group(function (): void {
         Route::get("/course-semester/{course}/groups/{group}/students", "index")->name("course.semester.group.students.index");
+        Route::post("/course-semester/{course}/groups/{group}/students", "store")->name("course.semester.group.students.index");
     });
 });

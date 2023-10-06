@@ -19,31 +19,33 @@ class GroupStudentController extends Controller
     public function index(Request $request, CourseSemester $course, Group $group): Response
     {
         $searchText = $request->query("search");
-        $availableStudents = Student::query()->whereNotIn("id", $group->students->pluck("id"))->get();
-        $students = $group->students()
-            ->when(
-                $searchText !== null,
-                fn(Builder $query): Builder => $query
-                    ->where("name", "ILIKE", "%$searchText%")
-                    ->orWhere("surname", "ILIKE", "%$searchText%")
-                    ->orWhere("index_number", "LIKE", "%$searchText%"),
-            )
-            ->paginate()
-            ->withQueryString();
+        $students = $group->students;
+        $availableStudents = $searchText
+            ? Student::query()
+                ->whereNotIn("id", $group->students->pluck("id"))
+                ->where(
+                    fn(Builder $query): Builder => $query
+                        ->where("first_name", "ILIKE", "%$searchText%")
+                        ->orWhere("surname", "ILIKE", "%$searchText%")
+                        ->orWhere("index_number", "LIKE", "%$searchText%"),
+                )
+                ->get()
+            : [];
 
         return inertia("Dashboard/CourseSemester/Student/Index", [
             "course" => new CourseSemesterResource($course),
             "group" => $group,
             "students" => $students,
             "availableStudents" => $availableStudents,
-            "total" => $group->students->count(),
-            "lastUpdate" => $group->students->sortBy("updated_at")->first()?->updated_at->diffForHumans(),
+            "search" => $searchText,
+            "total" => $students->count(),
+            "lastUpdate" => $students->sortBy("updated_at")->first()?->updated_at->diffForHumans(),
         ]);
     }
 
     public function store(Request $request, CourseSemester $course, Group $group): RedirectResponse
     {
-        $group->students()->attach();
+        $group->students()->attach($request->get("student"));
 
         return redirect()->back()
             ->with("success", "Dodano studenta");
