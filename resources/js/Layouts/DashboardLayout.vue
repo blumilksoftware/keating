@@ -40,7 +40,7 @@ const navigation = [
     title: 'Uczelnia',
     elements: [
       { name: 'Studenci', href: '/dashboard/students', icon: UsersIcon, current: false },
-      { name: 'Kursy w semestrze', href: '#', icon: BookmarkSquareIcon, current: false },
+      { name: 'Kursy w semestrze', href: '/dashboard/course-semester', icon: BookmarkSquareIcon, current: false },
     ],
   },
   {

@@ -10,25 +10,24 @@ import { useForm } from '@inertiajs/inertia-vue3'
 import FormError from '@/Shared/Forms/FormError.vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
-import TextAreaEditor from '../../../Shared/Forms/TextAreaEditor.vue'
 
 
 const props = defineProps({
   course: Object,
-  classTypes: Array,
+  courses: Array,
+  semesters: Array,
+  studyForms: Array,
 })
 
 
 const form = useForm({
-  name: props.course.name,
-  abbreviation: props.course.abbreviation,
-  description: props.course.description,
-  semester: props.course.semester,
-  type: props.course.type,
+  course: props.course.course_id,
+  semester: props.course.semester_id,
+  form: props.course.form,
 })
 
 function updateCourse() {
-  form.patch(`/dashboard/courses/${props.course.id}`)
+  form.patch(`/dashboard/course-semester/${props.course.id}`)
 }
 </script>
 
@@ -37,15 +36,14 @@ function updateCourse() {
     <div class="flex flex-col gap-8">
       <ManagementHeader>
         <template #header>
-          Zarządzanie kursami
+          Zarządzanie kursami w semestrze
         </template>
         <template #statistics>
           <ManagementHeaderItem>
-            Formularz edycji istniejącego kursu
+            Formularz edycji istniejącego kursu w semestrze
           </ManagementHeaderItem>
         </template>
       </ManagementHeader>
-
       <form class="grid grid-cols-2" @submit.prevent="updateCourse">
         <Section>
           <div class="flex flex-col justify-between gap-4">
@@ -56,39 +54,31 @@ function updateCourse() {
               <TextInput class="opacity-75" placeholder="autogenerowany ulid" autocomplete="off" disabled />
             </FormGroup>
             <FormGroup>
-              <FormLabel for="name">
-                Nazwa
+              <FormLabel for="course">
+                Kurs
               </FormLabel>
-              <TextInput id="name" v-model="form.name" :error="form.errors.name" autocomplete="off" />
-              <FormError :error="form.errors.name" />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel for="abbreviation">
-                Skrótowiec
-              </FormLabel>
-              <TextInput id="abbreviation" v-model="form.abbreviation" :error="form.errors.abbreviation" autocomplete="off" />
-              <FormError :error="form.errors.abbreviation" />
+              <Select id="course" v-model="form.course" :error="form.errors.course" :options="courses" label="name"
+                      item-value="id"
+              />
+              <FormError :error="form.errors.course" />
             </FormGroup>
             <FormGroup>
               <FormLabel for="semester">
                 Semestr
               </FormLabel>
-              <TextInput id="semester" v-model="form.semester" type="number" min="1" max="10" :error="form.errors.semester" autocomplete="off" />
+              <Select id="semester" v-model="form.semester" :error="form.errors.semester" :options="semesters" label="name"
+                      item-value="id"
+              />
               <FormError :error="form.errors.semester" />
             </FormGroup>
             <FormGroup>
               <FormLabel for="type">
-                Typ zajęć
+                Tryb studiów
               </FormLabel>
-              <Select id="type" v-model="form.type" :error="form.errors.type" :options="classTypes" label="label" item-value="value" />
-              <FormError :error="form.errors.type" />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel for="description">
-                Opis
-              </FormLabel>
-              <TextAreaEditor id="description" v-model="form.description" :error="form.errors.description" autocomplete="off" />
-              <FormError :error="form.errors.description" />
+              <Select id="type" v-model="form.form" :error="form.errors.form" :options="studyForms" label="label"
+                      item-value="value"
+              />
+              <FormError :error="form.errors.form" />
             </FormGroup>
             <div class="mt-4 flex justify-end">
               <SubmitButton>

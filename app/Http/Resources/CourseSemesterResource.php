@@ -18,10 +18,9 @@ class CourseSemesterResource extends JsonResource
 
         return [
             "id" => $course->id,
-            "name" => $course->name,
             "course" => $course->course->name,
             "semester" => $course->semester->name,
-            "type" => StudyForm::labels()[$course->form],
+            "form" => StudyForm::labels()[$course->form],
         ];
     }
 }

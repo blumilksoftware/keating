@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property string $id
@@ -30,5 +31,10 @@ class Group extends Model
     public function course(): BelongsTo
     {
         return $this->belongsTo(CourseSemester::class);
+    }
+
+    public function students(): BelongsToMany
+    {
+        return $this->belongsToMany(Student::class, "student_group");
     }
 }

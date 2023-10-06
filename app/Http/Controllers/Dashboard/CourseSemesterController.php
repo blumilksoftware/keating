@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Enums\StudyForm;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseSemesterRequest;
-use App\Http\Resources\CourseResource;
+use App\Http\Resources\CourseSemesterResource;
 use App\Models\Course;
 use App\Models\CourseSemester;
 use App\Models\Semester;
@@ -24,7 +24,7 @@ class CourseSemesterController extends Controller
             ->get();
 
         return inertia("Dashboard/CourseSemester/Index", [
-            "courses" => CourseResource::collection($courses),
+            "courses" => CourseSemesterResource::collection($courses),
             "total" => Course::query()->count(),
             "lastUpdate" => CourseSemester::query()->orderByDesc("updated_at")->first()?->updated_at->diffForHumans(),
         ]);
@@ -41,11 +41,19 @@ class CourseSemesterController extends Controller
 
     public function store(CourseSemesterRequest $request): RedirectResponse
     {
-        CourseSemester::query()->create($request->validated());
+        CourseSemester::query()->create($request->getData());
 
         return redirect()
-            ->route("courses.index")
+            ->route("course.semester..index")
             ->with("success", "Dodano kurs");
+    }
+
+    public function show(CourseSemester $course): Response
+    {
+        return inertia("Dashboard/CourseSemester/Show", [
+            "course" => new CourseSemesterResource($course),
+            "groups" => $course->groups,
+        ]);
     }
 
     public function edit(CourseSemester $course): Response
@@ -53,15 +61,17 @@ class CourseSemesterController extends Controller
         return inertia("Dashboard/CourseSemester/Edit", [
             "course" => $course,
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
+            "courses" => Course::all(["id", "name"]),
+            "semesters" => Semester::all(["id", "name"]),
         ]);
     }
 
     public function update(CourseSemesterRequest $request, CourseSemester $course): RedirectResponse
     {
-        $course->update($request->validated());
+        $course->update($request->getData());
 
         return redirect()
-            ->route("courses.index")
+            ->route("course.semester.index")
             ->with("success", "Zaktualizowano kurs");
     }
 

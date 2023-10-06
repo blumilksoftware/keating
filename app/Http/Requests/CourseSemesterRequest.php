@@ -13,10 +13,18 @@ class CourseSemesterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => ["required", "max:255"],
-            "course_id" => ["required", "exists:courses,id"],
-            "semester_id" => ["required", "exists:semesters,id"],
+            "course" => ["required", "exists:courses,id"],
+            "semester" => ["required", "exists:semesters,id"],
             "form" => ["required", new Enum(StudyForm::class)],
+        ];
+    }
+
+    public function getData(): array
+    {
+        return [
+            "course_id" => $this->get("course"),
+            "semester_id" => $this->get("semester"),
+            "form" => $this->get("form"),
         ];
     }
 }

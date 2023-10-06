@@ -7,6 +7,8 @@ use App\Http\Controllers\Dashboard\CourseController;
 use App\Http\Controllers\Dashboard\CourseSemesterController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\FieldController;
+use App\Http\Controllers\Dashboard\GroupController;
+use App\Http\Controllers\Dashboard\GroupStudentController;
 use App\Http\Controllers\Dashboard\LogoutController;
 use App\Http\Controllers\Dashboard\PasswordUpdateController;
 use App\Http\Controllers\Dashboard\SemesterController;
@@ -83,8 +85,17 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::get("/course-semester", "index")->name("course.semester.index");
         Route::get("/course-semester/create", "create")->name("course.semester.create");
         Route::post("/course-semester", "store")->name("course.semester.store");
+        Route::get("/course-semester/{course}", "show")->name("course.semester.show");
         Route::get("/course-semester/{course}/edit", "edit")->name("course.semester.edit");
         Route::patch("/course-semester/{course}", "update")->name("course.semester.update");
         Route::delete("/course-semester/{course}", "destroy")->name("course.semester.destroy");
+    });
+    Route::controller(GroupController::class)->group(function (): void {
+        Route::post("/course-semester/{course}/groups", "store")->name("course.semester.group.store");
+        Route::patch("/course-semester/{course}/groups/{group}", "update")->name("course.semester.group.update");
+        Route::delete("/course-semester/{course}/groups/{group}", "destroy")->name("course.semester.group.destroy");
+    });
+    Route::controller(GroupStudentController::class)->group(function (): void {
+        Route::get("/course-semester/{course}/groups/{group}/students", "index")->name("course.semester.group.students.index");
     });
 });

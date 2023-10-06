@@ -10,7 +10,7 @@ import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
 import { ref } from 'vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
-import { Cog6ToothIcon, XCircleIcon } from '@heroicons/vue/24/outline'
+import { Cog6ToothIcon, XCircleIcon, EyeIcon } from '@heroicons/vue/24/outline'
 
 defineProps({
   courses: Object,
@@ -26,7 +26,7 @@ const courseToDeleteId = ref(0)
     <div class="flex flex-col gap-8">
       <ManagementHeader>
         <template #header>
-          Zarządzanie kursami
+          Zarządzanie kursami w semestrze
         </template>
         <template #statistics>
           <ManagementHeaderItem>
@@ -50,17 +50,14 @@ const courseToDeleteId = ref(0)
             <TableHeader class="w-1/6">
               ID
             </TableHeader>
-            <TableHeader class="w-1/5">
-              Nazwa
-            </TableHeader>
             <TableHeader class="w-1/6">
-              Skrótowiec
+              Kurs
             </TableHeader>
             <TableHeader class="w-1/6">
               Semestr
             </TableHeader>
             <TableHeader class="w-1/6">
-              Forma
+              Tryb studiów
             </TableHeader>
             <TableHeader />
           </template>
@@ -70,18 +67,18 @@ const courseToDeleteId = ref(0)
                 {{ course.id }}
               </TableCell>
               <TableCell>
-                {{ course.name }}
-              </TableCell>
-              <TableCell>
                 {{ course.course }}
               </TableCell>
               <TableCell>
                 {{ course.semester }}
               </TableCell>
               <TableCell>
-                {{ course.form }}
+                {{ course.type }}
               </TableCell>
               <TableCell class="flex justify-end gap-2">
+                <Button :href="`/dashboard/course-semester/${course.id}`">
+                  <EyeIcon class="w-5" />
+                </Button>
                 <Button :href="`/dashboard/course-semester/${course.id}/edit`">
                   <Cog6ToothIcon class="w-5" />
                 </Button>

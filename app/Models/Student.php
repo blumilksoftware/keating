@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property string $id
@@ -27,4 +28,9 @@ class Student extends Model
         "surname",
         "index_number",
     ];
+
+    public function students(): BelongsToMany
+    {
+        return $this->belongsToMany(Group::class, "student_group");
+    }
 }

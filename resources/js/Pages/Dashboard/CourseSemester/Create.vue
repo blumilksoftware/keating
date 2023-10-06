@@ -10,23 +10,21 @@ import { useForm } from '@inertiajs/inertia-vue3'
 import FormError from '@/Shared/Forms/FormError.vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
-import TextAreaEditor from '@/Shared/Forms/TextAreaEditor.vue'
 
 defineProps({
   courses: Array,
   semesters: Array,
-  classTypes: Array,
+  studyForms: Array,
 })
 
 const form = useForm({
-  name: '',
   course: '',
   semester: '',
   form: '',
 })
 
 function createCourse() {
-  form.post('/dashboard/courses-semester')
+  form.post('/dashboard/course-semester')
 }
 </script>
 
@@ -43,7 +41,6 @@ function createCourse() {
           </ManagementHeaderItem>
         </template>
       </ManagementHeader>
-
       <form class="grid grid-cols-2" @submit.prevent="createCourse">
         <Section>
           <div class="flex flex-col justify-between gap-4">
@@ -54,31 +51,24 @@ function createCourse() {
               <TextInput class="opacity-75" placeholder="autogenerowany ulid" autocomplete="off" disabled />
             </FormGroup>
             <FormGroup>
-              <FormLabel for="name">
-                Nazwa
-              </FormLabel>
-              <TextInput id="name" v-model="form.name" :error="form.errors.name" autocomplete="off" />
-              <FormError :error="form.errors.name" />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel for="semester">
+              <FormLabel for="course">
                 Kurs
               </FormLabel>
-              <Select id="type" v-model="form.course" :error="form.errors.course" :options="courses" label="name" item-value="id" />
+              <Select id="course" v-model="form.course" :error="form.errors.course" :options="courses" label="name" item-value="id" />
               <FormError :error="form.errors.course" />
             </FormGroup>
             <FormGroup>
               <FormLabel for="semester">
                 Semestr
               </FormLabel>
-              <Select id="type" v-model="form.semester" :error="form.errors.semester" :options="semesters" label="name" item-value="id" />
+              <Select id="semester" v-model="form.semester" :error="form.errors.semester" :options="semesters" label="name" item-value="id" />
               <FormError :error="form.errors.semester" />
             </FormGroup>
             <FormGroup>
               <FormLabel for="type">
                 Tryb studiów
               </FormLabel>
-              <Select id="type" v-model="form.form" :error="form.errors.form" :options="studyForm" label="label" item-value="value" />
+              <Select id="type" v-model="form.form" :error="form.errors.form" :options="studyForms" label="label" item-value="value" />
               <FormError :error="form.errors.form" />
             </FormGroup>
             <div class="mt-4 flex justify-end">
