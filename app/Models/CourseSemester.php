@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $name
  * @property string $course_id
  * @property string $semester_id
- * @property string $form
+ * @property StudyForm $form
  * @property Course $course
  * @property Semester $semester
  * @property Carbon $created_at

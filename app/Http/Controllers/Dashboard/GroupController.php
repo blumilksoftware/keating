@@ -14,7 +14,7 @@ class GroupController extends Controller
 {
     public function store(GroupRequest $request, CourseSemester $course): RedirectResponse
     {
-        $course->groups()->create(["name" => $request->get("name")]);
+        $course->groups()->create($request->validated());
 
         return redirect()->back()
             ->with("success", "Dodano grupę");
@@ -22,7 +22,7 @@ class GroupController extends Controller
 
     public function update(GroupRequest $request, CourseSemester $course, Group $group): RedirectResponse
     {
-        $group->update(["name" => $request->get("name")]);
+        $group->update($request->validated());
 
         return redirect()->back()
             ->with("success", "Zaktualizowano grupę");
@@ -30,6 +30,7 @@ class GroupController extends Controller
 
     public function destroy(CourseSemester $course, Group $group): RedirectResponse
     {
+        $group->students()->detach($group->students);
         $group->delete();
 
         return redirect()->back()

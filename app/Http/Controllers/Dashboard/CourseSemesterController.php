@@ -44,7 +44,7 @@ class CourseSemesterController extends Controller
         CourseSemester::query()->create($request->getData());
 
         return redirect()
-            ->route("course.semester..index")
+            ->route("course.semester.index")
             ->with("success", "Dodano kurs");
     }
 

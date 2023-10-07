@@ -135,4 +135,26 @@ class GroupTest extends TestCase
         $group->refresh();
         $this->assertCount(0, $group->students);
     }
+
+    public function testStudentsAreDetachedBeforeStudentGroupDeleting(): void
+    {
+        $group = Group::factory()->create();
+        $students = Student::factory(10)->create();
+        $this->assertCount(0, $group->students);
+        $this->assertDatabaseCount("groups", 1);
+
+        $this->post(
+            "/dashboard/course-semester/{$group->course_semester_id}/groups/{$group->id}/students",
+            [
+                "student" => $students->pluck("id"),
+            ],
+        )->assertSessionHasNoErrors();
+
+        $this->assertDatabaseCount("student_group", 10);
+
+        $this->delete("/dashboard/course-semester/{$group->course_semester_id}/groups/{$group->id}");
+
+        $this->assertDatabaseCount("student_group", 0);
+        $this->assertDatabaseCount("groups", 0);
+    }
 }

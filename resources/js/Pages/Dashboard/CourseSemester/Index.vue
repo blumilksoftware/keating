@@ -73,7 +73,7 @@ const courseToDeleteId = ref(0)
                 {{ course.semester }}
               </TableCell>
               <TableCell>
-                {{ course.type }}
+                {{ course.form }}
               </TableCell>
               <TableCell class="flex justify-end gap-2">
                 <Button :href="`/dashboard/course-semester/${course.id}`">
