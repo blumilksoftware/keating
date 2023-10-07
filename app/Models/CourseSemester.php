@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\StudyForm;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,6 +34,9 @@ class CourseSemester extends Model
         "course_id",
         "semester_id",
         "form",
+    ];
+    protected $casts = [
+        "form" => StudyForm::class,
     ];
 
     public function course(): BelongsTo
