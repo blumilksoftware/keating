@@ -19,7 +19,9 @@ class GroupStudentController extends Controller
     public function index(Request $request, CourseSemester $course, Group $group): Response
     {
         $searchText = $request->query("search");
-        $students = $group->students;
+        $students = $group->students()
+            ->paginate()
+            ->withQueryString();
         $availableStudents = $searchText
             ? Student::query()
                 ->whereNotIn("id", $group->students->pluck("id"))
@@ -28,8 +30,7 @@ class GroupStudentController extends Controller
                         ->where("first_name", "ILIKE", "%$searchText%")
                         ->orWhere("surname", "ILIKE", "%$searchText%")
                         ->orWhere("index_number", "LIKE", "%$searchText%"),
-                )
-                ->get()
+                )->get()
             : [];
 
         return inertia("Dashboard/CourseSemester/Student/Index", [
@@ -38,8 +39,7 @@ class GroupStudentController extends Controller
             "students" => $students,
             "availableStudents" => $availableStudents,
             "search" => $searchText,
-            "total" => $students->count(),
-            "lastUpdate" => $students->sortBy("updated_at")->first()?->updated_at->diffForHumans(),
+            "total" => $group->students->count(),
         ]);
     }
 
@@ -51,9 +51,9 @@ class GroupStudentController extends Controller
             ->with("success", "Dodano studenta");
     }
 
-    public function destroy(CourseSemester $course, Group $group): RedirectResponse
+    public function destroy(CourseSemester $course, Group $group, Student $student): RedirectResponse
     {
-        $group->delete();
+        $group->students()->detach($student);
 
         return redirect()->back()
             ->with("success", "Usunięto grupę");

@@ -24,7 +24,6 @@ const props = defineProps({
   availableStudents: Array,
   search: String,
   total: Number,
-  lastUpdate: String,
 })
 const showModal = ref(false)
 const studentToDeleteId = ref(0)
@@ -66,9 +65,6 @@ watch(form, debounce(() => {
           <ManagementHeaderItem v-if="students.total">
             Liczba studentów w tabeli: {{ students.total }}
           </ManagementHeaderItem>
-          <ManagementHeaderItem v-if="lastUpdate">
-            Ostatnie zmiany: {{ lastUpdate }}
-          </ManagementHeaderItem>
         </template>
         <template #actions>
           <Button @click="[studentsFormOpen = !studentsFormOpen]">
@@ -97,7 +93,7 @@ watch(form, debounce(() => {
         </div>
         <EmptyState v-else />
       </div>
-      <div v-if="students.length" class="flex flex-col gap-8">
+      <div v-if="students.data.length" class="flex flex-col gap-8">
         <TableWrapper>
           <template #header>
             <TableHeader class="w-1/6">
@@ -115,7 +111,7 @@ watch(form, debounce(() => {
             <TableHeader />
           </template>
           <template #body>
-            <TableRow v-for="student in students" :key="student.id">
+            <TableRow v-for="student in students.data" :key="student.id">
               <TableCell class="pr-12 opacity-75">
                 {{ student.id }}
               </TableCell>
@@ -142,5 +138,5 @@ watch(form, debounce(() => {
     </div>
   </DashboardLayout>
 
-  <RemoveModal :show="showModal" :href="`/dashboard/students/${studentToDeleteId}`" @close="showModal = false" />
+  <RemoveModal :show="showModal" :href="`/dashboard/course-semester/${props.course.data.id}/groups/${props.group.id}/students/${studentToDeleteId}`" @close="showModal = false" />
 </template>
