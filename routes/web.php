@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Dashboard\ContactInfoController;
 use App\Http\Controllers\Dashboard\CourseController;
+use App\Http\Controllers\Dashboard\CourseSemesterController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\FieldController;
+use App\Http\Controllers\Dashboard\GroupController;
+use App\Http\Controllers\Dashboard\GroupStudentController;
 use App\Http\Controllers\Dashboard\LogoutController;
 use App\Http\Controllers\Dashboard\PasswordUpdateController;
 use App\Http\Controllers\Dashboard\SemesterController;
@@ -77,5 +80,24 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::get("/courses/{course}/edit", "edit")->name("courses.edit");
         Route::patch("/courses/{course}", "update")->name("courses.update");
         Route::delete("/courses/{course}", "destroy")->name("courses.destroy");
+    });
+    Route::controller(CourseSemesterController::class)->group(function (): void {
+        Route::get("/semester-courses", "index")->name("course.semester.index");
+        Route::get("/semester-courses/create", "create")->name("course.semester.create");
+        Route::post("/semester-courses", "store")->name("course.semester.store");
+        Route::get("/semester-courses/{course}", "show")->name("course.semester.show");
+        Route::get("/semester-courses/{course}/edit", "edit")->name("course.semester.edit");
+        Route::patch("/semester-courses/{course}", "update")->name("course.semester.update");
+        Route::delete("/semester-courses/{course}", "destroy")->name("course.semester.destroy");
+    });
+    Route::controller(GroupController::class)->group(function (): void {
+        Route::post("/semester-courses/{course}/groups", "store")->name("course.semester.group.store");
+        Route::patch("/semester-courses/{course}/groups/{group}", "update")->name("course.semester.group.update");
+        Route::delete("/semester-courses/{course}/groups/{group}", "destroy")->name("course.semester.group.destroy");
+    });
+    Route::controller(GroupStudentController::class)->group(function (): void {
+        Route::get("/semester-courses/{course}/groups/{group}/students", "index")->name("course.semester.group.students.index");
+        Route::post("/semester-courses/{course}/groups/{group}/students", "store")->name("course.semester.group.students.store");
+        Route::delete("/semester-courses/{course}/groups/{group}/students/{student}", "destroy")->name("course.semester.group.students.destroy");
     });
 });

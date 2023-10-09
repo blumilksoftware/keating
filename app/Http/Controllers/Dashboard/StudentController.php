@@ -22,7 +22,7 @@ class StudentController extends Controller
             ->when(
                 $searchText !== null,
                 fn(Builder $query): Builder => $query
-                    ->where("name", "ILIKE", "%$searchText%")
+                    ->where("first_name", "ILIKE", "%$searchText%")
                     ->orWhere("surname", "ILIKE", "%$searchText%")
                     ->orWhere("index_number", "LIKE", "%$searchText%"),
             )
