@@ -8,6 +8,7 @@ use App\Enums\StudyForm;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseSemesterRequest;
 use App\Http\Resources\CourseSemesterResource;
+use App\Http\Resources\GroupResource;
 use App\Models\Course;
 use App\Models\CourseSemester;
 use App\Models\Semester;
@@ -33,7 +34,6 @@ class CourseSemesterController extends Controller
     public function create(): Response
     {
         return inertia("Dashboard/CourseSemester/Create", [
-            "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
             "courses" => Course::all(["id", "name"]),
             "semesters" => Semester::all(["id", "name"]),
         ]);
@@ -52,7 +52,8 @@ class CourseSemesterController extends Controller
     {
         return inertia("Dashboard/CourseSemester/Show", [
             "course" => new CourseSemesterResource($course),
-            "groups" => $course->groups,
+            "groups" => GroupResource::collection($course->groups),
+            "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
         ]);
     }
 

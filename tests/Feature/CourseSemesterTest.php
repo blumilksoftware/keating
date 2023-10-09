@@ -30,30 +30,26 @@ class CourseSemesterTest extends TestCase
         $this->post("/dashboard/course-semester", [
             "course" => $this->course->id,
             "semester" => $this->semester->id,
-            "form" => "stationary",
         ])->assertSessionHasNoErrors();
     }
 
     public function testCourseCanBeUpdated(): void
     {
-        $course = CourseSemester::factory()->create(["form" => "part-time"]);
+        $course = CourseSemester::factory()->create();
 
         $this->assertDatabaseMissing("course_semester", [
             "course_id" => $this->course->id,
             "semester_id" => $this->semester->id,
-            "form" => "stationary",
         ]);
 
         $this->patch("/dashboard/course-semester/{$course->id}", [
             "course" => $this->course->id,
             "semester" => $this->semester->id,
-            "form" => "stationary",
         ])->assertSessionHasNoErrors();
 
         $this->assertDatabaseHas("course_semester", [
             "course_id" => $this->course->id,
             "semester_id" => $this->semester->id,
-            "form" => "stationary",
         ]);
     }
 
@@ -62,11 +58,9 @@ class CourseSemesterTest extends TestCase
         $this->post("/dashboard/course-semester", [
             "course" => 123,
             "semester" => 312,
-            "form" => "bad-stationary",
         ])->assertSessionHasErrors([
             "course",
             "semester",
-            "form",
         ]);
 
         $this->assertDatabaseCount("course_semester", 0);

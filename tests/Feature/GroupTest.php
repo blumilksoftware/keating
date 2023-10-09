@@ -29,6 +29,7 @@ class GroupTest extends TestCase
     {
         $this->post("/dashboard/course-semester/{$this->course->id}/groups", [
             "name" => "s1INF_1(1)",
+            "form" => "stationary",
         ])->assertSessionHasNoErrors();
     }
 
@@ -38,14 +39,17 @@ class GroupTest extends TestCase
 
         $this->assertDatabaseMissing("groups", [
             "name" => "s1INF_1(1)",
+            "form" => "stationary",
         ]);
 
         $this->patch("/dashboard/course-semester/{$group->course_semester_id}/groups/{$group->id}", [
             "name" => "s1INF_1(1)",
+            "form" => "stationary",
         ])->assertSessionHasNoErrors();
 
         $this->assertDatabaseHas("groups", [
             "name" => "s1INF_1(1)",
+            "form" => "stationary",
         ]);
     }
 
@@ -53,8 +57,10 @@ class GroupTest extends TestCase
     {
         $this->post("/dashboard/course-semester/{$this->course->id}/groups", [
             "name" => Str::random(256),
+            "form" => "bad-stationary",
         ])->assertSessionHasErrors([
             "name",
+            "form",
         ]);
 
         $this->assertDatabaseCount("groups", 0);

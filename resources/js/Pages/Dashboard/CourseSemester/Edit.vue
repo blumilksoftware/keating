@@ -16,14 +16,12 @@ const props = defineProps({
   course: Object,
   courses: Array,
   semesters: Array,
-  studyForms: Array,
 })
 
 
 const form = useForm({
   course: props.course.course_id,
   semester: props.course.semester_id,
-  form: props.course.form,
 })
 
 function updateCourse() {
@@ -70,15 +68,6 @@ function updateCourse() {
                       item-value="id"
               />
               <FormError :error="form.errors.semester" />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel for="type">
-                Tryb studiów
-              </FormLabel>
-              <Select id="type" v-model="form.form" :error="form.errors.form" :options="studyForms" label="label"
-                      item-value="value"
-              />
-              <FormError :error="form.errors.form" />
             </FormGroup>
             <div class="mt-4 flex justify-end">
               <SubmitButton>

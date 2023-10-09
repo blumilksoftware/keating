@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Enums\StudyForm;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,7 +16,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $name
  * @property string $course_id
  * @property string $semester_id
- * @property StudyForm $form
  * @property Course $course
  * @property Semester $semester
  * @property Carbon $created_at
@@ -33,10 +31,6 @@ class CourseSemester extends Model
         "name",
         "course_id",
         "semester_id",
-        "form",
-    ];
-    protected $casts = [
-        "form" => StudyForm::class,
     ];
 
     public function course(): BelongsTo

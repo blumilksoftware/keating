@@ -14,13 +14,11 @@ import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 defineProps({
   courses: Array,
   semesters: Array,
-  studyForms: Array,
 })
 
 const form = useForm({
   course: '',
   semester: '',
-  form: '',
 })
 
 function createCourse() {
@@ -63,13 +61,6 @@ function createCourse() {
               </FormLabel>
               <Select id="semester" v-model="form.semester" :error="form.errors.semester" :options="semesters" label="name" item-value="id" />
               <FormError :error="form.errors.semester" />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel for="type">
-                Tryb studiów
-              </FormLabel>
-              <Select id="type" v-model="form.form" :error="form.errors.form" :options="studyForms" label="label" item-value="value" />
-              <FormError :error="form.errors.form" />
             </FormGroup>
             <div class="mt-4 flex justify-end">
               <SubmitButton>

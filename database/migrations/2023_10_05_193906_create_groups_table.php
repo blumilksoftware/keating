@@ -12,6 +12,7 @@ return new class() extends Migration {
         Schema::create("groups", function (Blueprint $table): void {
             $table->ulid("id")->primary();
             $table->string("name");
+            $table->string("form");
             $table->string("course_semester_id")->nullable();
             $table->foreign("course_semester_id")->references("id")->on("course_semester")->onDelete("set null");
             $table->timestamps();

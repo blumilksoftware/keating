@@ -5,6 +5,7 @@ import SubmitButton from '@/Shared/Components/Buttons/SubmitButton.vue'
 import FormGroup from '@/Shared/Forms/FormGroup.vue'
 import FormLabel from '@/Shared/Forms/FormLabel.vue'
 import TextInput from '@/Shared/Forms/TextInput.vue'
+import Select from '@/Shared/Forms/Select.vue'
 import Button from '@/Shared/Components/Buttons/Button.vue'
 import { useForm } from '@inertiajs/inertia-vue3'
 import FormError from '@/Shared/Forms/FormError.vue'
@@ -17,6 +18,7 @@ import { ref } from 'vue'
 const props = defineProps({
   course: Object,
   groups: Array,
+  studyForms: Array,
 })
 const showModal = ref(false)
 const groupToDeleteId = ref(0)
@@ -24,14 +26,17 @@ const groupToEdit = ref(0)
 const showEditForm = ref(false)
 const form = useForm({
   name: '',
+  form: '',
 })
 const editForm = useForm({
   name: '',
+  form: '',
 })
 
 function editGroup(group) {
   groupToEdit.value = group
   editForm.name = group.name
+  editForm.form = group.form
   showEditForm.value = true
 }
 
@@ -86,12 +91,6 @@ function updateGroup() {
               </FormLabel>
               <TextInput :placeholder="course.data.semester" autocomplete="off" disabled />
             </FormGroup>
-            <FormGroup>
-              <FormLabel for="type">
-                Tryb studiów
-              </FormLabel>
-              <TextInput :placeholder="course.data.form" autocomplete="off" disabled />
-            </FormGroup>
           </div>
         </Section>
       </div>
@@ -132,6 +131,13 @@ function updateGroup() {
                 <TextInput id="name" v-model="form.name" :error="form.errors.name" autocomplete="off" />
                 <FormError :error="form.errors.name" />
               </FormGroup>
+              <FormGroup>
+                <FormLabel for="type">
+                  Tryb studiów
+                </FormLabel>
+                <Select id="type" v-model="form.form" :error="form.errors.form" :options="studyForms" label="label" item-value="value" />
+                <FormError :error="form.errors.form" />
+              </FormGroup>
               <div class="mt-4 flex justify-end">
                 <SubmitButton>
                   Utwórz
@@ -154,6 +160,13 @@ function updateGroup() {
                 <TextInput id="name" v-model="editForm.name" :error="editForm.errors.name" autocomplete="off" />
                 <FormError :error="editForm.errors.name" />
               </FormGroup>
+              <FormGroup>
+                <FormLabel for="type">
+                  Tryb studiów
+                </FormLabel>
+                <Select id="type" v-model="editForm.form" :error="editForm.errors.form" :options="studyForms" label="label" item-value="value" />
+                <FormError :error="editForm.errors.form" />
+              </FormGroup>
               <div class="mt-4 flex justify-end">
                 <SubmitButton>
                   Zapisz
@@ -163,10 +176,10 @@ function updateGroup() {
           </form>
         </Section>
         <div class="grid grid-cols-2 gap-4">
-          <div v-for="group in groups" :key="group.id"
+          <div v-for="group in groups.data" :key="group.id"
                class="flex h-max cursor-pointer items-center justify-between overflow-x-auto bg-white p-4 text-center sm:rounded-lg"
           >
-            {{ group.name }}
+            {{ group.name }}[{{ group.formAbbreviation }}]
             <div class="flex gap-2">
               <Button :href="`/dashboard/course-semester/${course.data.id}/groups/${group.id}/students`">
                 <UsersIcon class="w-5" />
