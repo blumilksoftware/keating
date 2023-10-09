@@ -33,7 +33,7 @@ const form = useForm({
 })
 
 function addStudent(id) {
-  Inertia.post(`/dashboard/course-semester/${props.course.data.id}/groups/${props.group.id}/students`, {
+  Inertia.post(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/students`, {
     student: id,
   }, {
     preserveState: true,
@@ -41,7 +41,7 @@ function addStudent(id) {
 }
 
 watch(form, debounce(() => {
-  Inertia.get(`/dashboard/course-semester/${props.course.data.id}/groups/${props.group.id}/students`, {
+  Inertia.get(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/students`, {
     search: form.search,
   }, {
     preserveState: true,
@@ -138,5 +138,5 @@ watch(form, debounce(() => {
     </div>
   </DashboardLayout>
 
-  <RemoveModal :show="showModal" :href="`/dashboard/course-semester/${props.course.data.id}/groups/${props.group.id}/students/${studentToDeleteId}`" @close="showModal = false" />
+  <RemoveModal :show="showModal" :href="`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/students/${studentToDeleteId}`" @close="showModal = false" />
 </template>

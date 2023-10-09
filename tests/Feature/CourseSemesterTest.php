@@ -27,7 +27,7 @@ class CourseSemesterTest extends TestCase
 
     public function testCourseSemesterCanBeCreated(): void
     {
-        $this->post("/dashboard/course-semester", [
+        $this->post("/dashboard/semester-courses", [
             "course" => $this->course->id,
             "semester" => $this->semester->id,
         ])->assertSessionHasNoErrors();
@@ -42,7 +42,7 @@ class CourseSemesterTest extends TestCase
             "semester_id" => $this->semester->id,
         ]);
 
-        $this->patch("/dashboard/course-semester/{$course->id}", [
+        $this->patch("/dashboard/semester-courses/{$course->id}", [
             "course" => $this->course->id,
             "semester" => $this->semester->id,
         ])->assertSessionHasNoErrors();
@@ -55,7 +55,7 @@ class CourseSemesterTest extends TestCase
 
     public function testCourseCannotBeCreatedWithInvalidData(): void
     {
-        $this->post("/dashboard/course-semester", [
+        $this->post("/dashboard/semester-courses", [
             "course" => 123,
             "semester" => 312,
         ])->assertSessionHasErrors([
@@ -71,7 +71,7 @@ class CourseSemesterTest extends TestCase
         $course = CourseSemester::factory()->create();
         $this->assertDatabaseCount("course_semester", 1);
 
-        $this->delete("/dashboard/course-semester/{$course->id}");
+        $this->delete("/dashboard/semester-courses/{$course->id}");
 
         $this->assertDatabaseCount("course_semester", 0);
     }

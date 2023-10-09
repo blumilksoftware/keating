@@ -19,6 +19,7 @@ class CourseSemesterResource extends JsonResource
             "id" => $course->id,
             "course" => $course->course->name,
             "semester" => $course->semester->name,
+            "groupsCount" => $course->groups_count ?? $course->groups->count(),
         ];
     }
 }

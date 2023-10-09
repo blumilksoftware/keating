@@ -21,8 +21,8 @@ const props = defineProps({
   studyForms: Array,
 })
 const showModal = ref(false)
-const groupToDeleteId = ref(0)
-const groupToEdit = ref(0)
+const groupToDeleteId = ref(null)
+const groupToEdit = ref(null)
 const showEditForm = ref(false)
 const form = useForm({
   name: '',
@@ -41,7 +41,7 @@ function editGroup(group) {
 }
 
 function createGroup() {
-  form.post(`/dashboard/course-semester/${props.course.data.id}/groups`, {
+  form.post(`/dashboard/semester-courses/${props.course.data.id}/groups`, {
     onSuccess: () => {
       form.reset()
     },
@@ -49,7 +49,7 @@ function createGroup() {
 }
 
 function updateGroup() {
-  editForm.patch(`/dashboard/course-semester/${props.course.data.id}/groups/${groupToEdit.value.id}`, {
+  editForm.patch(`/dashboard/semester-courses/${props.course.data.id}/groups/${groupToEdit.value.id}`, {
     onSuccess: () => {
       showEditForm.value = false
     },
@@ -90,6 +90,12 @@ function updateGroup() {
                 Semestr
               </FormLabel>
               <TextInput :placeholder="course.data.semester" autocomplete="off" disabled />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="semester">
+                Liczba grup
+              </FormLabel>
+              <TextInput :placeholder="course.data.groupsCount" autocomplete="off" disabled />
             </FormGroup>
           </div>
         </Section>
@@ -181,7 +187,7 @@ function updateGroup() {
           >
             {{ group.name }}[{{ group.formAbbreviation }}]
             <div class="flex gap-2">
-              <Button :href="`/dashboard/course-semester/${course.data.id}/groups/${group.id}/students`">
+              <Button :href="`/dashboard/semester-courses/${course.data.id}/groups/${group.id}/students`">
                 <UsersIcon class="w-5" />
               </Button>
               <Button>
@@ -197,7 +203,7 @@ function updateGroup() {
     </div>
   </DashboardLayout>
 
-  <RemoveModal :show="showModal" :href="`/dashboard/course-semester/${course.data.id}/groups/${groupToDeleteId}`"
+  <RemoveModal :show="showModal" :href="`/dashboard/semester-courses/${course.data.id}/groups/${groupToDeleteId}`"
                @close="showModal = false"
   />
 </template>

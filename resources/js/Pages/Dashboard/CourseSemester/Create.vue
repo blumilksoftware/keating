@@ -22,7 +22,7 @@ const form = useForm({
 })
 
 function createCourse() {
-  form.post('/dashboard/course-semester')
+  form.post('/dashboard/semester-courses')
 }
 </script>
 

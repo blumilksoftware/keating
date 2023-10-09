@@ -21,6 +21,7 @@ class CourseSemesterController extends Controller
     public function index(): Response
     {
         $courses = CourseSemester::query()
+            ->withCount("groups")
             ->orderBy("created_at")
             ->get();
 
@@ -51,7 +52,7 @@ class CourseSemesterController extends Controller
     public function show(CourseSemester $course): Response
     {
         return inertia("Dashboard/CourseSemester/Show", [
-            "course" => new CourseSemesterResource($course),
+            "course" => new CourseSemesterResource($course->load("groups")),
             "groups" => GroupResource::collection($course->groups),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
         ]);

@@ -38,7 +38,7 @@ const courseToDeleteId = ref(0)
         </template>
         <template #actions>
           <span class="hidden sm:block">
-            <Button :href="`/dashboard/course-semester/create`">
+            <Button :href="`/dashboard/semester-courses/create`">
               Dodaj
             </Button>
           </span>
@@ -56,6 +56,9 @@ const courseToDeleteId = ref(0)
             <TableHeader class="w-1/6">
               Semestr
             </TableHeader>
+            <TableHeader class="w-1/6">
+              Liczba grup
+            </TableHeader>
             <TableHeader />
           </template>
           <template #body>
@@ -69,11 +72,14 @@ const courseToDeleteId = ref(0)
               <TableCell>
                 {{ course.semester }}
               </TableCell>
+              <TableCell>
+                {{ course.groupsCount }}
+              </TableCell>
               <TableCell class="flex justify-end gap-2">
-                <Button :href="`/dashboard/course-semester/${course.id}`">
+                <Button :href="`/dashboard/semester-courses/${course.id}`">
                   <EyeIcon class="w-5" />
                 </Button>
-                <Button :href="`/dashboard/course-semester/${course.id}/edit`">
+                <Button :href="`/dashboard/semester-courses/${course.id}/edit`">
                   <Cog6ToothIcon class="w-5" />
                 </Button>
                 <Button class="text-red-600" @click="[showModal = true, courseToDeleteId = course.id]">
@@ -88,5 +94,5 @@ const courseToDeleteId = ref(0)
     </div>
   </DashboardLayout>
 
-  <RemoveModal :show="showModal" :href="`/dashboard/course-semester/${courseToDeleteId}`" @close="showModal = false" />
+  <RemoveModal :show="showModal" :href="`/dashboard/semester-courses/${courseToDeleteId}`" @close="showModal = false" />
 </template>

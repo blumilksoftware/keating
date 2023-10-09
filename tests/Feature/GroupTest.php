@@ -27,7 +27,7 @@ class GroupTest extends TestCase
 
     public function testStudentGroupSemesterCanBeCreated(): void
     {
-        $this->post("/dashboard/course-semester/{$this->course->id}/groups", [
+        $this->post("/dashboard/semester-courses/{$this->course->id}/groups", [
             "name" => "s1INF_1(1)",
             "form" => "stationary",
         ])->assertSessionHasNoErrors();
@@ -42,7 +42,7 @@ class GroupTest extends TestCase
             "form" => "stationary",
         ]);
 
-        $this->patch("/dashboard/course-semester/{$group->course_semester_id}/groups/{$group->id}", [
+        $this->patch("/dashboard/semester-courses/{$group->course_semester_id}/groups/{$group->id}", [
             "name" => "s1INF_1(1)",
             "form" => "stationary",
         ])->assertSessionHasNoErrors();
@@ -55,7 +55,7 @@ class GroupTest extends TestCase
 
     public function testStudentGroupCannotBeCreatedWithInvalidData(): void
     {
-        $this->post("/dashboard/course-semester/{$this->course->id}/groups", [
+        $this->post("/dashboard/semester-courses/{$this->course->id}/groups", [
             "name" => Str::random(256),
             "form" => "bad-stationary",
         ])->assertSessionHasErrors([
@@ -71,7 +71,7 @@ class GroupTest extends TestCase
         $group = Group::factory()->create();
         $this->assertDatabaseCount("groups", 1);
 
-        $this->delete("/dashboard/course-semester/{$group->course_semester_id}/groups/{$group->id}");
+        $this->delete("/dashboard/semester-courses/{$group->course_semester_id}/groups/{$group->id}");
 
         $this->assertDatabaseCount("groups", 0);
     }
@@ -83,7 +83,7 @@ class GroupTest extends TestCase
         $this->assertCount(0, $group->students);
 
         $this->post(
-            "/dashboard/course-semester/{$group->course_semester_id}/groups/{$group->id}/students",
+            "/dashboard/semester-courses/{$group->course_semester_id}/groups/{$group->id}/students",
             [
                 "student" => $student->id,
             ],
@@ -100,7 +100,7 @@ class GroupTest extends TestCase
         $this->assertCount(0, $group->students);
 
         $this->post(
-            "/dashboard/course-semester/{$group->course_semester_id}/groups/{$group->id}/students",
+            "/dashboard/semester-courses/{$group->course_semester_id}/groups/{$group->id}/students",
             [
                 "student" => $student->id,
             ],
@@ -110,7 +110,7 @@ class GroupTest extends TestCase
         $this->assertCount(1, $group->students);
 
         $this->post(
-            "/dashboard/course-semester/{$group->course_semester_id}/groups/{$group->id}/students",
+            "/dashboard/semester-courses/{$group->course_semester_id}/groups/{$group->id}/students",
             [
                 "student" => $student->id,
             ],
@@ -127,7 +127,7 @@ class GroupTest extends TestCase
         $this->assertCount(0, $group->students);
 
         $this->post(
-            "/dashboard/course-semester/{$group->course_semester_id}/groups/{$group->id}/students",
+            "/dashboard/semester-courses/{$group->course_semester_id}/groups/{$group->id}/students",
             [
                 "student" => $student->id,
             ],
@@ -136,7 +136,7 @@ class GroupTest extends TestCase
         $group->refresh();
         $this->assertCount(1, $group->students);
 
-        $this->delete("/dashboard/course-semester/{$group->course_semester_id}/groups/{$group->id}/students/{$student->id}");
+        $this->delete("/dashboard/semester-courses/{$group->course_semester_id}/groups/{$group->id}/students/{$student->id}");
 
         $group->refresh();
         $this->assertCount(0, $group->students);
@@ -150,7 +150,7 @@ class GroupTest extends TestCase
         $this->assertDatabaseCount("groups", 1);
 
         $this->post(
-            "/dashboard/course-semester/{$group->course_semester_id}/groups/{$group->id}/students",
+            "/dashboard/semester-courses/{$group->course_semester_id}/groups/{$group->id}/students",
             [
                 "student" => $students->pluck("id"),
             ],
@@ -158,7 +158,7 @@ class GroupTest extends TestCase
 
         $this->assertDatabaseCount("student_group", 10);
 
-        $this->delete("/dashboard/course-semester/{$group->course_semester_id}/groups/{$group->id}");
+        $this->delete("/dashboard/semester-courses/{$group->course_semester_id}/groups/{$group->id}");
 
         $this->assertDatabaseCount("student_group", 0);
         $this->assertDatabaseCount("groups", 0);

@@ -82,22 +82,22 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::delete("/courses/{course}", "destroy")->name("courses.destroy");
     });
     Route::controller(CourseSemesterController::class)->group(function (): void {
-        Route::get("/course-semester", "index")->name("course.semester.index");
-        Route::get("/course-semester/create", "create")->name("course.semester.create");
-        Route::post("/course-semester", "store")->name("course.semester.store");
-        Route::get("/course-semester/{course}", "show")->name("course.semester.show");
-        Route::get("/course-semester/{course}/edit", "edit")->name("course.semester.edit");
-        Route::patch("/course-semester/{course}", "update")->name("course.semester.update");
-        Route::delete("/course-semester/{course}", "destroy")->name("course.semester.destroy");
+        Route::get("/semester-courses", "index")->name("course.semester.index");
+        Route::get("/semester-courses/create", "create")->name("course.semester.create");
+        Route::post("/semester-courses", "store")->name("course.semester.store");
+        Route::get("/semester-courses/{course}", "show")->name("course.semester.show");
+        Route::get("/semester-courses/{course}/edit", "edit")->name("course.semester.edit");
+        Route::patch("/semester-courses/{course}", "update")->name("course.semester.update");
+        Route::delete("/semester-courses/{course}", "destroy")->name("course.semester.destroy");
     });
     Route::controller(GroupController::class)->group(function (): void {
-        Route::post("/course-semester/{course}/groups", "store")->name("course.semester.group.store");
-        Route::patch("/course-semester/{course}/groups/{group}", "update")->name("course.semester.group.update");
-        Route::delete("/course-semester/{course}/groups/{group}", "destroy")->name("course.semester.group.destroy");
+        Route::post("/semester-courses/{course}/groups", "store")->name("course.semester.group.store");
+        Route::patch("/semester-courses/{course}/groups/{group}", "update")->name("course.semester.group.update");
+        Route::delete("/semester-courses/{course}/groups/{group}", "destroy")->name("course.semester.group.destroy");
     });
     Route::controller(GroupStudentController::class)->group(function (): void {
-        Route::get("/course-semester/{course}/groups/{group}/students", "index")->name("course.semester.group.students.index");
-        Route::post("/course-semester/{course}/groups/{group}/students", "store")->name("course.semester.group.students.store");
-        Route::delete("/course-semester/{course}/groups/{group}/students/{student}", "destroy")->name("course.semester.group.students.destroy");
+        Route::get("/semester-courses/{course}/groups/{group}/students", "index")->name("course.semester.group.students.index");
+        Route::post("/semester-courses/{course}/groups/{group}/students", "store")->name("course.semester.group.students.store");
+        Route::delete("/semester-courses/{course}/groups/{group}/students/{student}", "destroy")->name("course.semester.group.students.destroy");
     });
 });

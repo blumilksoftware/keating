@@ -25,7 +25,7 @@ const form = useForm({
 })
 
 function updateCourse() {
-  form.patch(`/dashboard/course-semester/${props.course.id}`)
+  form.patch(`/dashboard/semester-courses/${props.course.id}`)
 }
 </script>
 

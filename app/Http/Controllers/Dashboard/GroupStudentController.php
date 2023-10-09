@@ -45,7 +45,7 @@ class GroupStudentController extends Controller
 
     public function store(Request $request, CourseSemester $course, Group $group): RedirectResponse
     {
-        $group->students()->sync($request->get("student"), false);
+        $group->students()->sync(ids: $request->get("student"), detaching: false);
 
         return redirect()->back()
             ->with("success", "Dodano studenta");
