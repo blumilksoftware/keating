@@ -14,7 +14,7 @@ return new class() extends Migration {
             $table->string("name");
             $table->string("form");
             $table->string("course_semester_id")->nullable();
-            $table->foreign("course_semester_id")->references("id")->on("course_semester")->onDelete("set null");
+            $table->foreign("course_semester_id")->references("id")->on("course_semester")->onDelete("SET NULL");
             $table->timestamps();
         });
     }
