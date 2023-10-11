@@ -23,7 +23,7 @@ const title = computed(() => {
   }[props.status]
 })
 
-const isLightTheme = ref(true)
+const isLightTheme = ref(false)
 
 window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
   isLightTheme.value = e.matches ?? false
