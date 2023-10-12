@@ -25,7 +25,7 @@ window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e 
 <template>
   <div class="flex min-h-screen flex-col items-center justify-center bg-gray-100">
     <div v-if="isLightTheme" class="flex flex-col items-center">
-      <img src="/baby-yoda.png"
+      <img src="/images/baby-yoda.png"
            alt="Baby yoda"
            class="mb-8 ml-16 w-72 sm:ml-28 sm:w-96"
       >
@@ -43,7 +43,7 @@ window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e 
       </InertiaLink>
     </div>
     <div v-else class="flex flex-col items-center">
-      <img src="/darth-vader.png"
+      <img src="/images/darth-vader.png"
            alt="Darth Vader"
            class="mb-16 w-96 px-4 sm:w-1/2 sm:px-0"
       >

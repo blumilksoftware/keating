@@ -25,10 +25,6 @@ class Handler extends ExceptionHandler
     {
         $response = parent::render($request, $e);
 
-        if (!app()->environment("production")) {
-            return $response;
-        }
-
         if ($response->status() === Response::HTTP_METHOD_NOT_ALLOWED) {
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
