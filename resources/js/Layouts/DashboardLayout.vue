@@ -33,20 +33,20 @@ const navigation = [
       { name: 'Aktualizacja hasła', href: '/dashboard/password', icon: LockOpenIcon, current: false },
       { name: 'Aktualności', href: '/dashboard/news', icon: NewspaperIcon, current: false },
       { name: 'FAQ', href: '/dashboard/faqs', icon: QuestionMarkCircleIcon, current: false },
-      { name: 'Formy kontaktu', href: '#', icon: AtSymbolIcon, current: false },
+      { name: 'Formy kontaktu', href: '/dashboard/contact-infos', icon: AtSymbolIcon, current: false },
     ],
   },
   {
     title: 'Uczelnia',
     elements: [
       { name: 'Studenci', href: '/dashboard/students', icon: UsersIcon, current: false },
-      { name: 'Kursy w semestrze', href: '#', icon: BookmarkSquareIcon, current: false },
+      { name: 'Kursy w semestrze', href: '/dashboard/semester-courses', icon: BookmarkSquareIcon, current: false },
     ],
   },
   {
     title: 'Słowniki',
     elements: [
-      { name: 'Kursy', href: '#', icon: BriefcaseIcon, current: false },
+      { name: 'Kursy', href: '/dashboard/courses', icon: BriefcaseIcon, current: false },
       { name: 'Kierunki i specjalności', href: '/dashboard/fields', icon: MagnifyingGlassIcon, current: false },
       { name: 'Semestry', href: '/dashboard/semesters', icon: ClipboardIcon, current: false },
     ],

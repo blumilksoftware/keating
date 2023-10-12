@@ -2,9 +2,14 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Dashboard\ContactInfoController;
+use App\Http\Controllers\Dashboard\CourseController;
+use App\Http\Controllers\Dashboard\CourseSemesterController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\FaqController;
 use App\Http\Controllers\Dashboard\FieldController;
+use App\Http\Controllers\Dashboard\GroupController;
+use App\Http\Controllers\Dashboard\GroupStudentController;
 use App\Http\Controllers\Dashboard\LogoutController;
 use App\Http\Controllers\Dashboard\NewsManagementController;
 use App\Http\Controllers\Dashboard\PasswordUpdateController;
@@ -25,9 +30,17 @@ Route::middleware("guest")->group(function (): void {
 
 Route::middleware("auth")->prefix("dashboard")->group(function (): void {
     Route::get("/", DashboardController::class)->name("dashboard");
+    Route::post("/logout", LogoutController::class);
     Route::get("/password", [PasswordUpdateController::class, "edit"])->name("password.edit");
     Route::patch("/password", [PasswordUpdateController::class, "update"])->name("password.update");
-    Route::post("/logout", LogoutController::class);
+    Route::controller(ContactInfoController::class)->group(function (): void {
+        Route::get("/contact-infos", "index")->name("contactInfo.index");
+        Route::get("/contact-infos/create", "create")->name("contactInfo.create");
+        Route::post("/contact-infos", "store")->name("contactInfo.store");
+        Route::get("/contact-infos/{contact_info}/edit", "edit")->name("contactInfo.edit");
+        Route::patch("/contact-infos/{contact_info}", "update")->name("contactInfo.update");
+        Route::delete("/contact-infos/{contact_info}", "destroy")->name("contactInfo.destroy");
+    });
     Route::controller(StudentController::class)->group(function (): void {
         Route::get("/students", "index")->name("students.index");
         Route::get("/students/create", "create")->name("students.create");
@@ -68,5 +81,32 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::get("/news/{news}/edit", "edit")->name("news.edit");
         Route::patch("/news/{news}", "update")->name("news.update");
         Route::delete("/news/{news}", "destroy")->name("news.destroy");
+    });
+    Route::controller(CourseController::class)->group(function (): void {
+        Route::get("/courses", "index")->name("courses.index");
+        Route::get("/courses/create", "create")->name("courses.create");
+        Route::post("/courses", "store")->name("courses.store");
+        Route::get("/courses/{course}/edit", "edit")->name("courses.edit");
+        Route::patch("/courses/{course}", "update")->name("courses.update");
+        Route::delete("/courses/{course}", "destroy")->name("courses.destroy");
+    });
+    Route::controller(CourseSemesterController::class)->group(function (): void {
+        Route::get("/semester-courses", "index")->name("course.semester.index");
+        Route::get("/semester-courses/create", "create")->name("course.semester.create");
+        Route::post("/semester-courses", "store")->name("course.semester.store");
+        Route::get("/semester-courses/{course}", "show")->name("course.semester.show");
+        Route::get("/semester-courses/{course}/edit", "edit")->name("course.semester.edit");
+        Route::patch("/semester-courses/{course}", "update")->name("course.semester.update");
+        Route::delete("/semester-courses/{course}", "destroy")->name("course.semester.destroy");
+    });
+    Route::controller(GroupController::class)->group(function (): void {
+        Route::post("/semester-courses/{course}/groups", "store")->name("course.semester.group.store");
+        Route::patch("/semester-courses/{course}/groups/{group}", "update")->name("course.semester.group.update");
+        Route::delete("/semester-courses/{course}/groups/{group}", "destroy")->name("course.semester.group.destroy");
+    });
+    Route::controller(GroupStudentController::class)->group(function (): void {
+        Route::get("/semester-courses/{course}/groups/{group}/students", "index")->name("course.semester.group.students.index");
+        Route::post("/semester-courses/{course}/groups/{group}/students", "store")->name("course.semester.group.students.store");
+        Route::delete("/semester-courses/{course}/groups/{group}/students/{student}", "destroy")->name("course.semester.group.students.destroy");
     });
 });
