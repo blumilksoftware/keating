@@ -25,7 +25,7 @@ class Handler extends ExceptionHandler
     {
         $response = parent::render($request, $e);
 
-        if (!app()->environment("local")) {
+        if (!app()->environment("production")) {
             return $response;
         }
 
