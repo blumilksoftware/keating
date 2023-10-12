@@ -1,7 +1,7 @@
 <script setup>
-import {computed, ref} from 'vue'
+import { computed, ref } from 'vue'
 
-const props = defineProps({status: Number})
+const props = defineProps({ status: Number })
 
 const title = computed(() => {
   return {
