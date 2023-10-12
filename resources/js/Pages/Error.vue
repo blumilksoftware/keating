@@ -1,18 +1,10 @@
 <script setup>
-import { computed, ref } from 'vue'
-import Button from '@/Shared/Components/Buttons/Button.vue'
+import {computed, ref} from 'vue'
 
-const props = defineProps({ status: Number })
+const props = defineProps({status: Number})
 
 const title = computed(() => {
   return {
-    // 401: 'Błąd 401 - Nieuprawniony dostęp',
-    // 403: 'Błąd 403 - Zabroniony',
-    // 404: 'Błąd 404 - Nie znaleziono strony',
-    // 419: 'Błąd 419 - Strona wygasła',
-    // 429: 'Błąd 429 - Przekroczono limit zapytań',
-    // 500: 'Błąd 500 - Błąd serwera',
-    // 503: 'Błąd 503 - Serwis niedostępny',
     401: 'Błąd 401',
     403: 'Błąd 403',
     404: 'Błąd 404',
