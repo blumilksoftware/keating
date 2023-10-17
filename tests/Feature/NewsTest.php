@@ -123,7 +123,7 @@ class NewsTest extends TestCase
 
         $this->assertDatabaseCount("news", 1);
 
-        $this->delete("/dashboard/news/$news->id");
+        $this->delete("/dashboard/news/{$news->id}");
 
         $this->assertDatabaseCount("news", 0);
     }

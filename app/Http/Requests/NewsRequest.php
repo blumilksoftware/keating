@@ -7,6 +7,7 @@ namespace App\Http\Requests;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class NewsRequest extends FormRequest
 {
@@ -14,7 +15,7 @@ class NewsRequest extends FormRequest
     {
         return [
             "title" => ["required", "max:255"],
-            "slug" => ["nullable", "unique:news,slug", "max:255"],
+            "slug" => ["nullable", "max:255", Rule::unique("news", "slug")->ignore($this->route("news"))],
             "content" => ["required", "max:65000"],
         ];
     }
