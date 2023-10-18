@@ -8,31 +8,34 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property string $id
- * @property string $first_name
- * @property string $surname
- * @property string $index_number
+ * @property string $name
+ * @property int $priority
+ * @property bool $active
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Student extends Model
+class GradeColumn extends Model
 {
     use HasFactory;
     use HasUlids;
 
     protected $fillable = [
-        "first_name",
-        "surname",
-        "index_number",
+        "name",
+        "priority",
+        "active",
+    ];
+    protected $casts = [
+        "active" => "boolean",
     ];
 
-    public function groups(): BelongsToMany
+    public function group(): BelongsTo
     {
-        return $this->belongsToMany(Group::class, "student_group");
+        return $this->belongsTo(Group::class);
     }
 
     public function grades(): HasMany

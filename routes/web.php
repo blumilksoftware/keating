@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\CourseController;
 use App\Http\Controllers\Dashboard\CourseSemesterController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\FieldController;
+use App\Http\Controllers\Dashboard\GradeController;
 use App\Http\Controllers\Dashboard\GroupController;
 use App\Http\Controllers\Dashboard\GroupStudentController;
 use App\Http\Controllers\Dashboard\LogoutController;
@@ -99,5 +100,10 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::get("/semester-courses/{course}/groups/{group}/students", "index")->name("course.semester.group.students.index");
         Route::post("/semester-courses/{course}/groups/{group}/students", "store")->name("course.semester.group.students.store");
         Route::delete("/semester-courses/{course}/groups/{group}/students/{student}", "destroy")->name("course.semester.group.students.destroy");
+    });
+    Route::controller(GradeController::class)->group(function (): void {
+        Route::get("/semester-courses/{course}/groups/{group}/grades", "index")->name("course.semester.group.grades.index");
+        Route::post("/semester-courses/{course}/groups/{group}/grades", "store")->name("course.semester.group.grades.index");
+        Route::post("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}", "createOrUpdateGrade")->name("course.semester.group.grades.index");
     });
 });
