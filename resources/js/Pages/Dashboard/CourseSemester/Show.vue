@@ -12,7 +12,7 @@ import FormError from '@/Shared/Forms/FormError.vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
-import { Cog6ToothIcon, UsersIcon, XCircleIcon } from '@heroicons/vue/24/outline'
+import { Cog6ToothIcon, UsersIcon, XCircleIcon, ChartBarIcon } from '@heroicons/vue/24/outline'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -187,6 +187,9 @@ function updateGroup() {
           >
             {{ group.name }}[{{ group.formAbbreviation }}]
             <div class="flex gap-2">
+              <Button :href="`/dashboard/semester-courses/${course.data.id}/groups/${group.id}/grades`">
+                <ChartBarIcon class="w-5" />
+              </Button>
               <Button :href="`/dashboard/semester-courses/${course.data.id}/groups/${group.id}/students`">
                 <UsersIcon class="w-5" />
               </Button>

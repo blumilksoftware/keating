@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Observers\GradeColumnObserver;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -41,5 +42,10 @@ class GradeColumn extends Model
     public function grades(): HasMany
     {
         return $this->hasMany(Grade::class);
+    }
+
+    protected static function booted(): void
+    {
+        self::observe(GradeColumnObserver::class);
     }
 }
