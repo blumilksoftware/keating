@@ -15,7 +15,7 @@ return new class() extends Migration {
             $table->boolean("active")->nullable();
             $table->integer("priority");
             $table->string("group_id")->nullable();
-            $table->foreign("group_id")->references("id")->on("groups")->onDelete("SET NULL");
+            $table->foreign("group_id")->references("id")->on("groups")->onDelete("CASCADE");
             $table->timestamps();
         });
     }

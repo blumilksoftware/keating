@@ -12,9 +12,9 @@ return new class() extends Migration {
         Schema::create("course_semester", function (Blueprint $table): void {
             $table->ulid("id")->primary();
             $table->string("course_id")->nullable();
-            $table->foreign("course_id")->references("id")->on("courses")->onDelete("set null");
+            $table->foreign("course_id")->references("id")->on("courses")->onDelete("CASCADE");
             $table->string("semester_id")->nullable();
-            $table->foreign("semester_id")->references("id")->on("semesters")->onDelete("set null");
+            $table->foreign("semester_id")->references("id")->on("semesters")->onDelete("CASCADE");
             $table->timestamps();
         });
     }

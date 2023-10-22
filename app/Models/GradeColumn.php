@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 /**
  * @property string $id
@@ -19,6 +20,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property bool $active
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property-read Group $group
+ * @property-read Collection<Grade> $grades
  */
 class GradeColumn extends Model
 {

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateGrade;
+use App\Http\Requests\UpdateGradeColumn;
 use App\Http\Resources\CourseSemesterResource;
 use App\Models\CourseSemester;
 use App\Models\GradeColumn;
@@ -38,31 +40,28 @@ class GradeController extends Controller
         ]);
     }
 
-    public function store(Request $request, CourseSemester $course, Group $group): RedirectResponse
+    public function store(UpdateGradeColumn $request, CourseSemester $course, Group $group): RedirectResponse
     {
-        $group->gradeColumns()->create(["name" => $request->get("name"), "active" => $request->get("active")]);
+        $group->gradeColumns()->create($request->getData());
 
         return redirect()->back()
             ->with("success", "Dodano kolumnę");
     }
 
-    public function update(Request $request, CourseSemester $course, Group $group, GradeColumn $gradeColumn): RedirectResponse
+    public function update(UpdateGradeColumn $request, CourseSemester $course, Group $group, GradeColumn $gradeColumn): RedirectResponse
     {
-        $gradeColumn->update(["name" => $request->get("name"), "active" => $request->get("active")]);
+        $gradeColumn->update($request->getData());
 
         return redirect()->back()
             ->with("success", "Zaktualizowano kolumnę");
     }
 
-    public function createOrUpdateGrade(Request $request, CourseSemester $course, Group $group, GradeColumn $gradeColumn)
+    public function createOrUpdateGrade(UpdateGrade $request, CourseSemester $course, Group $group, GradeColumn $gradeColumn)
     {
         $gradeColumn->grades()
             ->updateOrCreate([
                 "student_id" => $request->get("student_id"),
-            ], [
-                "value" => $request->get("value"),
-                "status" => $request->get("status"),
-            ]);
+            ], $request->getData());
 
         return redirect()->back()
             ->with("success", "Zaktualizowano ocenę");

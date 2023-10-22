@@ -14,9 +14,9 @@ return new class() extends Migration {
             $table->boolean("status")->nullable();
             $table->string("value")->nullable();
             $table->string("student_id")->nullable();
-            $table->foreign("student_id")->references("id")->on("students")->onDelete("SET NULL");
+            $table->foreign("student_id")->references("id")->on("students")->onDelete("CASCADE");
             $table->string("grade_column_id")->nullable();
-            $table->foreign("grade_column_id")->references("id")->on("grade_columns")->onDelete("SET NULL");
+            $table->foreign("grade_column_id")->references("id")->on("grade_columns")->onDelete("CASCADE");
             $table->timestamps();
         });
     }
