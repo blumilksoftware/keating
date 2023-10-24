@@ -12,6 +12,7 @@ class UpdateGrade extends FormRequest
     {
         return [
             "student_id" => ["required", "exists:students,id"],
+            "value" => ["nullable", "max:10"],
         ];
     }
 

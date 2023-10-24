@@ -25,9 +25,10 @@ import Pagination from '../../../../Shared/Components/Pagination.vue'
 const props = defineProps({
   course: Object,
   group: Object,
-  students: Array,
+  students: Object,
   gradeColumns: Array,
   search: String,
+  total: Number,
 })
 const showModal = ref(false)
 const showEditForm = ref(false)

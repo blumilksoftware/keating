@@ -34,6 +34,7 @@ class GradeController extends Controller
         return inertia("Dashboard/CourseSemester/Grade/Index", [
             "course" => new CourseSemesterResource($course),
             "group" => $group,
+            "total" => $group->students->count(),
             "students" => $students,
             "search" => $searchText,
             "gradeColumns" => $group->gradeColumns()->with("grades")->orderBy("priority")->get(),
