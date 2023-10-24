@@ -56,12 +56,19 @@ class GradeController extends Controller
             ->with("success", "Zaktualizowano kolumnę");
     }
 
-    public function createOrUpdateGrade(UpdateGrade $request, CourseSemester $course, Group $group, GradeColumn $gradeColumn)
+    public function storeGrade(UpdateGrade $request, CourseSemester $course, Group $group, GradeColumn $gradeColumn): RedirectResponse
     {
         $gradeColumn->grades()
-            ->updateOrCreate([
-                "student_id" => $request->get("student_id"),
-            ], $request->getData());
+            ->create($request->getData());
+
+        return redirect()->back();
+    }
+
+    public function updateGrade(UpdateGrade $request, CourseSemester $course, Group $group, GradeColumn $gradeColumn): RedirectResponse
+    {
+        $gradeColumn->grades()
+            ->where("student_id", $request->get("student_id"))
+            ->update($request->getData());
 
         return redirect()->back()
             ->with("success", "Zaktualizowano ocenę");

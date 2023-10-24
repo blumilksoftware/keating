@@ -55,17 +55,16 @@ function updateGradeColumn() {
   editForm.reset()
 }
 
-function createOrUpdateGrade(gradeColumnId, studentId, value, status) {
-  Inertia.post(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades/${gradeColumnId}`, {
+function updateGrade(gradeColumnId, studentId, value, status) {
+  Inertia.patch(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades/${gradeColumnId}/update`, {
     status: status,
     value: value,
     student_id: studentId,
   })
 }
 
-function updateValue(gradeColumnId, studentId, value, status) {
-  Inertia.post(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades/${gradeColumnId}`, {
-    value: value,
+function createGrade(gradeColumnId, studentId, status) {
+  Inertia.post(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades/${gradeColumnId}/store`, {
     status: status,
     student_id: studentId,
   })
@@ -212,12 +211,12 @@ watch(searchForm, debounce(() => {
           <template #body>
             <TableRow v-for="student in students.data" :key="student.id">
               <TableCell>
-                {{ student.index_number }} ({{ student.first_name }} {{ student.surname }} )
+                {{ student.index_number }} ({{ student.first_name }} {{ student.surname }})
               </TableCell>
               <TableCell v-for="column in gradeColumns" :key="column.id" class="w-1/12 cursor-pointer border-2 !p-0">
                 <GradeCell :grade="column.grades.find(obj => obj.student_id === student.id)" :grade-column="column"
                            :student="student" class="min-h-[50px] w-full"
-                           @create-or-update-grade="createOrUpdateGrade" @update-value="updateValue"
+                           @create-grade="createGrade" @update-grade="updateGrade"
                 />
               </TableCell>
             </TableRow>

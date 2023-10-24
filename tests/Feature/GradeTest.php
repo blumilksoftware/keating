@@ -29,7 +29,7 @@ class GradeTest extends TestCase
     {
         $this->assertDatabaseCount("grades", 0);
 
-        $this->post("/dashboard/semester-courses/{$this->gradeColumn->group->course_semester_id}/groups/{$this->gradeColumn->group->id}/grades/{$this->gradeColumn->id}", [
+        $this->post("/dashboard/semester-courses/{$this->gradeColumn->group->course_semester_id}/groups/{$this->gradeColumn->group->id}/grades/{$this->gradeColumn->id}/store", [
             "student_id" => $this->student->id,
             "status" => true,
             "value" => 4,
@@ -42,7 +42,7 @@ class GradeTest extends TestCase
     {
         $this->assertDatabaseCount("grades", 0);
 
-        $this->post("/dashboard/semester-courses/{$this->gradeColumn->group->course_semester_id}/groups/{$this->gradeColumn->group->id}/grades/{$this->gradeColumn->id}", [
+        $this->post("/dashboard/semester-courses/{$this->gradeColumn->group->course_semester_id}/groups/{$this->gradeColumn->group->id}/grades/{$this->gradeColumn->id}/store", [
             "student_id" => "123",
             "status" => true,
         ])->assertSessionHasErrors()
@@ -62,8 +62,8 @@ class GradeTest extends TestCase
             "status" => true,
         ]);
 
-        $this->post("/dashboard/semester-courses/{$grade->gradeColumn->group->course_semester_id}/groups/{$grade->gradeColumn->group->id}/grades/{$grade->gradeColumn->id}", [
-            "student_id" => $this->student->id,
+        $this->patch("/dashboard/semester-courses/{$grade->gradeColumn->group->course_semester_id}/groups/{$grade->gradeColumn->group->id}/grades/{$grade->gradeColumn->id}/update", [
+            "student_id" => $grade->student_id,
             "status" => true,
             "value" => 3,
         ])->assertSessionHasNoErrors();

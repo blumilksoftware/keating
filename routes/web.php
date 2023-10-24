@@ -105,8 +105,9 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::get("/semester-courses/{course}/groups/{group}/grades", "index")->name("course.semester.group.grades.index");
         Route::post("/semester-courses/{course}/groups/{group}/grades", "store")->name("course.semester.group.grades.store");
         Route::patch("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}", "update")->name("course.semester.group.grades.update");
-        Route::post("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}", "createOrUpdateGrade")->name("course.semester.group.grades.createOrUpdate");
         Route::delete("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}", "destroy")->name("course.semester.group.grades.destroy");
+        Route::post("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/store", "storeGrade")->name("course.semester.group.grades.store");
+        Route::patch("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/update", "updateGrade")->name("course.semester.group.grades.update");
         Route::post("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/reorder/{down}", "reorder")->name("course.semester.group.grades.reorder");
     });
 });
