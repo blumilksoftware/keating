@@ -20,7 +20,7 @@ import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 const props = defineProps({
   course: Object,
   group: Object,
-  students: Array,
+  students: Object,
   availableStudents: Array,
   search: String,
   total: Number,

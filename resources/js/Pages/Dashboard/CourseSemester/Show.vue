@@ -17,7 +17,7 @@ import { ref } from 'vue'
 
 const props = defineProps({
   course: Object,
-  groups: Array,
+  groups: Object,
   studyForms: Array,
 })
 const showModal = ref(false)
