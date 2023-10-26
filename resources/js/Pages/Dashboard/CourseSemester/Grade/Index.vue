@@ -46,12 +46,16 @@ const editForm = useForm({
 })
 
 function createGradeColumn() {
-  form.post(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades`)
+  form.post(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades`, {
+    preserveScroll: true,
+  })
   form.reset()
 }
 
 function updateGradeColumn() {
-  editForm.patch(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades/${columnToEdit.value.id}`)
+  editForm.patch(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades/${columnToEdit.value.id}`, {
+    preserveScroll: true,
+  })
   showEditForm.value = false
   editForm.reset()
 }
@@ -61,6 +65,8 @@ function updateGrade(gradeColumnId, studentId, value, status) {
     status: status,
     value: value,
     student_id: studentId,
+  }, {
+    preserveScroll: true,
   })
 }
 
@@ -68,6 +74,8 @@ function createGrade(gradeColumnId, studentId, status) {
   Inertia.post(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades/${gradeColumnId}/store`, {
     status: status,
     student_id: studentId,
+  }, {
+    preserveScroll: true,
   })
 }
 
@@ -116,7 +124,7 @@ watch(searchForm, debounce(() => {
           </ManagementHeaderItem>
         </template>
         <template #actions>
-          <TextInput id="filter" v-model="searchForm.search" placeholder="Szukaj" type="search" class="max-w-lg" />
+          <TextInput id="filter" v-model="searchForm.search" class="max-w-lg" placeholder="Szukaj" type="search" />
           <Button @click="[showCreateForm = true, showEditForm = false]">
             Dodaj kolumnę
           </Button>
@@ -134,8 +142,8 @@ watch(searchForm, debounce(() => {
                 <FormError :error="form.errors.name" />
               </FormGroup>
               <FormGroup class="flex items-center">
-                <input id="active" v-model="form.active" type="checkbox" class="mr-3">
-                <FormLabel for="active" class="!m-0">
+                <input id="active" v-model="form.active" class="mr-3" type="checkbox">
+                <FormLabel class="!m-0" for="active">
                   Aktywna
                 </FormLabel>
               </FormGroup>
@@ -161,8 +169,8 @@ watch(searchForm, debounce(() => {
                 <FormError :error="editForm.errors.name" />
               </FormGroup>
               <FormGroup class="flex items-center">
-                <input id="active" v-model="editForm.active" type="checkbox" class="mr-3">
-                <FormLabel for="active" class="!m-0">
+                <input id="active" v-model="editForm.active" class="mr-3" type="checkbox">
+                <FormLabel class="!m-0" for="active">
                   Aktywna
                 </FormLabel>
               </FormGroup>
@@ -179,47 +187,47 @@ watch(searchForm, debounce(() => {
         </form>
         <TableWrapper>
           <template #header>
-            <TableHeader class="w-1/6">
+            <TableHeader>
               Numer indeksu
             </TableHeader>
             <TableHeader v-for="(column, index) in gradeColumns" :key="column.id"
-                         class="w-1/12 cursor-pointer border-2 border-solid text-center"
+                         v-auto-animate="{ duration: 50 }"
                          :class="[column.active ? '' : 'bg-gray-300 text-white']"
+                         class="min-w-[100px] cursor-pointer border-2 border-solid text-center"
             >
               <span @click="showColumnMenu = !showColumnMenu">
                 {{ column.name }}
               </span>
               <div v-if="showColumnMenu" class="mt-5 flex grow justify-between">
-                <ArrowLeftIcon v-if="index === 0" class="w-6 text-gray-400" />
+                <ArrowLeftIcon v-if="index === 0" class="w-4 text-gray-400" />
                 <div v-else title="Move Up" @click="reorder(column.id, 1)"
                      @keydown.prevent.stop.space="reorder(column.id, 1)"
                 >
-                  <ArrowLeftIcon class="w-6 hover:text-gray-500" />
+                  <ArrowLeftIcon class="w-4 hover:text-gray-500" />
                 </div>
                 <div class="flex">
-                  <PencilSquareIcon class="w-6" @click="editColumn(column)" />
-                  <TrashIcon class="w-6" @click="[columnToDeleteId = column.id, showModal = true]" />
+                  <PencilSquareIcon class="w-4" @click="editColumn(column)" />
+                  <TrashIcon class="w-4" @click="[columnToDeleteId = column.id, showModal = true]" />
                 </div>
-                <ArrowRightIcon v-if="index === gradeColumns.length - 1" class="w-6 text-gray-400" />
+                <ArrowRightIcon v-if="index === gradeColumns.length - 1" class="w-4 text-gray-400" />
                 <div v-else title="Move Down" @click="reorder(column.id, 0)"
                      @keydown.prevent.stop.space="reorder(column.id, 0)"
                 >
-                  <ArrowRightIcon class="w-6 hover:text-gray-500" />
+                  <ArrowRightIcon class="w-4 hover:text-gray-500" />
                 </div>
               </div>
             </TableHeader>
           </template>
           <template #body>
             <TableRow v-for="student in students.data" :key="student.id">
-              <TableCell>
+              <TableCell class="h-[100px] min-w-[200px] cursor-pointer border-2">
                 {{ student.index_number }} ({{ student.first_name }} {{ student.surname }})
               </TableCell>
-              <TableCell v-for="column in gradeColumns" :key="column.id" class="w-1/12 cursor-pointer border-2 !p-0">
-                <GradeCell :grade="column.grades.find(obj => obj.student_id === student.id)" :grade-column="column"
-                           :student="student" class="min-h-[50px] w-full"
-                           @create-grade="createGrade" @update-grade="updateGrade"
-                />
-              </TableCell>
+              <GradeCell v-for="column in gradeColumns" :key="column.id"
+                         :grade="column.grades.find(obj => obj.student_id === student.id)" :grade-column="column"
+                         :student="student" class="cursor-pointer border-2"
+                         @create-grade="createGrade" @update-grade="updateGrade"
+              />
             </TableRow>
           </template>
         </TableWrapper>
@@ -227,8 +235,9 @@ watch(searchForm, debounce(() => {
       </div>
     </div>
   </DashboardLayout>
-  <RemoveModal :href="`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades/${columnToDeleteId}`"
-               :show="showModal"
-               @close="showModal = false"
+  <RemoveModal
+    :href="`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades/${columnToDeleteId}`"
+    :show="showModal"
+    @close="showModal = false"
   />
 </template>
