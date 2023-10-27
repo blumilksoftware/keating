@@ -30,6 +30,7 @@ const props = defineProps({
   search: String,
   total: Number,
 })
+const showName = ref(false)
 const showModal = ref(false)
 const showEditForm = ref(false)
 const showCreateForm = ref(false)
@@ -191,37 +192,38 @@ watch(searchForm, debounce(() => {
               Numer indeksu
             </TableHeader>
             <TableHeader v-for="(column, index) in gradeColumns" :key="column.id"
-                         v-auto-animate="{ duration: 50 }"
+                         v-auto-animate="{ duration: 100 }"
                          :class="[column.active ? '' : 'bg-gray-300 text-white']"
-                         class="min-w-[100px] cursor-pointer border-2 border-solid text-center"
+                         class="w-[70px] cursor-pointer border-2 border-solid text-center"
             >
+              <div v-if="showColumnMenu" class="mb-5 flex grow justify-between">
+                <ArrowLeftIcon v-if="index === 0" class="w-6 text-gray-400" />
+                <div v-else title="Move Up" @click="reorder(column.id, 1)"
+                     @keydown.prevent.stop.space="reorder(column.id, 1)"
+                >
+                  <ArrowLeftIcon class="w-6 hover:text-gray-500" />
+                </div>
+                <ArrowRightIcon v-if="index === gradeColumns.length - 1" class="w-6 text-gray-400" />
+                <div v-else title="Move Down" @click="reorder(column.id, 0)"
+                     @keydown.prevent.stop.space="reorder(column.id, 0)"
+                >
+                  <ArrowRightIcon class="w-6 hover:text-gray-500" />
+                </div>
+              </div>
               <span @click="showColumnMenu = !showColumnMenu">
                 {{ column.name }}
               </span>
               <div v-if="showColumnMenu" class="mt-5 flex grow justify-between">
-                <ArrowLeftIcon v-if="index === 0" class="w-4 text-gray-400" />
-                <div v-else title="Move Up" @click="reorder(column.id, 1)"
-                     @keydown.prevent.stop.space="reorder(column.id, 1)"
-                >
-                  <ArrowLeftIcon class="w-4 hover:text-gray-500" />
-                </div>
-                <div class="flex">
-                  <PencilSquareIcon class="w-4" @click="editColumn(column)" />
-                  <TrashIcon class="w-4" @click="[columnToDeleteId = column.id, showModal = true]" />
-                </div>
-                <ArrowRightIcon v-if="index === gradeColumns.length - 1" class="w-4 text-gray-400" />
-                <div v-else title="Move Down" @click="reorder(column.id, 0)"
-                     @keydown.prevent.stop.space="reorder(column.id, 0)"
-                >
-                  <ArrowRightIcon class="w-4 hover:text-gray-500" />
-                </div>
+                <PencilSquareIcon class="w-6" @click="editColumn(column)" />
+                <TrashIcon class="w-6" @click="[columnToDeleteId = column.id, showModal = true]" />
               </div>
             </TableHeader>
           </template>
           <template #body>
             <TableRow v-for="student in students.data" :key="student.id">
-              <TableCell class="h-[100px] min-w-[200px] cursor-pointer border-2">
-                {{ student.index_number }} ({{ student.first_name }} {{ student.surname }})
+              <TableCell class="h-[70px] w-[120px] min-w-[120px] cursor-pointer border-2" @click="[showName = !showName]">
+                <span v-if="!showName">{{ student.index_number }}</span>
+                <span v-else>{{ student.first_name }} {{ student.surname }}</span>
               </TableCell>
               <GradeCell v-for="column in gradeColumns" :key="column.id"
                          :grade="column.grades.find(obj => obj.student_id === student.id)" :grade-column="column"
