@@ -4,49 +4,51 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Enums\StudyForm;
+use App\Observers\GradeColumnObserver;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 /**
  * @property string $id
  * @property string $name
- * @property string $course_semester_id
- * @property StudyForm $form
+ * @property int $priority
+ * @property bool $active
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property-read Group $group
+ * @property-read Collection<Grade> $grades
  */
-class Group extends Model
+class GradeColumn extends Model
 {
     use HasFactory;
     use HasUlids;
 
     protected $fillable = [
         "name",
-        "course_semester_id",
-        "form",
+        "priority",
+        "active",
     ];
     protected $casts = [
-        "form" => StudyForm::class,
+        "active" => "boolean",
     ];
 
-    public function course(): BelongsTo
+    public function group(): BelongsTo
     {
-        return $this->belongsTo(CourseSemester::class);
+        return $this->belongsTo(Group::class);
     }
 
-    public function students(): BelongsToMany
+    public function grades(): HasMany
     {
-        return $this->belongsToMany(Student::class, "student_group");
+        return $this->hasMany(Grade::class);
     }
 
-    public function gradeColumns(): HasMany
+    protected static function booted(): void
     {
-        return $this->hasMany(GradeColumn::class);
+        self::observe(GradeColumnObserver::class);
     }
 }

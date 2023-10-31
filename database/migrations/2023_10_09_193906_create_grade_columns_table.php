@@ -9,18 +9,19 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     public function up(): void
     {
-        Schema::create("groups", function (Blueprint $table): void {
+        Schema::create("grade_columns", function (Blueprint $table): void {
             $table->ulid("id")->primary();
             $table->string("name");
-            $table->string("form");
-            $table->string("course_semester_id")->nullable();
-            $table->foreign("course_semester_id")->references("id")->on("course_semester")->onDelete("CASCADE");
+            $table->boolean("active")->nullable();
+            $table->integer("priority");
+            $table->string("group_id")->nullable();
+            $table->foreign("group_id")->references("id")->on("groups")->onDelete("CASCADE");
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists("groups");
+        Schema::dropIfExists("grade_columns");
     }
 };

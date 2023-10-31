@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\CourseSemesterController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\FaqController;
 use App\Http\Controllers\Dashboard\FieldController;
+use App\Http\Controllers\Dashboard\GradeController;
 use App\Http\Controllers\Dashboard\GroupController;
 use App\Http\Controllers\Dashboard\GroupStudentController;
 use App\Http\Controllers\Dashboard\LogoutController;
@@ -108,5 +109,14 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::get("/semester-courses/{course}/groups/{group}/students", "index")->name("course.semester.group.students.index");
         Route::post("/semester-courses/{course}/groups/{group}/students", "store")->name("course.semester.group.students.store");
         Route::delete("/semester-courses/{course}/groups/{group}/students/{student}", "destroy")->name("course.semester.group.students.destroy");
+    });
+    Route::controller(GradeController::class)->group(function (): void {
+        Route::get("/semester-courses/{course}/groups/{group}/grades", "index")->name("course.semester.group.grades.index");
+        Route::post("/semester-courses/{course}/groups/{group}/grades", "store")->name("course.semester.group.grades.store");
+        Route::patch("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}", "update")->name("course.semester.group.grades.update");
+        Route::delete("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}", "destroy")->name("course.semester.group.grades.destroy");
+        Route::post("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/store", "storeGrade")->name("course.semester.group.grades.store");
+        Route::patch("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/update", "updateGrade")->name("course.semester.group.grades.update");
+        Route::post("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/reorder/{down}", "reorder")->name("course.semester.group.grades.reorder");
     });
 });
