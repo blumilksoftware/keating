@@ -23,7 +23,7 @@ const form = useForm({
 })
 
 function updateSettings() {
-  form.patch(`/dashboard/settings`)
+  form.patch('/dashboard/settings')
 }
 </script>
 
@@ -43,12 +43,6 @@ function updateSettings() {
       <form class="grid grid-cols-2" @submit.prevent="updateSettings">
         <Section>
           <div class="flex flex-col justify-between gap-4">
-            <FormGroup>
-              <FormLabel for="id">
-                Id
-              </FormLabel>
-              <TextInput class="opacity-75" :placeholder="settings.id" autocomplete="off" disabled />
-            </FormGroup>
             <FormGroup>
               <FormLabel for="teacher_name">
                 Imię i nazwisko nauczyciela
