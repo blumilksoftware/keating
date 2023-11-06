@@ -1,0 +1,9 @@
+.git/
+.idea/
+vendor/
+node_modules/
+.env
+.env.prod
+.env.beta
+./environment/prod/deployment/prod/
+./environment/prod/deployment/beta/
