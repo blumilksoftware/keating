@@ -1,11 +1,13 @@
-name: Deploy to beta manually
+name: Deploy to beta by push
 
 concurrency:
   group: deploy-beta
   cancel-in-progress: true
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
 
