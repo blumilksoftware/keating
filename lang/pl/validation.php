@@ -124,5 +124,10 @@ return [
         "abbreviation" => "skrótowiec",
         "form" => "tryb studiów",
         "type" => "typ zajęć",
+        "teacher_name" => "imię i nazwisko nauczyciela",
+        "teacher_email" => "adres e-mail nauczyciela",
+        "teacher_titles" => "tytuły/stopnie naukowe nauczyciela",
+        "university_name" => "nazwa uczelni",
+        "department_name" => "nazwa wydziału",
     ],
 ];
