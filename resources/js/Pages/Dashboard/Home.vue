@@ -9,7 +9,7 @@ defineProps({
 
 <template>
   <DashboardLayout>
-    <h2 class="text-2xl font-semibold leading-6 text-gray-900 mb-6">
+    <h2 class="mb-6 text-2xl font-semibold leading-6 text-gray-900">
       Cześć, {{ name }}
     </h2>
 
