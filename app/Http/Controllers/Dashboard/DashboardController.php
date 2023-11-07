@@ -16,13 +16,15 @@ class DashboardController extends Controller
 {
     public function __invoke(): Response
     {
+        $activeSemester = Semester::getActive();
+
         return inertia("Dashboard/Home", [
             "name" => explode(" ", Setting::query()->first()?->teacher_name ?? "")[0],
             "counters" => [
                 [
-                    ["name" => "Liczba studentów w tym semestrze", "value" => Semester::getActive()?->students()->count() ?? 0],
-                    ["name" => "Liczba kursów w tym semestrze", "value" => Semester::getActive()?->courses()->count() ?? 0],
-                    ["name" => "Liczba grup w tym semestrze", "value" => Semester::getActive()?->groups()->count() ?? 0],
+                    ["name" => "Liczba studentów w tym semestrze", "value" => $activeSemester?->students()->count() ?? 0],
+                    ["name" => "Liczba kursów w tym semestrze", "value" => $activeSemester?->courses()->count() ?? 0],
+                    ["name" => "Liczba grup w tym semestrze", "value" => $activeSemester?->groups()->count() ?? 0],
                 ],
                 [
                     ["name" => "Liczba studentów", "value" => Student::query()->count()],
