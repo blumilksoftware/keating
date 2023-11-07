@@ -15,6 +15,7 @@ use App\Http\Controllers\Dashboard\LogoutController;
 use App\Http\Controllers\Dashboard\NewsManagementController;
 use App\Http\Controllers\Dashboard\PasswordUpdateController;
 use App\Http\Controllers\Dashboard\SemesterController;
+use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\StudentController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\LoginController;
@@ -118,5 +119,9 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::post("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/store", "storeGrade")->name("course.semester.group.grades.store");
         Route::patch("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/update", "updateGrade")->name("course.semester.group.grades.update");
         Route::post("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/reorder/{down}", "reorder")->name("course.semester.group.grades.reorder");
+    });
+    Route::controller(SettingController::class)->group(function (): void {
+        Route::get("/settings", "edit")->name("settings.edit");
+        Route::patch("/settings", "update")->name("settings.update");
     });
 });
