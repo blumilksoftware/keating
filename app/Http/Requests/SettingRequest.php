@@ -11,11 +11,11 @@ class SettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "teacher_name" => ["nullable", "max:255"],
-            "teacher_email" => ["nullable", "email", "max:255"],
-            "teacher_titles" => ["nullable", "max:255"],
-            "university_name" => ["nullable", "max:255"],
-            "department_name" => ["nullable", "max:255"],
+            "teacher_name" => ["required", "max:255"],
+            "teacher_email" => ["required", "email", "max:255"],
+            "teacher_titles" => ["required", "max:255"],
+            "university_name" => ["required", "max:255"],
+            "department_name" => ["required", "max:255"],
         ];
     }
 }
