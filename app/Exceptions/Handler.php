@@ -29,7 +29,7 @@ class Handler extends ExceptionHandler
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
 
-        if (in_array($response->status(), $this->handleByInertia, true)) {
+        if (!config("app.debug") && in_array($response->status(), $this->handleByInertia, true)) {
             return Inertia::render("Error", [
                 "status" => $response->status(),
             ])
