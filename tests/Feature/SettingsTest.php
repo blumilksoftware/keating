@@ -89,4 +89,38 @@ class SettingsTest extends TestCase
             "department_name" => "IT department",
         ]);
     }
+
+    public function testSettingsCannotBeUpdatedWithEmptyData(): void
+    {
+        $this->assertDatabaseHas("settings", [
+            "teacher_name" => "Ty Doe",
+            "teacher_email" => "ty.doe@exmple.com",
+            "teacher_titles" => "dr inż.",
+            "university_name" => "CWUP",
+            "department_name" => "IT department",
+        ]);
+
+        $this->patch("/dashboard/settings", [
+            "teacher_name" => "",
+            "teacher_email" => "",
+            "teacher_titles" => "",
+            "university_name" => "",
+            "department_name" => "",
+        ])->assertSessionHasErrors()
+            ->assertInvalid([
+                "teacher_name",
+                "teacher_email",
+                "teacher_titles",
+                "university_name",
+                "department_name",
+            ]);
+
+        $this->assertDatabaseHas("settings", [
+            "teacher_name" => "Ty Doe",
+            "teacher_email" => "ty.doe@exmple.com",
+            "teacher_titles" => "dr inż.",
+            "university_name" => "CWUP",
+            "department_name" => "IT department",
+        ]);
+    }
 }
