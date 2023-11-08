@@ -14,6 +14,8 @@ use App\Http\Controllers\Dashboard\GroupStudentController;
 use App\Http\Controllers\Dashboard\LogoutController;
 use App\Http\Controllers\Dashboard\NewsManagementController;
 use App\Http\Controllers\Dashboard\PasswordUpdateController;
+use App\Http\Controllers\Dashboard\SectionController;
+use App\Http\Controllers\Dashboard\SectionSettingsController;
 use App\Http\Controllers\Dashboard\SemesterController;
 use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\StudentController;
@@ -124,4 +126,11 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::get("/settings", "edit")->name("settings.edit");
         Route::patch("/settings", "update")->name("settings.update");
     });
+    Route::controller(SectionController::class)->group(function (): void {
+        Route::get("/sections", "show")->name("sections.show");
+        Route::post("/sections", "store")->name("sections.store");
+        Route::patch("/sections/{section}", "update")->name("sections.update");
+        Route::delete("/sections/{section}", "destroy")->name("sections.update");
+    });
+    Route::patch("/section-settings", SectionSettingsController::class)->name("section.settings.update");
 });
