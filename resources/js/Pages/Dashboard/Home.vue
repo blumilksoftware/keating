@@ -2,12 +2,17 @@
 import DashboardLayout from '@/Layouts/DashboardLayout.vue'
 
 defineProps({
+  name: String,
   counters: Array,
 })
 </script>
 
 <template>
   <DashboardLayout>
+    <h2 class="mb-6 text-2xl font-semibold leading-6 text-gray-900">
+      Cześć, {{ name }}
+    </h2>
+
     <h3 class="text-base font-semibold leading-6 text-gray-900">
       Ogólne statystyki
     </h3>

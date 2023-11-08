@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Support\Collection;
 
 /**
  * @property string $id
@@ -41,5 +44,24 @@ class Semester extends Model
     public static function getActive(): ?Model
     {
         return self::active()->first();
+    }
+
+    public function courses(): HasMany
+    {
+        return $this->hasMany(CourseSemester::class);
+    }
+
+    public function groups(): HasManyThrough
+    {
+        return $this->hasManyThrough(Group::class, CourseSemester::class);
+    }
+
+    public function students(): Collection
+    {
+        return $this->groups()
+            ->get()
+            ->map(fn(Group $group): Collection => $group->students)
+            ->flatten()
+            ->unique("id");
     }
 }
