@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
     {
         User::factory()->create(["email" => "admin@example.com"]);
         Setting::factory()->create();
-        Section::factory(10)->create();
+        Section::factory(4)->counter()->create();
+        Section::factory(3)->about()->create();
         SectionSettings::query()->create([
             "banner_enabled" => true,
             "about_enabled" => true,

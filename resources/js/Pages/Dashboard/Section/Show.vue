@@ -120,7 +120,7 @@ function updateSectionSettings() {
             </FormGroup>
             <FormGroup>
               <FormLabel for="value">
-                Wartość
+                Opis
               </FormLabel>
               <TextAreaEditor id="value" v-model="createForm.value" :error="createForm.errors.value"
                               autocomplete="off"
@@ -159,7 +159,7 @@ function updateSectionSettings() {
             </FormGroup>
             <FormGroup>
               <FormLabel for="value">
-                Wartość / opis
+                Opis
               </FormLabel>
               <TextAreaEditor id="value" v-model="editForm.value" :error="editForm.errors.value"
                               autocomplete="off"
@@ -187,10 +187,10 @@ function updateSectionSettings() {
               <TableWrapper>
                 <template #header>
                   <TableHeader class="w-1/5">
-                    Title
+                    Tytuł
                   </TableHeader>
                   <TableHeader class="w-4/5">
-                    Value
+                    Opis
                   </TableHeader>
                   <TableHeader />
                 </template>
@@ -228,10 +228,10 @@ function updateSectionSettings() {
               <TableWrapper>
                 <template #header>
                   <TableHeader class="w-1/5">
-                    Title
+                    Tytuł
                   </TableHeader>
                   <TableHeader class="w-4/5">
-                    Value
+                    Opis
                   </TableHeader>
                   <TableHeader />
                 </template>

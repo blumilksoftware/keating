@@ -19,7 +19,7 @@ class SettingsTest extends TestCase
         parent::setUp();
 
         $this->user = User::factory()->create();
-        $this->gradeColumn = Setting::factory()->create([
+        Setting::factory()->create([
             "teacher_name" => "Ty Doe",
             "teacher_email" => "ty.doe@exmple.com",
             "teacher_titles" => "dr inż.",
