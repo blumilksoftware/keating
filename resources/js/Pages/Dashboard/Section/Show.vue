@@ -64,7 +64,7 @@ function createSection() {
     preserveScroll: true,
     onSuccess: () => {
       createForm.reset()
-    }
+    },
   })
 }
 
@@ -74,7 +74,7 @@ function updateSection() {
     onSuccess: () => {
       showEditForm.value = false
       editForm.reset()
-    }
+    },
   })
 }
 
