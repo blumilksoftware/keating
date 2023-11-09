@@ -41,7 +41,6 @@ defineProps({
         </div>
       </div>
     </div>
-
     <div v-if="sectionSettings.about_enabled && about.length" class="relative isolate bg-gradient-to-r from-gray-50 to-gray-100 py-24 sm:py-32">
       <BackgroundGrid mask-direction="left" />
       <div class="mx-auto max-w-7xl px-6 lg:px-8">

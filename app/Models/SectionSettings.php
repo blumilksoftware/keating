@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -20,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
 class SectionSettings extends Model
 {
     use HasUlids;
+    use HasFactory;
 
     protected $fillable = [
         "banner_enabled",

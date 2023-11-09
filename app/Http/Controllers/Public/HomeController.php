@@ -16,6 +16,8 @@ class HomeController extends Controller
     {
         /** @var Setting $settings */
         $settings = Setting::query()->first();
+        /** @var SectionSettings $sectionSettings */
+        $sectionSettings = SectionSettings::query()->first();
 
         return inertia("Public/Home", [
             "title" => $settings->teacher_titles,
@@ -24,9 +26,9 @@ class HomeController extends Controller
             "department" => $settings->department_name,
             "university" => $settings->university_name,
             "universityLogo" => "https://irg2023.collegiumwitelona.pl/assets/logos/cwup.png",
-            "sectionSettings" => SectionSettings::query()->first(),
-            "about" => Section::query()->about()->get(),
-            "counters" => Section::query()->counter()->get(),
+            "sectionSettings" => $sectionSettings,
+            "about" => $sectionSettings->about_enabled ? Section::query()->about()->orderBy("created_at")->get() : [],
+            "counters" => $sectionSettings->counters_enabled ? Section::query()->counter()->orderBy("created_at")->get() : [],
         ]);
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Feature;
 
 use App\Models\Section;
+use App\Models\SectionSettings;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
@@ -116,5 +117,36 @@ class SectionsTest extends TestCase
             ->assertSessionHasNoErrors();
 
         $this->assertDatabaseCount("sections", 0);
+    }
+
+    public function testSectionSettingsCanBeUpdated(): void
+    {
+        SectionSettings::factory()->create([
+            "banner_enabled" => true,
+            "about_enabled" => true,
+            "counters_enabled" => true,
+            "contact_enabled" => true,
+        ]);
+
+        $this->assertDatabaseHas("section_settings", [
+            "banner_enabled" => true,
+            "about_enabled" => true,
+            "counters_enabled" => true,
+            "contact_enabled" => true,
+        ]);
+
+        $this->patch("/dashboard/section-settings", [
+            "banner_enabled" => false,
+            "about_enabled" => false,
+            "counters_enabled" => false,
+            "contact_enabled" => false,
+        ])->assertSessionHasNoErrors();
+
+        $this->assertDatabaseHas("section_settings", [
+            "banner_enabled" => false,
+            "about_enabled" => false,
+            "counters_enabled" => false,
+            "contact_enabled" => false,
+        ]);
     }
 }
