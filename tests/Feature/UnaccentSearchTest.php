@@ -20,14 +20,14 @@ class UnaccentSearchTest extends TestCase
         parent::setUp();
 
         $this->user = User::factory()->create();
-        Student::factory()->create(["surname" => "Żłów"]);
+        Student::factory()->create(["surname" => "Żółw"]);
         $this->actingAs($this->user);
         DB::statement("CREATE EXTENSION IF NOT EXISTS unaccent");
     }
 
     public function testStudentsCanBeSearchedWithoutAccentSensitivity(): void
     {
-        $this->get("/dashboard/students?search=zlow")
+        $this->get("/dashboard/students?search=zolw")
             ->assertOk()
             ->assertInertia(
                 fn(Assert $page): Assert => $page
