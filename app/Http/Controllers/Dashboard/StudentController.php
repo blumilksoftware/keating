@@ -22,8 +22,8 @@ class StudentController extends Controller
             ->when(
                 $searchText !== null,
                 fn(Builder $query): Builder => $query
-                    ->where("first_name", "ILIKE", "%$searchText%")
-                    ->orWhere("surname", "ILIKE", "%$searchText%")
+                    ->whereLikeUnaccentInsensitive("first_name", $searchText)
+                    ->orWhereLikeUnaccentInsensitive("surname", $searchText)
                     ->orWhere("index_number", "LIKE", "%$searchText%"),
             )
             ->paginate()

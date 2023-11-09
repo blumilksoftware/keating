@@ -66,6 +66,7 @@ services:
         ports:
             - ${DOCKER_DATABASE_HOST_PORT:-3853}:5432
         volumes:
+            - ./environment/dev/postgres/init-unaccent.sql:/docker-entrypoint-initdb.d/init-unaccent.sql
             - keating-postgres-data:/var/lib/postgresql/data
         networks:
             - keating-dev
