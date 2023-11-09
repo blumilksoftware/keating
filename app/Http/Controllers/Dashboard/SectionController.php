@@ -20,8 +20,8 @@ class SectionController extends Controller
         return inertia("Dashboard/Section/Show", [
             "sectionTypes" => Options::forEnum(SectionType::class)->toArray(),
             "sectionSettings" => SectionSettings::query()->first(),
-            "about" => Section::query()->about()->get(),
-            "counters" => Section::query()->counter()->get(),
+            "about" => Section::query()->about()->orderBy("created_at")->get(),
+            "counters" => Section::query()->counter()->orderBy("created_at")->get(),
         ]);
     }
 
