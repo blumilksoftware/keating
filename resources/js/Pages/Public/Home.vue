@@ -63,7 +63,7 @@ defineProps({
                 {{ section.title }}
               </h3>
               <!-- eslint-disable vue/no-v-html -->
-              <p class="mt-5 text-sm leading-6 text-gray-600" v-html="DOMPurify.sanitize(section.value)" />
+              <div class="mt-5 text-sm leading-6 text-gray-600 prose" v-html="DOMPurify.sanitize(section.value)" />
               <!-- eslint-enable -->
             </div>
           </article>
@@ -81,7 +81,7 @@ defineProps({
           class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-10 text-white sm:grid-cols-2 sm:gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-4"
         >
           <div v-for="counter in counters" :key="counter.id" class="flex flex-col gap-y-3 border-l border-white pl-6">
-            <dt class="text-sm" v-html="counter.value" />
+            <dt class="text-sm text-white prose" v-html="counter.value" />
             <dd class="order-first text-5xl font-semibold tracking-tight">
               {{ counter.title }}
             </dd>

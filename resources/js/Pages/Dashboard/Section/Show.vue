@@ -62,16 +62,20 @@ function editSection(section) {
 function createSection() {
   createForm.post('/dashboard/sections/', {
     preserveScroll: true,
+    onSuccess: () => {
+      createForm.reset()
+    }
   })
-  createForm.reset()
 }
 
 function updateSection() {
   editForm.patch(`/dashboard/sections/${sectionToEdit.value.id}/`, {
     preserveScroll: true,
+    onSuccess: () => {
+      showEditForm.value = false
+      editForm.reset()
+    }
   })
-  showEditForm.value = false
-  editForm.reset()
 }
 
 function updateSectionSettings() {
@@ -201,7 +205,7 @@ function updateSectionSettings() {
                     </TableCell>
                     <TableCell>
                       <!-- eslint-disable vue/no-v-html -->
-                      <span v-html="DOMPurify.sanitize(item.value)" />
+                      <div class="prose" v-html="DOMPurify.sanitize(item.value)" />
                       <!-- eslint-enable -->
                     </TableCell>
                     <TableCell class="flex justify-end gap-2">
@@ -242,7 +246,7 @@ function updateSectionSettings() {
                     </TableCell>
                     <TableCell>
                       <!-- eslint-disable vue/no-v-html -->
-                      <span class="prose" v-html="DOMPurify.sanitize(counter.value)" />
+                      <div class="prose" v-html="DOMPurify.sanitize(counter.value)" />
                       <!-- eslint-enable -->
                     </TableCell>
                     <TableCell class="flex justify-end gap-2">
