@@ -53,6 +53,7 @@ class GroupStudentController extends Controller
 
     public function destroy(CourseSemester $course, Group $group, Student $student): RedirectResponse
     {
+        $student->grades()->where("student_id", $student->id)->get()->each->delete();
         $group->students()->detach($student);
 
         return redirect()->back()

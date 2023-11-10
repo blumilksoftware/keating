@@ -27,6 +27,7 @@ class CourseSemesterController extends Controller
 
         return inertia("Dashboard/CourseSemester/Index", [
             "courses" => CourseSemesterResource::collection($courses),
+            "activeSemester" => Semester::getActive(),
             "total" => Course::query()->count(),
             "lastUpdate" => CourseSemester::query()->orderByDesc("updated_at")->first()?->updated_at->diffForHumans(),
         ]);

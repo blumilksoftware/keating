@@ -11,9 +11,9 @@ return new class() extends Migration {
     {
         Schema::create("student_group", function (Blueprint $table): void {
             $table->string("group_id")->nullable();
-            $table->foreign("group_id")->references("id")->on("groups")->onDelete("set null");
+            $table->foreign("group_id")->references("id")->on("groups")->onDelete("CASCADE");
             $table->string("student_id")->nullable();
-            $table->foreign("student_id")->references("id")->on("students")->onDelete("set null");
+            $table->foreign("student_id")->references("id")->on("students")->onDelete("CASCADE");
             $table->primary(["student_id", "group_id"], "student_group_id_primary");
         });
     }

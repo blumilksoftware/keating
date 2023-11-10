@@ -9,6 +9,7 @@ $providers = ServiceProvider::defaultProviders()->merge([
     App\Providers\AppServiceProvider::class,
     App\Providers\EventServiceProvider::class,
     App\Providers\RouteServiceProvider::class,
+    App\Providers\BuilderServiceProvider::class,
 ])->toArray();
 
 return [
