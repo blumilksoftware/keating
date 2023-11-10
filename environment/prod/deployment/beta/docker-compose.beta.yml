@@ -1,0 +1,79 @@
+version: "3.8"
+
+networks:
+  traefik-proxy:
+    external: true
+  keating-beta:
+    driver: bridge
+
+volumes:
+  keating-beta-pgsql-data:
+    name: keating-beta-pgsql-data
+  keating-beta-redis-data:
+    name: keating-beta-redis-data
+
+services:
+  keating-beta-app:
+    image: ghcr.io/blumilksoftware/keating:beta
+    container_name: keating-beta-app
+    pull_policy: always
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          memory: 512M
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.keating-beta-app.rule=Host(`${KEATING_HOST_NAME:? variable KEATING_HOST_NAME not set}`)"
+      - "traefik.http.routers.keating-beta-app.entrypoints=websecure"
+      - "traefik.http.routers.keating-beta-app.tls=true"
+      - "traefik.http.routers.keating-beta-app.tls.certresolver=lets-encrypt-resolver"
+      - "traefik.http.routers.keating-beta-app.middlewares=response-gzip-compress@file"
+    depends_on:
+      keating-beta-database:
+        condition: service_healthy
+      keating-beta-redis:
+        condition: service_healthy
+    working_dir: /application
+    volumes:
+      - ./.env:/application/.env:ro
+    networks:
+      - keating-beta
+      - traefik-proxy
+    restart: unless-stopped
+    env_file:
+      - .deployment
+
+  keating-beta-database:
+    image: postgres:15.2-alpine3.17
+    container_name: keating-beta-database
+    environment:
+      - PGPASSWORD=${DOCKER_KEATING_BETA_DB_ROOT_PASSWORD:? variable DOCKER_KEATING_BETA_DB_ROOT_PASSWORD not set}
+      - POSTGRES_DB=${DOCKER_KEATING_BETA_DB_DATABASE:? variable DOCKER_KEATING_BETA_DB_DATABASE not set}
+      - POSTGRES_USER=${DOCKER_KEATING_BETA_DB_USERNAME:? variable DOCKER_KEATING_BETA_DB_USERNAME not set}
+      - POSTGRES_PASSWORD=${DOCKER_KEATING_BETA_DB_PASSWORD:? variable DOCKER_KEATING_BETA_DB_PASSWORD not set}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready --dbname ${DOCKER_KEATING_BETA_DB_DATABASE} --username ${DOCKER_KEATING_BETA_DB_USERNAME}"]
+      interval: 3s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - keating-beta-pgsql-data:/var/lib/postgresql/data
+    networks:
+      - keating-beta
+    restart: unless-stopped
+
+  keating-beta-redis:
+    image: redis:7.0.11-alpine3.17
+    container_name: keating-beta-redis
+    healthcheck:
+      test: [ "CMD-SHELL", "redis-cli ping | grep PONG" ]
+      interval: 3s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - keating-beta-redis-data:/data
+    networks:
+      - keating-beta
+    restart: unless-stopped
