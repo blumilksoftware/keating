@@ -41,7 +41,7 @@ defineProps({
                 <td class="border-b-2 border-gray-200 p-5">
                   <div class="grid grid-cols-6">
                     <Link v-for="item in semesters" :key="item.id"
-                          :class="[item.id === semester.id ? 'border-blue-900 text-blue-900' : '']"
+                          :class="[item.id === semester?.id ? 'border-blue-900 text-blue-900' : '']"
                           :href="`/oceny/${item.id}`"
                           class="mr-5 mt-4 border-2 px-5 py-3"
                     >
@@ -57,7 +57,7 @@ defineProps({
                 <td class="border-b-2 border-gray-200 p-5">
                   <div class="grid grid-cols-6">
                     <Link v-for="item in courses" :key="item.id"
-                          :class="[item.id === course.id ? 'border-blue-900 text-blue-900' : '']"
+                          :class="[item.id === course?.id ? 'border-blue-900 text-blue-900' : '']"
                           :href="`/oceny/${semester.id}/${item.id}`"
                           class="mr-5 mt-4 border-2 px-5 py-3"
                     >
@@ -73,7 +73,7 @@ defineProps({
                 <td class="border-b-2 border-gray-200 p-5">
                   <div class="grid grid-cols-6">
                     <Link v-for="item in groups" :key="item.id"
-                          :class="[item.id === group.id ? 'border-blue-900 text-blue-900' : '']"
+                          :class="[item.id === group?.id ? 'border-blue-900 text-blue-900' : '']"
                           :href="`/oceny/${semester.id}/${course.id}/${item.id}`"
                           class="mr-5 mt-4 border-2 px-5 py-3"
                     >

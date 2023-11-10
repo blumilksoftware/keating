@@ -13,7 +13,7 @@ use Inertia\Response;
 
 class GradeController extends Controller
 {
-    public function __invoke(Request $request, ?Semester $semester, ?CourseSemester $course, ?Group $group): Response
+    public function __invoke(Request $request, ?Semester $semester = null, ?CourseSemester $course = null, ?Group $group = null): Response
     {
         $courses = [];
         $groups = [];
