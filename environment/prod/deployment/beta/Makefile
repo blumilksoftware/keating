@@ -11,12 +11,9 @@ BETA_DOCKER_IMAGE = ghcr.io/blumilksoftware/keating:beta
 
 CURRENT_DIR = $(shell pwd)
 
-beta-artisan:
-	@echo "Running: php artisan ${ARTISAN_ARGS}" && \
-	${DOCKER_EXEC_ARTISAN_COMMAND} ${ARTISAN_ARGS}
-
 beta-deploy: decrypt-beta-env create-deployment-file
-	@docker compose --file ${DOCKER_COMPOSE_FILENAME} up --force-recreate --detach && \
+	@docker compose --file ${DOCKER_COMPOSE_FILENAME} pull && \
+	@docker compose --file ${DOCKER_COMPOSE_FILENAME} up --detach && \
 	echo "App post deploy actions" && \
 	${DOCKER_EXEC_SCRIPT} post-deploy-actions.sh
 
@@ -39,4 +36,4 @@ create-deployment-file:
 	DEPLOY_DATE='${DEPLOYMENT_DATETIME}'\
 	" > .deployment
 
-.PHONY: beta-artisan beta-deploy decrypt-beta-env create-deployment-file
+.PHONY: beta-deploy decrypt-beta-env create-deployment-file
