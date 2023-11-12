@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/", HomeController::class)->name("main");
 Route::get("/aktualnosci", NewsController::class);
-Route::get("/oceny/{semester?}/{course?}/{group?}", PublicGradeController::class);
+Route::get("/oceny/{semester?}/{course?}/{group?}/{index?}", PublicGradeController::class);
 
 Route::middleware("guest")->group(function (): void {
     Route::get("/login", [LoginController::class, "create"])->name("login");

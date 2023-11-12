@@ -4,9 +4,15 @@ import BackgroundGrid from '@/Components/BackgroundGrid.vue'
 import SectionHeader from '@/Components/SectionHeader.vue'
 import { Link } from '@inertiajs/inertia-vue3'
 import TextInput from '@/Shared/Forms/TextInput.vue'
-import SubmitButton from '../../Shared/Components/Buttons/SubmitButton.vue'
+import SubmitButton from '@/Shared/Components/Buttons/SubmitButton.vue'
+import TableWrapper from '@/Shared/Components/Table/TableWrapper.vue'
+import TableHeader from '@/Shared/Components/Table/TableHeader.vue'
+import TableRow from '@/Shared/Components/Table/TableRow.vue'
+import TableCell from '@/Shared/Components/Table/TableCell.vue'
+import { Inertia } from '@inertiajs/inertia'
+import { ref } from 'vue'
 
-defineProps({
+const props = defineProps({
   title: String,
   semesters: Array,
   semester: Object,
@@ -14,7 +20,19 @@ defineProps({
   course: Object,
   groups: Array,
   group: Object,
+  index: String,
+  gradeColumns: Array,
+  students: Array,
+  indexExists: Boolean,
 })
+
+const index = ref(props.index)
+
+function getIndex() {
+  Inertia.get(`/oceny/${props.semester.id}/${props.course.id}/${props.group.id}/${index.value}`, {}, {
+    preserveScroll: true,
+  })
+}
 </script>
 
 <template>
@@ -87,14 +105,39 @@ defineProps({
                   Wybierz numer indeksu:
                 </td>
                 <td class="flex border-b-2 border-gray-200 p-5">
-                  <TextInput class="mr-3 w-1/4 opacity-75" autocomplete="off" />
-                  <SubmitButton>
+                  <TextInput v-model="index" autocomplete="off" class="mr-3 w-1/4 opacity-75" />
+                  <SubmitButton @click="getIndex">
                     Szukaj
                   </SubmitButton>
                 </td>
               </tr>
             </tbody>
           </table>
+          <TableWrapper v-if="indexExists" class="mt-10">
+            <template #header>
+              <TableHeader>
+                student
+              </TableHeader>
+              <TableHeader v-for="column in gradeColumns" :key="column.id"
+                           class="min-w-[50px] border-2 border-solid text-center"
+              >
+                {{ column.name }}
+              </TableHeader>
+            </template>
+            <template #body>
+              <TableRow v-for="student in students" :key="student">
+                <TableCell class="h-[50px] w-[50px] min-w-[50px] cursor-pointer border-2 text-center font-bold">
+                  {{ student.student }}
+                </TableCell>
+                <TableCell v-for="grade in student.grades" :key="grade"
+                           :class="[grade.present ? 'bg-lime-200' :'bg-rose-300']"
+                           class="border-2 text-center font-bold text-gray-900"
+                >
+                  {{ grade.value }}
+                </TableCell>
+              </TableRow>
+            </template>
+          </TableWrapper>
         </div>
       </div>
     </div>
