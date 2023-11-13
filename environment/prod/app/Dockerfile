@@ -1,7 +1,7 @@
 ### PHP DEPENDENCIES ###
-FROM composer:2.6.2-bin as vendor
+FROM composer:2.6.2 as vendor
 
-WORKDIR /app_composer_dependenciesr
+WORKDIR /app_composer_dependencies
 
 COPY composer.json composer.lock ./
 
