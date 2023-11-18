@@ -11,6 +11,7 @@ use App\Models\GradeColumn;
 use App\Models\Group;
 use App\Models\Semester;
 use App\Models\Student;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
 use Inertia\Response;
 
@@ -22,56 +23,65 @@ class GradeController extends Controller
         $groups = [];
         $gradeColumns = [];
         $students = [];
+        $studentByIndex = null;
 
         if ($semester) {
-            $courses = $semester->courses()->with("course")->get();
+            $courses = $semester
+                ->courses()
+                ->with("course", fn(BelongsTo $query): BelongsTo => $query->select(["name", "id"]))
+                ->get();
         }
 
         if ($course) {
-            $groups = $course->groups;
+            $groups = $course
+                ->groups()
+                ->get(["name", "id"]);
         }
 
-        if ($group) {
-            $gradeColumns = $group
-                ->gradeColumns()
-                ->where("active", true)
-                ->orderBy("priority")
-                ->get();
+        if ($group && $index) {
             $studentByIndex = $group->students()
                 ->where("index_number", $index)
                 ->first();
-            $students = $group->students()
-                ->whereNot("index_number", $index)
-                ->inRandomOrder()
-                ->take(8)
-                ->get()
-                ->push($studentByIndex)
-                ->sortBy("index_number")
-                ->map(fn(Student $student): array => [
-                    "student" => $student->id === $studentByIndex->id ? $student->index_number : "",
-                    "grades" => $gradeColumns
-                        ->map(function (GradeColumn $column) use ($student): array {
-                            /** @var Grade $grade */
-                            $grade = Grade::query()
-                                ->where("grade_column_id", $column->id)
-                                ->where("student_id", $student->id)
-                                ->first();
 
-                            return $grade
-                                ? [
-                                    "present" => $grade->status,
-                                    "value" => $grade->value,
-                                ]
-                                : [
-                                    "present" => false,
-                                    "value" => null,
-                                ];
-                        }),
-                ]);
+            if ($studentByIndex) {
+                $gradeColumns = $group
+                    ->gradeColumns()
+                    ->where("active", true)
+                    ->orderBy("priority")
+                    ->get();
+                $students = $group->students()
+                    ->whereNot("index_number", $index)
+                    ->inRandomOrder()
+                    ->take(8)
+                    ->get()
+                    ->push($studentByIndex)
+                    ->sortBy("index_number")
+                    ->map(fn(Student $student): array => [
+                        "student" => $student->id === $studentByIndex->id ? $student->index_number : "",
+                        "grades" => $gradeColumns
+                            ->map(function (GradeColumn $column) use ($student): array {
+                                /** @var Grade $grade */
+                                $grade = Grade::query()
+                                    ->where("grade_column_id", $column->id)
+                                    ->where("student_id", $student->id)
+                                    ->first();
+
+                                return $grade
+                                    ? [
+                                        "present" => $grade->status,
+                                        "value" => $grade->value,
+                                    ]
+                                    : [
+                                        "present" => false,
+                                        "value" => null,
+                                    ];
+                            }),
+                    ]);
+            }
         }
 
         return inertia("Public/Grade", [
-            "semesters" => Semester::all(),
+            "semesters" => Semester::query()->get(["name", "id"]),
             "semester" => $semester,
             "courses" => $courses,
             "course" => $course,
@@ -80,7 +90,7 @@ class GradeController extends Controller
             "index" => $index,
             "gradeColumns" => $gradeColumns,
             "students" => $students,
-            "indexExists" => $studentByIndex->exists(),
+            "indexExists" => $studentByIndex?->exists(),
         ]);
     }
 }
