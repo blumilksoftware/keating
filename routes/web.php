@@ -116,10 +116,10 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::delete("/semester-courses/{course}/groups/{group}/students/{student}", "destroy")->name("course.semester.group.students.destroy");
     });
     Route::controller(GradeController::class)->group(function (): void {
-        Route::get("/semester-courses/{course}/groups/{group}/grades", "index")->name("course.semester.group.grades.index");
-        Route::post("/semester-courses/{course}/groups/{group}/grades", "store")->name("course.semester.group.grades.store");
-        Route::patch("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}", "update")->name("course.semester.group.grades.update");
-        Route::delete("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}", "destroy")->name("course.semester.group.grades.destroy");
+        Route::get("/semester-courses/{course}/groups/{group}/grades", "index")->name("course.semester.group.grade.column.index");
+        Route::post("/semester-courses/{course}/groups/{group}/grades", "store")->name("course.semester.group.grade.column.store");
+        Route::patch("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}", "update")->name("course.semester.group.column.grades.update");
+        Route::delete("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}", "destroy")->name("course.semester.group.column.grades.destroy");
         Route::post("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/store", "storeGrade")->name("course.semester.group.grades.store");
         Route::patch("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/update", "updateGrade")->name("course.semester.group.grades.update");
         Route::post("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/reorder/{down}", "reorder")->name("course.semester.group.grades.reorder");
@@ -132,7 +132,7 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::get("/sections", "show")->name("sections.show");
         Route::post("/sections", "store")->name("sections.store");
         Route::patch("/sections/{section}", "update")->name("sections.update");
-        Route::delete("/sections/{section}", "destroy")->name("sections.update");
+        Route::delete("/sections/{section}", "destroy")->name("sections.destroy");
     });
     Route::patch("/section-settings", SectionSettingsController::class)->name("section.settings.update");
 });
