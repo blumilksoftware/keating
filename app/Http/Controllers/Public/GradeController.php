@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Public;
 
+use App\DTOs\StudentData;
 use App\Http\Controllers\Controller;
 use App\Models\CourseSemester;
-use App\Models\Grade;
-use App\Models\GradeColumn;
 use App\Models\Group;
 use App\Models\Semester;
 use App\Models\Student;
@@ -43,7 +42,7 @@ class GradeController extends Controller
                 ->where("index_number", $index)
                 ->first();
 
-            if ($studentByIndex) {
+            if ($studentByIndex?->exists()) {
                 $gradeColumns = $group
                     ->gradeColumns()
                     ->where("active", true)
@@ -56,27 +55,7 @@ class GradeController extends Controller
                     ->get()
                     ->push($studentByIndex)
                     ->sortBy("index_number")
-                    ->map(fn(Student $student): array => [
-                        "student" => $student->id === $studentByIndex->id ? $student->index_number : "",
-                        "grades" => $gradeColumns
-                            ->map(function (GradeColumn $column) use ($student): array {
-                                /** @var Grade $grade */
-                                $grade = Grade::query()
-                                    ->where("grade_column_id", $column->id)
-                                    ->where("student_id", $student->id)
-                                    ->first();
-
-                                return $grade
-                                    ? [
-                                        "present" => $grade->status,
-                                        "value" => $grade->value,
-                                    ]
-                                    : [
-                                        "present" => false,
-                                        "value" => null,
-                                    ];
-                            }),
-                    ]);
+                    ->map(fn(Student $student): StudentData => StudentData::fromModels($student, $studentByIndex, $gradeColumns));
             }
         }
 
