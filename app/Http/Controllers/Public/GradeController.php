@@ -66,7 +66,7 @@ class GradeController extends Controller
             "course" => $course,
             "groups" => $groups,
             "group" => $group,
-            "index" => $index,
+            "index" => $index ?? "",
             "gradeColumns" => $gradeColumns,
             "students" => $students,
             "indexExists" => $studentByIndex?->exists(),

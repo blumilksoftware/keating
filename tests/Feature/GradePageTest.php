@@ -134,7 +134,7 @@ class GradePageTest extends TestCase
                     ->where("course.id", $this->course->id)
                     ->has("groups", 1)
                     ->where("group.id", $this->group->id)
-                    ->where("index", null),
+                    ->where("index", ""),
             );
 
         $this->get("/oceny/{$this->course->semester_id}/{$this->course->id}/{$this->group->id}/{$this->student->index_number}")

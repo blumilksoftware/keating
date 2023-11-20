@@ -3,14 +3,13 @@ import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '@/Components/BackgroundGrid.vue'
 import SectionHeader from '@/Components/SectionHeader.vue'
 import { Link } from '@inertiajs/inertia-vue3'
-import TextInput from '@/Shared/Forms/TextInput.vue'
 import SubmitButton from '@/Shared/Components/Buttons/SubmitButton.vue'
 import TableWrapper from '@/Shared/Components/Table/TableWrapper.vue'
 import TableHeader from '@/Shared/Components/Table/TableHeader.vue'
 import TableRow from '@/Shared/Components/Table/TableRow.vue'
 import TableCell from '@/Shared/Components/Table/TableCell.vue'
 import { Inertia } from '@inertiajs/inertia'
-import { ExclamationCircleIcon } from '@heroicons/vue/24/solid'
+import { ExclamationCircleIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -109,9 +108,9 @@ function getIndex() {
                 </td>
                 <td class="block border-b-2 border-gray-200 px-5 pb-5 pt-2 sm:table-cell sm:p-5">
                   <div class="flex">
-                    <TextInput v-model="searchIndex" autocomplete="off" class="mr-3 w-32 opacity-75 sm:w-48" />
-                    <SubmitButton @click="getIndex">
-                      Szukaj
+                    <input v-model="searchIndex" autocomplete="off" class="mr-3 block w-32 border-2 border-gray-200 px-5 py-3 opacity-75 focus:!border-blue-900 focus:!text-blue-900 focus:!ring-0 sm:w-48">
+                    <SubmitButton class="min-h-max" @click="getIndex">
+                      <MagnifyingGlassIcon class="h-6 w-6" />
                     </SubmitButton>
                   </div>
                 </td>
