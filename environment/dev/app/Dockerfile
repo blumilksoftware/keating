@@ -2,7 +2,7 @@ FROM composer/composer:2.6.5-bin as composer-bin
 
 FROM node:20.10.0-bullseye-slim as node
 
-FROM php:8.2.13-fpm-bullseye
+FROM php:8.3.2-fpm-bullseye
 
 COPY --from=composer-bin ./composer /usr/bin/composer
 
