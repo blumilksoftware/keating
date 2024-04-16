@@ -1,8 +1,8 @@
-FROM composer/composer:2.6.5-bin as composer-bin
+FROM composer/composer:2.7.2-bin as composer-bin
 
-FROM node:20.10.0-bullseye-slim as node
+FROM node:21.7.3-bullseye-slim as node
 
-FROM php:8.2.13-fpm-bullseye
+FROM php:8.3.6-fpm-bullseye
 
 COPY --from=composer-bin ./composer /usr/bin/composer
 
@@ -33,7 +33,7 @@ RUN mv "${PHP_INI_DIR}/php.ini-development" "${PHP_INI_DIR}/php.ini"
 
 # For other versions check: http://nginx.org/packages/mainline/debian/pool/nginx/n/nginx/
 ARG NGINX_VERSION="1.25.2-1~bullseye"
-ARG PHPREDIS_VERSION=6.0.0
+ARG PHPREDIS_VERSION=6.0.2
 
 RUN apt-get update \
     && apt-get install --assume-yes gpg \
@@ -52,7 +52,7 @@ RUN apt-get update \
     && docker-php-ext-enable \
         redis
 
-ARG XDEBUG_VERSION=3.2.1
+ARG XDEBUG_VERSION=3.3.1
 ARG INSTALL_XDEBUG=true
 
 RUN if [ ${INSTALL_XDEBUG} = true ]; then \
