@@ -30,7 +30,7 @@ class Handler extends ExceptionHandler
         }
 
         if (!config("app.debug") && in_array($response->status(), $this->handleByInertia, true)) {
-            return Inertia::render("Error", [
+            return Inertia::render(\Error::class, [
                 "status" => $response->status(),
             ])
                 ->toResponse($request)

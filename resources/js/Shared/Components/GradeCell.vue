@@ -38,7 +38,7 @@ function createGradeOnClick() {
     <input
       :class="[grade.status? 'bg-lime-200' : 'bg-rose-300']"
       :value="grade.value"
-      class="h-full w-full cursor-pointer border-0 p-0 text-center font-bold text-gray-900 shadow-none ring-0 focus:border-0 focus:ring-0"
+      class="size-full cursor-pointer border-0 p-0 text-center font-bold text-gray-900 shadow-none ring-0 focus:border-0 focus:ring-0"
       @change="emit('updateGrade',gradeColumn.id, student.id, $event.target.value, grade.status)"
     >
   </TableCell>

@@ -76,8 +76,7 @@ class ContactInfoTest extends TestCase
 
     public function testContactInfoCannotBeCreatedWithoutData(): void
     {
-        $this->post("/dashboard/contact-infos", [
-        ])->assertSessionHasErrors([
+        $this->post("/dashboard/contact-infos", [])->assertSessionHasErrors([
             "label",
             "identifier",
             "icon",
