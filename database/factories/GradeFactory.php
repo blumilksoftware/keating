@@ -13,7 +13,7 @@ class GradeFactory extends Factory
     public function definition(): array
     {
         return [
-            "value" => fake()->numberBetween(2, 5),
+            "value" => fake()->boolean ? fake()->numberBetween(2, 5) : null,
             "status" => fake()->boolean,
             "student_id" => Student::factory(),
             "grade_column_id" => GradeColumn::factory(),
