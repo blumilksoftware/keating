@@ -74,7 +74,7 @@ defineProps({
     <div v-if="sectionSettings.counters_enabled && counters.length" class="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
       <img
         src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZ3JhbW1pbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=2850&q=80&blend=111827&blend-mode=multiply&sat=-100&exp=15"
-        alt="" class="absolute inset-0 -z-10 h-full w-full object-cover"
+        alt="" class="absolute inset-0 -z-10 size-full object-cover"
       >
       <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
         <dl

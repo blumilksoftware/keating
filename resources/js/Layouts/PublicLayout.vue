@@ -25,7 +25,7 @@ const mobileMenuOpen = ref(false)
                   @click="mobileMenuOpen = true"
           >
             <span class="sr-only">Otwórz menu</span>
-            <Bars3Icon class="h-6 w-6" aria-hidden="true" />
+            <Bars3Icon class="size-6" aria-hidden="true" />
           </button>
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
@@ -52,7 +52,7 @@ const mobileMenuOpen = ref(false)
           <div class="flex items-center justify-between">
             <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = false">
               <span class="sr-only">Close menu</span>
-              <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+              <XMarkIcon class="size-6" aria-hidden="true" />
             </button>
           </div>
           <div class="mt-6 flow-root">

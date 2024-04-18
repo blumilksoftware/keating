@@ -73,7 +73,7 @@ const courseToDeleteId = ref(0)
               <TableCell>
                 <div class="inline-flex items-center">
                   <span v-if="course.semesterId === activeSemester?.id">
-                    <svg class="mr-1.5 h-1.5 w-1.5 fill-green-500" viewBox="0 0 8 8" aria-hidden="true">
+                    <svg class="mr-1.5 size-1.5 fill-green-500" viewBox="0 0 8 8" aria-hidden="true">
                       <circle cx="4" cy="4" r="4" />
                     </svg>
                   </span>

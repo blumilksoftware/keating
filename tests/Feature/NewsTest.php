@@ -108,8 +108,7 @@ class NewsTest extends TestCase
 
     public function testNewsCannotBeCreatedWithoutData(): void
     {
-        $this->post("/dashboard/news", [
-        ])->assertSessionHasErrors([
+        $this->post("/dashboard/news", [])->assertSessionHasErrors([
             "title",
             "content",
         ]);
