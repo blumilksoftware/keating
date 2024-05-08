@@ -1,5 +1,5 @@
 ### PHP DEPENDENCIES ###
-FROM composer:2.7.2 as vendor
+FROM composer:2.7.4 as vendor
 
 WORKDIR /app_composer_dependencies
 
@@ -14,7 +14,7 @@ RUN composer install \
     --ignore-platform-reqs
 
 ### FRONTEND ###
-FROM node:21.7.3-bullseye-slim as frontend
+FROM node:22.1.0-bullseye-slim as frontend
 
 WORKDIR /app_frontend_dependencies
 

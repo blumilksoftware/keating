@@ -22,7 +22,7 @@ function attemptLogin() {
   <PublicLayout>
     <div class="relative isolate bg-white pt-14">
       <BackgroundGrid />
-      <img src="/cwup.png" alt="" class="absolute right-0 z-0 hidden w-[50%] opacity-10 lg:mt-16 lg:block xl:mt-10 2xl:mt-0">
+      <img src="/cwup.png" alt="" class="absolute right-0 z-0 hidden w-1/2 opacity-10 lg:mt-16 lg:block xl:mt-10 2xl:mt-0">
       <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
         <div class="mx-auto max-w-7xl text-center lg:mx-0 lg:flex-auto">
           <img :src="universityLogo" :alt="university" class="mx-auto w-[360px]">
