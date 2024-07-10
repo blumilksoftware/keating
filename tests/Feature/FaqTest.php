@@ -67,8 +67,7 @@ class FaqTest extends TestCase
 
     public function testSemesterCannotBeCreatedWithoutData(): void
     {
-        $this->post("/dashboard/faqs", [
-        ])->assertSessionHasErrors([
+        $this->post("/dashboard/faqs", [])->assertSessionHasErrors([
             "question",
             "answer",
         ]);

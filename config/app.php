@@ -2,14 +2,18 @@
 
 declare(strict_types=1);
 
+use App\Providers\AppServiceProvider;
+use App\Providers\BuilderServiceProvider;
+use App\Providers\EventServiceProvider;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
 $providers = ServiceProvider::defaultProviders()->merge([
-    App\Providers\AppServiceProvider::class,
-    App\Providers\EventServiceProvider::class,
-    App\Providers\RouteServiceProvider::class,
-    App\Providers\BuilderServiceProvider::class,
+    AppServiceProvider::class,
+    EventServiceProvider::class,
+    RouteServiceProvider::class,
+    BuilderServiceProvider::class,
 ])->toArray();
 
 return [
