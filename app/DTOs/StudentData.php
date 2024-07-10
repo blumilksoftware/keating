@@ -39,7 +39,7 @@ readonly class StudentData
                     "value" => $grade->value,
                 ]
                 : [
-                    "present" => false,
+                    "present" => null,
                     "value" => null,
                 ];
         });
