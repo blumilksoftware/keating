@@ -91,7 +91,7 @@ watch(() => props.flash, (flash) => {
                 <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
                   <button type="button" class="-m-2.5 p-2.5" @click="sidebarOpen = false">
                     <span class="sr-only">Close sidebar</span>
-                    <XMarkIcon class="h-6 w-6 text-white" aria-hidden="true" />
+                    <XMarkIcon class="size-6 text-white" aria-hidden="true" />
                   </button>
                 </div>
               </TransitionChild>
@@ -106,7 +106,7 @@ watch(() => props.flash, (flash) => {
                       <ul role="list" class="-mx-2 space-y-1">
                         <li v-for="item in section.elements" :key="item.name">
                           <InertiaLink :href="item.href" :class="[item.current ? 'bg-gray-50 text-sky-600' : 'text-gray-700 hover:bg-gray-50 hover:text-sky-600', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
-                            <component :is="item.icon" :class="[item.current ? 'text-sky-600' : 'text-gray-400 group-hover:text-sky-600', 'h-6 w-6 shrink-0']" aria-hidden="true" />
+                            <component :is="item.icon" :class="[item.current ? 'text-sky-600' : 'text-gray-400 group-hover:text-sky-600', 'size-6 shrink-0']" aria-hidden="true" />
                             {{ item.name }}
                           </InertiaLink>
                         </li>
@@ -133,7 +133,7 @@ watch(() => props.flash, (flash) => {
               <ul role="list" class="-mx-2 space-y-1">
                 <li v-for="item in section.elements" :key="item.name">
                   <InertiaLink :href="item.href" :class="[item.current ? 'bg-gray-50 text-sky-600' : 'text-gray-700 hover:bg-gray-50 hover:text-sky-600', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
-                    <component :is="item.icon" :class="[item.current ? 'text-sky-600' : 'text-gray-400 group-hover:text-sky-600', 'h-6 w-6 shrink-0']" aria-hidden="true" />
+                    <component :is="item.icon" :class="[item.current ? 'text-sky-600' : 'text-gray-400 group-hover:text-sky-600', 'size-6 shrink-0']" aria-hidden="true" />
                     {{ item.name }}
                   </InertiaLink>
                 </li>
@@ -141,11 +141,11 @@ watch(() => props.flash, (flash) => {
             </li>
             <li class="-mx-6 mb-3 mt-auto">
               <InertiaLink href="/" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
-                <HomeIcon class="h-6 w-6 text-gray-700" title="Strona główna" />
+                <HomeIcon class="size-6 text-gray-700" title="Strona główna" />
                 <span aria-hidden="true">Strona główna</span>
               </InertiaLink>
               <InertiaLink href="/dashboard/logout" method="post" as="button" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
-                <PowerIcon class="h-6 w-6 text-gray-700" title="Wyloguj się" />
+                <PowerIcon class="size-6 text-gray-700" title="Wyloguj się" />
                 <span aria-hidden="true">Wyloguj się</span>
               </InertiaLink>
             </li>
@@ -157,18 +157,18 @@ watch(() => props.flash, (flash) => {
     <div class="sticky top-0 z-40 flex items-center gap-x-6 bg-white p-4 shadow-sm sm:px-6 lg:hidden">
       <button type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden" @click="sidebarOpen = true">
         <span class="sr-only">Open sidebar</span>
-        <Bars3Icon class="h-6 w-6" aria-hidden="true" />
+        <Bars3Icon class="size-6" aria-hidden="true" />
       </button>
       <div class="flex-1 text-sm font-semibold leading-6 text-gray-900">
         Dashboard
       </div>
       <InertiaLink href="/">
         <span class="sr-only">Strona główna</span>
-        <HomeIcon class="h-6 w-6 text-gray-700" title="Strona główna" />
+        <HomeIcon class="size-6 text-gray-700" title="Strona główna" />
       </InertiaLink>
       <InertiaLink href="/dashboard/logout" method="post" as="button">
         <span class="sr-only">Wyloguj się</span>
-        <PowerIcon class="h-6 w-6 text-gray-700" title="Wyloguj się" />
+        <PowerIcon class="size-6 text-gray-700" title="Wyloguj się" />
       </InertiaLink>
     </div>
 
