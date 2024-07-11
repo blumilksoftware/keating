@@ -221,7 +221,7 @@ watch(searchForm, debounce(() => {
           </template>
           <template #body>
             <TableRow v-for="student in students.data" :key="student.id">
-              <TableCell class="h-[70px] w-[120px] min-w-[120px] cursor-pointer border-2" @click="[showName = !showName]">
+              <TableCell class="h-[70px] w-[120px] min-w-[120px] cursor-pointer border-2" @dblclick="[showName = !showName]">
                 <span v-if="!showName">{{ student.index_number }}</span>
                 <span v-else>{{ student.first_name }} {{ student.surname }}</span>
               </TableCell>
