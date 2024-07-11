@@ -31,8 +31,8 @@ function createGradeOnClick() {
   <TableCell
     v-if="grade"
     :class="[grade?.status
-    ? 'bg-lime-200'
-    : grade?.status !== null ? 'bg-rose-300' : 'bg-white']"
+      ? 'bg-lime-200'
+      : grade?.status !== null ? 'bg-rose-300' : 'bg-white']"
     @dblclick="emit('updateGrade', gradeColumn.id, student.id, grade.value, !grade.status)"
   >
     <input
