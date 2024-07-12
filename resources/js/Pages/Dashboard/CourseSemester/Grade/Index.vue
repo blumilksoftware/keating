@@ -30,7 +30,6 @@ const props = defineProps({
   search: String,
   total: Number,
 })
-const showName = ref(false)
 const showModal = ref(false)
 const showEditForm = ref(false)
 const showCreateForm = ref(false)
@@ -221,8 +220,10 @@ watch(searchForm, debounce(() => {
           </template>
           <template #body>
             <TableRow v-for="student in students.data" :key="student.id">
-              <TableCell class="h-[70px] w-[120px] min-w-[120px] cursor-pointer border-2 flex-row">
-                <div class="font-bold">{{ student.first_name }} {{ student.surname }}</div>
+              <TableCell class="h-[70px] w-[120px] min-w-[120px] cursor-pointer flex-row border-2">
+                <div class="font-bold">
+                  {{ student.first_name }} {{ student.surname }}
+                </div>
                 <div>({{ student.index_number }})</div>
               </TableCell>
               <GradeCell v-for="column in gradeColumns" :key="column.id"
