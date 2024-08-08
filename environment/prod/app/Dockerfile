@@ -1,5 +1,5 @@
 ### PHP DEPENDENCIES ###
-FROM composer:2.7.2 as vendor
+FROM composer:2.7.2 AS vendor
 
 WORKDIR /app_composer_dependencies
 
@@ -14,7 +14,7 @@ RUN composer install \
     --ignore-platform-reqs
 
 ### FRONTEND ###
-FROM node:21.7.3-bullseye-slim as frontend
+FROM node:21.7.3-bullseye-slim AS frontend
 
 WORKDIR /app_frontend_dependencies
 
@@ -28,7 +28,7 @@ COPY resources/css ./resources/css/
 RUN npm run build
 
 ### APPLICATION ###
-FROM php:8.3.6-fpm-bullseye as app
+FROM php:8.3.6-fpm-bullseye AS app
 
 COPY --from=vendor /usr/bin/composer /usr/local/bin/composer
 
