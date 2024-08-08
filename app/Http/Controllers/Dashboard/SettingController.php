@@ -49,7 +49,7 @@ class SettingController extends Controller
         $settings = Setting::query()->firstOrFail();
 
         if ($settings->logo) {
-            Storage::disk("public")->delete($settings->logo);
+            $res = Storage::disk("public")->delete($settings->logo);
             $settings->logo = null;
             $settings->save();
 

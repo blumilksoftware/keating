@@ -9,9 +9,9 @@ import { useForm } from '@inertiajs/inertia-vue3'
 import FormError from '@/Shared/Forms/FormError.vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
-import ColorInput from "../../../Shared/Forms/ColorInput.vue";
-import {ref} from "vue";
-import {Method} from "@inertiajs/inertia";
+import ColorInput from '../../../Shared/Forms/ColorInput.vue'
+import { ref } from 'vue'
+import { Method } from '@inertiajs/inertia'
 
 const props = defineProps({
   settings: Object,
@@ -38,11 +38,6 @@ function onFileSelected(event) {
   form.logo = event.target?.files[0]
   imageUrl.value = URL.createObjectURL(event.target?.files[0])
   form.errors.logo = ''
-}
-
-function deleteFile() {
-  form.logo = ''
-  imageUrl.value = ''
 }
 </script>
 
@@ -116,7 +111,7 @@ function deleteFile() {
                 Logo
               </FormLabel>
               <input
-                class="!mb-px block w-full border-0 border-b border-brand-light-gray p-2 text-sm font-medium text-brand-black hover:!mb-px hover:border-b-2 hover:border-brand-black focus:!mb-px focus:border-b-2 focus:border-brand-black focus:ring-0 focus:ring-offset-0"
+                class="border-brand-light-gray text-brand-black hover:border-brand-black focus:border-brand-black !mb-px block w-full border-0 border-b p-2 text-sm font-medium hover:!mb-px hover:border-b-2 focus:!mb-px focus:border-b-2 focus:ring-0 focus:ring-offset-0"
                 type="file" @input="onFileSelected"
               >
               <FormError :error="form.errors.logo" class="mt-2" />
@@ -128,8 +123,8 @@ function deleteFile() {
                   <InertiaLink
                     href="/dashboard/settings/remove-logo"
                     :method="Method.DELETE"
-                    @click="form.logo = ''"
                     class="text-sm text-red-500 hover:text-red-700"
+                    @click="form.logo = ''"
                   >
                     Usuń
                   </InertiaLink>
