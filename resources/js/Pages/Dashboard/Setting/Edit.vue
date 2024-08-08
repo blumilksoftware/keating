@@ -9,6 +9,9 @@ import { useForm } from '@inertiajs/inertia-vue3'
 import FormError from '@/Shared/Forms/FormError.vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
+import ColorInput from "../../../Shared/Forms/ColorInput.vue";
+import {ref} from "vue";
+import {Method} from "@inertiajs/inertia";
 
 const props = defineProps({
   settings: Object,
@@ -20,10 +23,26 @@ const form = useForm({
   teacher_titles: props.settings.teacher_titles,
   university_name: props.settings.university_name,
   department_name: props.settings.department_name,
+  primary_color: props.settings.primary_color,
+  secondary_color: props.settings.secondary_color,
+  logo: props.settings.logo,
 })
 
+const imageUrl = ref('')
+
 function updateSettings() {
-  form.patch('/dashboard/settings')
+  form.post('/dashboard/settings')
+}
+
+function onFileSelected(event) {
+  form.logo = event.target?.files[0]
+  imageUrl.value = URL.createObjectURL(event.target?.files[0])
+  form.errors.logo = ''
+}
+
+function deleteFile() {
+  form.logo = ''
+  imageUrl.value = ''
 }
 </script>
 
@@ -40,7 +59,7 @@ function updateSettings() {
           </ManagementHeaderItem>
         </template>
       </ManagementHeader>
-      <form class="grid grid-cols-2" @submit.prevent="updateSettings">
+      <form class="grid grid-cols-2" enctype="multipart/form-data" @submit.prevent="updateSettings">
         <Section>
           <div class="flex flex-col justify-between gap-4">
             <FormGroup>
@@ -77,6 +96,55 @@ function updateSettings() {
               </FormLabel>
               <TextInput id="department_name" v-model="form.department_name" :error="form.errors.department_name" autocomplete="off" />
               <FormError :error="form.errors.department_name" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="primary_color">
+                Kolor główny
+              </FormLabel>
+              <ColorInput id="primary_color" v-model="form.primary_color" :error="form.errors.primary_color" autocomplete="off" />
+              <FormError :error="form.errors.primary_color" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="secondary_color">
+                Kolor dodatkowy
+              </FormLabel>
+              <ColorInput id="secondary_color" v-model="form.secondary_color" :error="form.errors.secondary_color" autocomplete="off" />
+              <FormError :error="form.errors.secondary_color" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="title">
+                Logo
+              </FormLabel>
+              <input
+                class="!mb-px block w-full border-0 border-b border-brand-light-gray p-2 text-sm font-medium text-brand-black hover:!mb-px hover:border-b-2 hover:border-brand-black focus:!mb-px focus:border-b-2 focus:border-brand-black focus:ring-0 focus:ring-offset-0"
+                type="file" @input="onFileSelected"
+              >
+              <FormError :error="form.errors.logo" class="mt-2" />
+            </FormGroup>
+            <FormGroup v-if="form.logo || imageUrl">
+              <div v-if="form.logo && !imageUrl">
+                <FormLabel class="mb-3 flex justify-between">
+                  Aktualne logo
+                  <InertiaLink
+                    href="/dashboard/settings/remove-logo"
+                    :method="Method.DELETE"
+                    @click="form.logo = ''"
+                    class="text-sm text-red-500 hover:text-red-700"
+                  >
+                    Usuń
+                  </InertiaLink>
+                </FormLabel>
+                <img :alt="'alt text'"
+                     :src="`/storage/${form.logo}`"
+                     class="m-auto shadow-lg"
+                >
+              </div>
+              <div v-else>
+                <FormLabel class="mb-3">
+                  Przesłane logo
+                </FormLabel>
+                <img :src="imageUrl" alt="Image preview" class="m-auto shadow-lg">
+              </div>
             </FormGroup>
             <div class="mt-4 flex justify-end">
               <SubmitButton>
