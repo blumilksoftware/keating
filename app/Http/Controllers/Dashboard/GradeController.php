@@ -67,9 +67,11 @@ class GradeController extends Controller
 
     public function updateGrade(UpdateGrade $request, CourseSemester $course, Group $group, GradeColumn $gradeColumn): RedirectResponse
     {
-        $gradeColumn->grades()
+        $grade = $gradeColumn->grades()
             ->where("student_id", $request->get("student_id"))
-            ->update($request->getData());
+            ->firstOrFail();
+
+        $grade->update($request->getData());
 
         return redirect()->back()
             ->with("success", "Zaktualizowano ocenę");
