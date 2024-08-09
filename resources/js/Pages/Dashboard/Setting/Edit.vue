@@ -25,7 +25,7 @@ const form = useForm({
   department_name: props.settings.department_name,
   primary_color: props.settings.primary_color,
   secondary_color: props.settings.secondary_color,
-  logo: props.settings.logo,
+  logo: null,
 })
 
 const imageUrl = ref('')
@@ -35,7 +35,15 @@ function updateSettings() {
 }
 
 function onFileSelected(event) {
-  form.logo = event.target?.files[0]
+  const file = event.target?.files[0]
+
+  if(file.size > 1024 * 1024) {
+    form.errors.logo = 'Plik nie może być większy niż 1MB'
+
+    return
+  }
+
+  form.logo = file
   imageUrl.value = URL.createObjectURL(event.target?.files[0])
   form.errors.logo = ''
 }
@@ -116,8 +124,8 @@ function onFileSelected(event) {
               >
               <FormError :error="form.errors.logo" class="mt-2" />
             </FormGroup>
-            <FormGroup v-if="form.logo || imageUrl">
-              <div v-if="form.logo && !imageUrl">
+            <FormGroup v-if="settings.logo || imageUrl">
+              <div v-if="settings.logo && !imageUrl">
                 <FormLabel class="mb-3 flex justify-between">
                   Aktualne logo
                   <InertiaLink
@@ -130,7 +138,7 @@ function onFileSelected(event) {
                   </InertiaLink>
                 </FormLabel>
                 <img :alt="'alt text'"
-                     :src="`/storage/${form.logo}`"
+                     :src="`/storage/${settings.logo}`"
                      class="m-auto shadow-lg"
                 >
               </div>
