@@ -30,5 +30,8 @@ class Setting extends Model
         "teacher_titles",
         "university_name",
         "department_name",
+        "primary_color",
+        "secondary_color",
+        "logo",
     ];
 }
