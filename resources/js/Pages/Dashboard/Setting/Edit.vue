@@ -112,7 +112,7 @@ function onFileSelected(event) {
               </FormLabel>
               <input
                 class="border-brand-light-gray text-brand-black hover:border-brand-black focus:border-brand-black !mb-px block w-full border-0 border-b p-2 text-sm font-medium hover:!mb-px hover:border-b-2 focus:!mb-px focus:border-b-2 focus:ring-0 focus:ring-offset-0"
-                type="file" @input="onFileSelected"
+                type="file" max="1" @input="onFileSelected"
               >
               <FormError :error="form.errors.logo" class="mt-2" />
             </FormGroup>
