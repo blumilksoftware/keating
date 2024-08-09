@@ -37,7 +37,7 @@ function updateSettings() {
 function onFileSelected(event) {
   const file = event.target?.files[0]
 
-  if(file.size > 1024 * 1024) {
+  if (file.size > 1024 * 1024) {
     form.errors.logo = 'Plik nie może być większy niż 1MB'
 
     return
