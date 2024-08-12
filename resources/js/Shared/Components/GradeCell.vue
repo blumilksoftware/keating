@@ -1,6 +1,6 @@
 <script setup>
 import TableCell from './Table/TableCell.vue'
-import {useForm} from "@inertiajs/inertia-vue3";
+import { useForm } from '@inertiajs/inertia-vue3'
 
 const props = defineProps({
   gradeColumn: Object,
@@ -24,10 +24,10 @@ const gradeInput = useForm({
     @dblclick="emit('updateGrade', gradeColumn.id, student.id, inputVal, !grade.status)"
   >
     <input
+      v-model="gradeInput.value"
       :class="[grade?.status
         ? 'bg-lime-200'
         : grade?.status !== null ? 'bg-rose-300' : 'bg-white']"
-      v-model="gradeInput.value"
       class="size-full cursor-pointer border-0 p-0 text-center font-bold text-gray-900 shadow-none ring-0 focus:border-0 focus:ring-0"
       @change="emit('updateGrade', gradeColumn.id, student.id, gradeInput.value, grade.status)"
     >
