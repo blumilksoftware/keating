@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Frontend;
 
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -13,12 +14,20 @@ class StudentTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->user = User::factory()->create();
+        $this->actingAs($this->user);
+    }
+
     public function testStudentCanBeCreated(): void
     {
         $this->assertDatabaseCount("students", 0);
 
         $this->post("/dashboard/students", [
-            "name" => "Name",
+            "first_name" => "Name",
             "surname" => "Surname",
             "index_number" => "12345",
         ])->assertSessionHasNoErrors();
@@ -31,19 +40,19 @@ class StudentTest extends TestCase
         $student = Student::factory()->create();
 
         $this->assertDatabaseMissing("students", [
-            "name" => "Name",
+            "first_name" => "Name",
             "surname" => "Surname",
             "index_number" => "12345",
         ]);
 
         $this->patch("/dashboard/students/{$student->id}", [
-            "name" => "Name",
+            "first_name" => "Name",
             "surname" => "Surname",
             "index_number" => "12345",
         ])->assertSessionHasNoErrors();
 
         $this->assertDatabaseHas("students", [
-            "name" => "Name",
+            "first_name" => "Name",
             "surname" => "Surname",
             "index_number" => "12345",
         ]);
@@ -55,7 +64,7 @@ class StudentTest extends TestCase
         $this->assertDatabaseCount("students", 1);
 
         $this->post("/dashboard/students", [
-            "name" => "Name",
+            "first_name" => "Name",
             "surname" => "Surname",
             "index_number" => "12345",
         ])->assertSessionHasErrors("index_number");
@@ -66,11 +75,11 @@ class StudentTest extends TestCase
     public function testStudentCannotBeCreatedWithInvalidData(): void
     {
         $this->post("/dashboard/students", [
-            "name" => Str::random(256),
+            "first_name" => Str::random(256),
             "surname" => Str::random(256),
             "index_number" => Str::random(256),
         ])->assertSessionHasErrors([
-            "name",
+            "first_name",
             "surname",
             "index_number",
         ]);

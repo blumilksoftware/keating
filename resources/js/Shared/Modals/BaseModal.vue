@@ -43,12 +43,12 @@ defineProps({
                     <slot name="header" />
                   </DialogTitle>
                 </div>
-                <div class="h-10 w-10">
+                <div class="size-10">
                   <button type="button" class="border-brand-black rounded-full border-2 p-0.5 opacity-70 hover:opacity-90 focus:opacity-100 focus:outline-none"
                           @click="emit('close')"
                   >
                     <span class="sr-only">Anuluj</span>
-                    <XMarkIcon class="h-6 w-6" />
+                    <XMarkIcon class="size-6" />
                   </button>
                 </div>
               </div>

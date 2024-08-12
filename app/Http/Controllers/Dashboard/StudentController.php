@@ -22,8 +22,8 @@ class StudentController extends Controller
             ->when(
                 $searchText !== null,
                 fn(Builder $query): Builder => $query
-                    ->where("name", "ILIKE", "%$searchText%")
-                    ->orWhere("surname", "ILIKE", "%$searchText%")
+                    ->whereLikeUnaccentInsensitive("first_name", $searchText)
+                    ->orWhereLikeUnaccentInsensitive("surname", $searchText)
                     ->orWhere("index_number", "LIKE", "%$searchText%"),
             )
             ->paginate()
@@ -31,6 +31,8 @@ class StudentController extends Controller
 
         return inertia("Dashboard/Student/Index", [
             "students" => $students,
+            "total" => Student::query()->count(),
+            "lastUpdate" => Student::query()->orderByDesc("updated_at")->first()?->updated_at->diffForHumans(),
         ]);
     }
 

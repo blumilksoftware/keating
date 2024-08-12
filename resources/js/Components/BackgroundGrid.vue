@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-  <svg class="absolute inset-0 -z-10 h-full w-full stroke-gray-200"
+  <svg class="absolute inset-0 -z-10 size-full stroke-gray-200"
        :class="'[mask-image:radial-gradient(100%_100%_at_top_' + maskDirection + ',white,transparent)]'"
        aria-hidden="true"
   >

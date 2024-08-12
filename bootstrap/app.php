@@ -2,18 +2,54 @@
 
 declare(strict_types=1);
 
-use App\Console\Kernel as ConsoleKernel;
-use App\Exceptions\Handler;
-use App\Http\Kernel as HttpKernel;
-use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Contracts\Http\Kernel as HttpKernelContract;
+use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\Response;
 
-$app = new Application($_ENV["APP_BASE_PATH"] ?? dirname(__DIR__));
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        web: __DIR__ . "/../routes/web.php",
+        commands: __DIR__ . "/../routes/console.php",
+        health: "/up",
+    )
+    ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->web([
+            HandleInertiaRequests::class,
+        ]);
+        $middleware->trustProxies("*");
+    })
+    ->withExceptions(function (Exceptions $exceptions): void {
+        $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
+            if (!app()->environment("production")) {
+                return $response;
+            }
 
-$app->singleton(HttpKernelContract::class, HttpKernel::class);
-$app->singleton(ConsoleKernelContract::class, ConsoleKernel::class);
-$app->singleton(ExceptionHandler::class, Handler::class);
+            $handledStatuses = [
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                Response::HTTP_SERVICE_UNAVAILABLE,
+                Response::HTTP_TOO_MANY_REQUESTS,
+                419,
+                Response::HTTP_NOT_FOUND,
+                Response::HTTP_FORBIDDEN,
+                Response::HTTP_UNAUTHORIZED,
+            ];
 
-return $app;
+            if ($response->getStatusCode() === Response::HTTP_METHOD_NOT_ALLOWED) {
+                $response->setStatusCode(Response::HTTP_NOT_FOUND);
+            }
+
+            if (in_array($response->getStatusCode(), $handledStatuses, strict: true)) {
+                return Inertia::render("Error", [
+                    "status" => $response->getStatusCode(),
+                ])
+                    ->toResponse($request)
+                    ->setStatusCode($response->getStatusCode());
+            }
+
+            return $response;
+        });
+    })->create();

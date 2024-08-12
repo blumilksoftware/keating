@@ -10,21 +10,22 @@ use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
 {
-    protected $rootView = "app";
-
-    public function version(Request $request): ?string
-    {
-        return parent::version($request);
-    }
-
     public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
-            "flash" => $this->getFlashedData($request),
+            "auth" => $this->getAuthData($request),
+            "flash" => $this->getFlashData($request),
         ]);
     }
 
-    protected function getFlashedData(Request $request): Closure
+    protected function getAuthData(Request $request): array
+    {
+        return [
+            "user" => $request->user() ? $request->user()->only("id", "name", "email") : null,
+        ];
+    }
+
+    protected function getFlashData(Request $request): Closure
     {
         return fn(): array => [
             "success" => $request->session()->get("success"),

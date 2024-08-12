@@ -60,4 +60,32 @@ queue:
 create-test-db:
 	@docker compose --file ${DOCKER_COMPOSE_FILE} exec ${DOCKER_COMPOSE_DATABASE_CONTAINER} bash -c 'createdb --username=${DATABASE_USERNAME} ${TEST_DATABASE_NAME} &> /dev/null && echo "Created database for tests (${TEST_DATABASE_NAME})." || echo "Database for tests (${TEST_DATABASE_NAME}) exists."'
 
-.PHONY: init check-env-file build run stop restart shell shell-root test fix create-test-db queue
+encrypt-beta-env:
+	@docker compose --file ${DOCKER_COMPOSE_FILE} run \
+	--rm \
+	--no-deps \
+	--volume ${CURRENT_DIR}/environment/prod/deployment/beta:/envs \
+	--entrypoint "" \
+	--workdir /application \
+	--user "${CURRENT_USER_ID}:${CURRENT_USER_GROUP_ID}" \
+	${DOCKER_COMPOSE_APP_CONTAINER} \
+	bash -c "cp /envs/.env.beta /application \
+		&& php artisan env:encrypt --env beta --key ${BETA_ENV_KEY} \
+		&& mv .env.beta.encrypted /envs \
+		&& rm .env.beta"
+
+decrypt-beta-env:
+	@docker compose --file ${DOCKER_COMPOSE_FILE} run \
+	--rm \
+	--no-deps \
+	--volume ${CURRENT_DIR}/environment/prod/deployment/beta:/envs \
+	--entrypoint "" \
+	--workdir /application \
+	--user "${CURRENT_USER_ID}:${CURRENT_USER_GROUP_ID}" \
+	${DOCKER_COMPOSE_APP_CONTAINER} \
+	bash -c "cp /envs/.env.beta.encrypted /application \
+		&& php artisan env:decrypt --env beta --key ${BETA_ENV_KEY} \
+		&& mv .env.beta /envs \
+		&& rm .env.beta.encrypted"
+
+.PHONY: init check-env-file build run stop restart shell shell-root test fix create-test-db queue encrypt-beta-env decrypt-beta-env
