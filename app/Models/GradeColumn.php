@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Observers\GradeColumnObserver;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,6 +24,7 @@ use Illuminate\Support\Collection;
  * @property-read Group $group
  * @property-read Collection<Grade> $grades
  */
+#[ObservedBy(GradeColumnObserver::class)]
 class GradeColumn extends Model
 {
     use HasFactory;
@@ -45,10 +47,5 @@ class GradeColumn extends Model
     public function grades(): HasMany
     {
         return $this->hasMany(Grade::class);
-    }
-
-    protected static function booted(): void
-    {
-        self::observe(GradeColumnObserver::class);
     }
 }

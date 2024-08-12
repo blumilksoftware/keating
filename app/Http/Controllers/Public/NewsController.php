@@ -14,7 +14,7 @@ class NewsController extends Controller
     {
         $news = News::query()
             ->orderBy("published_at", "desc")
-            ->paginate(10);
+            ->paginate(9);
 
         return inertia("Public/News/Index", [
             "paginator" => $news,

@@ -2,10 +2,12 @@
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '../../../Components/BackgroundGrid.vue'
 import SectionHeader from '../../../Components/SectionHeader.vue'
+import Pagination from '../../../Components/Pagination.vue'
 
 defineProps({
   paginator: Object,
 })
+
 </script>
 
 <template>
@@ -40,6 +42,10 @@ defineProps({
                 </p>
               </div>
             </article>
+          </div>
+
+          <div class="mt-24 flex justify-center">
+            <Pagination :pagination="paginator" />
           </div>
         </div>
       </div>
