@@ -105,8 +105,8 @@ watch(() => props.flash, (flash) => {
                       </div>
                       <ul role="list" class="-mx-2 space-y-1">
                         <li v-for="item in section.elements" :key="item.name">
-                          <InertiaLink :href="item.href" :class="[item.current ? 'bg-gray-50 text-sky-600' : 'text-gray-700 hover:bg-gray-50 hover:text-sky-600', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
-                            <component :is="item.icon" :class="[item.current ? 'text-sky-600' : 'text-gray-400 group-hover:text-sky-600', 'size-6 shrink-0']" aria-hidden="true" />
+                          <InertiaLink :href="item.href" :class="[$page.component.startsWith(item.component) ? 'bg-gray-50 text-sky-600' : 'text-gray-700 hover:bg-gray-50 hover:text-sky-600', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
+                            <component :is="item.icon" :class="[$page.component.startsWith(item.component) ? 'text-sky-600' : 'text-gray-400 group-hover:text-sky-600', 'size-6 shrink-0']" aria-hidden="true" />
                             {{ item.name }}
                           </InertiaLink>
                         </li>
@@ -132,7 +132,7 @@ watch(() => props.flash, (flash) => {
               <ul role="list" class="-mx-2 space-y-1">
                 <li v-for="item in section.elements" :key="item.name">
                   <InertiaLink :href="item.href" :class="[$page.component.startsWith(item.component) ? 'bg-gray-50 text-sky-600' : 'text-gray-700 hover:bg-gray-50 hover:text-sky-600', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
-                    <component :is="item.icon" :class="[item.current ? 'text-sky-600' : 'text-gray-400 group-hover:text-sky-600', 'size-6 shrink-0']" aria-hidden="true" />
+                    <component :is="item.icon" :class="[$page.component.startsWith(item.component) ? 'text-sky-600' : 'text-gray-400 group-hover:text-sky-600', 'size-6 shrink-0']" aria-hidden="true" />
                     {{ item.name }}
                   </InertiaLink>
                 </li>
