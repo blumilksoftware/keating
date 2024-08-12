@@ -29,28 +29,28 @@ const navigation = [
   {
     title: 'Ogólne',
     elements: [
-      { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
-      { name: 'Ustawienia', href: '/dashboard/settings', icon: Cog6ToothIcon, current: false },
-      { name: 'Sekcje', href: '/dashboard/sections', icon: Square2StackIcon, current: false },
-      { name: 'Aktualizacja hasła', href: '/dashboard/password', icon: LockOpenIcon, current: false },
-      { name: 'Aktualności', href: '/dashboard/news', icon: NewspaperIcon, current: false },
-      { name: 'FAQ', href: '/dashboard/faqs', icon: QuestionMarkCircleIcon, current: false },
-      { name: 'Formy kontaktu', href: '/dashboard/contact-infos', icon: AtSymbolIcon, current: false },
+      { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, component: 'Dashboard/Home' },
+      { name: 'Ustawienia', href: '/dashboard/settings', icon: Cog6ToothIcon, component: 'Dashboard/Setting' },
+      { name: 'Sekcje', href: '/dashboard/sections', icon: Square2StackIcon, component: 'Dashboard/Section' },
+      { name: 'Aktualizacja hasła', href: '/dashboard/password', icon: LockOpenIcon, component: 'Dashboard/PasswordUpdate' },
+      { name: 'Aktualności', href: '/dashboard/news', icon: NewspaperIcon, component: 'Dashboard/News' },
+      { name: 'FAQ', href: '/dashboard/faqs', icon: QuestionMarkCircleIcon, component: 'Dashboard/FAQ' },
+      { name: 'Formy kontaktu', href: '/dashboard/contact-infos', icon: AtSymbolIcon, component: 'Dashboard/ContactInfo' },
     ],
   },
   {
     title: 'Uczelnia',
     elements: [
-      { name: 'Studenci', href: '/dashboard/students', icon: UsersIcon, current: false },
-      { name: 'Kursy w semestrze', href: '/dashboard/semester-courses', icon: BookmarkSquareIcon, current: false },
+      { name: 'Studenci', href: '/dashboard/students', icon: UsersIcon, component: 'Dashboard/Student' },
+      { name: 'Kursy w semestrze', href: '/dashboard/semester-courses', icon: BookmarkSquareIcon, component: 'Dashboard/CourseSemester' },
     ],
   },
   {
     title: 'Słowniki',
     elements: [
-      { name: 'Kursy', href: '/dashboard/courses', icon: BriefcaseIcon, current: false },
-      { name: 'Kierunki i specjalności', href: '/dashboard/fields', icon: MagnifyingGlassIcon, current: false },
-      { name: 'Semestry', href: '/dashboard/semesters', icon: ClipboardIcon, current: false },
+      { name: 'Kursy', href: '/dashboard/courses', icon: BriefcaseIcon, component: 'Dashboard/Course/' },
+      { name: 'Kierunki i specjalności', href: '/dashboard/fields', icon: MagnifyingGlassIcon, component: 'Dashboard/Field' },
+      { name: 'Semestry', href: '/dashboard/semesters', icon: ClipboardIcon, component: 'Dashboard/Semester' },
     ],
   },
 ]
@@ -120,7 +120,6 @@ watch(() => props.flash, (flash) => {
         </div>
       </Dialog>
     </TransitionRoot>
-
     <!-- Static sidebar for desktop -->
     <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
       <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
@@ -132,7 +131,7 @@ watch(() => props.flash, (flash) => {
               </div>
               <ul role="list" class="-mx-2 space-y-1">
                 <li v-for="item in section.elements" :key="item.name">
-                  <InertiaLink :href="item.href" :class="[item.current ? 'bg-gray-50 text-sky-600' : 'text-gray-700 hover:bg-gray-50 hover:text-sky-600', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
+                  <InertiaLink :href="item.href" :class="[$page.component.startsWith(item.component) ? 'bg-gray-50 text-sky-600' : 'text-gray-700 hover:bg-gray-50 hover:text-sky-600', 'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6']">
                     <component :is="item.icon" :class="[item.current ? 'text-sky-600' : 'text-gray-400 group-hover:text-sky-600', 'size-6 shrink-0']" aria-hidden="true" />
                     {{ item.name }}
                   </InertiaLink>
