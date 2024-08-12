@@ -70,10 +70,11 @@ function updateGrade(gradeColumnId, studentId, value, status) {
   })
 }
 
-function createGrade(gradeColumnId, studentId, status) {
+function createGrade(gradeColumnId, studentId, status, value) {
   Inertia.post(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades/${gradeColumnId}/store`, {
     status: status,
     student_id: studentId,
+    value: value,
   }, {
     preserveScroll: true,
   })
