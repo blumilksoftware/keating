@@ -126,7 +126,8 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
     });
     Route::controller(SettingController::class)->group(function (): void {
         Route::get("/settings", "edit")->name("settings.edit");
-        Route::patch("/settings", "update")->name("settings.update");
+        Route::post("/settings", "update")->name("settings.update");
+        Route::delete("/settings/remove-logo", "removeLogo")->name("settings.remove.logo");
     });
     Route::controller(SectionController::class)->group(function (): void {
         Route::get("/sections", "show")->name("sections.show");

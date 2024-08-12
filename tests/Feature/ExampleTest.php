@@ -10,6 +10,13 @@ use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
+    protected function tearDown(): void
+    {
+        Setting::query()->delete();
+
+        parent::tearDown();
+    }
+
     public function testTheApplicationReturnsASuccessfulResponse(): void
     {
         Setting::factory()->create();

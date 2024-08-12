@@ -1,6 +1,6 @@
-FROM composer/composer:2.7.2-bin as composer-bin
+FROM composer/composer:2.7.2-bin AS composer-bin
 
-FROM node:21.7.3-bullseye-slim as node
+FROM node:21.7.3-bullseye-slim AS node
 
 FROM php:8.3.6-fpm-bullseye
 
@@ -41,7 +41,9 @@ RUN apt-get update \
     && echo "deb https://nginx.org/packages/mainline/debian bullseye nginx" | tee /etc/apt/sources.list.d/nginx.list \
     && apt-get update && apt-get install --assume-yes \
         nginx=${NGINX_VERSION} \
+        gnupg \
         libzip-dev \
+        libpng-dev \
         libpq-dev \
         supervisor \
         cron \
@@ -49,6 +51,7 @@ RUN apt-get update \
     && docker-php-ext-install \
         zip \
         pdo_pgsql \
+        gd \
     && docker-php-ext-enable \
         redis
 
