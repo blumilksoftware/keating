@@ -189,19 +189,19 @@ function updateGroup() {
             <div class="flex gap-2">
               <Button class="has-tooltip" :href="`/dashboard/semester-courses/${course.data.id}/groups/${group.id}/grades`">
                 <ChartBarIcon class="w-5" />
-                <span class='tooltip p-1 rounded bg-gray-500 text-white -ml-6 -mt-16'>Oceny</span>
+                <span class="tooltip -ml-6 -mt-16 rounded bg-gray-500 p-1 text-white">Oceny</span>
               </Button>
               <Button class="has-tooltip" :href="`/dashboard/semester-courses/${course.data.id}/groups/${group.id}/students`">
                 <UsersIcon class="w-5" />
-                <span class='tooltip p-1 rounded bg-gray-500 text-white -ml-8 -mt-16'>Studenci</span>
+                <span class="tooltip -ml-8 -mt-16 rounded bg-gray-500 p-1 text-white">Studenci</span>
               </Button>
               <Button class="has-tooltip">
                 <PencilSquareIcon class="w-5" @click="editGroup(group)" />
-                <span class='tooltip p-1 rounded bg-gray-500 text-white -ml-10 -mt-16'>Edytuj grupę</span>
+                <span class="tooltip -ml-10 -mt-16 rounded bg-gray-500 p-1 text-white">Edytuj grupę</span>
               </Button>
-              <Button class="text-red-600 has-tooltip" @click="[showModal = true, showEditForm = false, groupToDeleteId = group.id]">
+              <Button class="has-tooltip text-red-600" @click="[showModal = true, showEditForm = false, groupToDeleteId = group.id]">
                 <XCircleIcon class="w-5" />
-                <span class='tooltip p-1 rounded bg-rose-300 text-white -ml-10 -mt-16'>Usuń grupę</span>
+                <span class="tooltip -ml-10 -mt-16 rounded bg-rose-300 p-1 text-white">Usuń grupę</span>
               </Button>
             </div>
           </div>
