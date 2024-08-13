@@ -10,7 +10,7 @@ import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
 import { ref } from 'vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
-import { Cog6ToothIcon, XCircleIcon, EyeIcon } from '@heroicons/vue/24/outline'
+import { PencilSquareIcon, XCircleIcon, EyeIcon } from '@heroicons/vue/24/outline'
 
 defineProps({
   courses: Object,
@@ -88,7 +88,7 @@ const courseToDeleteId = ref(0)
                   <EyeIcon class="w-5" />
                 </Button>
                 <Button :href="`/dashboard/semester-courses/${course.id}/edit`">
-                  <Cog6ToothIcon class="w-5" />
+                  <PencilSquareIcon class="w-5" />
                 </Button>
                 <Button class="text-red-600" @click="[showModal = true, courseToDeleteId = course.id]">
                   <XCircleIcon class="w-5" />

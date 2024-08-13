@@ -10,7 +10,7 @@ import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
 import { ref } from 'vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
-import { Cog6ToothIcon, XCircleIcon } from '@heroicons/vue/24/outline'
+import { PencilSquareIcon, XCircleIcon } from '@heroicons/vue/24/outline'
 
 defineProps({
   fields: Object,
@@ -71,7 +71,7 @@ const fieldToDeleteId = ref(0)
               </TableCell>
               <TableCell class="flex justify-end gap-2">
                 <Button :href="`/dashboard/fields/${field.id}/edit`">
-                  <Cog6ToothIcon class="w-5" />
+                  <PencilSquareIcon class="w-5" />
                 </Button>
                 <Button class="text-red-600" @click="[showModal = true, fieldToDeleteId = field.id]">
                   <XCircleIcon class="w-5" />
