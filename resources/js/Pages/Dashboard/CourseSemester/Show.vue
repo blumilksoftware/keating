@@ -12,7 +12,7 @@ import FormError from '@/Shared/Forms/FormError.vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
-import { Cog6ToothIcon, UsersIcon, XCircleIcon, ChartBarIcon } from '@heroicons/vue/24/outline'
+import { PencilSquareIcon, UsersIcon, XCircleIcon, ChartBarIcon } from '@heroicons/vue/24/outline'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -187,17 +187,21 @@ function updateGroup() {
           >
             {{ group.name }}[{{ group.formAbbreviation }}]
             <div class="flex gap-2">
-              <Button :href="`/dashboard/semester-courses/${course.data.id}/groups/${group.id}/grades`">
+              <Button class="has-tooltip" :href="`/dashboard/semester-courses/${course.data.id}/groups/${group.id}/grades`">
                 <ChartBarIcon class="w-5" />
+                <span class="tooltip -ml-6 -mt-16 rounded bg-gray-500 p-1 text-white">Oceny</span>
               </Button>
-              <Button :href="`/dashboard/semester-courses/${course.data.id}/groups/${group.id}/students`">
+              <Button class="has-tooltip" :href="`/dashboard/semester-courses/${course.data.id}/groups/${group.id}/students`">
                 <UsersIcon class="w-5" />
+                <span class="tooltip -ml-8 -mt-16 rounded bg-gray-500 p-1 text-white">Studenci</span>
               </Button>
-              <Button>
-                <Cog6ToothIcon class="w-5" @click="editGroup(group)" />
+              <Button class="has-tooltip">
+                <PencilSquareIcon class="w-5" @click="editGroup(group)" />
+                <span class="tooltip -ml-10 -mt-16 rounded bg-gray-500 p-1 text-white">Edytuj grupę</span>
               </Button>
-              <Button class="text-red-600" @click="[showModal = true, showEditForm = false, groupToDeleteId = group.id]">
+              <Button class="has-tooltip text-red-600" @click="[showModal = true, showEditForm = false, groupToDeleteId = group.id]">
                 <XCircleIcon class="w-5" />
+                <span class="tooltip -ml-10 -mt-16 rounded bg-rose-300 p-1 text-white">Usuń grupę</span>
               </Button>
             </div>
           </div>
