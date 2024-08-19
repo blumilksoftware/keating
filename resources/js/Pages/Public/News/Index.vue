@@ -4,6 +4,8 @@ import BackgroundGrid from '../../../Components/BackgroundGrid.vue'
 import SectionHeader from '../../../Components/SectionHeader.vue'
 import Pagination from '../../../Components/Pagination.vue'
 
+import { NoSymbolIcon } from '@heroicons/vue/24/outline'
+
 defineProps({
   paginator: Object,
 })
@@ -37,14 +39,17 @@ defineProps({
                     {{ post.title }}
                   </a>
                 </h3>
-                <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
-                  {{ post.content }}
-                </p>
+                <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600" v-html="post.content"></p>
               </div>
             </article>
           </div>
 
-          <div class="mt-24 flex justify-center">
+          <div class="text-center" v-if="paginator.data.length === 0">
+            <NoSymbolIcon class="mx-auto h-12 w-12 text-gray-400"></NoSymbolIcon>
+            <h3 class="mt-2 text-sm font-semibold text-gray-900">Brak aktualności</h3>
+          </div>
+
+          <div class="mt-24 flex justify-center" v-if="paginator.data.length > 0">
             <Pagination :pagination="paginator" />
           </div>
         </div>

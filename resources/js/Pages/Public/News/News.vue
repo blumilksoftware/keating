@@ -19,13 +19,11 @@ defineProps({
               {{ news.title }}
             </template>
             <template #subheader>
-              wiadomość z dnia {{ news.published_at_formatted }}
+              wiadomość z dnia {{ news.published_at }}
             </template>
           </SectionHeader>
 
-          <div class="mt-10">
-            <p>Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque erat velit. Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae sed turpis id.</p>
-          </div>
+          <div class="mt-10" v-html="news.content"></div>
         </div>
       </div>
     </div>
