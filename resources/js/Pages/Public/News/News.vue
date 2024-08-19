@@ -23,7 +23,7 @@ defineProps({
             </template>
           </SectionHeader>
 
-          <div class="mt-10" v-html="news.content"></div>
+          <div class="mt-10" v-html="news.content" />
         </div>
       </div>
     </div>
