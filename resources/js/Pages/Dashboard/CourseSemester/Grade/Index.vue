@@ -30,7 +30,6 @@ const props = defineProps({
   search: String,
   total: Number,
 })
-const showName = ref(false)
 const showModal = ref(false)
 const showEditForm = ref(false)
 const showCreateForm = ref(false)
@@ -71,10 +70,11 @@ function updateGrade(gradeColumnId, studentId, value, status) {
   })
 }
 
-function createGrade(gradeColumnId, studentId, status) {
+function createGrade(gradeColumnId, studentId, status, value) {
   Inertia.post(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades/${gradeColumnId}/store`, {
     status: status,
     student_id: studentId,
+    value: value,
   }, {
     preserveScroll: true,
   })
@@ -221,9 +221,11 @@ watch(searchForm, debounce(() => {
           </template>
           <template #body>
             <TableRow v-for="student in students.data" :key="student.id">
-              <TableCell class="h-[70px] w-[120px] min-w-[120px] cursor-pointer border-2" @click="[showName = !showName]">
-                <span v-if="!showName">{{ student.index_number }}</span>
-                <span v-else>{{ student.first_name }} {{ student.surname }}</span>
+              <TableCell class="h-[70px] w-[120px] min-w-[120px] cursor-pointer flex-row border-2">
+                <div class="font-bold">
+                  {{ student.first_name }} {{ student.surname }}
+                </div>
+                <div>({{ student.index_number }})</div>
               </TableCell>
               <GradeCell v-for="column in gradeColumns" :key="column.id"
                          :grade="column.grades.find(obj => obj.student_id === student.id)" :grade-column="column"

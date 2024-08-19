@@ -11,7 +11,7 @@ import { ref } from 'vue'
 import { Method } from '@inertiajs/inertia'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
-import { Cog6ToothIcon, XCircleIcon, CheckIcon } from '@heroicons/vue/24/outline'
+import { PencilSquareIcon, XCircleIcon, CheckIcon } from '@heroicons/vue/24/outline'
 
 defineProps({
   semesters: Object,
@@ -79,7 +79,7 @@ const semesterToDeleteId = ref(0)
                   <CheckIcon class="w-5" />
                 </Button>
                 <Button :href="`/dashboard/semesters/${semester.id}/edit`">
-                  <Cog6ToothIcon class="w-5" />
+                  <PencilSquareIcon class="w-5" />
                 </Button>
                 <Button class="text-red-600" @click="[showModal = true, semesterToDeleteId = semester.id]">
                   <XCircleIcon class="w-5" />

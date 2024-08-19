@@ -5,6 +5,7 @@ defineProps({
   name: String,
   counters: Array,
 })
+
 </script>
 
 <template>

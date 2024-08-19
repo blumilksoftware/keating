@@ -13,7 +13,7 @@ import { Inertia } from '@inertiajs/inertia'
 import { debounce } from 'lodash'
 import TextInput from '@/Shared/Forms/TextInput.vue'
 import { useForm } from '@inertiajs/inertia-vue3'
-import { Cog6ToothIcon, XCircleIcon } from '@heroicons/vue/24/outline'
+import { PencilSquareIcon, XCircleIcon } from '@heroicons/vue/24/outline'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 
@@ -97,7 +97,7 @@ watch(form, debounce(() => {
               </TableCell>
               <TableCell class="flex justify-end gap-2">
                 <Button :href="`news/${article.id}/edit`">
-                  <Cog6ToothIcon class="w-5" />
+                  <PencilSquareIcon class="w-5" />
                 </Button>
                 <Button class="text-red-600" @click="[showModal = true, newsToDeleteId = article.id]">
                   <XCircleIcon class="w-5" />

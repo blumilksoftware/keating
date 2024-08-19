@@ -9,7 +9,7 @@ import Button from '@/Shared/Components/Buttons/Button.vue'
 import EmptyState from '@/Shared/Components/EmptyState.vue'
 import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
 import { ref } from 'vue'
-import { Cog6ToothIcon, XCircleIcon } from '@heroicons/vue/24/outline'
+import { PencilSquareIcon, XCircleIcon } from '@heroicons/vue/24/outline'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 defineProps({
@@ -73,7 +73,7 @@ const contactInfoToDeleteId = ref(0)
               </TableCell>
               <TableCell class="flex justify-end gap-2">
                 <Button :href="`contact-infos/${contact.id}/edit`">
-                  <Cog6ToothIcon class="w-5" />
+                  <PencilSquareIcon class="w-5" />
                 </Button>
                 <Button class="text-red-600" @click="[showModal = true, contactInfoToDeleteId = contact.id]">
                   <XCircleIcon class="w-5" />
