@@ -4,21 +4,27 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class NewsFactory extends Factory
 {
+    protected const array NEWS_TITLES = [
+        "Odwołane zajęcia",
+        "Przeniesione zajęcia",
+        "Nieobecność",
+        "Początek roku akademickiego",
+        "Koniec roku akademickiego",
+        "Terminy egzaminów",
+    ];
+
     public function definition(): array
     {
-        $title = fake()->unique()->name();
+        $title = fake()->randomElement(static::NEWS_TITLES);
 
         return [
             "title" => $title,
-            "slug" => Str::slug($title),
             "content" => fake()->realText(),
-            "published_at" => Carbon::now(),
+            "published_at" => fake()->dateTimeThisYear(),
         ];
     }
 }
