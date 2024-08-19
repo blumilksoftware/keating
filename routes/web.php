@@ -19,6 +19,7 @@ use App\Http\Controllers\Dashboard\SectionSettingsController;
 use App\Http\Controllers\Dashboard\SemesterController;
 use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\StudentController;
+use App\Http\Controllers\Public\CourseController as PublicCourseController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\LoginController;
 use App\Http\Controllers\Public\NewsController;
@@ -27,6 +28,8 @@ use Illuminate\Support\Facades\Route;
 Route::get("/", HomeController::class)->name("main");
 Route::get("/aktualnosci", [NewsController::class, "index"]);
 Route::get("/aktualnosci/{slug}", [NewsController::class, "get"]);
+Route::get("/kursy", [PublicCourseController::class, "index"]);
+Route::get("/kursy/{id}", [PublicCourseController::class, "get"]);
 
 Route::middleware("guest")->group(function (): void {
     Route::get("/login", [LoginController::class, "create"])->name("login");

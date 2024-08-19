@@ -22,8 +22,7 @@ class ActivateSemesterAction
         try {
             $this->db->beginTransaction();
 
-            Semester::getActive()?->update(["active" => 0]);
-            $semester->update(["active" => 1]);
+            $semester->update(["active" => !$semester->active]);
 
             $this->db->commit();
         } catch (Exception $exception) {
