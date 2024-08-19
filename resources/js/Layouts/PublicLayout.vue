@@ -82,7 +82,7 @@ const mobileMenuOpen = ref(false)
       </Dialog>
     </header>
 
-    <div class="flex-1">
+    <div class="flex-1 bg-white">
       <slot />
     </div>
 
@@ -92,8 +92,7 @@ const mobileMenuOpen = ref(false)
           <p class="text-center text-xs leading-5 text-gray-500">
             2023
             <EllipsisHorizontalIcon class="mx-2 inline-block w-6" />
-            <a class="font-semibold" href="https://github.com/blumilksoftware/keating" target="_blank">keating
-              management system</a>
+            <a class="font-semibold" href="https://github.com/blumilksoftware/keating" target="_blank">keating management system</a>
             developed at
             <a class="font-semibold" href="https://blumilk.pl/" target="_blank">Blumilk</a>
           </p>

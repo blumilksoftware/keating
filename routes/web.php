@@ -26,7 +26,8 @@ use App\Http\Controllers\Public\NewsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/", HomeController::class)->name("main");
-Route::get("/aktualnosci", NewsController::class);
+Route::get("/aktualnosci", [NewsController::class, "index"]);
+Route::get("/aktualnosci/{slug}", [NewsController::class, "get"]);
 Route::get("/oceny/{semester?}/{course?}/{group?}/{index?}", PublicGradeController::class);
 
 Route::middleware("guest")->group(function (): void {

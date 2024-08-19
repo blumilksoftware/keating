@@ -129,6 +129,7 @@ return [
         "university_name" => "nazwa uczelni",
         "department_name" => "nazwa wydziału",
         "title" => "tytuł",
+        "content" => "treść",
         "value" => "opis",
     ],
 ];
