@@ -3,7 +3,7 @@ import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '../../../Components/BackgroundGrid.vue'
 import SectionHeader from '../../../Components/SectionHeader.vue'
 import Pagination from '../../../Components/Pagination.vue'
-
+import sanitizeHtml from 'sanitize-html'
 import { NoSymbolIcon } from '@heroicons/vue/24/outline'
 
 defineProps({
@@ -39,7 +39,7 @@ defineProps({
                     {{ post.title }}
                   </a>
                 </h3>
-                <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600" v-html="post.content" />
+                <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600" v-html="sanitizeHtml(post.content)" />
               </div>
             </article>
           </div>

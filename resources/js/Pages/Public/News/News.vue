@@ -2,6 +2,7 @@
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '../../../Components/BackgroundGrid.vue'
 import SectionHeader from '../../../Components/SectionHeader.vue'
+import sanitizeHtml from 'sanitize-html'
 
 defineProps({
   news: Object,
@@ -23,7 +24,7 @@ defineProps({
             </template>
           </SectionHeader>
 
-          <div class="mt-10" v-html="news.content" />
+          <div class="mt-10" v-html="sanitizeHtml(news.content)" />
         </div>
       </div>
     </div>
