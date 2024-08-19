@@ -39,17 +39,19 @@ defineProps({
                     {{ post.title }}
                   </a>
                 </h3>
-                <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600" v-html="post.content"></p>
+                <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600" v-html="post.content" />
               </div>
             </article>
           </div>
 
-          <div class="text-center" v-if="paginator.data.length === 0">
-            <NoSymbolIcon class="mx-auto h-12 w-12 text-gray-400"></NoSymbolIcon>
-            <h3 class="mt-2 text-sm font-semibold text-gray-900">Brak aktualności</h3>
+          <div v-if="paginator.data.length === 0" class="text-center">
+            <NoSymbolIcon class="mx-auto size-12 text-gray-400" />
+            <h3 class="mt-2 text-sm font-semibold text-gray-900">
+              Brak aktualności
+            </h3>
           </div>
 
-          <div class="mt-24 flex justify-center" v-if="paginator.data.length > 0">
+          <div v-if="paginator.data.length > 0" class="mt-24 flex justify-center">
             <Pagination :pagination="paginator" />
           </div>
         </div>
