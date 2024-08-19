@@ -39,6 +39,7 @@ defineProps({
                     {{ post.title }}
                   </a>
                 </h3>
+                <!-- eslint-disable vue/no-v-html (as is sanitized) -->
                 <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600" v-html="sanitizeHtml(post.content)" />
               </div>
             </article>
