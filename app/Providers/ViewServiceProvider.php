@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Models\Setting;
+use Illuminate\Cache\CacheManager;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -13,7 +14,7 @@ class ViewServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $title = Cache::get("pageTitle");
+        $title = app(CacheManager::class)->get("pageTitle");
 
         if (!$title) {
             /** @var Setting $settings */
@@ -23,7 +24,7 @@ class ViewServiceProvider extends ServiceProvider
                 ? "{$settings->teacher_titles} {$settings->teacher_name}, {$settings->university_name}"
                 : config("app.name");
 
-            Cache::put("pageTitle", $title);
+            app(CacheManager::class)->put("pageTitle", $title);
         }
 
         View::share("pageTitle", $title);
