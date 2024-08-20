@@ -25,7 +25,7 @@ class HomeController extends Controller
             "email" => $settings->teacher_email,
             "department" => $settings->department_name,
             "university" => $settings->university_name,
-            "universityLogo" => "https://irg2023.collegiumwitelona.pl/assets/logos/cwup.png",
+            "universityLogo" => asset("cwup-full.png"),
             "sectionSettings" => $sectionSettings,
             "about" => $sectionSettings->about_enabled ? Section::query()->about()->orderBy("created_at")->get() : [],
             "counters" => $sectionSettings->counters_enabled ? Section::query()->counter()->orderBy("created_at")->get() : [],

@@ -6,6 +6,7 @@ import {
 import BackgroundGrid from '@/Components/BackgroundGrid.vue'
 import SectionHeader from '@/Components/SectionHeader.vue'
 import DOMPurify from 'dompurify'
+import { Head } from '@inertiajs/inertia-vue3'
 
 defineProps({
   title: String,
@@ -21,6 +22,8 @@ defineProps({
 </script>
 
 <template>
+  <Head title="/" />
+
   <PublicLayout>
     <div v-if="sectionSettings.banner_enabled" class="relative isolate bg-white pt-14">
       <BackgroundGrid />

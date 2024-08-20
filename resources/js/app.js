@@ -4,12 +4,16 @@ import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 import Toast from 'vue-toastification'
 import '../css/app.css'
 
+const pageTitle = document.getElementsByName('title')[0].content ?? 'Keating'
+
 createInertiaApp({
   progress: {
     delay: 50,
     color: '#14b8a6',
   },
-  title: (title) => title ? `${title} - Keating` : 'Keating',
+  title: function(title) {
+    return title && title !== '/' ? `${title} - ${pageTitle}` : pageTitle
+  },
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
 

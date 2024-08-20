@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Illuminate\Support\Str;
 
 return [
-    "default" => env("CACHE_DRIVER", "redis"),
+    "default" => env("CACHE_DRIVER", "array"),
     "stores" => [
         "apc" => [
             "driver" => "apc",
