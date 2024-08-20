@@ -18,7 +18,6 @@ class ViewServiceProvider extends ServiceProvider implements DeferrableProvider
         $title = $cache->get("pageTitle");
 
         if (!$title) {
-            /** @var ?Setting $settings */
             try {
                 $settings = Setting::query()->first();
             } catch (QueryException) {
