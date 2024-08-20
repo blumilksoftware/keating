@@ -6,7 +6,6 @@ namespace App\Providers;
 
 use App\Models\Setting;
 use Illuminate\Cache\CacheManager;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Psr\Container\ContainerExceptionInterface;
@@ -20,7 +19,6 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        dd(app(CacheManager::class));
         $title = app(CacheManager::class)->get("pageTitle");
 
         if (!$title) {
