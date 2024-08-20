@@ -2,7 +2,7 @@
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '@/Components/BackgroundGrid.vue'
 import SectionHeader from '@/Components/SectionHeader.vue'
-import {Head, Link} from '@inertiajs/inertia-vue3'
+import { Head, Link } from '@inertiajs/inertia-vue3'
 import SubmitButton from '@/Shared/Components/Buttons/SubmitButton.vue'
 import TableWrapper from '@/Shared/Components/Table/TableWrapper.vue'
 import TableHeader from '@/Shared/Components/Table/TableHeader.vue'

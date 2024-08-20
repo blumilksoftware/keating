@@ -1,7 +1,7 @@
 <script setup>
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '@/Components/BackgroundGrid.vue'
-import {Head, useForm} from '@inertiajs/inertia-vue3'
+import { Head, useForm } from '@inertiajs/inertia-vue3'
 
 defineProps({
   university: String,

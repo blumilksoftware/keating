@@ -19,7 +19,7 @@ import {
 } from '@heroicons/vue/24/outline'
 import { ref, watch } from 'vue'
 import { useToast } from 'vue-toastification'
-import {Head} from "@inertiajs/inertia-vue3";
+import { Head } from '@inertiajs/inertia-vue3'
 
 const toast = useToast()
 const props = defineProps({

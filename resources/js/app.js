@@ -4,7 +4,7 @@ import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 import Toast from 'vue-toastification'
 import '../css/app.css'
 
-const pageTitle = document.getElementsByName("title")[0].content ?? "Keating"
+const pageTitle = document.getElementsByName('title')[0].content ?? 'Keating'
 
 createInertiaApp({
   progress: {
@@ -12,7 +12,7 @@ createInertiaApp({
     color: '#14b8a6',
   },
   title: function(title) {
-     return title && title !== "/" ? `${title} - ${pageTitle}` : pageTitle
+    return title && title !== '/' ? `${title} - ${pageTitle}` : pageTitle
   },
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })

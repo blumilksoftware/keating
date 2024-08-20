@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Models\Setting;
-use Closure;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -13,10 +13,18 @@ class ViewServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        /** @var Setting $settings */
-        $settings = Setting::query()->first();
+        $title = Cache::get("pageTitle");
 
-        $title = "{$settings->teacher_titles} {$settings->teacher_name}, {$settings->university_name}";
+        if (!$title) {
+            /** @var Setting $settings */
+            $settings = Setting::query()->first();
+
+            $title = $settings
+                ? "{$settings->teacher_titles} {$settings->teacher_name}, {$settings->university_name}"
+                : config("app.name");
+
+            Cache::put("pageTitle", $title);
+        }
 
         View::share("pageTitle", $title);
     }

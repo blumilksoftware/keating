@@ -3,7 +3,7 @@ import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '../../../Components/BackgroundGrid.vue'
 import SectionHeader from '../../../Components/SectionHeader.vue'
 import sanitizeHtml from 'sanitize-html'
-import {Head} from "@inertiajs/inertia-vue3";
+import { Head } from '@inertiajs/inertia-vue3'
 
 defineProps({
   news: Object,
