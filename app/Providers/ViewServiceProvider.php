@@ -20,8 +20,8 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $title = app(CacheManager::class)->get("pageTitle");
         dd(app(CacheManager::class));
+        $title = app(CacheManager::class)->get("pageTitle");
 
         if (!$title) {
             /** @var Setting $settings */
