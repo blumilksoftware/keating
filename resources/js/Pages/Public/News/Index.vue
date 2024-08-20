@@ -3,6 +3,8 @@ import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '../../../Components/BackgroundGrid.vue'
 import SectionHeader from '../../../Components/SectionHeader.vue'
 import Pagination from '../../../Components/Pagination.vue'
+import sanitizeHtml from 'sanitize-html'
+import { NoSymbolIcon } from '@heroicons/vue/24/outline'
 
 defineProps({
   paginator: Object,
@@ -37,14 +39,19 @@ defineProps({
                     {{ post.title }}
                   </a>
                 </h3>
-                <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
-                  {{ post.content }}
-                </p>
+                <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600" v-html="sanitizeHtml(post.content)" />
               </div>
             </article>
           </div>
 
-          <div class="mt-24 flex justify-center">
+          <div v-if="paginator.data.length === 0" class="text-center">
+            <NoSymbolIcon class="mx-auto size-12 text-gray-400" />
+            <h3 class="mt-2 text-sm font-semibold text-gray-900">
+              Brak aktualności
+            </h3>
+          </div>
+
+          <div v-if="paginator.data.length > 0" class="mt-24 flex justify-center">
             <Pagination :pagination="paginator" />
           </div>
         </div>

@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-22.04
     services:
       pgsql:
-        image: postgres:15.2-alpine3.17
+        image: postgres:15.5-alpine3.17@sha256:1961f9d61a86948fb3c02ef87a6616f74f3530d10a1cd299b84abba7ed6db791
         env:
           POSTGRES_DB: keating
           POSTGRES_USER: keating
@@ -34,20 +34,20 @@ jobs:
           - 5432:5432
 
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
       - name: Validate composer.json and composer.lock
         run: composer validate
 
       - name: Cache dependencies
-        uses: actions/cache@v4.0.2
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
         with:
           path: vendor
           key: ${{ runner.os }}-composer-dependencies-${{ hashFiles('composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-dependencies
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@2.30.2
+        uses: shivammathur/setup-php@c541c155eee45413f5b09a52248675b1a2575231 # 2.31.1
         with:
           php-version: 8.3
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_pgsql, intl

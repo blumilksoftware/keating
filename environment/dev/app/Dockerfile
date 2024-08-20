@@ -1,8 +1,8 @@
-FROM composer/composer:2.7.2-bin AS composer-bin
+FROM composer/composer:2.7.7-bin@sha256:1832641f1ba36c8e748f4b4462f77e7c8836cca7730fdf0540580d703b78f2e7 AS composer-bin
 
-FROM node:21.7.3-bullseye-slim AS node
+FROM node:21.7.3-bullseye-slim@sha256:50adaf5a166e4e3dc01e77e9bdb4c35e34ef32a1e9e26200019cddb2b154fb34 AS node
 
-FROM php:8.3.6-fpm-bullseye
+FROM php:8.3.10-fpm-bullseye@sha256:857b7cdf42fc4e5b313548e6f6260fce0534439e30915824a5ac3efe9a121dff
 
 COPY --from=composer-bin ./composer /usr/bin/composer
 
