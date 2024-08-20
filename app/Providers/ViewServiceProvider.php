@@ -6,18 +6,15 @@ namespace App\Providers;
 
 use App\Models\Setting;
 use Illuminate\Cache\CacheManager;
-use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Factory;
 
-class ViewServiceProvider extends ServiceProvider implements DeferrableProvider
+class ViewServiceProvider extends ServiceProvider
 {
-    public function boot(CacheManager $cache): void
+    public function boot(CacheManager $cache, Factory $view): void
     {
-        $title = $cache->get("pageTitle");
-
-        if (!$title) {
+        $title = $cache->get("pageTitle", function () use ($cache): string {
             try {
                 $settings = Setting::query()->first();
             } catch (QueryException) {
@@ -29,8 +26,10 @@ class ViewServiceProvider extends ServiceProvider implements DeferrableProvider
                 : config("app.name");
 
             $cache->put("pageTitle", $title);
-        }
 
-        View::share("pageTitle", $title);
+            return $title;
+        });
+
+        $view->share("pageTitle", $title);
     }
 }
