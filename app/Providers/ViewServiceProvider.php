@@ -4,21 +4,33 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Setting;
 use Illuminate\Cache\CacheManager;
+use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Psr\Container\ContainerExceptionInterface;
-use Psr\Container\NotFoundExceptionInterface;
 
-class ViewServiceProvider extends ServiceProvider
+class ViewServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    /**
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
-     */
-    public function boot(): void
+    public function boot(CacheManager $cache): void
     {
-        $title = app(CacheManager::class)->get("pageTitle");
+        $title = $cache->get("pageTitle");
+
+        if (!$title) {
+            /** @var ?Setting $settings */
+            try {
+                $settings = Setting::query()->first();
+            } catch (QueryException) {
+                $settings = null;
+            }
+
+            $title = $settings
+                ? "{$settings->teacher_titles} {$settings->teacher_name}, {$settings->university_name}"
+                : config("app.name");
+
+            $cache->put("pageTitle", $title);
+        }
 
         View::share("pageTitle", $title);
     }
