@@ -2,7 +2,7 @@
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '@/Components/BackgroundGrid.vue'
 import SectionHeader from '@/Components/SectionHeader.vue'
-import { Link } from '@inertiajs/inertia-vue3'
+import {Head, Link} from '@inertiajs/inertia-vue3'
 import SubmitButton from '@/Shared/Components/Buttons/SubmitButton.vue'
 import TableWrapper from '@/Shared/Components/Table/TableWrapper.vue'
 import TableHeader from '@/Shared/Components/Table/TableHeader.vue'
@@ -36,6 +36,8 @@ function getIndex() {
 </script>
 
 <template>
+  <Head title="Oceny" />
+
   <PublicLayout>
     <div class="relative isolate bg-gradient-to-r from-gray-50 to-gray-100 py-24 sm:py-32">
       <BackgroundGrid mask-direction="left" />

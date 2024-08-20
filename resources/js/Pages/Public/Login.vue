@@ -1,7 +1,7 @@
 <script setup>
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '@/Components/BackgroundGrid.vue'
-import { useForm } from '@inertiajs/inertia-vue3'
+import {Head, useForm} from '@inertiajs/inertia-vue3'
 
 defineProps({
   university: String,
@@ -19,6 +19,8 @@ function attemptLogin() {
 </script>
 
 <template>
+  <Head title="Logowanie" />
+
   <PublicLayout>
     <div class="relative isolate bg-white pt-14">
       <BackgroundGrid />
