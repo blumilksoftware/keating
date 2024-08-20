@@ -55,6 +55,8 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::get("/students/{student}/edit", "edit")->name("students.edit");
         Route::patch("/students/{student}", "update")->name("students.update");
         Route::delete("/students/{student}", "destroy")->name("students.destroy");
+        Route::get("/students/import", "import")->name("students.import");
+        Route::post("/students/import", "storeMany")->name("students.import.post");
     });
     Route::controller(SemesterController::class)->group(function (): void {
         Route::get("/semesters", "index")->name("semesters.index");

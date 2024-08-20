@@ -1,0 +1,438 @@
+
+Collegium Witelona
+Uczelnia Państwowa
+
+    dane nauczyciela
+
+uczelnia
+prace dyplomowe
+ankiety
+wiadomości
+HARMONOGRAMY
+PRK
+
+ENPL
+John Keating
+wyloguj
+
+
+szczegóły protokołu
+
+protokol/2023/0/ABC/0/00
+Protokół: 	protokol/2023/0/ABC/0/00 	rok akademicki:	2023/24l
+kierunek: 	Informatyka 	przedmiot:	Projektowanie i programowanie systemów internetowych I
+wydział: 	Wydział Nauk Technicznych i Ekonomicznych
+forma studiów:	stacjonarne 	typ przedmiotu:	Projekt
+rodzaj studiów:	Studia I stopnia - inżynierskie 	specjalność:	programowanie aplikacji mobilnych i internetowych
+rok studiów:	2 	semestr:	4
+protokoł ważny od:	2024-04-22 	protokoł ważny do:	2024-09-29
+typ zakończenia:	zaliczenie z oceną 	twórca protokołu:	Gale Nolan [-]
+operacje
+pokaż termin 1
+pokaż termin 2
+
+
+
+
+wystawianie ocen
+domyślna data wystawienia oceny:
+tabela wystawiania ocen
+lp. 		student 	termin 1 Ważny od 2024-04-22 do 2024-07-03 	termin 2 Ważny od 2024-09-09 do 2024-09-29
+1
+Term. 1
+Term. 2
+
+Black Sirius
+nr albumu:83507
+podstawowy
+
+dobry plus
+(09-06-2024)
+brak oceny
+2
+Term. 1
+Term. 2
+
+Bones Susan
+nr albumu:83608
+podstawowy
+
+bardzo dobry
+(09-06-2024)
+brak oceny
+3
+Term. 1
+Term. 2
+
+Brown Lavender
+nr albumu:83609
+podstawowy
+
+dobry
+(09-06-2024)
+brak oceny
+4
+Term. 1
+Term. 2
+
+Chang Cho
+nr albumu:83617
+podstawowy
+
+bardzo dobry
+(09-06-2024)
+brak oceny
+5
+Term. 1
+Term. 2
+
+Creevey Colin
+nr albumu:83737
+podstawowy
+
+bardzo dobry
+(09-06-2024)
+brak oceny
+6
+Term. 1
+Term. 2
+
+Delacour Fleur
+nr albumu:83783
+podstawowy
+
+dostateczny plus
+(09-06-2024)
+brak oceny
+7
+Term. 1
+Term. 2
+
+Diggory Cedric
+nr albumu:83810
+podstawowy
+
+dobry
+(09-06-2024)
+brak oceny
+8
+Term. 1
+Term. 2
+
+Dumbledore Albus
+nr albumu:83897
+podstawowy
+
+dobry
+(09-06-2024)
+brak oceny
+9
+Term. 1
+Term. 2
+
+Dursley Dudley
+nr albumu:83933
+podstawowy
+
+dostateczny plus
+(09-06-2024)
+brak oceny
+10
+Term. 1
+Term. 2
+
+Filch Argus
+nr albumu:83947
+podstawowy
+
+dobry plus
+(09-06-2024)
+brak oceny
+11
+Term. 1
+Term. 2
+
+Finnigan Seamus
+nr albumu:83957
+podstawowy
+
+dostateczny plus
+(09-06-2024)
+brak oceny
+12
+Term. 1
+Term. 2
+
+Granger Hermione
+nr albumu:84096
+podstawowy
+
+dobry
+(09-06-2024)
+brak oceny
+13
+Term. 1
+Term. 2
+
+Hagrid Rubeus
+nr albumu:84118
+podstawowy
+
+dobry
+(09-06-2024)
+brak oceny
+14
+Term. 1
+Term. 2
+
+Jordan Lee
+nr albumu:84552
+podstawowy
+
+bardzo dobry
+(09-06-2024)
+brak oceny
+15
+Term. 1
+Term. 2
+
+Krum Viktor
+nr albumu:84636
+podstawowy
+
+dobry plus
+(09-06-2024)
+brak oceny
+16
+Term. 1
+Term. 2
+
+Lestrange Bellatrix
+nr albumu:84709
+podstawowy
+
+dobry
+(09-06-2024)
+brak oceny
+17
+Term. 1
+Term. 2
+
+Lockhart Gilderoy
+nr albumu:84770
+podstawowy
+
+dobry plus
+(09-06-2024)
+brak oceny
+18
+Term. 1
+Term. 2
+
+Longbottom Neville
+nr albumu:84797
+podstawowy
+
+dostateczny plus
+(09-06-2024)
+brak oceny
+19
+Term. 1
+Term. 2
+
+Lovegood Luna
+nr albumu:84853
+podstawowy
+
+dobry
+(09-06-2024)
+brak oceny
+20
+Term. 1
+Term. 2
+
+Lupin Remus
+nr albumu:85128
+podstawowy
+
+dobry
+(09-06-2024)
+brak oceny
+21
+Term. 1
+Term. 2
+
+Macmillan Ernie
+nr albumu:85228
+podstawowy
+
+dobry plus
+(09-06-2024)
+brak oceny
+22
+Term. 1
+Term. 2
+
+Malfoy Draco
+nr albumu:85388
+podstawowy
+
+dobry
+(09-06-2024)
+brak oceny
+23
+Term. 1
+Term. 2
+
+Moody Alastor
+nr albumu:85480
+podstawowy
+
+niedostateczny
+(09-06-2024)
+brak oceny
+24
+Term. 1
+Term. 2
+
+Parkinson Pansy
+nr albumu:85507
+podstawowy
+
+bardzo dobry
+(13-06-2024)
+brak oceny
+25
+Term. 1
+Term. 2
+
+Patil Padma
+nr albumu:85601
+podstawowy
+
+bardzo dobry
+(09-06-2024)
+brak oceny
+26
+Term. 1
+Term. 2
+
+Patil Parvati
+nr albumu:85819
+podstawowy
+
+dostateczny plus
+(09-06-2024)
+brak oceny
+27
+Term. 1
+Term. 2
+
+Pettigrew Peter
+nr albumu:85857
+podstawowy
+
+dostateczny plus
+(09-06-2024)
+brak oceny
+28
+Term. 1
+Term. 2
+
+Potter Harry
+nr albumu:85871
+podstawowy
+
+dobry plus
+(09-06-2024)
+brak oceny
+29
+Term. 1
+Term. 2
+
+Riddle Tom
+nr albumu:85999
+podstawowy
+
+dobry plus
+(09-06-2024)
+brak oceny
+30
+Term. 1
+Term. 2
+
+Scamander Newt
+nr albumu:86115
+podstawowy
+
+dobry plus
+(09-06-2024)
+brak oceny
+31
+Term. 1
+Term. 2
+
+Slughorn Horace
+nr albumu:86122
+podstawowy
+
+dobry plus
+(09-06-2024)
+brak oceny
+32
+Term. 1
+Term. 2
+
+Snape Severus
+nr albumu:86177
+podstawowy
+
+dobry plus
+(09-06-2024)
+brak oceny
+33
+Term. 1
+Term. 2
+
+Trelawney Sybill
+nr albumu:86340
+podstawowy
+
+dobry plus
+(09-06-2024)
+brak oceny
+34
+Term. 1
+Term. 2
+
+Weasley Ginny
+nr albumu:86866
+podstawowy
+
+bardzo dobry
+(09-06-2024)
+brak oceny
+35
+Term. 1
+Term. 2
+
+Weasley Ron
+nr albumu:86980
+podstawowy
+
+bardzo dobry
+(09-06-2024)
+brak oceny
+36
+Term. 1
+Term. 2
+
+Zabini Blais
+nr albumu:87144
+podstawowy
+
+dobry plus
+(09-06-2024)
+brak oceny
+Deklaracja dostępności
+Simple.Bazus © Wszelkie prawa zastrzeżone 2005 - 2024 | wu#2016.1.5263#0#20240812_063613 | wsrest#2016.1.5490#1.7.1143#20240812_063603

@@ -24,6 +24,7 @@ defineProps({
             </template>
           </SectionHeader>
 
+          <!-- eslint-disable vue/no-v-html (as is sanitized) -->
           <div class="mt-10" v-html="sanitizeHtml(news.content)" />
         </div>
       </div>

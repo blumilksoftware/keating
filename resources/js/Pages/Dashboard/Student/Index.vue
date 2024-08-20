@@ -59,6 +59,9 @@ watch(form, debounce(() => {
         </template>
         <template #actions>
           <TextInput v-if="total || form.search.length > 0" id="filter" v-model="form.search" placeholder="Szukaj" type="search" class="max-w-lg" />
+          <Button :href="`/dashboard/students/import`">
+            Dodaj masowo
+          </Button>
           <Button :href="`/dashboard/students/create`">
             Dodaj
           </Button>
