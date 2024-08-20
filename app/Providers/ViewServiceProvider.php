@@ -21,16 +21,16 @@ class ViewServiceProvider extends ServiceProvider
     {
         $title = app(CacheManager::class)->get("pageTitle");
 
-        if (!$title) {
-            /** @var Setting $settings */
-            $settings = Setting::query()->first();
-
-            $title = $settings
-                ? "{$settings->teacher_titles} {$settings->teacher_name}, {$settings->university_name}"
-                : config("app.name");
-
-            app(CacheManager::class)->put("pageTitle", $title);
-        }
+//        if (!$title) {
+//            /** @var Setting $settings */
+//            $settings = Setting::query()->first();
+//
+//            $title = $settings
+//                ? "{$settings->teacher_titles} {$settings->teacher_name}, {$settings->university_name}"
+//                : config("app.name");
+//
+//            app(CacheManager::class)->put("pageTitle", $title);
+//        }
 
         View::share("pageTitle", $title);
     }
