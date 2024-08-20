@@ -9,12 +9,19 @@ use Illuminate\Cache\CacheManager;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class ViewServiceProvider extends ServiceProvider
 {
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function boot(): void
     {
         $title = app(CacheManager::class)->get("pageTitle");
+        dd(app(CacheManager::class));
 
         if (!$title) {
             /** @var Setting $settings */
