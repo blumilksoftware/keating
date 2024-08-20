@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace Keating\Http\Controllers\Dashboard;
 
-use App\Enums\ClassType;
-use App\Enums\StudyForm;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CourseRequest;
-use App\Http\Resources\CourseResource;
-use App\Models\Course;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
+use Keating\Enums\ClassType;
+use Keating\Enums\StudyForm;
+use Keating\Http\Controllers\Controller;
+use Keating\Http\Requests\CourseRequest;
+use Keating\Http\Resources\CourseResource;
+use Keating\Models\Course;
 use Spatie\LaravelOptions\Options;
 
 class CourseController extends Controller

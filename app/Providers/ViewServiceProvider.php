@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Providers;
+namespace Keating\Providers;
 
-use App\Models\Setting;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Factory;
+use Keating\Models\Setting;
 
 class ViewServiceProvider extends ServiceProvider
 {

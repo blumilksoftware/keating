@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Public;
+namespace Keating\Http\Controllers\Public;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Auth\AuthManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Response;
+use Keating\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
@@ -19,11 +19,11 @@ class LoginController extends Controller
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, AuthManager $auth): RedirectResponse
     {
         $credentials = $request->only("email", "password");
 
-        if (Auth::attempt($credentials)) {
+        if ($auth->attempt($credentials)) {
             $request->session()->regenerate();
 
             return redirect()->route("dashboard");

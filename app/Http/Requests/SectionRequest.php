@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests;
+namespace Keating\Http\Requests;
 
-use App\Enums\SectionType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
+use Keating\Enums\SectionType;
 
 class SectionRequest extends FormRequest
 {

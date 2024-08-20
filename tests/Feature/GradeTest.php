@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Models\Grade;
-use App\Models\GradeColumn;
-use App\Models\Student;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Keating\Models\Grade;
+use Keating\Models\GradeColumn;
+use Keating\Models\Student;
+use Keating\Models\User;
 use Tests\TestCase;
 
 class GradeTest extends TestCase

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Models\News;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
+use Keating\Models\News;
+use Keating\Models\User;
 use Tests\TestCase;
 
 class NewsTest extends TestCase

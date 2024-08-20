@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\DTOs;
+namespace Keating\DTOs;
 
-use App\Models\Grade;
-use App\Models\GradeColumn;
-use App\Models\Student;
 use Illuminate\Support\Collection;
+use Keating\Models\Grade;
+use Keating\Models\GradeColumn;
+use Keating\Models\Student;
 
 readonly class StudentData
 {

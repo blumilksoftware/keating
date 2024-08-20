@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Public;
+namespace Keating\Http\Controllers\Public;
 
-use App\DTOs\StudentData;
-use App\Http\Controllers\Controller;
-use App\Models\CourseSemester;
-use App\Models\Group;
-use App\Models\Semester;
-use App\Models\Student;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use Keating\DTOs\StudentData;
+use Keating\Http\Controllers\Controller;
+use Keating\Models\CourseSemester;
+use Keating\Models\Group;
+use Keating\Models\Semester;
+use Keating\Models\Student;
 
 class GradeController extends Controller
 {

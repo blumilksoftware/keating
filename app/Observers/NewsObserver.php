@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Observers;
+namespace Keating\Observers;
 
-use App\Models\News;
 use Illuminate\Support\Str;
+use Keating\Models\News;
 
 class NewsObserver
 {

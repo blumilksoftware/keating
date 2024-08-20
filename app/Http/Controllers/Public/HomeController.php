@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Public;
+namespace Keating\Http\Controllers\Public;
 
-use App\Http\Controllers\Controller;
-use App\Models\Section;
-use App\Models\SectionSettings;
-use App\Models\Setting;
 use Inertia\Response;
+use Keating\Http\Controllers\Controller;
+use Keating\Models\Section;
+use Keating\Models\SectionSettings;
+use Keating\Models\Setting;
 
 class HomeController extends Controller
 {

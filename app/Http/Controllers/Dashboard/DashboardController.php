@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace Keating\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Models\Course;
-use App\Models\Group;
-use App\Models\Semester;
-use App\Models\Setting;
-use App\Models\Student;
 use Inertia\Response;
+use Keating\Http\Controllers\Controller;
+use Keating\Models\Course;
+use Keating\Models\Group;
+use Keating\Models\Semester;
+use Keating\Models\Setting;
+use Keating\Models\Student;
 
 class DashboardController extends Controller
 {

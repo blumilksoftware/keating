@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace Keating\Http\Controllers\Dashboard;
 
-use App\Actions\WuStudentsImport;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreStudentRequest;
-use App\Http\Requests\UpdateStudentRequest;
-use App\Models\Student;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use Keating\Actions\WuStudentsImport;
+use Keating\Http\Controllers\Controller;
+use Keating\Http\Requests\StoreStudentRequest;
+use Keating\Http\Requests\UpdateStudentRequest;
+use Keating\Models\Student;
 
 class StudentController extends Controller
 {

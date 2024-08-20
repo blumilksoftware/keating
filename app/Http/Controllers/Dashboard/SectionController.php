@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace Keating\Http\Controllers\Dashboard;
 
-use App\Enums\SectionType;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\SectionRequest;
-use App\Models\Section;
-use App\Models\SectionSettings;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
+use Keating\Enums\SectionType;
+use Keating\Http\Controllers\Controller;
+use Keating\Http\Requests\SectionRequest;
+use Keating\Models\Section;
+use Keating\Models\SectionSettings;
 use Spatie\LaravelOptions\Options;
 
 class SectionController extends Controller

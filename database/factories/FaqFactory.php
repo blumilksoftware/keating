@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Models\Faq;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Keating\Models\Faq;
 
 /**
  * @extends Factory<Faq>

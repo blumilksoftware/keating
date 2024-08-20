@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-use App\Models\User;
+use Keating\Models\User;
 
 return [
     "defaults" => [

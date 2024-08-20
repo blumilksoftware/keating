@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace Keating\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\GroupRequest;
-use App\Models\CourseSemester;
-use App\Models\Group;
 use Illuminate\Http\RedirectResponse;
+use Keating\Http\Controllers\Controller;
+use Keating\Http\Requests\GroupRequest;
+use Keating\Models\CourseSemester;
+use Keating\Models\Group;
 
 class GroupController extends Controller
 {
