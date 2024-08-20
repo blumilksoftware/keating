@@ -2,11 +2,11 @@
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '../../../Components/BackgroundGrid.vue'
 import SectionHeader from '../../../Components/SectionHeader.vue'
-import {ArrowRightCircleIcon} from "@heroicons/vue/24/outline";
-import TableWrapper from "../../../Shared/Components/Table/Public/TableWrapper.vue";
-import TableHeader from "../../../Shared/Components/Table/Public/TableHeader.vue";
-import TableRow from "../../../Shared/Components/Table/Public/TableRow.vue";
-import TableCell from "../../../Shared/Components/Table/Public/TableCell.vue";
+import { ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
+import TableWrapper from '../../../Shared/Components/Table/Public/TableWrapper.vue'
+import TableHeader from '../../../Shared/Components/Table/Public/TableHeader.vue'
+import TableRow from '../../../Shared/Components/Table/Public/TableRow.vue'
+import TableCell from '../../../Shared/Components/Table/Public/TableCell.vue'
 
 defineProps({
   courses: Object,
@@ -48,7 +48,7 @@ defineProps({
                   <TableHeader class="w-1/5">
                     Forma
                   </TableHeader>
-                  <TableHeader/>
+                  <TableHeader />
                 </template>
                 <template #body>
                   <TableRow v-for="course in courses" :key="course.id" :class="[course.active ? '' : 'bg-gray-100']">
@@ -69,7 +69,7 @@ defineProps({
                     </TableCell>
                     <TableCell>
                       <InertiaLink :href="`kursy/${course.id}`">
-                        <ArrowRightCircleIcon class="w-6 h-6 text-gray-500 m-auto" />
+                        <ArrowRightCircleIcon class="m-auto size-6 text-gray-500" />
                       </InertiaLink>
                     </TableCell>
                   </TableRow>

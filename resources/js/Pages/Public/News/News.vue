@@ -2,7 +2,7 @@
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '../../../Components/BackgroundGrid.vue'
 import SectionHeader from '../../../Components/SectionHeader.vue'
-import sanitizeHtml from 'sanitize-html'
+import DOMPurify from 'dompurify'
 
 defineProps({
   news: Object,
@@ -23,8 +23,9 @@ defineProps({
               wiadomość z dnia {{ news.published_at }}
             </template>
           </SectionHeader>
-
-          <div class="mt-10" v-html="sanitizeHtml(news.content)" />
+          <!-- eslint-disable vue/no-v-html -->
+          <div class="mt-10" v-html="DOMPurify.sanitize(news.content)" />
+          <!-- eslint-enable vue/no-v-html -->
         </div>
       </div>
     </div>
