@@ -25,7 +25,7 @@ defineProps({
           </SectionHeader>
 
           <div
-            class="mx-auto mt-10 md:border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+            class="mx-auto mt-10 border-gray-200 pt-10 sm:mt-16 sm:pt-16 md:border-t lg:mx-0 lg:max-w-none lg:grid-cols-3"
           >
             <h3 class="text-xl">
               Podstawowe informacje
