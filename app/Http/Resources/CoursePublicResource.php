@@ -27,10 +27,12 @@ class CoursePublicResource extends JsonResource
         $course = $this;
 
         return [
+            "id" => $course->id,
             "name" => $course->name,
             "abbreviation" => $course->abbreviation,
             "description" => $course->description,
             "semester" => $course->getRomanizedSemester(),
+            "semesterName" => $course->getSemesterName(),
             "type" => ClassType::labels()[$course->type],
             "active" => $this->activeSemesters->contains($course->getRomanizedSemester()),
         ];

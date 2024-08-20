@@ -35,7 +35,7 @@ class CourseController extends Controller
             ->firstOrFail();
 
         return inertia("Public/Course/Course", [
-            "course" => $course,
+            "course" => new CourseResource($course, collect()),
         ]);
     }
 }

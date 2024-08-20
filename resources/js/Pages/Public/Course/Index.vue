@@ -2,7 +2,7 @@
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '../../../Components/BackgroundGrid.vue'
 import SectionHeader from '../../../Components/SectionHeader.vue'
-import {PencilSquareIcon, XCircleIcon} from "@heroicons/vue/24/outline";
+import {ArrowRightCircleIcon} from "@heroicons/vue/24/outline";
 import TableWrapper from "../../../Shared/Components/Table/Public/TableWrapper.vue";
 import TableHeader from "../../../Shared/Components/Table/Public/TableHeader.vue";
 import TableRow from "../../../Shared/Components/Table/Public/TableRow.vue";
@@ -37,12 +37,12 @@ defineProps({
                     Kod
                   </TableHeader>
                   <TableHeader class="w-1/5">
-                    Nazwa
+                    Pełna nazwa kursu
                   </TableHeader>
-                  <TableHeader class="w-1/6">
+                  <TableHeader class="w-1/5">
                     Semestr
                   </TableHeader>
-                  <TableHeader class="w-1/6">
+                  <TableHeader class="w-1/5">
                     Forma
                   </TableHeader>
                   <TableHeader/>
@@ -62,7 +62,9 @@ defineProps({
                       {{ course.type }}
                     </TableCell>
                     <TableCell>
-                      ->
+                      <InertiaLink :href="`kursy/${course.id}`">
+                        <ArrowRightCircleIcon class="w-6 h-6 text-gray-500 m-auto" />
+                      </InertiaLink>
                     </TableCell>
                   </TableRow>
                 </template>

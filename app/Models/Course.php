@@ -52,6 +52,13 @@ class Course extends Model
         };
     }
 
+    public function getSemesterName(): string
+    {
+        return $this->semester % 2 === 0
+            ? __("Letni")
+            : __("Zimowy");
+    }
+
     protected function description(): Attribute
     {
         return Attribute::make(
