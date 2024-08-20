@@ -96,7 +96,7 @@ function updateCourse() {
               <FormLabel for="description">
                 Opis
               </FormLabel>
-              <TextAreaEditor id="description" v-model="form.description" :error="form.errors.description" autocomplete="off" />
+              <TextAreaEditor id="description" v-model="form.description" />
               <FormError :error="form.errors.description" />
             </FormGroup>
             <div class="mt-4 flex justify-end">

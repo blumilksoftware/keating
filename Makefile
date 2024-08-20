@@ -54,6 +54,9 @@ test:
 fix:
 	@docker compose --file ${DOCKER_COMPOSE_FILE} exec --user "${CURRENT_USER_ID}:${CURRENT_USER_GROUP_ID}" ${DOCKER_COMPOSE_APP_CONTAINER} bash -c 'composer csf'
 
+lintf:
+	@docker compose --file ${DOCKER_COMPOSE_FILE} exec --user "${CURRENT_USER_ID}:${CURRENT_USER_GROUP_ID}" ${DOCKER_COMPOSE_APP_CONTAINER} npm run lintf
+
 queue:
 	@docker compose --file ${DOCKER_COMPOSE_FILE} exec --user "${CURRENT_USER_ID}:${CURRENT_USER_GROUP_ID}" ${DOCKER_COMPOSE_APP_CONTAINER} php artisan queue:work
 
@@ -88,4 +91,4 @@ decrypt-beta-env:
 		&& mv .env.beta /envs \
 		&& rm .env.beta.encrypted"
 
-.PHONY: init check-env-file build run stop restart shell shell-root test fix create-test-db queue encrypt-beta-env decrypt-beta-env
+.PHONY: init check-env-file build run stop restart shell shell-root test fix create-test-db queue encrypt-beta-env decrypt-beta-env lintf
