@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Actions\WuStudentsImport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
@@ -72,5 +73,20 @@ class StudentController extends Controller
 
         return redirect()->back()
             ->with("success", "Usunięto studenta");
+    }
+
+    public function import(): Response
+    {
+        return inertia("Dashboard/Student/Import");
+    }
+
+    public function storeMany(Request $request, WuStudentsImport $importer): RedirectResponse
+    {
+        $importer->import($request->get("content") ?? "");
+        $importer->save();
+
+        return redirect()
+            ->route("students.index")
+            ->with("success", "Dodano studentów");
     }
 }
