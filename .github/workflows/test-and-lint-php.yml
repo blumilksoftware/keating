@@ -54,7 +54,7 @@ jobs:
           coverage: none
 
       - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-interaction --no-suggest
+        run: APP_ENV=ci composer install --prefer-dist --no-interaction --no-suggest
 
       - name: Run PHP linter
         run: composer cs
