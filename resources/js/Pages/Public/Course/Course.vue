@@ -29,16 +29,21 @@ defineProps({
               Podstawowe informacje
             </h3>
             <div
-              class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2 uppercase">
+              class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3 uppercase">
               <div class="text-center flex-row">
-                <div class="text-2xl leading-8">SEMESTR</div>
-                <div class="text-5xl leading-10 my-2">{{ course.semester }}</div>
-                <div class="text-2xl leading-8">{{ course.semesterName }}</div>
+                <div class="text-xl leading-8">KIERUNEK</div>
+                <div class="text-5xl leading-10 my-2">{{ course.fieldAbbreviation }}</div>
+                <div class="text-xl leading-8">KIERUNEK {{ course.field }}</div>
               </div>
               <div class="text-center flex-row">
-                <div class="text-2xl leading-8">FORMA ZAJĘĆ</div>
+                <div class="text-xl leading-8">SEMESTR</div>
+                <div class="text-5xl leading-10 my-2">{{ course.semester }}</div>
+                <div class="text-xl leading-8">{{ course.semesterName }}</div>
+              </div>
+              <div class="text-center flex-row">
+                <div class="text-xl leading-8">FORMA ZAJĘĆ</div>
                 <div class="text-5xl leading-10 my-2">{{ course.type[0] }}</div>
-                <div class="text-2xl leading-8">{{ course.type }}</div>
+                <div class="text-xl leading-8">{{ course.type }}</div>
               </div>
             </div>
           </div>

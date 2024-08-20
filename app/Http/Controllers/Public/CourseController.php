@@ -18,7 +18,9 @@ class CourseController extends Controller
             ->where("active", true)
             ->pluck("name");
 
-        $courses = Course::query()->get()
+        $courses = Course::query()
+            ->with("field")
+            ->get()
             ->map(fn(Course $course): array => (new CourseResource($course, $activeSemesters))->resolve())
             ->sortBy("semester")
             ->sortByDesc("active");

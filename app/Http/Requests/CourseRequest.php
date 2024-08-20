@@ -18,6 +18,7 @@ class CourseRequest extends FormRequest
             "description" => ["nullable", "max:65000"],
             "semester" => ["required", "numeric", "min:1", "max:10"],
             "type" => ["required", new Enum(ClassType::class)],
+            "field_id" => ["required", "exists:fields,id"],
         ];
     }
 }

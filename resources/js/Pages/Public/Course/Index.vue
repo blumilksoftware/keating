@@ -40,6 +40,9 @@ defineProps({
                     Pełna nazwa kursu
                   </TableHeader>
                   <TableHeader class="w-1/5">
+                    Specjalność
+                  </TableHeader>
+                  <TableHeader class="w-1/5">
                     Semestr
                   </TableHeader>
                   <TableHeader class="w-1/5">
@@ -54,6 +57,9 @@ defineProps({
                     </TableCell>
                     <TableCell>
                       {{ course.name }}
+                    </TableCell>
+                    <TableCell>
+                      {{ course.fieldAbbreviation }}
                     </TableCell>
                     <TableCell>
                       {{ course.semester }}

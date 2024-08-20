@@ -14,6 +14,7 @@ import TextAreaEditor from '@/Shared/Forms/TextAreaEditor.vue'
 
 defineProps({
   classTypes: Array,
+  fields: Array,
 })
 
 const form = useForm({
@@ -21,6 +22,7 @@ const form = useForm({
   abbreviation: '',
   description: '',
   semester: '',
+  field_id: '',
   type: '',
 })
 
@@ -79,6 +81,13 @@ function createCourse() {
               </FormLabel>
               <Select id="type" v-model="form.type" :error="form.errors.type" :options="classTypes" label="label" item-value="value" />
               <FormError :error="form.errors.type" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="field">
+                Kierunek/specjalność
+              </FormLabel>
+              <Select id="field" v-model="form.field_id" :error="form.errors.field_id" :options="fields" label="name" item-value="id" />
+              <FormError :error="form.errors.field_id" />
             </FormGroup>
             <FormGroup>
               <FormLabel for="description">

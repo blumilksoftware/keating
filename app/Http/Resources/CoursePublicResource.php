@@ -34,7 +34,9 @@ class CoursePublicResource extends JsonResource
             "semester" => $course->getRomanizedSemester(),
             "semesterName" => $course->getSemesterName(),
             "type" => ClassType::labels()[$course->type],
-            "active" => $this->activeSemesters->contains($course->getRomanizedSemester()),
+            "field" => $course->field->name,
+            "fieldAbbreviation" => $course->field->abbreviation,
+            "active" => $this->activeSemesters->contains($course->getRomanizedSemester()) || $this->activeSemesters->contains($course->semester),
         ];
     }
 }

@@ -16,6 +16,7 @@ import TextAreaEditor from '../../../Shared/Forms/TextAreaEditor.vue'
 const props = defineProps({
   course: Object,
   classTypes: Array,
+  fields: Array,
 })
 
 
@@ -25,6 +26,7 @@ const form = useForm({
   description: props.course.description,
   semester: props.course.semester,
   type: props.course.type,
+  field_id: props.course.field_id,
 })
 
 function updateCourse() {
@@ -82,6 +84,13 @@ function updateCourse() {
               </FormLabel>
               <Select id="type" v-model="form.type" :error="form.errors.type" :options="classTypes" label="label" item-value="value" />
               <FormError :error="form.errors.type" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="field">
+                Kierunek/specjalność
+              </FormLabel>
+              <Select id="field" v-model="form.field_id" :error="form.errors.field_id" :options="fields" label="name" item-value="id" />
+              <FormError :error="form.errors.field_id" />
             </FormGroup>
             <FormGroup>
               <FormLabel for="description">
