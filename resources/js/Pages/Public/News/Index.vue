@@ -5,6 +5,7 @@ import SectionHeader from '../../../Components/SectionHeader.vue'
 import Pagination from '../../../Components/Pagination.vue'
 import DOMPurify from 'dompurify'
 import { NoSymbolIcon } from '@heroicons/vue/24/outline'
+import { Head } from '@inertiajs/inertia-vue3'
 
 defineProps({
   paginator: Object,
@@ -13,6 +14,8 @@ defineProps({
 </script>
 
 <template>
+  <Head title="Aktualności" />
+
   <PublicLayout>
     <div class="relative isolate bg-white">
       <BackgroundGrid />

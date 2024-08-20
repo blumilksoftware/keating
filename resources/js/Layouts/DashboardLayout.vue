@@ -19,6 +19,7 @@ import {
 } from '@heroicons/vue/24/outline'
 import { ref, watch } from 'vue'
 import { useToast } from 'vue-toastification'
+import { Head } from '@inertiajs/inertia-vue3'
 
 const toast = useToast()
 const props = defineProps({
@@ -77,6 +78,8 @@ watch(() => props.flash, (flash) => {
 </script>
 
 <template>
+  <Head title="Panel administracyjny" />
+
   <div>
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog as="div" class="relative z-50 lg:hidden" @close="sidebarOpen = false">

@@ -15,7 +15,7 @@ class LoginController extends Controller
     public function create(): Response
     {
         return inertia("Public/Login", [
-            "universityLogo" => "https://irg2023.collegiumwitelona.pl/assets/logos/cwup.png",
+            "universityLogo" => asset("cwup-full.png"),
         ]);
     }
 

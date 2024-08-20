@@ -2,6 +2,7 @@
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '../../../Components/BackgroundGrid.vue'
 import SectionHeader from '../../../Components/SectionHeader.vue'
+import { Head } from '@inertiajs/inertia-vue3'
 import DOMPurify from 'dompurify'
 
 defineProps({
@@ -10,6 +11,8 @@ defineProps({
 </script>
 
 <template>
+  <Head :title="news.title + ' - Aktualności'" />
+
   <PublicLayout>
     <div class="relative isolate bg-white">
       <BackgroundGrid />
