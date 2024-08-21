@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Models\Section;
-use App\Models\SectionSettings;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
+use Keating\Models\Section;
+use Keating\Models\SectionSettings;
+use Keating\Models\User;
 use Tests\TestCase;
 
 class SectionsTest extends TestCase

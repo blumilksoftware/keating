@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace Keating\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Models\SectionSettings;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Keating\Models\SectionSettings;
 
-class SectionSettingsController extends Controller
+class SectionSettingsController
 {
     public function __invoke(Request $request): RedirectResponse
     {

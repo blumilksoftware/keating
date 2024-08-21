@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Actions;
+namespace Keating\Actions;
 
-use App\Models\Semester;
 use Exception;
 use Illuminate\Database\ConnectionInterface;
+use Keating\Models\Semester;
 
 class ActivateSemesterAction
 {

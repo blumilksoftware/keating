@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\CourseSemester;
-use App\Models\Grade;
-use App\Models\GradeColumn;
-use App\Models\Group;
-use App\Models\Section;
-use App\Models\SectionSettings;
-use App\Models\Setting;
-use App\Models\Student;
-use App\Models\User;
 use Illuminate\Database\Seeder;
+use Keating\Models\CourseSemester;
+use Keating\Models\Grade;
+use Keating\Models\GradeColumn;
+use Keating\Models\Group;
+use Keating\Models\Section;
+use Keating\Models\SectionSettings;
+use Keating\Models\Setting;
+use Keating\Models\Student;
+use Keating\Models\User;
 
 class DatabaseSeeder extends Seeder
 {

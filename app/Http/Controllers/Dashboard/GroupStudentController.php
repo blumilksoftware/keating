@@ -2,19 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace Keating\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\CourseSemesterResource;
-use App\Models\CourseSemester;
-use App\Models\Group;
-use App\Models\Student;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use Keating\Http\Resources\CourseSemesterResource;
+use Keating\Models\CourseSemester;
+use Keating\Models\Group;
+use Keating\Models\Student;
 
-class GroupStudentController extends Controller
+class GroupStudentController
 {
     public function index(Request $request, CourseSemester $course, Group $group): Response
     {

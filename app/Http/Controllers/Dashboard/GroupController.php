@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace Keating\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\GroupRequest;
-use App\Models\CourseSemester;
-use App\Models\Group;
 use Illuminate\Http\RedirectResponse;
+use Keating\Http\Requests\GroupRequest;
+use Keating\Models\CourseSemester;
+use Keating\Models\Group;
 
-class GroupController extends Controller
+class GroupController
 {
     public function store(GroupRequest $request, CourseSemester $course): RedirectResponse
     {

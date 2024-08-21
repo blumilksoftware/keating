@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Resources;
+namespace Keating\Http\Resources;
 
-use App\Enums\StudyForm;
-use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Keating\Enums\StudyForm;
+use Keating\Models\Group;
 
 class GroupResource extends JsonResource
 {

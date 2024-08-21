@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace Keating\Models;
 
-use App\Observers\GradeColumnObserver;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -13,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
+use Keating\Observers\GradeColumnObserver;
 
 /**
  * @property string $id

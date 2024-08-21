@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace Keating\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\FieldRequest;
-use App\Models\Field;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
+use Keating\Http\Requests\FieldRequest;
+use Keating\Models\Field;
 
-class FieldController extends Controller
+class FieldController
 {
     public function index(): Response
     {
