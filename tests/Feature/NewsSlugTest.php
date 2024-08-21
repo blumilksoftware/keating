@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Models\News;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Keating\Models\News;
 use Tests\TestCase;
 
 class NewsSlugTest extends TestCase

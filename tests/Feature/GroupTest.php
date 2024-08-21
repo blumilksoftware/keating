@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Models\CourseSemester;
-use App\Models\Group;
-use App\Models\Student;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
+use Keating\Models\CourseSemester;
+use Keating\Models\Group;
+use Keating\Models\Student;
+use Keating\Models\User;
 use Tests\TestCase;
 
 class GroupTest extends TestCase

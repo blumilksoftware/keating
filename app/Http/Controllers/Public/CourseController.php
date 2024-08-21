@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Public;
+namespace Keating\Http\Controllers\Public;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\CoursePublicResource as CourseResource;
-use App\Models\Course;
-use App\Models\Semester;
 use Inertia\Response;
+use Keating\Http\Resources\CoursePublicResource as CourseResource;
+use Keating\Models\Course;
+use Keating\Models\Semester;
 
-class CourseController extends Controller
+class CourseController
 {
     public function index(): Response
     {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Observers;
+namespace Keating\Observers;
 
-use App\Models\Grade;
+use Keating\Models\Grade;
 
 class GradeObserver
 {

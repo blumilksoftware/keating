@@ -2,23 +2,22 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace Keating\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Inertia\Response;
 
-class PasswordUpdateController extends Controller
+class PasswordUpdateController
 {
     public function edit(): Response
     {
         return inertia("Dashboard/PasswordUpdate");
     }
 
-    public function update(Request $request): RedirectResponse
+    public function update(Request $request, Hasher $hasher): RedirectResponse
     {
         $validated = $request->validate([
             "current_password" => ["required", "current_password"],
@@ -26,7 +25,7 @@ class PasswordUpdateController extends Controller
         ]);
 
         $request->user()->update([
-            "password" => Hash::make($validated["password"]),
+            "password" => $hasher->make($validated["password"]),
         ]);
 
         return redirect()->back()

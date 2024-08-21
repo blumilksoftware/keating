@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Public;
+namespace Keating\Http\Controllers\Public;
 
-use App\Http\Controllers\Controller;
-use App\Models\News;
 use Inertia\Response;
+use Keating\Models\News;
 
-class NewsController extends Controller
+class NewsController
 {
     public function index(): Response
     {

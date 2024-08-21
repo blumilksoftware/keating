@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace Keating\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\NewsRequest;
-use App\Models\News;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use Keating\Http\Requests\NewsRequest;
+use Keating\Models\News;
 
-class NewsManagementController extends Controller
+class NewsManagementController
 {
     public function index(Request $request): Response
     {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Traits;
+namespace Keating\Traits;
 
 use Closure;
 use Illuminate\Database\Eloquent\Model;

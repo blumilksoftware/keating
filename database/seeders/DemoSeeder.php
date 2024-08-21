@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\News;
 use Illuminate\Database\Seeder;
+use Keating\Models\News;
 
 class DemoSeeder extends Seeder
 {

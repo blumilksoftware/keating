@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Resources;
+namespace Keating\Http\Resources;
 
-use App\Models\Field;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Keating\Models\Field;
 
 class FieldResource extends JsonResource
 {
