@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Keating\Http\Controllers\Public;
 
 use Inertia\Response;
-use Keating\Http\Resources\CoursePublicResource as CourseResource;
+use Keating\DTOs\CoursePublicData;
 use Keating\Models\Course;
 use Keating\Models\Semester;
 
@@ -20,7 +20,7 @@ class CourseController
         $courses = Course::query()
             ->with("field")
             ->get()
-            ->map(fn(Course $course): array => (new CourseResource($course, $activeSemesters))->resolve())
+            ->map(fn(Course $course): CoursePublicData => CoursePublicData::fromModel($course, $activeSemesters))
             ->sortBy("semester")
             ->sortByDesc("active");
 
@@ -36,7 +36,7 @@ class CourseController
             ->firstOrFail();
 
         return inertia("Public/Course/Course", [
-            "course" => new CourseResource($course, collect()),
+            "course" => CoursePublicData::fromModel($course),
         ]);
     }
 }

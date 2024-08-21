@@ -6,12 +6,12 @@ namespace Keating\Http\Controllers\Dashboard;
 
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
+use Keating\DTOs\CourseData;
+use Keating\DTOs\FieldData;
 use Keating\Enums\ClassType;
 use Keating\Enums\SemesterName;
 use Keating\Enums\StudyForm;
 use Keating\Http\Requests\CourseRequest;
-use Keating\Http\Resources\CourseResource;
-use Keating\Http\Resources\FieldResource;
 use Keating\Models\Course;
 use Keating\Models\Field;
 use Spatie\LaravelOptions\Options;
@@ -25,7 +25,7 @@ class CourseController
             ->get();
 
         return inertia("Dashboard/Course/Index", [
-            "courses" => CourseResource::collection($courses),
+            "courses" => $courses->map(fn(Course $course): CourseData => CourseData::fromModel($course)),
             "total" => Course::query()->count(),
             "lastUpdate" => Course::query()->orderByDesc("updated_at")->first()?->updated_at->diffForHumans(),
         ]);
@@ -41,7 +41,7 @@ class CourseController
             "classTypes" => Options::forEnum(ClassType::class)->toArray(),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
             "semesterNames" => Options::forEnum(SemesterName::class)->toArray(),
-            "fields" => FieldResource::collection($fields)->resolve(),
+            "fields" => $fields->map(fn(Field $field) => FieldData::fromModel($field)),
         ]);
     }
 
@@ -65,7 +65,7 @@ class CourseController
             "classTypes" => Options::forEnum(ClassType::class)->toArray(),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
             "semesterNames" => Options::forEnum(SemesterName::class)->toArray(),
-            "fields" => FieldResource::collection($fields)->resolve(),
+            "fields" => $fields->map(fn(Field $field) => FieldData::fromModel($field)),
         ]);
     }
 

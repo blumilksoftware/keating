@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
-use Keating\Http\Resources\CourseSemesterResource;
+use Keating\DTOs\CourseSemesterData;
 use Keating\Models\CourseSemester;
 use Keating\Models\Group;
 use Keating\Models\Student;
@@ -33,7 +33,7 @@ class GroupStudentController
             : [];
 
         return inertia("Dashboard/CourseSemester/Student/Index", [
-            "course" => new CourseSemesterResource($course),
+            "course" => CourseSemesterData::fromModel($course),
             "group" => $group,
             "students" => $students,
             "availableStudents" => $availableStudents,

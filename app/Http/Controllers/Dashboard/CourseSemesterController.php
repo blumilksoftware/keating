@@ -6,10 +6,10 @@ namespace Keating\Http\Controllers\Dashboard;
 
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
+use Keating\DTOs\CourseSemesterData;
+use Keating\DTOs\GroupData;
 use Keating\Enums\StudyForm;
 use Keating\Http\Requests\CourseSemesterRequest;
-use Keating\Http\Resources\CourseSemesterResource;
-use Keating\Http\Resources\GroupResource;
 use Keating\Models\Course;
 use Keating\Models\CourseSemester;
 use Keating\Models\Semester;
@@ -25,7 +25,7 @@ class CourseSemesterController
             ->get();
 
         return inertia("Dashboard/CourseSemester/Index", [
-            "courses" => CourseSemesterResource::collection($courses),
+            "courses" => $courses->map(fn(CourseSemester $course): CourseSemesterData => CourseSemesterData::fromModel($course)),
             "activeSemester" => Semester::getActive(),
             "total" => Course::query()->count(),
             "lastUpdate" => CourseSemester::query()->orderByDesc("updated_at")->first()?->updated_at->diffForHumans(),
@@ -52,8 +52,8 @@ class CourseSemesterController
     public function show(CourseSemester $course): Response
     {
         return inertia("Dashboard/CourseSemester/Show", [
-            "course" => new CourseSemesterResource($course->load("groups")),
-            "groups" => GroupResource::collection($course->groups),
+            "course" => CourseSemesterData::fromModel($course),
+            "groups" => $course->groups->map(fn($group): GroupData => GroupData::fromModel($group)),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
         ]);
     }

@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use Keating\DTOs\CourseSemesterData;
 use Keating\Http\Requests\UpdateGrade;
 use Keating\Http\Requests\UpdateGradeColumn;
-use Keating\Http\Resources\CourseSemesterResource;
 use Keating\Models\CourseSemester;
 use Keating\Models\GradeColumn;
 use Keating\Models\Group;
@@ -31,7 +31,7 @@ class GradeController
             ->withQueryString();
 
         return inertia("Dashboard/CourseSemester/Grade/Index", [
-            "course" => new CourseSemesterResource($course),
+            "course" => CourseSemesterData::fromModel($course),
             "group" => $group,
             "total" => $group->students->count(),
             "students" => $students,
