@@ -82,7 +82,7 @@ class SemesterTest extends TestCase
         $this->assertTrue($semester->active);
     }
 
-    public function testOnlyOneSemesterCanBeActive(): void
+    public function testManySemestersCanBeActive(): void
     {
         $inactiveSemester = Semester::factory()->create(["active" => 0]);
         $activeSemester = Semester::factory()->create(["active" => 1]);
@@ -94,6 +94,6 @@ class SemesterTest extends TestCase
         $inactiveSemester->refresh();
         $activeSemester->refresh();
         $this->assertTrue($inactiveSemester->active);
-        $this->assertFalse($activeSemester->active);
+        $this->assertTrue($activeSemester->active);
     }
 }

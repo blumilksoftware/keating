@@ -3,7 +3,7 @@ import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '../../../Components/BackgroundGrid.vue'
 import SectionHeader from '../../../Components/SectionHeader.vue'
 import Pagination from '../../../Components/Pagination.vue'
-import sanitizeHtml from 'sanitize-html'
+import DOMPurify from 'dompurify'
 import { NoSymbolIcon } from '@heroicons/vue/24/outline'
 import { Head } from '@inertiajs/inertia-vue3'
 
@@ -42,8 +42,9 @@ defineProps({
                     {{ post.title }}
                   </a>
                 </h3>
-                <!-- eslint-disable vue/no-v-html (as is sanitized) -->
-                <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600" v-html="sanitizeHtml(post.content)" />
+                <!-- eslint-disable vue/no-v-html -->
+                <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600" v-html="DOMPurify.sanitize(post.content)" />
+                <!-- eslint-enable vue/no-v-html -->
               </div>
             </article>
           </div>
