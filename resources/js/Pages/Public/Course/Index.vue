@@ -1,12 +1,12 @@
 <script setup>
 import PublicLayout from '@/Layouts/PublicLayout.vue'
-import BackgroundGrid from '../../../Components/BackgroundGrid.vue'
-import SectionHeader from '../../../Components/SectionHeader.vue'
+import BackgroundGrid from '@/Components/BackgroundGrid.vue'
+import SectionHeader from '@/Components/SectionHeader.vue'
 import { ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
-import TableWrapper from '../../../Shared/Components/Table/Public/TableWrapper.vue'
-import TableHeader from '../../../Shared/Components/Table/Public/TableHeader.vue'
-import TableRow from '../../../Shared/Components/Table/Public/TableRow.vue'
-import TableCell from '../../../Shared/Components/Table/Public/TableCell.vue'
+import TableWrapper from '@/Shared/Components/Table/Public/TableWrapper.vue'
+import TableHeader from '@/Shared/Components/Table/Public/TableHeader.vue'
+import TableRow from '@/Shared/Components/Table/Public/TableRow.vue'
+import TableCell from '@/Shared/Components/Table/Public/TableCell.vue'
 
 defineProps({
   courses: Object,

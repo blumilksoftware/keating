@@ -20,6 +20,7 @@ defineProps({
 
 const form = useForm({
   name: '',
+  slug: '',
   abbreviation: '',
   description: '',
   semester: '',
@@ -62,6 +63,13 @@ function createCourse() {
               </FormLabel>
               <TextInput id="name" v-model="form.name" :error="form.errors.name" autocomplete="off" />
               <FormError :error="form.errors.name" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="slug">
+                Slug
+              </FormLabel>
+              <TextInput id="slug" v-model="form.slug" :error="form.errors.slug" autocomplete="off" />
+              <FormError :error="form.errors.slug" />
             </FormGroup>
             <FormGroup>
               <FormLabel for="abbreviation">

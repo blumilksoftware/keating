@@ -12,7 +12,7 @@ return new class() extends Migration {
         Schema::table("courses", function (Blueprint $table): void {
             $table->string("field_id")->nullable();
             $table->foreign("field_id")->references("id")->on("fields")->onDelete("CASCADE");
-            $table->string("slug");
+            $table->string("slug")->unique();
             $table->string("semester_name");
         });
     }
