@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Enums\StudyForm;
-use App\Models\CourseSemester;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Keating\Enums\StudyForm;
+use Keating\Models\CourseSemester;
 
 class GroupFactory extends Factory
 {

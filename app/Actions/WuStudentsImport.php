@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Actions;
+namespace Keating\Actions;
 
-use App\Models\Student;
+use Keating\Models\Student;
 
 class WuStudentsImport
 {

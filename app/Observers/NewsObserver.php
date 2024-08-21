@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Observers;
+namespace Keating\Observers;
 
-use App\Models\News;
-use App\Traits\Sluggable;
+use Keating\Models\News;
+use Keating\Traits\Sluggable;
 
 class NewsObserver
 {

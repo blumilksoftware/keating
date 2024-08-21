@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Public;
+namespace Keating\Http\Controllers\Public;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\CoursePublicResource as CourseResource;
-use App\Models\Course;
-use App\Models\Semester;
 use Inertia\Response;
+use Keating\DTOs\CoursePublicData;
+use Keating\Models\Course;
+use Keating\Models\Semester;
 
-class CourseController extends Controller
+class CourseController
 {
     public function index(): Response
     {
@@ -21,7 +20,7 @@ class CourseController extends Controller
         $courses = Course::query()
             ->with("field")
             ->get()
-            ->map(fn(Course $course): array => (new CourseResource($course, $activeSemesters))->resolve())
+            ->map(fn(Course $course): CoursePublicData => CoursePublicData::fromModel($course, $activeSemesters))
             ->sortBy("semester")
             ->sortByDesc("active");
 
@@ -37,7 +36,7 @@ class CourseController extends Controller
             ->firstOrFail();
 
         return inertia("Public/Course/Course", [
-            "course" => new CourseResource($course, collect()),
+            "course" => CoursePublicData::fromModel($course),
         ]);
     }
 }

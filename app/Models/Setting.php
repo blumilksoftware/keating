@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace Keating\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Keating\Observers\SettingObserver;
 
 /**
  * @property string $id
@@ -19,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
+#[ObservedBy(SettingObserver::class)]
 class Setting extends Model
 {
     use HasFactory;

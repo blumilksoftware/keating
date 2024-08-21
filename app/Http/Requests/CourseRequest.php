@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests;
+namespace Keating\Http\Requests;
 
-use App\Enums\ClassType;
-use App\Enums\SemesterName;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
+use Keating\Enums\ClassType;
+use Keating\Enums\SemesterName;
 
 class CourseRequest extends FormRequest
 {

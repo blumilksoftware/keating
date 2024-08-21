@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace Keating\Models;
 
-use App\Observers\NewsObserver;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Keating\Observers\NewsObserver;
 
 /**
  * @property string $id
@@ -33,7 +33,7 @@ class News extends Model
     protected $casts = [
         "published_at" => "datetime:Y-m-d H:i",
     ];
-    protected $appends = [
+    protected $Keatingends = [
         "published_at_formatted",
     ];
 

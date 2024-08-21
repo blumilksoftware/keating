@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Console\Commands;
+namespace Keating\Console\Commands;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Console\Command;

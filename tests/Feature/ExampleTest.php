@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Models\SectionSettings;
-use App\Models\Setting;
+use Keating\Models\SectionSettings;
+use Keating\Models\Setting;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase

@@ -2,22 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace Keating\Http\Controllers\Dashboard;
 
-use App\Enums\ClassType;
-use App\Enums\SemesterName;
-use App\Enums\StudyForm;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CourseRequest;
-use App\Http\Resources\CourseResource;
-use App\Http\Resources\FieldResource;
-use App\Models\Course;
-use App\Models\Field;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
+use Keating\DTOs\CourseData;
+use Keating\DTOs\FieldData;
+use Keating\Enums\ClassType;
+use Keating\Enums\SemesterName;
+use Keating\Enums\StudyForm;
+use Keating\Http\Requests\CourseRequest;
+use Keating\Models\Course;
+use Keating\Models\Field;
 use Spatie\LaravelOptions\Options;
 
-class CourseController extends Controller
+class CourseController
 {
     public function index(): Response
     {
@@ -26,7 +25,7 @@ class CourseController extends Controller
             ->get();
 
         return inertia("Dashboard/Course/Index", [
-            "courses" => CourseResource::collection($courses),
+            "courses" => $courses->map(fn(Course $course): CourseData => CourseData::fromModel($course)),
             "total" => Course::query()->count(),
             "lastUpdate" => Course::query()->orderByDesc("updated_at")->first()?->updated_at->diffForHumans(),
         ]);
@@ -42,7 +41,7 @@ class CourseController extends Controller
             "classTypes" => Options::forEnum(ClassType::class)->toArray(),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
             "semesterNames" => Options::forEnum(SemesterName::class)->toArray(),
-            "fields" => FieldResource::collection($fields)->resolve(),
+            "fields" => $fields->map(fn(Field $field) => FieldData::fromModel($field)),
         ]);
     }
 
@@ -66,7 +65,7 @@ class CourseController extends Controller
             "classTypes" => Options::forEnum(ClassType::class)->toArray(),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
             "semesterNames" => Options::forEnum(SemesterName::class)->toArray(),
-            "fields" => FieldResource::collection($fields)->resolve(),
+            "fields" => $fields->map(fn(Field $field) => FieldData::fromModel($field)),
         ]);
     }
 

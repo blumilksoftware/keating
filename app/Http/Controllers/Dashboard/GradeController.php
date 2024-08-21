@@ -2,21 +2,20 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace Keating\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateGrade;
-use App\Http\Requests\UpdateGradeColumn;
-use App\Http\Resources\CourseSemesterResource;
-use App\Models\CourseSemester;
-use App\Models\GradeColumn;
-use App\Models\Group;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use Keating\DTOs\CourseSemesterData;
+use Keating\Http\Requests\UpdateGrade;
+use Keating\Http\Requests\UpdateGradeColumn;
+use Keating\Models\CourseSemester;
+use Keating\Models\GradeColumn;
+use Keating\Models\Group;
 
-class GradeController extends Controller
+class GradeController
 {
     public function index(Request $request, CourseSemester $course, Group $group): Response
     {
@@ -32,7 +31,7 @@ class GradeController extends Controller
             ->withQueryString();
 
         return inertia("Dashboard/CourseSemester/Grade/Index", [
-            "course" => new CourseSemesterResource($course),
+            "course" => CourseSemesterData::fromModel($course),
             "group" => $group,
             "total" => $group->students->count(),
             "students" => $students,
