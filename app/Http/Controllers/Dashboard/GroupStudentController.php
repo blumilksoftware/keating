@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Keating\Http\Controllers\Dashboard;
 
-use App\DTOs\CourseSemesterData;
-use App\Http\Controllers\Controller;
-use App\Models\CourseSemester;
-use App\Models\Group;
-use App\Models\Student;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use Keating\DTOs\CourseSemesterData;
+use Keating\Models\CourseSemester;
+use Keating\Models\Group;
+use Keating\Models\Student;
 
 class GroupStudentController
 {

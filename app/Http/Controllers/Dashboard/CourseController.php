@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace Keating\Http\Controllers\Dashboard;
 
-use App\DTOs\CourseData;
-use App\Enums\ClassType;
-use App\Enums\StudyForm;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CourseRequest;
-use App\Models\Course;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
+use Keating\DTOs\CourseData;
+use Keating\DTOs\FieldData;
+use Keating\Enums\ClassType;
 use Keating\Enums\SemesterName;
-use Keating\Http\Resources\CourseResource;
-use Keating\Http\Resources\FieldResource;
+use Keating\Enums\StudyForm;
+use Keating\Http\Requests\CourseRequest;
+use Keating\Models\Course;
 use Keating\Models\Field;
 use Spatie\LaravelOptions\Options;
 
@@ -43,7 +41,7 @@ class CourseController
             "classTypes" => Options::forEnum(ClassType::class)->toArray(),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
             "semesterNames" => Options::forEnum(SemesterName::class)->toArray(),
-            "fields" => FieldResource::collection($fields)->resolve(),
+            "fields" => $fields->map(fn(Field $field) => FieldData::fromModel($field)),
         ]);
     }
 
@@ -67,7 +65,7 @@ class CourseController
             "classTypes" => Options::forEnum(ClassType::class)->toArray(),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
             "semesterNames" => Options::forEnum(SemesterName::class)->toArray(),
-            "fields" => FieldResource::collection($fields)->resolve(),
+            "fields" => $fields->map(fn(Field $field) => FieldData::fromModel($field)),
         ]);
     }
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\DTOs;
+namespace Keating\DTOs;
 
-use App\Enums\ClassType;
-use App\Models\Course;
+use Keating\Enums\ClassType;
+use Keating\Models\Course;
 
 readonly class CourseData
 {

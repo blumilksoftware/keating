@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\DTOs;
+namespace Keating\DTOs;
 
-use App\Enums\StudyForm;
-use App\Models\Group;
+use Keating\Enums\StudyForm;
+use Keating\Models\Group;
 
 readonly class GroupData
 {

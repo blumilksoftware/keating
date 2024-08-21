@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\DTOs;
+namespace Keating\DTOs;
 
-use App\Models\CourseSemester;
+use Keating\Models\CourseSemester;
 
 readonly class CourseSemesterData
 {

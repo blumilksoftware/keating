@@ -2,21 +2,20 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace Keating\Http\Controllers\Dashboard;
 
-use App\DTOs\CourseSemesterData;
-use App\DTOs\GroupData;
-use App\Enums\StudyForm;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CourseSemesterRequest;
-use App\Models\Course;
-use App\Models\CourseSemester;
-use App\Models\Semester;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
+use Keating\DTOs\CourseSemesterData;
+use Keating\DTOs\GroupData;
+use Keating\Enums\StudyForm;
+use Keating\Http\Requests\CourseSemesterRequest;
+use Keating\Models\Course;
+use Keating\Models\CourseSemester;
+use Keating\Models\Semester;
 use Spatie\LaravelOptions\Options;
 
-class CourseSemesterController extends Controller
+class CourseSemesterController
 {
     public function index(): Response
     {
