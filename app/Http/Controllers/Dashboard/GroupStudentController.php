@@ -8,13 +8,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
-use Keating\Http\Controllers\Controller;
 use Keating\Http\Resources\CourseSemesterResource;
 use Keating\Models\CourseSemester;
 use Keating\Models\Group;
 use Keating\Models\Student;
 
-class GroupStudentController extends Controller
+class GroupStudentController
 {
     public function index(Request $request, CourseSemester $course, Group $group): Response
     {

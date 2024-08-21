@@ -7,13 +7,12 @@ namespace Keating\Http\Controllers\Dashboard;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 use Keating\Enums\SectionType;
-use Keating\Http\Controllers\Controller;
 use Keating\Http\Requests\SectionRequest;
 use Keating\Models\Section;
 use Keating\Models\SectionSettings;
 use Spatie\LaravelOptions\Options;
 
-class SectionController extends Controller
+class SectionController
 {
     public function show(): Response
     {

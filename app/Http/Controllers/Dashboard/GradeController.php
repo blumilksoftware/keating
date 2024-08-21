@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
-use Keating\Http\Controllers\Controller;
 use Keating\Http\Requests\UpdateGrade;
 use Keating\Http\Requests\UpdateGradeColumn;
 use Keating\Http\Resources\CourseSemesterResource;
@@ -16,7 +15,7 @@ use Keating\Models\CourseSemester;
 use Keating\Models\GradeColumn;
 use Keating\Models\Group;
 
-class GradeController extends Controller
+class GradeController
 {
     public function index(Request $request, CourseSemester $course, Group $group): Response
     {

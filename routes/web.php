@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Facades\Route;
 use Keating\Http\Controllers\Dashboard\ContactInfoController;
 use Keating\Http\Controllers\Dashboard\CourseController;
 use Keating\Http\Controllers\Dashboard\CourseSemesterController;
@@ -24,7 +25,6 @@ use Keating\Http\Controllers\Public\GradeController as PublicGradeController;
 use Keating\Http\Controllers\Public\HomeController;
 use Keating\Http\Controllers\Public\LoginController;
 use Keating\Http\Controllers\Public\NewsController;
-use Illuminate\Support\Facades\Route;
 
 Route::get("/", HomeController::class)->name("main");
 Route::get("/aktualnosci", [NewsController::class, "index"]);

@@ -9,12 +9,11 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Keating\Actions\WuStudentsImport;
-use Keating\Http\Controllers\Controller;
 use Keating\Http\Requests\StoreStudentRequest;
 use Keating\Http\Requests\UpdateStudentRequest;
 use Keating\Models\Student;
 
-class StudentController extends Controller
+class StudentController
 {
     public function index(Request $request): Response
     {

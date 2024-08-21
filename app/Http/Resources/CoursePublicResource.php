@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Resources;
+namespace Keating\Http\Resources;
 
-use App\Enums\ClassType;
-use App\Enums\SemesterName;
-use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Collection;
+use Keating\Enums\ClassType;
+use Keating\Enums\SemesterName;
+use Keating\Models\Course;
 
 class CoursePublicResource extends JsonResource
 {

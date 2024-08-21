@@ -8,13 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Keating\DTOs\StudentData;
-use Keating\Http\Controllers\Controller;
 use Keating\Models\CourseSemester;
 use Keating\Models\Group;
 use Keating\Models\Semester;
 use Keating\Models\Student;
 
-class GradeController extends Controller
+class GradeController
 {
     public function __invoke(Request $request, ?Semester $semester = null, ?CourseSemester $course = null, ?Group $group = null, ?string $index = null): Response
     {

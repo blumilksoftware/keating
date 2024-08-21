@@ -8,11 +8,10 @@ use Exception;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 use Keating\Actions\ActivateSemesterAction;
-use Keating\Http\Controllers\Controller;
 use Keating\Http\Requests\SemesterRequest;
 use Keating\Models\Semester;
 
-class SemesterController extends Controller
+class SemesterController
 {
     public function index(): Response
     {

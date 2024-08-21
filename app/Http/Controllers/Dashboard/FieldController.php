@@ -6,11 +6,10 @@ namespace Keating\Http\Controllers\Dashboard;
 
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
-use Keating\Http\Controllers\Controller;
 use Keating\Http\Requests\FieldRequest;
 use Keating\Models\Field;
 
-class FieldController extends Controller
+class FieldController
 {
     public function index(): Response
     {

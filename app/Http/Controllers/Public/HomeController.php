@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Keating\Http\Controllers\Public;
 
 use Inertia\Response;
-use Keating\Http\Controllers\Controller;
 use Keating\Models\Section;
 use Keating\Models\SectionSettings;
 use Keating\Models\Setting;
 
-class HomeController extends Controller
+class HomeController
 {
     public function __invoke(): Response
     {

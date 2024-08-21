@@ -7,7 +7,6 @@ namespace Keating\Http\Controllers\Dashboard;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 use Keating\Enums\StudyForm;
-use Keating\Http\Controllers\Controller;
 use Keating\Http\Requests\CourseSemesterRequest;
 use Keating\Http\Resources\CourseSemesterResource;
 use Keating\Http\Resources\GroupResource;
@@ -16,7 +15,7 @@ use Keating\Models\CourseSemester;
 use Keating\Models\Semester;
 use Spatie\LaravelOptions\Options;
 
-class CourseSemesterController extends Controller
+class CourseSemesterController
 {
     public function index(): Response
     {

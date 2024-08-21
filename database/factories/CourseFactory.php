@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use Keating\Enums\SemesterName;
-use Keating\Models\Field;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Keating\Enums\ClassType;
+use Keating\Enums\SemesterName;
+use Keating\Models\Field;
 
 class CourseFactory extends Factory
 {

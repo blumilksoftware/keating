@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace Keating\Http\Controllers\Dashboard;
 
 use Inertia\Response;
-use Keating\Http\Controllers\Controller;
 use Keating\Models\Course;
 use Keating\Models\Group;
 use Keating\Models\Semester;
 use Keating\Models\Setting;
 use Keating\Models\Student;
 
-class DashboardController extends Controller
+class DashboardController
 {
     public function __invoke(): Response
     {

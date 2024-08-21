@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Keating\Observers;
 
-use Keating\Traits\Sluggable;
 use Keating\Models\News;
+use Keating\Traits\Sluggable;
 
 class NewsObserver
 {

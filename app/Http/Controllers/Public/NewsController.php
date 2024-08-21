@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Keating\Http\Controllers\Public;
 
 use Inertia\Response;
-use Keating\Http\Controllers\Controller;
 use Keating\Models\News;
 
-class NewsController extends Controller
+class NewsController
 {
     public function index(): Response
     {

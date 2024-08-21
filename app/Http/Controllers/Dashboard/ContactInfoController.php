@@ -8,12 +8,11 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Keating\Enums\Icons;
-use Keating\Http\Controllers\Controller;
 use Keating\Http\Requests\ContactInfoRequest;
 use Keating\Models\ContactInfo;
 use Spatie\LaravelOptions\Options;
 
-class ContactInfoController extends Controller
+class ContactInfoController
 {
     public function index(Request $request): Response
     {

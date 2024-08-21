@@ -9,9 +9,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
 use Inertia\Response;
-use Keating\Http\Controllers\Controller;
 
-class PasswordUpdateController extends Controller
+class PasswordUpdateController
 {
     public function edit(): Response
     {

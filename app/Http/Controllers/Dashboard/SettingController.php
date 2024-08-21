@@ -7,11 +7,10 @@ namespace Keating\Http\Controllers\Dashboard;
 use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
-use Keating\Http\Controllers\Controller;
 use Keating\Http\Requests\SettingRequest;
 use Keating\Models\Setting;
 
-class SettingController extends Controller
+class SettingController
 {
     public function edit(): Response
     {

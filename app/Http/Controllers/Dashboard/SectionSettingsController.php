@@ -6,10 +6,9 @@ namespace Keating\Http\Controllers\Dashboard;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Keating\Http\Controllers\Controller;
 use Keating\Models\SectionSettings;
 
-class SectionSettingsController extends Controller
+class SectionSettingsController
 {
     public function __invoke(Request $request): RedirectResponse
     {

@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Keating\Http\Controllers\Dashboard;
 
 use Illuminate\Http\RedirectResponse;
-use Keating\Http\Controllers\Controller;
 use Keating\Http\Requests\GroupRequest;
 use Keating\Models\CourseSemester;
 use Keating\Models\Group;
 
-class GroupController extends Controller
+class GroupController
 {
     public function store(GroupRequest $request, CourseSemester $course): RedirectResponse
     {

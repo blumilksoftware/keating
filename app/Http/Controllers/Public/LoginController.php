@@ -8,9 +8,8 @@ use Illuminate\Auth\AuthManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
-use Keating\Http\Controllers\Controller;
 
-class LoginController extends Controller
+class LoginController
 {
     public function create(): Response
     {

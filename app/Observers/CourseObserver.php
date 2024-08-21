@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Observers;
+namespace Keating\Observers;
 
-use App\Models\Course;
-use App\Traits\Sluggable;
+use Keating\Models\Course;
+use Keating\Traits\Sluggable;
 
 class CourseObserver
 {

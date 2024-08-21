@@ -6,11 +6,10 @@ namespace Keating\Http\Controllers\Dashboard;
 
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
-use Keating\Http\Controllers\Controller;
 use Keating\Http\Requests\FaqRequest;
 use Keating\Models\Faq;
 
-class FaqController extends Controller
+class FaqController
 {
     public function index(): Response
     {

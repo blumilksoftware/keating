@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
-use Keating\Http\Controllers\Controller;
 use Keating\Http\Requests\NewsRequest;
 use Keating\Models\News;
 
-class NewsManagementController extends Controller
+class NewsManagementController
 {
     public function index(Request $request): Response
     {
