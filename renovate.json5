@@ -7,6 +7,6 @@
         "Blusia", // Agnieszka Rudek
     ],
     "ignoreDeps": [
-        "ghcr.io/blumilksoftware/keating",
+        "registry.blumilk.pl/internal-public/keating",
     ],
 }
