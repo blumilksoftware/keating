@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace App\Traits;
 
+use Closure;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 trait Sluggable
 {
-    public function createSlug(Model $model, string $attribute): string
+    public function createSlug(Model $model, Closure $slugString): string
     {
         if ($model->slug) {
             return $model->slug;
         }
 
-        $slug = $this->buildBaseSlug($model, $attribute);
+        $slug = Str::slug($slugString());
 
         if (!$this->checkIfSlugExists($model, $slug)) {
             return $slug;
