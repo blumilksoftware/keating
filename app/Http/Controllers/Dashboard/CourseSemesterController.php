@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\DTOs\CourseSemesterData;
+use App\DTOs\GroupData;
 use App\Enums\StudyForm;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseSemesterRequest;
-use App\Http\Resources\CourseSemesterResource;
-use App\Http\Resources\GroupResource;
 use App\Models\Course;
 use App\Models\CourseSemester;
 use App\Models\Semester;
@@ -26,7 +26,7 @@ class CourseSemesterController extends Controller
             ->get();
 
         return inertia("Dashboard/CourseSemester/Index", [
-            "courses" => CourseSemesterResource::collection($courses),
+            "courses" => $courses->map(fn(CourseSemester $course): CourseSemesterData => CourseSemesterData::fromModel($course)),
             "activeSemester" => Semester::getActive(),
             "total" => Course::query()->count(),
             "lastUpdate" => CourseSemester::query()->orderByDesc("updated_at")->first()?->updated_at->diffForHumans(),
@@ -53,8 +53,8 @@ class CourseSemesterController extends Controller
     public function show(CourseSemester $course): Response
     {
         return inertia("Dashboard/CourseSemester/Show", [
-            "course" => new CourseSemesterResource($course->load("groups")),
-            "groups" => GroupResource::collection($course->groups),
+            "course" => CourseSemesterData::fromModel($course),
+            "groups" => $course->groups->map(fn($group): GroupData => GroupData::fromModel($group)),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
         ]);
     }

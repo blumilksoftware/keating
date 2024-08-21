@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\DTOs\CourseData;
 use App\Enums\ClassType;
 use App\Enums\StudyForm;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
-use App\Http\Resources\CourseResource;
 use App\Models\Course;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
@@ -23,7 +23,7 @@ class CourseController extends Controller
             ->get();
 
         return inertia("Dashboard/Course/Index", [
-            "courses" => CourseResource::collection($courses),
+            "courses" => $courses->map(fn(Course $course): CourseData => CourseData::fromModel($course)),
             "total" => Course::query()->count(),
             "lastUpdate" => Course::query()->orderByDesc("updated_at")->first()?->updated_at->diffForHumans(),
         ]);

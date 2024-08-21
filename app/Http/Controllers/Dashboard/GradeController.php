@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\DTOs\CourseSemesterData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateGrade;
 use App\Http\Requests\UpdateGradeColumn;
-use App\Http\Resources\CourseSemesterResource;
 use App\Models\CourseSemester;
 use App\Models\GradeColumn;
 use App\Models\Group;
@@ -32,7 +32,7 @@ class GradeController extends Controller
             ->withQueryString();
 
         return inertia("Dashboard/CourseSemester/Grade/Index", [
-            "course" => new CourseSemesterResource($course),
+            "course" => CourseSemesterData::fromModel($course),
             "group" => $group,
             "total" => $group->students->count(),
             "students" => $students,

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\DTOs\CourseSemesterData;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CourseSemesterResource;
 use App\Models\CourseSemester;
 use App\Models\Group;
 use App\Models\Student;
@@ -34,7 +34,7 @@ class GroupStudentController extends Controller
             : [];
 
         return inertia("Dashboard/CourseSemester/Student/Index", [
-            "course" => new CourseSemesterResource($course),
+            "course" => CourseSemesterData::fromModel($course),
             "group" => $group,
             "students" => $students,
             "availableStudents" => $availableStudents,
