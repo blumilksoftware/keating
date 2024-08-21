@@ -47,7 +47,7 @@ function createCourse() {
           </ManagementHeaderItem>
         </template>
       </ManagementHeader>
-      {{ form.errors }}
+
       <form class="grid grid-cols-2" @submit.prevent="createCourse">
         <Section>
           <div class="flex flex-col justify-between gap-4">
