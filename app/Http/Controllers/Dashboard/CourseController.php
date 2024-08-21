@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Keating\Http\Controllers\Dashboard;
 
+use Keating\Enums\SemesterName;
+use Keating\Http\Resources\FieldResource;
+use Keating\Models\Field;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 use Keating\Enums\ClassType;
@@ -31,9 +34,15 @@ class CourseController extends Controller
 
     public function create(): Response
     {
+        $fields = Field::query()
+            ->orderBy("abbreviation")
+            ->get();
+
         return inertia("Dashboard/Course/Create", [
             "classTypes" => Options::forEnum(ClassType::class)->toArray(),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
+            "semesterNames" => Options::forEnum(SemesterName::class)->toArray(),
+            "fields" => FieldResource::collection($fields)->resolve(),
         ]);
     }
 
@@ -48,10 +57,16 @@ class CourseController extends Controller
 
     public function edit(Course $course): Response
     {
+        $fields = Field::query()
+            ->orderBy("abbreviation")
+            ->get();
+
         return inertia("Dashboard/Course/Edit", [
             "course" => $course,
             "classTypes" => Options::forEnum(ClassType::class)->toArray(),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
+            "semesterNames" => Options::forEnum(SemesterName::class)->toArray(),
+            "fields" => FieldResource::collection($fields)->resolve(),
         ]);
     }
 

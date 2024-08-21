@@ -11,7 +11,7 @@ class SemesterFactory extends Factory
     public function definition(): array
     {
         return [
-            "name" => "Semestr " . fake()->numberBetween(1, 7),
+            "name" => fake()->numberBetween(1, 7),
             "active" => fake()->boolean,
         ];
     }

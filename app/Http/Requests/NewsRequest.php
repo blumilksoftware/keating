@@ -33,7 +33,7 @@ class NewsRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            "slug" => $this->input("slug") !== null ? Str::slug($this->input("slug")) : Str::slug($this->input("title")),
+            "slug" => $this->input("slug") !== null ? Str::slug($this->input("slug")) : null,
         ]);
     }
 }
