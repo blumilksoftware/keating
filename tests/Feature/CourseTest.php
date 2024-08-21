@@ -49,15 +49,18 @@ class CourseTest extends TestCase
             "semester" => 2,
             "type" => "laboratory",
             "field_id" => $this->field->id,
+            "semester_name" => "summer",
+            "slug" => "course",
         ]);
 
         $this->patch("/dashboard/courses/{$course->id}", [
             "name" => "Course",
+            "slug" => "course",
             "abbreviation" => "C",
             "semester" => 2,
             "type" => "laboratory",
             "field_id" => $this->field->id,
-            "semester_name" => "summer",
+            "semester_name" => "winter",
         ])->assertSessionHasNoErrors();
 
         $this->assertDatabaseHas("courses", [
@@ -66,7 +69,8 @@ class CourseTest extends TestCase
             "semester" => 2,
             "type" => "laboratory",
             "field_id" => $this->field->id,
-            "semester_name" => "summer",
+            "semester_name" => "winter",
+            "slug" => "course",
         ]);
     }
 

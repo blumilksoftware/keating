@@ -30,7 +30,7 @@ class CourseRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            "slug" => $this->input("slug") !== null ? Str::slug($this->input("slug")) : Str::slug($this->input("name")),
+            "slug" => $this->input("slug") !== null ? Str::slug($this->input("slug")) : null,
         ]);
     }
 }
