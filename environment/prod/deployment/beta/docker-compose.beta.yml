@@ -1,5 +1,3 @@
-version: "3.8"
-
 networks:
   traefik-proxy:
     external: true
@@ -16,13 +14,18 @@ services:
   keating-beta-app:
     image: registry.blumilk.pl/internal-public/keating:beta
     container_name: keating-beta-app
-    pull_policy: always
     deploy:
       mode: replicated
       replicas: 1
       resources:
         limits:
           memory: 512M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+    pull_policy: always
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.keating-beta-app.rule=Host(`${KEATING_HOST_NAME:? variable KEATING_HOST_NAME not set}`)"
@@ -48,6 +51,17 @@ services:
   keating-beta-database:
     image: postgres:15.5-alpine3.17@sha256:1961f9d61a86948fb3c02ef87a6616f74f3530d10a1cd299b84abba7ed6db791
     container_name: keating-beta-database
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          memory: 512M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
     environment:
       - PGPASSWORD=${DOCKER_KEATING_BETA_DB_ROOT_PASSWORD:? variable DOCKER_KEATING_BETA_DB_ROOT_PASSWORD not set}
       - POSTGRES_DB=${DOCKER_KEATING_BETA_DB_DATABASE:? variable DOCKER_KEATING_BETA_DB_DATABASE not set}
@@ -68,6 +82,17 @@ services:
   keating-beta-redis:
     image: redis:7.0.11-alpine3.17@sha256:cbcf5bfbc3eaa232b1fa99e539459f46915a41334d46b54bf894f8837a7f071e
     container_name: keating-beta-redis
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          memory: 512M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
     healthcheck:
       test: [ "CMD-SHELL", "redis-cli ping | grep PONG" ]
       interval: 3s
