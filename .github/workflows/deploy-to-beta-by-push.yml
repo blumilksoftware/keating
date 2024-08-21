@@ -102,5 +102,5 @@ jobs:
           script_stop: true
           script: |
             cd ${{ env.TARGET_DIR_ON_SERVER }}/${{ env.DOCKER_REGISTRY_REPO_NAME }}/environment/prod/deployment/beta
-            make beta-deploy BETA_ENV_KEY=${{ secrets.BETA_ENV_KEY }}
-            docker images --filter dangling=true | grep "ghcr.io/blumilksoftware/${{ env.DOCKER_REGISTRY_REPO_NAME }}" | awk '{print $3}'| xargs --no-run-if-empty docker rmi
+            make beta-deploy SOPS_AGE_KEY=${{ secrets.SOPS_AGE_BETA_SECRET_KEY }}
+            docker images --filter dangling=true | grep "${{ env.DOCKER_IMAGE_NAME }}" | awk '{print $3}'| xargs --no-run-if-empty docker rmi

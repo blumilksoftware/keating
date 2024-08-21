@@ -60,32 +60,24 @@ queue:
 create-test-db:
 	@docker compose --file ${DOCKER_COMPOSE_FILE} exec ${DOCKER_COMPOSE_DATABASE_CONTAINER} bash -c 'createdb --username=${DATABASE_USERNAME} ${TEST_DATABASE_NAME} &> /dev/null && echo "Created database for tests (${TEST_DATABASE_NAME})." || echo "Database for tests (${TEST_DATABASE_NAME}) exists."'
 
-encrypt-beta-env:
-	@docker compose --file ${DOCKER_COMPOSE_FILE} run \
-	--rm \
-	--no-deps \
-	--volume ${CURRENT_DIR}/environment/prod/deployment/beta:/envs \
-	--entrypoint "" \
-	--workdir /application \
-	--user "${CURRENT_USER_ID}:${CURRENT_USER_GROUP_ID}" \
-	${DOCKER_COMPOSE_APP_CONTAINER} \
-	bash -c "cp /envs/.env.beta /application \
-		&& php artisan env:encrypt --env beta --key ${BETA_ENV_KEY} \
-		&& mv .env.beta.encrypted /envs \
-		&& rm .env.beta"
+encrypt-beta-secrets:
+	@$(MAKE) encrypt-secrets SECRETS_ENV=beta
 
-decrypt-beta-env:
-	@docker compose --file ${DOCKER_COMPOSE_FILE} run \
-	--rm \
-	--no-deps \
-	--volume ${CURRENT_DIR}/environment/prod/deployment/beta:/envs \
-	--entrypoint "" \
-	--workdir /application \
-	--user "${CURRENT_USER_ID}:${CURRENT_USER_GROUP_ID}" \
-	${DOCKER_COMPOSE_APP_CONTAINER} \
-	bash -c "cp /envs/.env.beta.encrypted /application \
-		&& php artisan env:decrypt --env beta --key ${BETA_ENV_KEY} \
-		&& mv .env.beta /envs \
-		&& rm .env.beta.encrypted"
+decrypt-beta-secrets:
+	@$(MAKE) decrypt-secrets SECRETS_ENV=beta AGE_SECRET_KEY=${SOPS_AGE_BETA_SECRET_KEY}
 
-.PHONY: init check-env-file build run stop restart shell shell-root test fix create-test-db queue encrypt-beta-env decrypt-beta-env
+decrypt-secrets:
+	@docker compose --file ${DOCKER_COMPOSE_FILE} exec --user "${CURRENT_USER_ID}:${CURRENT_USER_GROUP_ID}" --env SOPS_AGE_KEY=${AGE_SECRET_KEY} ${DOCKER_COMPOSE_APP_CONTAINER} \
+		bash -c "echo 'Decrypting ${SECRETS_ENV} secrets' \
+			&& cd ./environment/prod/deployment/${SECRETS_ENV} \
+			&& sops --decrypt --input-type=dotenv --output-type=dotenv --output .env.${SECRETS_ENV}.secrets.decrypted .env.${SECRETS_ENV}.secrets \
+			&& echo 'Done'"
+
+encrypt-secrets:
+	@docker compose --file ${DOCKER_COMPOSE_FILE} exec --user "${CURRENT_USER_ID}:${CURRENT_USER_GROUP_ID}" ${DOCKER_COMPOSE_APP_CONTAINER} \
+		bash -c "echo 'Encrypting ${SECRETS_ENV} secrets' \
+			&& cd ./environment/prod/deployment/${SECRETS_ENV} \
+			&& sops --encrypt --input-type=dotenv --output-type=dotenv --output .env.${SECRETS_ENV}.secrets .env.${SECRETS_ENV}.secrets.decrypted \
+			&& echo 'Done'"
+
+.PHONY: init check-env-file build run stop restart shell shell-root test fix create-test-db queue encrypt-beta-secrets decrypt-beta-secrets
