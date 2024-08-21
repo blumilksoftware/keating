@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace Keating\Http\Controllers\Dashboard;
 
 use App\DTOs\CourseSemesterData;
 use App\Http\Controllers\Controller;
@@ -16,7 +16,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
 
-class GradeController extends Controller
+class GradeController
 {
     public function index(Request $request, CourseSemester $course, Group $group): Response
     {

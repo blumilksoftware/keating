@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Models\Course;
-use App\Models\CourseSemester;
-use App\Models\Semester;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Keating\Models\Course;
+use Keating\Models\CourseSemester;
+use Keating\Models\Semester;
+use Keating\Models\User;
 use Tests\TestCase;
 
 class CourseSemesterTest extends TestCase

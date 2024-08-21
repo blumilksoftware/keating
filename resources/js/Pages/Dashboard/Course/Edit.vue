@@ -16,15 +16,20 @@ import TextAreaEditor from '../../../Shared/Forms/TextAreaEditor.vue'
 const props = defineProps({
   course: Object,
   classTypes: Array,
+  fields: Array,
+  semesterNames: Array,
 })
 
 
 const form = useForm({
   name: props.course.name,
+  slug: props.course.slug,
   abbreviation: props.course.abbreviation,
   description: props.course.description,
   semester: props.course.semester,
   type: props.course.type,
+  field_id: props.course.field_id,
+  semester_name: props.course.semester_name,
 })
 
 function updateCourse() {
@@ -63,6 +68,13 @@ function updateCourse() {
               <FormError :error="form.errors.name" />
             </FormGroup>
             <FormGroup>
+              <FormLabel for="slug">
+                Slug
+              </FormLabel>
+              <TextInput id="slug" v-model="form.slug" :error="form.errors.slug" autocomplete="off" />
+              <FormError :error="form.errors.slug" />
+            </FormGroup>
+            <FormGroup>
               <FormLabel for="abbreviation">
                 Skrótowiec
               </FormLabel>
@@ -77,6 +89,13 @@ function updateCourse() {
               <FormError :error="form.errors.semester" />
             </FormGroup>
             <FormGroup>
+              <FormLabel for="semesterName">
+                Nazwa semestru
+              </FormLabel>
+              <Select id="semesterName" v-model="form.semester_name" :error="form.errors.semester_name" :options="semesterNames" label="label" item-value="value" />
+              <FormError :error="form.errors.semester_name" />
+            </FormGroup>
+            <FormGroup>
               <FormLabel for="type">
                 Typ zajęć
               </FormLabel>
@@ -84,10 +103,17 @@ function updateCourse() {
               <FormError :error="form.errors.type" />
             </FormGroup>
             <FormGroup>
+              <FormLabel for="field">
+                Kierunek/specjalność
+              </FormLabel>
+              <Select id="field" v-model="form.field_id" :error="form.errors.field_id" :options="fields" label="name" item-value="id" />
+              <FormError :error="form.errors.field_id" />
+            </FormGroup>
+            <FormGroup>
               <FormLabel for="description">
                 Opis
               </FormLabel>
-              <TextAreaEditor id="description" v-model="form.description" :error="form.errors.description" autocomplete="off" />
+              <TextAreaEditor id="description" v-model="form.description" />
               <FormError :error="form.errors.description" />
             </FormGroup>
             <div class="mt-4 flex justify-end">

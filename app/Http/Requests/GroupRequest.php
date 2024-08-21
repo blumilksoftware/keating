@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests;
+namespace Keating\Http\Requests;
 
-use App\Enums\StudyForm;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
+use Keating\Enums\StudyForm;
 
 class GroupRequest extends FormRequest
 {

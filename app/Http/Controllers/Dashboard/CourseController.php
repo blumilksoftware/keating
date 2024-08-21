@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace Keating\Http\Controllers\Dashboard;
 
 use App\DTOs\CourseData;
 use App\Enums\ClassType;
@@ -12,9 +12,13 @@ use App\Http\Requests\CourseRequest;
 use App\Models\Course;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
+use Keating\Enums\SemesterName;
+use Keating\Http\Resources\CourseResource;
+use Keating\Http\Resources\FieldResource;
+use Keating\Models\Field;
 use Spatie\LaravelOptions\Options;
 
-class CourseController extends Controller
+class CourseController
 {
     public function index(): Response
     {
@@ -31,9 +35,15 @@ class CourseController extends Controller
 
     public function create(): Response
     {
+        $fields = Field::query()
+            ->orderBy("abbreviation")
+            ->get();
+
         return inertia("Dashboard/Course/Create", [
             "classTypes" => Options::forEnum(ClassType::class)->toArray(),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
+            "semesterNames" => Options::forEnum(SemesterName::class)->toArray(),
+            "fields" => FieldResource::collection($fields)->resolve(),
         ]);
     }
 
@@ -48,10 +58,16 @@ class CourseController extends Controller
 
     public function edit(Course $course): Response
     {
+        $fields = Field::query()
+            ->orderBy("abbreviation")
+            ->get();
+
         return inertia("Dashboard/Course/Edit", [
             "course" => $course,
             "classTypes" => Options::forEnum(ClassType::class)->toArray(),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
+            "semesterNames" => Options::forEnum(SemesterName::class)->toArray(),
+            "fields" => FieldResource::collection($fields)->resolve(),
         ]);
     }
 

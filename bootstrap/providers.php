@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Providers\BuilderServiceProvider;
-use App\Providers\ViewServiceProvider;
+use Keating\Providers\BuilderServiceProvider;
+use Keating\Providers\ViewServiceProvider;
 
 return [
     BuilderServiceProvider::class,

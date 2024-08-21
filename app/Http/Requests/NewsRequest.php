@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests;
+namespace Keating\Http\Requests;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
@@ -33,7 +33,7 @@ class NewsRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            "slug" => $this->input("slug") !== null ? Str::slug($this->input("slug")) : Str::slug($this->input("title")),
+            "slug" => $this->input("slug") !== null ? Str::slug($this->input("slug")) : null,
         ]);
     }
 }

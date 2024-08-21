@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Actions;
+namespace Keating\Actions;
 
-use App\Models\Semester;
 use Exception;
 use Illuminate\Database\ConnectionInterface;
+use Keating\Models\Semester;
 
 class ActivateSemesterAction
 {
@@ -22,8 +22,7 @@ class ActivateSemesterAction
         try {
             $this->db->beginTransaction();
 
-            Semester::getActive()?->update(["active" => 0]);
-            $semester->update(["active" => 1]);
+            $semester->update(["active" => !$semester->active]);
 
             $this->db->commit();
         } catch (Exception $exception) {

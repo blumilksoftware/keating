@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Models\Semester;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
+use Keating\Models\Semester;
+use Keating\Models\User;
 use Tests\TestCase;
 
 class SemesterTest extends TestCase
@@ -82,7 +82,7 @@ class SemesterTest extends TestCase
         $this->assertTrue($semester->active);
     }
 
-    public function testOnlyOneSemesterCanBeActive(): void
+    public function testManySemestersCanBeActive(): void
     {
         $inactiveSemester = Semester::factory()->create(["active" => 0]);
         $activeSemester = Semester::factory()->create(["active" => 1]);
@@ -94,6 +94,6 @@ class SemesterTest extends TestCase
         $inactiveSemester->refresh();
         $activeSemester->refresh();
         $this->assertTrue($inactiveSemester->active);
-        $this->assertFalse($activeSemester->active);
+        $this->assertTrue($activeSemester->active);
     }
 }

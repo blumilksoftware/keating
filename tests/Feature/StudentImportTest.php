@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Actions\WuStudentsImport;
-use App\Models\Student;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Keating\Actions\WuStudentsImport;
+use Keating\Models\Student;
 use Tests\TestCase;
 
 class StudentImportTest extends TestCase

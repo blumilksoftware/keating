@@ -2,33 +2,36 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\Dashboard\ContactInfoController;
-use App\Http\Controllers\Dashboard\CourseController;
-use App\Http\Controllers\Dashboard\CourseSemesterController;
-use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\FaqController;
-use App\Http\Controllers\Dashboard\FieldController;
-use App\Http\Controllers\Dashboard\GradeController;
-use App\Http\Controllers\Dashboard\GroupController;
-use App\Http\Controllers\Dashboard\GroupStudentController;
-use App\Http\Controllers\Dashboard\LogoutController;
-use App\Http\Controllers\Dashboard\NewsManagementController;
-use App\Http\Controllers\Dashboard\PasswordUpdateController;
-use App\Http\Controllers\Dashboard\SectionController;
-use App\Http\Controllers\Dashboard\SectionSettingsController;
-use App\Http\Controllers\Dashboard\SemesterController;
-use App\Http\Controllers\Dashboard\SettingController;
-use App\Http\Controllers\Dashboard\StudentController;
-use App\Http\Controllers\Public\GradeController as PublicGradeController;
-use App\Http\Controllers\Public\HomeController;
-use App\Http\Controllers\Public\LoginController;
-use App\Http\Controllers\Public\NewsController;
 use Illuminate\Support\Facades\Route;
+use Keating\Http\Controllers\Dashboard\ContactInfoController;
+use Keating\Http\Controllers\Dashboard\CourseController;
+use Keating\Http\Controllers\Dashboard\CourseSemesterController;
+use Keating\Http\Controllers\Dashboard\DashboardController;
+use Keating\Http\Controllers\Dashboard\FaqController;
+use Keating\Http\Controllers\Dashboard\FieldController;
+use Keating\Http\Controllers\Dashboard\GradeController;
+use Keating\Http\Controllers\Dashboard\GroupController;
+use Keating\Http\Controllers\Dashboard\GroupStudentController;
+use Keating\Http\Controllers\Dashboard\LogoutController;
+use Keating\Http\Controllers\Dashboard\NewsManagementController;
+use Keating\Http\Controllers\Dashboard\PasswordUpdateController;
+use Keating\Http\Controllers\Dashboard\SectionController;
+use Keating\Http\Controllers\Dashboard\SectionSettingsController;
+use Keating\Http\Controllers\Dashboard\SemesterController;
+use Keating\Http\Controllers\Dashboard\SettingController;
+use Keating\Http\Controllers\Dashboard\StudentController;
+use Keating\Http\Controllers\Public\CourseController as PublicCourseController;
+use Keating\Http\Controllers\Public\GradeController as PublicGradeController;
+use Keating\Http\Controllers\Public\HomeController;
+use Keating\Http\Controllers\Public\LoginController;
+use Keating\Http\Controllers\Public\NewsController;
 
 Route::get("/", HomeController::class)->name("main");
 Route::get("/aktualnosci", [NewsController::class, "index"]);
 Route::get("/aktualnosci/{slug}", [NewsController::class, "get"]);
 Route::get("/oceny/{semester?}/{course?}/{group?}/{index?}", PublicGradeController::class);
+Route::get("/kursy", [PublicCourseController::class, "index"]);
+Route::get("/kursy/{slug}", [PublicCourseController::class, "get"]);
 
 Route::middleware("guest")->group(function (): void {
     Route::get("/login", [LoginController::class, "create"])->name("login");

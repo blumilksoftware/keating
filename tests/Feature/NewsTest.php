@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Models\News;
-use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
+use Keating\Models\News;
+use Keating\Models\User;
 use Tests\TestCase;
 
 class NewsTest extends TestCase
@@ -57,6 +58,7 @@ class NewsTest extends TestCase
     public function testSlugForNewsCanBeGenerated(): void
     {
         $this->assertDatabaseCount("news", 0);
+        $now = Carbon::now()->format("Y-m-d");
 
         $this->post("/dashboard/news", [
             "title" => "Example question",
@@ -67,7 +69,7 @@ class NewsTest extends TestCase
 
         $this->assertDatabaseHas("news", [
             "title" => "Example question",
-            "slug" => "example-question",
+            "slug" => "$now-example-question",
             "content" => "Content of the wiki",
         ]);
     }

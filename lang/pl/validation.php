@@ -131,5 +131,8 @@ return [
         "title" => "tytuł",
         "content" => "treść",
         "value" => "opis",
+        "semester" => "semestr",
+        "semester_name" => "nazwa semestru",
+        "field_id" => "kierunek",
     ],
 ];

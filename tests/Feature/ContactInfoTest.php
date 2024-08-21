@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Enums\Icons;
-use App\Models\ContactInfo;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
+use Keating\Enums\Icons;
+use Keating\Models\ContactInfo;
+use Keating\Models\User;
 use Tests\TestCase;
 
 class ContactInfoTest extends TestCase

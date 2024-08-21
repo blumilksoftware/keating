@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Models\CourseSemester;
-use App\Models\Grade;
-use App\Models\GradeColumn;
-use App\Models\Group;
-use App\Models\SectionSettings;
-use App\Models\Setting;
-use App\Models\Student;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
+use Keating\Models\CourseSemester;
+use Keating\Models\Grade;
+use Keating\Models\GradeColumn;
+use Keating\Models\Group;
+use Keating\Models\SectionSettings;
+use Keating\Models\Setting;
+use Keating\Models\Student;
 use Tests\TestCase;
 
 class GradePageTest extends TestCase

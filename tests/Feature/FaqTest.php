@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Models\Faq;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
+use Keating\Models\Faq;
+use Keating\Models\User;
 use Tests\TestCase;
 
 class FaqTest extends TestCase
