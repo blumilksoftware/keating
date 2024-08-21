@@ -10,13 +10,13 @@ use Illuminate\Support\Str;
 
 trait Sluggable
 {
-    public function createSlug(Model $model, Closure $slugString): string
+    public function createSlug(Model $model, Closure $createStringForSlug): string
     {
         if ($model->slug) {
             return $model->slug;
         }
 
-        $slug = Str::slug($slugString());
+        $slug = Str::slug($createStringForSlug());
 
         if (!$this->checkIfSlugExists($model, $slug)) {
             return $slug;
