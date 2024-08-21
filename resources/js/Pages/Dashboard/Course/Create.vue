@@ -15,6 +15,7 @@ import TextAreaEditor from '@/Shared/Forms/TextAreaEditor.vue'
 defineProps({
   classTypes: Array,
   fields: Array,
+  semesterNames: Array,
 })
 
 const form = useForm({
@@ -24,6 +25,7 @@ const form = useForm({
   semester: '',
   field_id: '',
   type: '',
+  semester_name: '',
 })
 
 function createCourse() {
@@ -44,7 +46,7 @@ function createCourse() {
           </ManagementHeaderItem>
         </template>
       </ManagementHeader>
-
+      {{ form.errors }}
       <form class="grid grid-cols-2" @submit.prevent="createCourse">
         <Section>
           <div class="flex flex-col justify-between gap-4">
@@ -74,6 +76,13 @@ function createCourse() {
               </FormLabel>
               <TextInput id="semester" v-model="form.semester" type="number" min="1" max="10" :error="form.errors.semester" autocomplete="off" />
               <FormError :error="form.errors.semester" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="semesterName">
+                Nazwa semestru
+              </FormLabel>
+              <Select id="semesterName" v-model="form.semester_name" :error="form.errors.semester_name" :options="semesterNames" label="label" item-value="value" />
+              <FormError :error="form.errors.semester_name" />
             </FormGroup>
             <FormGroup>
               <FormLabel for="type">

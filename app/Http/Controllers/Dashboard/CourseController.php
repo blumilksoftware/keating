@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Dashboard;
 
 use App\Enums\ClassType;
+use App\Enums\SemesterName;
 use App\Enums\StudyForm;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
@@ -40,6 +41,7 @@ class CourseController extends Controller
         return inertia("Dashboard/Course/Create", [
             "classTypes" => Options::forEnum(ClassType::class)->toArray(),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
+            "semesterNames" => Options::forEnum(SemesterName::class)->toArray(),
             "fields" => FieldResource::collection($fields)->resolve(),
         ]);
     }
@@ -63,6 +65,7 @@ class CourseController extends Controller
             "course" => $course,
             "classTypes" => Options::forEnum(ClassType::class)->toArray(),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
+            "semesterNames" => Options::forEnum(SemesterName::class)->toArray(),
             "fields" => FieldResource::collection($fields)->resolve(),
         ]);
     }

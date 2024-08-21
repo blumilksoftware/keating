@@ -17,6 +17,7 @@ const props = defineProps({
   course: Object,
   classTypes: Array,
   fields: Array,
+  semesterNames: Array,
 })
 
 
@@ -27,6 +28,7 @@ const form = useForm({
   semester: props.course.semester,
   type: props.course.type,
   field_id: props.course.field_id,
+  semester_name: props.course.semester_name,
 })
 
 function updateCourse() {
@@ -77,6 +79,13 @@ function updateCourse() {
               </FormLabel>
               <TextInput id="semester" v-model="form.semester" type="number" min="1" max="10" :error="form.errors.semester" autocomplete="off" />
               <FormError :error="form.errors.semester" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="semesterName">
+                Nazwa semestru
+              </FormLabel>
+              <Select id="semesterName" v-model="form.semester_name" :error="form.errors.semester_name" :options="semesterNames" label="label" item-value="value" />
+              <FormError :error="form.errors.semester_name" />
             </FormGroup>
             <FormGroup>
               <FormLabel for="type">

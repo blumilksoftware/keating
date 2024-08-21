@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Observers\CourseObserver;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,9 +24,12 @@ use Stevebauman\Purify\Facades\Purify;
  * @property string $form
  * @property string $field_id
  * @property Field $field
+ * @property string $slug
+ * @property string $semester_name
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
+#[ObservedBy(CourseObserver::class)]
 class Course extends Model
 {
     use HasFactory;
@@ -35,9 +40,11 @@ class Course extends Model
         "abbreviation",
         "description",
         "semester",
+        "semester_name",
         "type",
         "form",
         "field_id",
+        "slug",
     ];
 
     public function getRomanizedSemester(): string
@@ -54,13 +61,6 @@ class Course extends Model
             9 => __("IX"),
             default => __("X"),
         };
-    }
-
-    public function getSemesterName(): string
-    {
-        return $this->semester % 2 === 0
-            ? __("Letni")
-            : __("Zimowy");
     }
 
     public function field(): BelongsTo

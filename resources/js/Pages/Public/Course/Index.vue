@@ -68,7 +68,7 @@ defineProps({
                       {{ course.type }}
                     </TableCell>
                     <TableCell>
-                      <InertiaLink :href="`kursy/${course.id}`">
+                      <InertiaLink :href="`kursy/${course.slug}`">
                         <ArrowRightCircleIcon class="m-auto size-6 text-gray-500" />
                       </InertiaLink>
                     </TableCell>

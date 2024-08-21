@@ -35,6 +35,7 @@ class CourseTest extends TestCase
             "semester" => 2,
             "type" => "laboratory",
             "field_id" => $this->field->id,
+            "semester_name" => "summer",
         ])->assertSessionHasNoErrors();
     }
 
@@ -56,6 +57,7 @@ class CourseTest extends TestCase
             "semester" => 2,
             "type" => "laboratory",
             "field_id" => $this->field->id,
+            "semester_name" => "summer",
         ])->assertSessionHasNoErrors();
 
         $this->assertDatabaseHas("courses", [
@@ -64,6 +66,7 @@ class CourseTest extends TestCase
             "semester" => 2,
             "type" => "laboratory",
             "field_id" => $this->field->id,
+            "semester_name" => "summer",
         ]);
     }
 
@@ -75,12 +78,14 @@ class CourseTest extends TestCase
             "semester" => "bad",
             "type" => "lab",
             "field_id" => 0,
+            "semester_name" => "spring",
         ])->assertSessionHasErrors([
             "name",
             "abbreviation",
             "semester",
             "type",
             "field_id",
+            "semester_name",
         ]);
 
         $this->assertDatabaseCount("courses", 0);

@@ -35,7 +35,7 @@ defineProps({
             >
               <div class="flex-row text-center">
                 <div class="text-xl leading-8">
-                  KIERUNEK
+                  Kierunek
                 </div>
                 <div class="my-2 text-5xl leading-10">
                   {{ course.fieldAbbreviation }}
@@ -46,7 +46,7 @@ defineProps({
               </div>
               <div class="flex-row text-center">
                 <div class="text-xl leading-8">
-                  SEMESTR
+                  Semestr
                 </div>
                 <div class="my-2 text-5xl leading-10">
                   {{ course.semester }}
@@ -57,10 +57,10 @@ defineProps({
               </div>
               <div class="flex-row text-center">
                 <div class="text-xl leading-8">
-                  FORMA ZAJĘĆ
+                  Forma zajęć
                 </div>
                 <div class="my-2 text-5xl leading-10">
-                  {{ course.type[0] }}
+                  {{ course.typeAbbreviation }}
                 </div>
                 <div class="text-xl leading-8">
                   {{ course.type }}

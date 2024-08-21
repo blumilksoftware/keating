@@ -30,10 +30,10 @@ class CourseController extends Controller
         ]);
     }
 
-    public function get(string $id): Response
+    public function get(string $slug): Response
     {
         $course = Course::query()
-            ->where("id", $id)
+            ->where("slug", $slug)
             ->firstOrFail();
 
         return inertia("Public/Course/Course", [
