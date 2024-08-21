@@ -14,7 +14,7 @@ volumes:
 
 services:
   keating-beta-app:
-    image: ghcr.io/blumilksoftware/keating:beta
+    image: registry.blumilk.pl/internal-public/keating:beta
     container_name: keating-beta-app
     pull_policy: always
     deploy:
