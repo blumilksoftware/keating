@@ -45,7 +45,7 @@ const courseToDeleteId = ref(0)
           </span>
         </template>
       </ManagementHeader>
-      <div v-if="courses.data.length" class="flex flex-col gap-8">
+      <div v-if="courses.length" class="flex flex-col gap-8">
         <TableWrapper>
           <template #header>
             <TableHeader class="w-1/6">
@@ -63,7 +63,7 @@ const courseToDeleteId = ref(0)
             <TableHeader />
           </template>
           <template #body>
-            <TableRow v-for="course in courses.data" :key="course.id">
+            <TableRow v-for="course in courses" :key="course.id">
               <TableCell class="pr-12 opacity-75">
                 {{ course.id }}
               </TableCell>
