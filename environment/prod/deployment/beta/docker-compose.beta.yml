@@ -73,6 +73,7 @@ services:
       timeout: 3s
       retries: 5
     volumes:
+      - ../postgres/init-unaccent.sql:/docker-entrypoint-initdb.d/init-unaccent.sql
       - keating-beta-pgsql-data:/var/lib/postgresql/data
     networks:
       - keating-beta
