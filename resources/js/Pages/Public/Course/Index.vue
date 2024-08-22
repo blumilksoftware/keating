@@ -2,7 +2,7 @@
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '@/Components/BackgroundGrid.vue'
 import SectionHeader from '@/Components/SectionHeader.vue'
-import { ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
+import { ArrowRightCircleIcon, NoSymbolIcon } from '@heroicons/vue/24/outline'
 import TableWrapper from '@/Shared/Components/Table/Public/TableWrapper.vue'
 import TableHeader from '@/Shared/Components/Table/Public/TableHeader.vue'
 import TableRow from '@/Shared/Components/Table/Public/TableRow.vue'
@@ -75,6 +75,13 @@ defineProps({
                   </TableRow>
                 </template>
               </TableWrapper>
+            </div>
+
+            <div v-if="courses.length === 0" class="text-center">
+              <NoSymbolIcon class="mx-auto size-12 text-gray-400" />
+              <h3 class="mt-2 text-sm font-semibold text-gray-900">
+                Brak kursów
+              </h3>
             </div>
           </div>
         </div>
