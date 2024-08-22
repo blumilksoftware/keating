@@ -11,7 +11,7 @@ class FaqController
 {
     public function __invoke(): Response
     {
-        $faqs = Faq::all();
+        $faqs = Faq::query()->get();
 
         return inertia("Public/Faq", [
             "faqs" => $faqs,
