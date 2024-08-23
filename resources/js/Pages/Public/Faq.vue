@@ -2,7 +2,7 @@
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '@/Components/BackgroundGrid.vue'
 import SectionHeader from '@/Components/SectionHeader.vue'
-import { NoSymbolIcon } from '@heroicons/vue/24/outline'
+import { NoSymbolIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline'
 import { Head } from '@inertiajs/inertia-vue3'
 import DOMPurify from 'dompurify'
 
@@ -28,16 +28,17 @@ defineProps({
             </template>
           </SectionHeader>
 
-          <div class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-4 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none">
-            <div v-for="(faq, index) in faqs" :key="index" class="cursor-pointer">
-              <div class="flex items-center justify-between bg-[#FAFAFC] p-4 text-lg font-semibold text-gray-600">
-                <div class="w-[90%]">
-                  {{ faq.question }}
+          <div class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none">
+            <div v-for="(faq, index) in faqs" :key="index" class="mb-5 border-b-2 pb-5">
+              <div class="flex items-center justify-between text-lg font-semibold text-gray-600">
+                <div class="flex w-[90%] items-center gap-2">
+                  <QuestionMarkCircleIcon class="size-7" />
+                  <span>{{ faq.question }}</span>
                 </div>
               </div>
-              <div class="text-md flex items-center justify-between bg-white px-4 py-5 font-normal text-gray-600">
+              <div class="text-md flex items-center justify-between bg-white px-4 pt-3 font-normal text-gray-600">
                 <!-- eslint-disable vue/no-v-html -->
-                <p class="prose text-gray-600" v-html="DOMPurify.sanitize(faq.answer)" />
+                <p class="prose max-w-full text-gray-600" v-html="DOMPurify.sanitize(faq.answer)" />
                 <!-- eslint-enable vue/no-v-html -->
               </div>
             </div>
