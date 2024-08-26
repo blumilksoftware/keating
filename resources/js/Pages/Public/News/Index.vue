@@ -1,11 +1,11 @@
 <script setup>
 import PublicLayout from '@/Layouts/PublicLayout.vue'
-import BackgroundGrid from '../../../Components/BackgroundGrid.vue'
-import SectionHeader from '../../../Components/SectionHeader.vue'
-import Pagination from '../../../Components/Pagination.vue'
+import BackgroundGrid from '@/Components/BackgroundGrid.vue'
+import SectionHeader from '@/Components/SectionHeader.vue'
+import Pagination from '@/Components/Pagination.vue'
 import DOMPurify from 'dompurify'
-import { NoSymbolIcon } from '@heroicons/vue/24/outline'
 import { Head } from '@inertiajs/inertia-vue3'
+import EmptyState from '@/Shared/Components/EmptyState/Public/EmptyState.vue'
 
 defineProps({
   paginator: Object,
@@ -49,12 +49,7 @@ defineProps({
             </article>
           </div>
 
-          <div v-if="paginator.data.length === 0" class="text-center">
-            <NoSymbolIcon class="mx-auto size-12 text-gray-400" />
-            <h3 class="mt-2 text-sm font-semibold text-gray-900">
-              Brak aktualności
-            </h3>
-          </div>
+          <EmptyState v-if="paginator.data.length === 0" description="Brak aktualności" />
 
           <div v-if="paginator.data.length > 0" class="mt-24 flex justify-center">
             <Pagination :pagination="paginator" />

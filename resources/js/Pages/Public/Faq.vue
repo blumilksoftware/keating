@@ -2,9 +2,10 @@
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 import BackgroundGrid from '@/Components/BackgroundGrid.vue'
 import SectionHeader from '@/Components/SectionHeader.vue'
-import { NoSymbolIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline'
+import { QuestionMarkCircleIcon } from '@heroicons/vue/24/outline'
 import { Head } from '@inertiajs/inertia-vue3'
 import DOMPurify from 'dompurify'
+import EmptyState from '@/Shared/Components/EmptyState/Public/EmptyState.vue'
 
 defineProps({
   faqs: Object,
@@ -43,12 +44,7 @@ defineProps({
               </div>
             </div>
 
-            <div v-if="faqs.length === 0" class="text-center">
-              <NoSymbolIcon class="mx-auto size-12 text-gray-400" />
-              <h3 class="mt-2 text-sm font-semibold text-gray-900">
-                Brak pytań i odpowiedzi
-              </h3>
-            </div>
+            <EmptyState v-if="faqs.length === 0" description="Brak pytań i odpowiedzi" />
           </div>
         </div>
       </div>
