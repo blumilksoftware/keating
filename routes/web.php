@@ -20,6 +20,7 @@ use Keating\Http\Controllers\Dashboard\SectionSettingsController;
 use Keating\Http\Controllers\Dashboard\SemesterController;
 use Keating\Http\Controllers\Dashboard\SettingController;
 use Keating\Http\Controllers\Dashboard\StudentController;
+use Keating\Http\Controllers\Public\ContactController;
 use Keating\Http\Controllers\Public\CourseController as PublicCourseController;
 use Keating\Http\Controllers\Public\GradeController as PublicGradeController;
 use Keating\Http\Controllers\Public\HomeController;
@@ -32,6 +33,7 @@ Route::get("/aktualnosci/{slug}", [NewsController::class, "get"]);
 Route::get("/oceny/{semester?}/{course?}/{group?}/{index?}", PublicGradeController::class);
 Route::get("/kursy", [PublicCourseController::class, "index"]);
 Route::get("/kursy/{slug}", [PublicCourseController::class, "get"]);
+Route::get("/kontakt", ContactController::class);
 
 Route::middleware("guest")->group(function (): void {
     Route::get("/login", [LoginController::class, "create"])->name("login");
