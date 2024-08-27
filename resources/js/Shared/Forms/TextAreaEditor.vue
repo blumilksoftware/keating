@@ -1,51 +1,69 @@
-<script setup>
-import { computed } from 'vue'
-import Editor from 'primevue/editor'
+<script>
+import Quill from 'quill'
+import 'quill/dist/quill.snow.css'
 
-const modules = {
-  keyboard: {
-    bindings: {
-      tab: false,
+export default {
+  name: 'QuillEditor',
+  props: {
+    modelValue: {
+      type: String,
+      default: '',
+    },
+    editorStyle: {
+      type: Object,
+      default: () => ({ height: '320px' }),
     },
   },
-}
+  emits: ['update:modelValue'],
+  watch: {
+    modelValue(newValue) {
+      if (newValue !== this.quill.root.innerHTML) {
+        this.quill.root.innerHTML = newValue
+      }
+    },
+  },
+  mounted() {
+    this.quill = new Quill(this.$refs.editorContainer, {
+      theme: 'snow',
+      modules: {
+        toolbar: this.$refs.editorToolbar,
+      },
+    })
 
-const props = defineProps({
-  modelValue: {
-    type: [String, Number],
-    default: null,
+    this.quill.on('text-change', () => {
+      const content = this.quill.root.innerHTML
+      this.$emit('update:modelValue', content)
+    })
+
+    this.quill.root.innerHTML = this.modelValue
   },
-  error: {
-    type: String,
-    default: null,
-  },
-})
-const emit = defineEmits(['update:modelValue'])
-const value = computed({
-  get: () => props.modelValue,
-  set: (value) => {
-    emit('update:modelValue', value)
-  },
-})
+}
 </script>
 
 <template>
-  <Editor v-model="value" :modules="modules" editor-style="height: 320px" class="focus-within:border-brand-black hover:border-brand-black border border-transparent">
-    <template #toolbar>
-      <!-- eslint-disable tailwindcss/no-custom-classname -->
+  <div>
+    <div ref="editorToolbar" class="ql-toolbar">
       <span class="ql-formats">
-        <button class="ql-header" aria-label="Heading H1" value="1" />
-        <button class="ql-header" aria-label="Heading H2" value="2" />
-        <button class="ql-bold" aria-label="Bold" />
-        <button class="ql-italic" aria-label="Italic" />
-        <button class="ql-underline" aria-label="Underline" />
-        <button class="ql-strike" aria-label="Strike" />
-        <button class="ql-code-block" aria-label="Code" />
-        <button class="ql-list" value="ordered" aria-label="Ordered list" />
-        <button class="ql-list" value="bullet" aria-label="Unordered list" />
-        <button class="ql-link" aria-label="Link" />
+        <button aria-label="Heading H1" class="ql-header" value="1" />
+        <button aria-label="Heading H2" class="ql-header" value="2" />
+        <button aria-label="Bold" class="ql-bold" />
+        <button aria-label="Italic" class="ql-italic" />
+        <button aria-label="Underline" class="ql-underline" />
+        <button aria-label="Strike" class="ql-strike" />
+        <button aria-label="Code" class="ql-code-block" />
+        <button aria-label="Ordered list" class="ql-list" value="ordered" />
+        <button aria-label="Unordered list" class="ql-list" value="bullet" />
+        <button aria-label="Link" class="ql-link" />
       </span>
-      <!-- eslint-enable -->
-    </template>
-  </Editor>
+    </div>
+    <div ref="editorContainer" class="ql-editor" :style="editorStyle" />
+  </div>
 </template>
+
+<style scoped>
+.ql-editor {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+}
+</style>
