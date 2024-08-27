@@ -1,0 +1,6 @@
+creation_rules:
+
+  - name: beta
+    path_regex: \.env\.beta\.secrets.*$
+    age: >-
+      age1vq7sw98g2xk9md2yg9f959k8xkaz8r32pds27jn3nsfcdue3757s0h7hd8
