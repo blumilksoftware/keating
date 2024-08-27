@@ -4,6 +4,7 @@ import BackgroundGrid from '@/Components/BackgroundGrid.vue'
 import SectionHeader from '@/Components/SectionHeader.vue'
 import { Head } from '@inertiajs/inertia-vue3'
 import ContactItem from '@/Shared/Components/ContactItem.vue'
+import { NoSymbolIcon } from '@heroicons/vue/24/outline'
 
 defineProps({
   title: String,
@@ -51,6 +52,13 @@ defineProps({
               </div>
               <div v-for="(contactInfo, index) in contactInfos" :key="index" class="mx-auto flex max-w-2xl py-6 lg:mx-0 xl:py-3">
                 <ContactItem :contact="contactInfo" />
+              </div>
+
+              <div v-if="!email && contactInfos.length === 0" class="text-center">
+                <NoSymbolIcon class="mx-auto size-12 text-gray-400" />
+                <h3 class="mt-2 text-sm font-semibold text-gray-900">
+                  Brak danych kontaktowych
+                </h3>
               </div>
             </div>
           </div>
