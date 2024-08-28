@@ -5,7 +5,6 @@ import SubmitButton from '@/Shared/Components/Buttons/SubmitButton.vue'
 import FormGroup from '@/Shared/Forms/FormGroup.vue'
 import FormLabel from '@/Shared/Forms/FormLabel.vue'
 import TextInput from '@/Shared/Forms/TextInput.vue'
-import Select from '@/Shared/Forms/Select.vue'
 import { useForm } from '@inertiajs/inertia-vue3'
 import FormError from '@/Shared/Forms/FormError.vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
@@ -62,13 +61,6 @@ function createContactInfo() {
               </FormLabel>
               <TextInput id="identifier" v-model="form.identifier" :error="form.errors.identifier" autocomplete="off" />
               <FormError :error="form.errors.identifier" />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel for="icon">
-                Ikona
-              </FormLabel>
-              <Select id="icon" v-model="form.icon" :error="form.errors.icon" :options="icons" label="label" item-value="value" />
-              <FormError :error="form.errors.icon" />
             </FormGroup>
             <div class="mt-4 flex justify-end">
               <SubmitButton>

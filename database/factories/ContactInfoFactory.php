@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Keating\Enums\Icons;
 use Keating\Models\ContactInfo;
 
 /**
@@ -18,7 +17,6 @@ class ContactInfoFactory extends Factory
         return [
             "label" => fake()->domainWord(),
             "identifier" => fake()->url(),
-            "icon" => fake()->randomElement(Icons::class),
         ];
     }
 }

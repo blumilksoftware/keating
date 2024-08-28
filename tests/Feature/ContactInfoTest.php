@@ -6,7 +6,6 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
-use Keating\Enums\Icons;
 use Keating\Models\ContactInfo;
 use Keating\Models\User;
 use Tests\TestCase;
@@ -30,7 +29,6 @@ class ContactInfoTest extends TestCase
         $this->post("/dashboard/contact-infos", [
             "label" => "karol.zygadlo@collegiumwitelona.pl",
             "identifier" => "mailto:karol.zygadlo@collegiumwitelona.pl",
-            "icon" => Icons::AtSymbol->value,
         ])->assertSessionHasNoErrors();
 
         $this->assertDatabaseCount("contact_infos", 1);
@@ -43,19 +41,16 @@ class ContactInfoTest extends TestCase
         $this->assertDatabaseMissing("contact_infos", [
             "label" => "karol.zygadlo@collegiumwitelona.pl",
             "identifier" => "mailto:karol.zygadlo@collegiumwitelona.pl",
-            "icon" => Icons::AtSymbol->value,
         ]);
 
         $this->patch("/dashboard/contact-infos/{$contactInfo->id}", [
             "label" => "karol.zygadlo@collegiumwitelona.pl",
             "identifier" => "mailto:karol.zygadlo@collegiumwitelona.pl",
-            "icon" => Icons::AtSymbol->value,
         ])->assertSessionHasNoErrors();
 
         $this->assertDatabaseHas("contact_infos", [
             "label" => "karol.zygadlo@collegiumwitelona.pl",
             "identifier" => "mailto:karol.zygadlo@collegiumwitelona.pl",
-            "icon" => "at-symbol",
         ]);
     }
 
@@ -64,11 +59,9 @@ class ContactInfoTest extends TestCase
         $this->post("/dashboard/contact-infos", [
             "label" => Str::random(256),
             "identifier" => Str::random(256),
-            "icon" => "test",
         ])->assertSessionHasErrors([
             "label",
             "identifier",
-            "icon",
         ]);
 
         $this->assertDatabaseCount("contact_infos", 0);
@@ -79,7 +72,6 @@ class ContactInfoTest extends TestCase
         $this->post("/dashboard/contact-infos", [])->assertSessionHasErrors([
             "label",
             "identifier",
-            "icon",
         ]);
 
         $this->assertDatabaseCount("contact_infos", 0);
