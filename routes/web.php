@@ -36,6 +36,10 @@ Route::get("/kursy/{slug}", [PublicCourseController::class, "get"]);
 Route::middleware("guest")->group(function (): void {
     Route::get("/login", [LoginController::class, "create"])->name("login");
     Route::post("/login", [LoginController::class, "store"]);
+    Route::get("/passwordless", [LoginController::class, "passwordlessCreate"])->name("passwordless.create");
+    Route::post("/passwordless", [LoginController::class, "passwordlessStore"])->name("passwordless.store");
+    Route::get("/passwordless/{email}", [LoginController::class, "passwordlessLogin"])->name("passwordless.login");
+    Route::get("/passwordless/check/{email}", [LoginController::class, "passwordlessCheck"])->name("passwordless.check");
 });
 
 Route::middleware("auth")->prefix("dashboard")->group(function (): void {
