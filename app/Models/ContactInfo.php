@@ -11,9 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property string $id
- * @property string $email
- * @property string $github_handle
- * @property string $alternative_channel
+ * @property string $label
+ * @property string $identifier
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */

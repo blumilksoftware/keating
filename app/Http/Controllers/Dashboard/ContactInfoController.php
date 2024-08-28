@@ -7,10 +7,8 @@ namespace Keating\Http\Controllers\Dashboard;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
-use Keating\Enums\Icons;
 use Keating\Http\Requests\ContactInfoRequest;
 use Keating\Models\ContactInfo;
-use Spatie\LaravelOptions\Options;
 
 class ContactInfoController
 {
@@ -29,9 +27,7 @@ class ContactInfoController
 
     public function create(): Response
     {
-        return inertia("Dashboard/ContactInfo/Create", [
-            "icons" => Options::forEnum(Icons::class)->toArray(),
-        ]);
+        return inertia("Dashboard/ContactInfo/Create");
     }
 
     public function store(ContactInfoRequest $request): RedirectResponse
@@ -47,7 +43,6 @@ class ContactInfoController
     {
         return inertia("Dashboard/ContactInfo/Edit", [
             "contactInfo" => $contactInfo,
-            "icons" => Options::forEnum(Icons::class)->toArray(),
         ]);
     }
 
