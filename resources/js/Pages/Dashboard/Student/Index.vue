@@ -16,6 +16,7 @@ import { useForm } from '@inertiajs/inertia-vue3'
 import { PencilSquareIcon, XCircleIcon } from '@heroicons/vue/24/outline'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
+import StyledLink from '../../../Shared/Components/StyledLink.vue'
 
 const props = defineProps({
   students: Object,
@@ -59,12 +60,12 @@ watch(form, debounce(() => {
         </template>
         <template #actions>
           <TextInput v-if="total || form.search.length > 0" id="filter" v-model="form.search" placeholder="Szukaj" type="search" class="max-w-lg" />
-          <Button :href="`/dashboard/students/import`">
+          <StyledLink :href="`/dashboard/students/import`">
             Dodaj masowo
-          </Button>
-          <Button :href="`/dashboard/students/create`">
+          </StyledLink>
+          <StyledLink :href="`/dashboard/students/create`">
             Dodaj
-          </Button>
+          </StyledLink>
         </template>
       </ManagementHeader>
       <div v-if="students.data.length" class="flex flex-col gap-8">
@@ -99,9 +100,9 @@ watch(form, debounce(() => {
                 {{ student.surname }}
               </TableCell>
               <TableCell class="flex justify-end gap-2">
-                <Button :href="`students/${student.id}/edit`">
+                <StyledLink :href="`students/${student.id}/edit`">
                   <PencilSquareIcon class="w-5" />
-                </Button>
+                </StyledLink>
                 <Button class="text-red-600" @click="[showModal = true, studentToDeleteId = student.id]">
                   <XCircleIcon class="w-5" />
                 </Button>

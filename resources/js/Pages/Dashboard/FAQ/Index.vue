@@ -11,6 +11,7 @@ import { ref } from 'vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 import { PencilSquareIcon, XCircleIcon } from '@heroicons/vue/24/outline'
+import StyledLink from '../../../Shared/Components/StyledLink.vue'
 
 defineProps({
   faqs: Object,
@@ -38,9 +39,9 @@ const faqToDeleteId = ref(0)
         </template>
         <template #actions>
           <span class="hidden sm:block">
-            <Button :href="`/dashboard/faqs/create`">
+            <StyledLink :href="`/dashboard/faqs/create`">
               Dodaj
-            </Button>
+            </StyledLink>
           </span>
         </template>
       </ManagementHeader>
@@ -64,9 +65,9 @@ const faqToDeleteId = ref(0)
                 {{ faq.question }}
               </TableCell>
               <TableCell class="flex justify-end gap-2">
-                <Button :href="`/dashboard/faqs/${faq.id}/edit`">
+                <StyledLink :href="`/dashboard/faqs/${faq.id}/edit`">
                   <PencilSquareIcon class="w-5" />
-                </Button>
+                </StyledLink>
                 <Button class="text-red-600" @click="[showModal = true, faqToDeleteId = faq.id]">
                   <XCircleIcon class="w-5" />
                 </Button>
