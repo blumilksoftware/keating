@@ -12,7 +12,7 @@ import { Method } from '@inertiajs/inertia'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 import { PencilSquareIcon, XCircleIcon, CheckIcon } from '@heroicons/vue/24/outline'
-import StyledLink from '../../../Shared/Components/StyledLink.vue'
+import StyledLink from '@/Shared/Components/StyledLink.vue'
 
 defineProps({
   semesters: Object,

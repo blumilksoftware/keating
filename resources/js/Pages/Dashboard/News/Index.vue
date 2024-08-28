@@ -16,7 +16,7 @@ import { useForm } from '@inertiajs/inertia-vue3'
 import { PencilSquareIcon, XCircleIcon } from '@heroicons/vue/24/outline'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
-import StyledLink from '../../../Shared/Components/StyledLink.vue'
+import StyledLink from '@/Shared/Components/StyledLink.vue'
 
 const props = defineProps({
   news: Object,

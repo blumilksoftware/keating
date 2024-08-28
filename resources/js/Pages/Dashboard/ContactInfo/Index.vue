@@ -12,7 +12,7 @@ import { ref } from 'vue'
 import { PencilSquareIcon, XCircleIcon } from '@heroicons/vue/24/outline'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
-import StyledLink from '../../../Shared/Components/StyledLink.vue'
+import StyledLink from '@/Shared/Components/StyledLink.vue'
 defineProps({
   contactInfos: Object,
   total: Number,

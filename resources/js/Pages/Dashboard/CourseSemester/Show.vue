@@ -14,7 +14,7 @@ import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
 import { PencilSquareIcon, UsersIcon, XCircleIcon, ChartBarIcon } from '@heroicons/vue/24/outline'
 import { ref } from 'vue'
-import StyledLink from '../../../Shared/Components/StyledLink.vue'
+import StyledLink from '@/Shared/Components/StyledLink.vue'
 
 const props = defineProps({
   course: Object,
