@@ -1,12 +1,21 @@
-<x-mail::message>
-    # Login Link
+<x-mail::layout>
 
-    Use the link below to log into the {{ config('app.name') }} application.
+    <x-slot:header>
+        <x-mail::header url="{{config('app.url')}}">
+            Keating
+        </x-mail::header>
+    </x-slot:header>
+
+    Zaloguj się, klikając w poniższy przycisk:
 
     <x-mail::button :url="$url">
-        Login
+        Zaloguj
     </x-mail::button>
 
-    Thanks,<br>
-    {{ config('app.name') }}
-</x-mail::message>
+    <x-slot:footer>
+        <x-mail::footer>
+            Keating &copy; {{ date('Y') }}
+        </x-mail::footer>
+    </x-slot:foot>
+
+</x-mail::layout>

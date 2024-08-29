@@ -21,13 +21,13 @@ function attemptLogin() {
   loginForm.post('/passwordless', {
     preserveState: true,
     onSuccess: () => {
-      interval.value = setInterval(checkLogin, 2000)
+      interval.value = setInterval(checkLogin, 5000)
     },
   })
 }
 
 async function checkLogin() {
-  return axios.get(`/passwordless/check/${loginForm.email}`)
+  return axios.post(`/passwordless/check/${loginForm.email}`)
     .then(response => {
       if (response.status === 200) {
         Inertia.visit('/dashboard')
@@ -57,6 +57,11 @@ onBeforeUnmount(() => {
           <div class="sm:mx-auto sm:w-full sm:max-w-[480px]">
             <div class="px-6 py-7 sm:px-12">
               <form class="z-10 space-y-6" @submit.prevent="attemptLogin">
+                <div v-if="$page.props.flash.success"
+                     class="text-wb-grey-80 rounded-md border border-blue-200 bg-blue-100 px-4 py-3 text-center text-sm"
+                >
+                  {{ $page.props.flash.success }}
+                </div>
                 <div v-if="loginForm.errors.email"
                      class="bg-wb-red-10 border-wb-red-20 text-wb-grey-80 rounded-md border px-4 py-3 text-center text-sm"
                 >

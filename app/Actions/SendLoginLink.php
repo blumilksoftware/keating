@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Keating\Mail\LoginLink;
 
-final class SendLoginLink
+class SendLoginLink
 {
     public function handle(string $email, Carbon $time): void
     {
