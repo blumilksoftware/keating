@@ -22,7 +22,7 @@ final class LoginLink extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: "Your Magic Link is here!",
+            subject: "Link do logowania w aplikacji Keating",
         );
     }
 
