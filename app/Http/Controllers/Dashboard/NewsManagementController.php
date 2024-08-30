@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Keating\Http\Requests\NewsRequest;
+use Keating\Http\Requests\NewsUpdateRequest;
 use Keating\Models\News;
 
 class NewsManagementController
@@ -53,7 +54,7 @@ class NewsManagementController
         ]);
     }
 
-    public function update(NewsRequest $request, News $news): RedirectResponse
+    public function update(NewsUpdateRequest $request, News $news): RedirectResponse
     {
         $news->update($request->getData());
 

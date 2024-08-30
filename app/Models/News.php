@@ -33,7 +33,7 @@ class News extends Model
     protected $casts = [
         "published_at" => "datetime:Y-m-d H:i",
     ];
-    protected $Keatingends = [
+    protected $appends = [
         "published_at_formatted",
     ];
 
