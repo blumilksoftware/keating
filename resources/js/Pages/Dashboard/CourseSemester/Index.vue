@@ -11,6 +11,7 @@ import { ref } from 'vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 import { PencilSquareIcon, XCircleIcon, EyeIcon } from '@heroicons/vue/24/outline'
+import StyledLink from '@/Shared/Components/StyledLink.vue'
 
 defineProps({
   courses: Object,
@@ -39,9 +40,9 @@ const courseToDeleteId = ref(0)
         </template>
         <template #actions>
           <span class="hidden sm:block">
-            <Button :href="`/dashboard/semester-courses/create`">
+            <StyledLink :href="`/dashboard/semester-courses/create`">
               Dodaj
-            </Button>
+            </StyledLink>
           </span>
         </template>
       </ManagementHeader>
@@ -84,12 +85,12 @@ const courseToDeleteId = ref(0)
                 {{ course.groupsCount }}
               </TableCell>
               <TableCell class="flex justify-end gap-2">
-                <Button :href="`/dashboard/semester-courses/${course.id}`">
+                <StyledLink :href="`/dashboard/semester-courses/${course.id}`">
                   <EyeIcon class="w-5" />
-                </Button>
-                <Button :href="`/dashboard/semester-courses/${course.id}/edit`">
+                </StyledLink>
+                <StyledLink :href="`/dashboard/semester-courses/${course.id}/edit`">
                   <PencilSquareIcon class="w-5" />
-                </Button>
+                </StyledLink>
                 <Button class="text-red-600" @click="[showModal = true, courseToDeleteId = course.id]">
                   <XCircleIcon class="w-5" />
                 </Button>

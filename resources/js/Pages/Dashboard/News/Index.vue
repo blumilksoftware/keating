@@ -16,6 +16,7 @@ import { useForm } from '@inertiajs/inertia-vue3'
 import { PencilSquareIcon, XCircleIcon } from '@heroicons/vue/24/outline'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
+import StyledLink from '@/Shared/Components/StyledLink.vue'
 
 const props = defineProps({
   news: Object,
@@ -59,9 +60,9 @@ watch(form, debounce(() => {
         </template>
         <template #actions>
           <TextInput v-if="total || form.search.length > 0" id="filter" v-model="form.search" placeholder="Szukaj" type="search" class="max-w-lg" />
-          <Button :href="`/dashboard/news/create`">
+          <StyledLink :href="`/dashboard/news/create`">
             Dodaj
-          </Button>
+          </StyledLink>
         </template>
       </ManagementHeader>
       <div v-if="news.data.length" class="flex flex-col gap-8">
@@ -96,9 +97,9 @@ watch(form, debounce(() => {
                 {{ article.published_at }}
               </TableCell>
               <TableCell class="flex justify-end gap-2">
-                <Button :href="`news/${article.id}/edit`">
+                <StyledLink :href="`news/${article.id}/edit`">
                   <PencilSquareIcon class="w-5" />
-                </Button>
+                </StyledLink>
                 <Button class="text-red-600" @click="[showModal = true, newsToDeleteId = article.id]">
                   <XCircleIcon class="w-5" />
                 </Button>

@@ -33,7 +33,7 @@ const form = useForm({
 })
 
 function addStudent(id) {
-  Inertia.post(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/students`, {
+  Inertia.post(`/dashboard/semester-courses/${props.course.id}/groups/${props.group.id}/students`, {
     student: id,
   }, {
     preserveState: true,
@@ -41,7 +41,7 @@ function addStudent(id) {
 }
 
 watch(form, debounce(() => {
-  Inertia.get(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/students`, {
+  Inertia.get(`/dashboard/semester-courses/${props.course.id}/groups/${props.group.id}/students`, {
     search: form.search,
   }, {
     preserveState: true,
@@ -56,7 +56,7 @@ watch(form, debounce(() => {
       <ManagementHeader>
         <template #header>
           Zarządzanie studentami w grupie <span class="text-gray-500">{{ group.name }}</span><br>
-          dla kursu <span class="text-gray-500">{{ course.data.course }}</span>
+          dla kursu <span class="text-gray-500">{{ course.course }}</span>
         </template>
         <template #statistics>
           <ManagementHeaderItem>
@@ -138,5 +138,5 @@ watch(form, debounce(() => {
     </div>
   </DashboardLayout>
 
-  <RemoveModal :show="showModal" :href="`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/students/${studentToDeleteId}`" @close="showModal = false" />
+  <RemoveModal :show="showModal" :href="`/dashboard/semester-courses/${props.course.id}/groups/${props.group.id}/students/${studentToDeleteId}`" @close="showModal = false" />
 </template>
