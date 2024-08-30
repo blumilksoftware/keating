@@ -15,6 +15,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             "auth" => $this->getAuthData($request),
             "flash" => $this->getFlashData($request),
+            "sections" => $this->getSectionsData(),
         ]);
     }
 
@@ -31,6 +32,15 @@ class HandleInertiaRequests extends Middleware
             "success" => $request->session()->get("success"),
             "error" => $request->session()->get("error"),
             "info" => $request->session()->get("info"),
+        ];
+    }
+
+    protected function getSectionsData(): array
+    {
+        return [
+            "faq_enabled" => config("keating.sections.faq_enabled"),
+            "contact_enabled" => config("keating.sections.contact_enabled"),
+            "news_enabled" => config("keating.sections.news_enabled"),
         ];
     }
 }
