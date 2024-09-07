@@ -26,6 +26,7 @@ use Keating\Http\Controllers\Public\GradeController as PublicGradeController;
 use Keating\Http\Controllers\Public\HomeController;
 use Keating\Http\Controllers\Public\LoginController;
 use Keating\Http\Controllers\Public\NewsController;
+use Keating\Models\User;
 
 Route::get("/", HomeController::class)->name("main");
 Route::get("/aktualnosci", [NewsController::class, "index"]);
@@ -33,7 +34,7 @@ Route::get("/aktualnosci/{slug}", [NewsController::class, "get"]);
 Route::get("/oceny/{semester?}/{course?}/{group?}/{index?}", PublicGradeController::class);
 Route::get("/kursy", [PublicCourseController::class, "index"]);
 Route::get("/kursy/{slug}", [PublicCourseController::class, "get"]);
-Route::get("/kontakt", ContactController::class);
+Route::get("/kontakt", ContactController::class)->can("contactEnabled", User::class)->name("contact");
 
 Route::middleware("guest")->group(function (): void {
     Route::get("/login", [LoginController::class, "create"])->name("login");
