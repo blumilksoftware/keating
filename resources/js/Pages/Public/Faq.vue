@@ -25,7 +25,7 @@ defineProps({
               FAQ
             </template>
             <template #subheader>
-              Często zadawane pytania i odpowiedzi na nie
+              Często zadawane pytania i odpowiedzi na nie.
             </template>
           </SectionHeader>
 

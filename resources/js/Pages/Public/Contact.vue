@@ -7,15 +7,7 @@ import ContactItem from '@/Shared/Components/ContactItem.vue'
 import { NoSymbolIcon } from '@heroicons/vue/24/outline'
 
 defineProps({
-  title: String,
-  name: String,
   email: String,
-  department: String,
-  university: String,
-  universityLogo: String,
-  sectionSettings: Object,
-  about: Array,
-  counters: Array,
   contactInfos: Array,
 })
 </script>
@@ -36,7 +28,6 @@ defineProps({
               Informacje kontaktowe.
             </template>
           </SectionHeader>
-          <img src="/cwup.png" alt="" class="pointer-events-none absolute right-0 z-0 hidden w-1/2 opacity-10 lg:mt-16 lg:block xl:mt-10 2xl:mt-0">
           <div class="mx-auto mt-10 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             <div class="mx-auto max-w-7xl text-center lg:mx-0 lg:flex-auto ">
               <div v-if="email" class="mx-auto max-w-2xl py-6 text-left lg:mx-0 xl:py-3">
