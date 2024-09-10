@@ -12,6 +12,7 @@ import { Method } from '@inertiajs/inertia'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 import { PencilSquareIcon, XCircleIcon, CheckIcon } from '@heroicons/vue/24/outline'
+import StyledLink from '@/Shared/Components/StyledLink.vue'
 
 defineProps({
   semesters: Object,
@@ -39,9 +40,9 @@ const semesterToDeleteId = ref(0)
         </template>
         <template #actions>
           <span class="hidden sm:block">
-            <Button :href="`/dashboard/semesters/create`">
+            <StyledLink :href="`/dashboard/semesters/create`">
               Dodaj
-            </Button>
+            </StyledLink>
           </span>
         </template>
       </ManagementHeader>
@@ -78,9 +79,9 @@ const semesterToDeleteId = ref(0)
                 >
                   <CheckIcon class="w-5" />
                 </Button>
-                <Button :href="`/dashboard/semesters/${semester.id}/edit`">
+                <StyledLink :href="`/dashboard/semesters/${semester.id}/edit`">
                   <PencilSquareIcon class="w-5" />
-                </Button>
+                </StyledLink>
                 <Button class="text-red-600" @click="[showModal = true, semesterToDeleteId = semester.id]">
                   <XCircleIcon class="w-5" />
                 </Button>

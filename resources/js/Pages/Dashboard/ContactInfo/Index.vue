@@ -12,6 +12,7 @@ import { ref } from 'vue'
 import { PencilSquareIcon, XCircleIcon } from '@heroicons/vue/24/outline'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
+import StyledLink from '@/Shared/Components/StyledLink.vue'
 defineProps({
   contactInfos: Object,
   total: Number,
@@ -41,9 +42,9 @@ const contactInfoToDeleteId = ref(0)
           </ManagementHeaderItem>
         </template>
         <template #actions>
-          <Button :href="`/dashboard/contact-infos/create`">
+          <StyledLink :href="`/dashboard/contact-infos/create`">
             Dodaj
-          </Button>
+          </StyledLink>
         </template>
       </ManagementHeader>
       <div v-if="contactInfos.length" class="flex flex-col gap-8">
@@ -72,9 +73,9 @@ const contactInfoToDeleteId = ref(0)
                 {{ contact.identifier }}
               </TableCell>
               <TableCell class="flex justify-end gap-2">
-                <Button :href="`contact-infos/${contact.id}/edit`">
+                <StyledLink :href="`contact-infos/${contact.id}/edit`">
                   <PencilSquareIcon class="w-5" />
-                </Button>
+                </StyledLink>
                 <Button class="text-red-600" @click="[showModal = true, contactInfoToDeleteId = contact.id]">
                   <XCircleIcon class="w-5" />
                 </Button>

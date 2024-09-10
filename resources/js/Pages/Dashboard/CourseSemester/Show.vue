@@ -14,6 +14,7 @@ import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
 import { PencilSquareIcon, UsersIcon, XCircleIcon, ChartBarIcon } from '@heroicons/vue/24/outline'
 import { ref } from 'vue'
+import StyledLink from '@/Shared/Components/StyledLink.vue'
 
 const props = defineProps({
   course: Object,
@@ -41,7 +42,7 @@ function editGroup(group) {
 }
 
 function createGroup() {
-  form.post(`/dashboard/semester-courses/${props.course.data.id}/groups`, {
+  form.post(`/dashboard/semester-courses/${props.course.id}/groups`, {
     onSuccess: () => {
       form.reset()
     },
@@ -49,7 +50,7 @@ function createGroup() {
 }
 
 function updateGroup() {
-  editForm.patch(`/dashboard/semester-courses/${props.course.data.id}/groups/${groupToEdit.value.id}`, {
+  editForm.patch(`/dashboard/semester-courses/${props.course.id}/groups/${groupToEdit.value.id}`, {
     onSuccess: () => {
       showEditForm.value = false
     },
@@ -77,25 +78,25 @@ function updateGroup() {
               <FormLabel for="id">
                 Id
               </FormLabel>
-              <TextInput :placeholder="course.data.id" autocomplete="off" disabled />
+              <TextInput :placeholder="course.id" autocomplete="off" disabled />
             </FormGroup>
             <FormGroup>
               <FormLabel for="course">
                 Kurs
               </FormLabel>
-              <TextInput :placeholder="course.data.course" autocomplete="off" disabled />
+              <TextInput :placeholder="course.course" autocomplete="off" disabled />
             </FormGroup>
             <FormGroup>
               <FormLabel for="semester">
                 Semestr
               </FormLabel>
-              <TextInput :placeholder="course.data.semester" autocomplete="off" disabled />
+              <TextInput :placeholder="course.semester" autocomplete="off" disabled />
             </FormGroup>
             <FormGroup>
               <FormLabel for="semester">
                 Liczba grup
               </FormLabel>
-              <TextInput :placeholder="course.data.groupsCount" autocomplete="off" disabled />
+              <TextInput :placeholder="course.groupsCount" autocomplete="off" disabled />
             </FormGroup>
           </div>
         </Section>
@@ -182,19 +183,19 @@ function updateGroup() {
           </form>
         </Section>
         <div class="grid grid-cols-2 gap-4">
-          <div v-for="group in groups.data" :key="group.id"
+          <div v-for="group in groups" :key="group.id"
                class="flex h-max cursor-pointer items-center justify-between overflow-x-auto bg-white p-4 text-center sm:rounded-lg"
           >
             {{ group.name }}[{{ group.formAbbreviation }}]
             <div class="flex gap-2">
-              <Button class="has-tooltip" :href="`/dashboard/semester-courses/${course.data.id}/groups/${group.id}/grades`">
+              <StyledLink class="has-tooltip" :href="`/dashboard/semester-courses/${course.id}/groups/${group.id}/grades`">
                 <ChartBarIcon class="w-5" />
                 <span class="tooltip -ml-6 -mt-16 rounded bg-gray-500 p-1 text-white">Oceny</span>
-              </Button>
-              <Button class="has-tooltip" :href="`/dashboard/semester-courses/${course.data.id}/groups/${group.id}/students`">
+              </StyledLink>
+              <StyledLink class="has-tooltip" :href="`/dashboard/semester-courses/${course.id}/groups/${group.id}/students`">
                 <UsersIcon class="w-5" />
                 <span class="tooltip -ml-8 -mt-16 rounded bg-gray-500 p-1 text-white">Studenci</span>
-              </Button>
+              </StyledLink>
               <Button class="has-tooltip">
                 <PencilSquareIcon class="w-5" @click="editGroup(group)" />
                 <span class="tooltip -ml-10 -mt-16 rounded bg-gray-500 p-1 text-white">Edytuj grupę</span>
@@ -210,7 +211,7 @@ function updateGroup() {
     </div>
   </DashboardLayout>
 
-  <RemoveModal :show="showModal" :href="`/dashboard/semester-courses/${course.data.id}/groups/${groupToDeleteId}`"
+  <RemoveModal :show="showModal" :href="`/dashboard/semester-courses/${course.id}/groups/${groupToDeleteId}`"
                @close="showModal = false"
   />
 </template>

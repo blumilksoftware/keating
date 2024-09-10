@@ -46,14 +46,14 @@ const editForm = useForm({
 })
 
 function createGradeColumn() {
-  form.post(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades`, {
+  form.post(`/dashboard/semester-courses/${props.course.id}/groups/${props.group.id}/grades`, {
     preserveScroll: true,
   })
   form.reset()
 }
 
 function updateGradeColumn() {
-  editForm.patch(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades/${columnToEdit.value.id}`, {
+  editForm.patch(`/dashboard/semester-courses/${props.course.id}/groups/${props.group.id}/grades/${columnToEdit.value.id}`, {
     preserveScroll: true,
   })
   showEditForm.value = false
@@ -61,7 +61,7 @@ function updateGradeColumn() {
 }
 
 function updateGrade(gradeColumnId, studentId, value, status) {
-  Inertia.patch(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades/${gradeColumnId}/update`, {
+  Inertia.patch(`/dashboard/semester-courses/${props.course.id}/groups/${props.group.id}/grades/${gradeColumnId}/update`, {
     status: status,
     value: value,
     student_id: studentId,
@@ -71,7 +71,7 @@ function updateGrade(gradeColumnId, studentId, value, status) {
 }
 
 function createGrade(gradeColumnId, studentId, status, value) {
-  Inertia.post(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades/${gradeColumnId}/store`, {
+  Inertia.post(`/dashboard/semester-courses/${props.course.id}/groups/${props.group.id}/grades/${gradeColumnId}/store`, {
     status: status,
     student_id: studentId,
     value: value,
@@ -89,7 +89,7 @@ function editColumn(column) {
 }
 
 function reorder(id, down) {
-  Inertia.post(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades/${id}/reorder/${down}`, {}, {
+  Inertia.post(`/dashboard/semester-courses/${props.course.id}/groups/${props.group.id}/grades/${id}/reorder/${down}`, {}, {
     preserveScroll: true,
   })
 }
@@ -99,7 +99,7 @@ const searchForm = useForm({
 })
 
 watch(searchForm, debounce(() => {
-  Inertia.get(`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades`, {
+  Inertia.get(`/dashboard/semester-courses/${props.course.id}/groups/${props.group.id}/grades`, {
     search: searchForm.search,
   }, {
     preserveState: true,
@@ -114,7 +114,7 @@ watch(searchForm, debounce(() => {
       <ManagementHeader>
         <template #header>
           Zarządzanie ocenami w grupie <span class="text-gray-500">{{ group.name }}</span><br>
-          dla kursu <span class="text-gray-500">{{ course.data.course }}</span>
+          dla kursu <span class="text-gray-500">{{ course.course }}</span>
         </template>
         <template #statistics>
           <ManagementHeaderItem>
@@ -220,15 +220,15 @@ watch(searchForm, debounce(() => {
             </TableHeader>
           </template>
           <template #body>
-            <TableRow v-for="student in students.data" :key="student.id">
+            <TableRow v-for="student in students.data" :key="student?.id">
               <TableCell class="h-[70px] w-[120px] min-w-[120px] cursor-pointer flex-row border-2">
                 <div class="font-bold">
-                  {{ student.first_name }} {{ student.surname }}
+                  {{ student?.first_name }} {{ student?.surname }}
                 </div>
-                <div>({{ student.index_number }})</div>
+                <div>({{ student?.index_number }})</div>
               </TableCell>
               <GradeCell v-for="column in gradeColumns" :key="column.id"
-                         :grade="column.grades.find(obj => obj.student_id === student.id)" :grade-column="column"
+                         :grade="column.grades.find(obj => obj.student_id === student?.id)" :grade-column="column"
                          :student="student" class="cursor-pointer border-2"
                          @create-grade="createGrade" @update-grade="updateGrade"
               />
@@ -240,7 +240,7 @@ watch(searchForm, debounce(() => {
     </div>
   </DashboardLayout>
   <RemoveModal
-    :href="`/dashboard/semester-courses/${props.course.data.id}/groups/${props.group.id}/grades/${columnToDeleteId}`"
+    :href="`/dashboard/semester-courses/${props.course.id}/groups/${props.group.id}/grades/${columnToDeleteId}`"
     :show="showModal"
     @close="showModal = false"
   />
