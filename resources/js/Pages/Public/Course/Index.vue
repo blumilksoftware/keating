@@ -76,6 +76,8 @@ defineProps({
                 </template>
               </TableWrapper>
             </div>
+
+            <EmptyState v-if="courses.length === 0" description="Brak kursów" />
           </div>
         </div>
       </div>

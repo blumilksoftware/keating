@@ -18,12 +18,7 @@ class ContactController
         $contactInfos = ContactInfo::query()->get();
 
         return inertia("Public/Contact", [
-            "title" => $settings->teacher_titles,
-            "name" => $settings->teacher_name,
             "email" => $settings->teacher_email,
-            "department" => $settings->department_name,
-            "university" => $settings->university_name,
-            "universityLogo" => asset("cwup-full.png"),
             "contactInfos" => $contactInfos->map(fn(ContactInfo $contactInfo): ContactInfoData => ContactInfoData::fromModel($contactInfo)),
         ]);
     }
