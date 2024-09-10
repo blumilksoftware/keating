@@ -13,7 +13,7 @@ import { Inertia } from '@inertiajs/inertia'
 import { debounce } from 'lodash'
 import TextInput from '@/Shared/Forms/TextInput.vue'
 import { useForm } from '@inertiajs/inertia-vue3'
-import { XCircleIcon, PlusIcon } from '@heroicons/vue/24/outline'
+import { PlusIcon } from '@heroicons/vue/24/outline'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 
@@ -55,8 +55,10 @@ watch(form, debounce(() => {
     <div class="flex flex-col gap-8">
       <ManagementHeader>
         <template #header>
-          Zarządzanie studentami w grupie <span class="text-gray-500">{{ group.name }}</span><br>
-          dla kursu <span class="text-gray-500">{{ course.course }}</span>
+          Zarządzanie studentami w grupie
+          <span class="text-gray-500">{{ group.name }}</span>
+          <br> dla kursu
+          <span class="text-gray-500">{{ course.course }}</span>
         </template>
         <template #statistics>
           <ManagementHeaderItem>
@@ -68,21 +70,16 @@ watch(form, debounce(() => {
         </template>
         <template #actions>
           <Button @click="[studentsFormOpen = !studentsFormOpen]">
-            Dodaj
+            dodaj
           </Button>
         </template>
       </ManagementHeader>
       <div v-if="studentsFormOpen" class="border-2 border-dotted p-4 sm:rounded-lg">
-        <TextInput id="search" v-model="form.search" placeholder="Szukaj studentów do dodania" type="search"
-                   class="mb-5 max-w-lg"
-        />
+        <TextInput id="search" v-model="form.search" placeholder="Szukaj studentów do dodania" type="search" class="mb-5 max-w-lg" />
         <div v-if="availableStudents.length" class="grid max-h-64 grid-cols-3 gap-4 overflow-y-auto">
-          <div v-for="student in availableStudents" :key="student.id"
-               class="flex h-max cursor-pointer items-center justify-between overflow-x-auto bg-white p-4 text-left sm:rounded-lg"
-          >
+          <div v-for="student in availableStudents" :key="student.id" class="flex h-max cursor-pointer items-center justify-between overflow-x-auto bg-white p-4 text-left sm:rounded-lg">
             <div>
-              {{ student.first_name }} {{ student.surname }} <br>
-              {{ student.index_number }}
+              {{ student.first_name }} {{ student.surname }} <br> {{ student.index_number }}
             </div>
             <div>
               <Button @click="addStudent(student.id)">
@@ -126,7 +123,7 @@ watch(form, debounce(() => {
               </TableCell>
               <TableCell class="flex justify-end gap-2">
                 <Button class="text-red-600" @click="[showModal = true, studentToDeleteId = student.id]">
-                  <XCircleIcon class="w-5" />
+                  usuń
                 </Button>
               </TableCell>
             </TableRow>

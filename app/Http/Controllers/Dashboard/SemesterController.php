@@ -16,7 +16,9 @@ class SemesterController
     public function index(): Response
     {
         $semesters = Semester::query()
+            ->orderByDesc("active")
             ->orderByDesc("created_at")
+            ->orderByDesc("id")
             ->get();
 
         return inertia("Dashboard/Semester/Index", [
@@ -71,7 +73,7 @@ class SemesterController
 
             return redirect()->back()
                 ->with("success", "Semestr aktywny");
-        } catch (Exception $e) {
+        } catch (Exception) {
             return redirect()->back()
                 ->with("error", "Wystąpił nieoczekiwany problem");
         }

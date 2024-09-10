@@ -127,7 +127,7 @@ watch(searchForm, debounce(() => {
         <template #actions>
           <TextInput id="filter" v-model="searchForm.search" class="max-w-lg" placeholder="Szukaj" type="search" />
           <Button @click="[showCreateForm = true, showEditForm = false]">
-            Dodaj kolumnę
+            dodaj kolumnę
           </Button>
         </template>
       </ManagementHeader>

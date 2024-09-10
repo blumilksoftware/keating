@@ -46,7 +46,7 @@ function editFAQ() {
               <FormLabel for="id">
                 Id
               </FormLabel>
-              <TextInput class="opacity-75" placeholder="autogenerowany ulid" autocomplete="off" disabled />
+              <TextInput class="opacity-75" :placeholder="faq.id" autocomplete="off" disabled />
             </FormGroup>
             <FormGroup>
               <FormLabel for="question">

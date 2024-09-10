@@ -80,7 +80,7 @@ const mobileMenuOpen = ref(false)
       <div class="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-center lg:px-8">
         <div class="mt-8 md:order-1 md:mt-0">
           <p class="text-center text-xs leading-5 text-gray-500">
-            2023
+            2024
             <EllipsisHorizontalIcon class="mx-2 inline-block w-6" />
             <a class="font-semibold" href="https://github.com/blumilksoftware/keating" target="_blank">keating
               management system</a> developed at <a class="font-semibold" href="https://blumilk.pl/" target="_blank">Blumilk</a>

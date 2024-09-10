@@ -9,7 +9,6 @@ import Button from '@/Shared/Components/Buttons/Button.vue'
 import EmptyState from '@/Shared/Components/EmptyState/EmptyState.vue'
 import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
 import { ref } from 'vue'
-import { PencilSquareIcon, XCircleIcon } from '@heroicons/vue/24/outline'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 import StyledLink from '@/Shared/Components/StyledLink.vue'
@@ -74,10 +73,10 @@ const contactInfoToDeleteId = ref(0)
               </TableCell>
               <TableCell class="flex justify-end gap-2">
                 <StyledLink :href="`contact-infos/${contact.id}/edit`">
-                  <PencilSquareIcon class="w-5" />
+                  edytuj
                 </StyledLink>
                 <Button class="text-red-600" @click="[showModal = true, contactInfoToDeleteId = contact.id]">
-                  <XCircleIcon class="w-5" />
+                  usuń
                 </Button>
               </TableCell>
             </TableRow>

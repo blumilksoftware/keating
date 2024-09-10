@@ -110,8 +110,7 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::get("/semester-courses", "index")->name("course.semester.index");
         Route::get("/semester-courses/create", "create")->name("course.semester.create");
         Route::post("/semester-courses", "store")->name("course.semester.store");
-        Route::get("/semester-courses/{course}", "show")->name("course.semester.show");
-        Route::get("/semester-courses/{course}/edit", "edit")->name("course.semester.edit");
+        Route::get("/semester-courses/{course}", "edit")->name("course.semester.edit");
         Route::patch("/semester-courses/{course}", "update")->name("course.semester.update");
         Route::delete("/semester-courses/{course}", "destroy")->name("course.semester.destroy");
     });

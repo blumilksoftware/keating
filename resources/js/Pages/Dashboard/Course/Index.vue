@@ -10,7 +10,6 @@ import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
 import { ref } from 'vue'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
-import { PencilSquareIcon, XCircleIcon } from '@heroicons/vue/24/outline'
 import StyledLink from '@/Shared/Components/StyledLink.vue'
 
 defineProps({
@@ -40,7 +39,7 @@ const courseToDeleteId = ref(0)
         <template #actions>
           <span class="hidden sm:block">
             <StyledLink :href="`/dashboard/courses/create`">
-              Dodaj
+              dodaj
             </StyledLink>
           </span>
         </template>
@@ -84,10 +83,10 @@ const courseToDeleteId = ref(0)
               </TableCell>
               <TableCell class="flex justify-end gap-2">
                 <StyledLink :href="`/dashboard/courses/${course.id}/edit`">
-                  <PencilSquareIcon class="w-5" />
+                  edytuj
                 </StyledLink>
                 <Button class="text-red-600" @click="[showModal = true, courseToDeleteId = course.id]">
-                  <XCircleIcon class="w-5" />
+                  usuń
                 </Button>
               </TableCell>
             </TableRow>

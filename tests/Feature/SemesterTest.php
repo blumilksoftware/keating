@@ -82,18 +82,37 @@ class SemesterTest extends TestCase
         $this->assertTrue($semester->active);
     }
 
-    public function testManySemestersCanBeActive(): void
+    public function testManySemestersCannotBeActive(): void
     {
-        $inactiveSemester = Semester::factory()->create(["active" => 0]);
-        $activeSemester = Semester::factory()->create(["active" => 1]);
-        $this->assertFalse($inactiveSemester->active);
-        $this->assertTrue($activeSemester->active);
+        $oldSemester = Semester::factory()->create(["active" => 0]);
+        $previousSemester = Semester::factory()->create(["active" => 0]);
+        $currentSemester = Semester::factory()->create(["active" => 0]);
 
-        $this->post("/dashboard/semesters/{$inactiveSemester->id}/activate");
+        $this->assertFalse($oldSemester->active);
+        $this->assertFalse($previousSemester->active);
+        $this->assertFalse($currentSemester->active);
 
-        $inactiveSemester->refresh();
-        $activeSemester->refresh();
-        $this->assertTrue($inactiveSemester->active);
-        $this->assertTrue($activeSemester->active);
+        $this->post("/dashboard/semesters/{$currentSemester->id}/activate");
+
+        $oldSemester->refresh();
+        $previousSemester->refresh();
+        $currentSemester->refresh();
+
+        $this->assertFalse($oldSemester->active);
+        $this->assertFalse($previousSemester->active);
+        $this->assertTrue($currentSemester->active);
+
+        $newSemester = Semester::factory()->create(["active" => 0]);
+        $this->post("/dashboard/semesters/{$newSemester->id}/activate");
+
+        $oldSemester->refresh();
+        $previousSemester->refresh();
+        $currentSemester->refresh();
+        $newSemester->refresh();
+
+        $this->assertFalse($oldSemester->active);
+        $this->assertFalse($previousSemester->active);
+        $this->assertFalse($currentSemester->active);
+        $this->assertTrue($newSemester->active);
     }
 }

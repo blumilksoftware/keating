@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Keating\Http\Controllers\Dashboard;
 
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 use Keating\DTOs\CourseSemesterData;
@@ -20,7 +21,12 @@ class CourseSemesterController
     public function index(): Response
     {
         $courses = CourseSemester::query()
+            ->join("semesters", "semesters.id", "=", "course_semester.semester_id")
+            ->join("courses", "courses.id", "=", "course_semester.course_id")
             ->withCount("groups")
+            ->orderByDesc("semesters.active")
+            ->orderByDesc("semesters.id")
+            ->orderBy("courses.semester")
             ->orderBy("created_at")
             ->get();
 
@@ -49,22 +55,17 @@ class CourseSemesterController
             ->with("success", "Dodano kurs");
     }
 
-    public function show(CourseSemester $course): Response
-    {
-        return inertia("Dashboard/CourseSemester/Show", [
-            "course" => CourseSemesterData::fromModel($course),
-            "groups" => $course->groups->map(fn($group): GroupData => GroupData::fromModel($group)),
-            "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
-        ]);
-    }
-
+    /**
+     * @throws Exception
+     */
     public function edit(CourseSemester $course): Response
     {
         return inertia("Dashboard/CourseSemester/Edit", [
-            "course" => $course,
+            "course" => CourseSemesterData::fromModel($course),
+            "courses" => Course::query()->get(["id", "name"]),
+            "semesters" => Semester::query()->orderByDesc("id")->get(["id", "name"]),
+            "groups" => $course->groups->map(fn($group): GroupData => GroupData::fromModel($group)),
             "studyForms" => Options::forEnum(StudyForm::class)->toArray(),
-            "courses" => Course::all(["id", "name"]),
-            "semesters" => Semester::all(["id", "name"]),
         ]);
     }
 

@@ -22,6 +22,7 @@ class Field extends Model
     use HasUlids;
 
     protected $fillable = [
+        "id",
         "name",
         "abbreviation",
     ];
