@@ -8,7 +8,6 @@ import FormError from '@/Shared/Forms/FormError.vue'
 import { useForm } from '@inertiajs/inertia-vue3'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
-import { PencilSquareIcon, XCircleIcon } from '@heroicons/vue/24/outline'
 import EmptyState from '@/Shared/Components/EmptyState/EmptyState.vue'
 import TableCell from '@/Shared/Components/Table/TableCell.vue'
 import TableRow from '@/Shared/Components/Table/TableRow.vue'
@@ -210,10 +209,10 @@ function updateSectionSettings() {
                     </TableCell>
                     <TableCell class="flex justify-end gap-2">
                       <Button @click="editSection(item)">
-                        <PencilSquareIcon class="w-5" />
+                        edytuj
                       </Button>
                       <Button class="text-red-600" @click="[showModal = true, sectionToDeleteId = item.id]">
-                        <XCircleIcon class="w-5" />
+                        usuń
                       </Button>
                     </TableCell>
                   </TableRow>
@@ -251,10 +250,10 @@ function updateSectionSettings() {
                     </TableCell>
                     <TableCell class="flex justify-end gap-2">
                       <Button @click="editSection(counter)">
-                        <PencilSquareIcon class="w-5" />
+                        edytuj
                       </Button>
                       <Button class="text-red-600" @click="[showModal = true, sectionToDeleteId = counter.id]">
-                        <XCircleIcon class="w-5" />
+                        usuń
                       </Button>
                     </TableCell>
                   </TableRow>

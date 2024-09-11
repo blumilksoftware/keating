@@ -199,8 +199,10 @@ function updateGroup() {
           </form>
         </Section>
         <div class="grid grid-cols-2 gap-4">
-          <div v-for="group in groups" :key="group.id" class="flex h-max cursor-pointer items-center justify-between overflow-x-auto bg-white p-4 text-center sm:rounded-lg">
-            {{ group.name }}[{{ group.formAbbreviation }}]
+          <div v-for="group in groups" :key="group.id" class="flex h-max flex-col items-center justify-center gap-4 overflow-x-auto bg-white p-4 text-center sm:rounded-lg">
+            <div class="flex">
+              {{ group.name }}
+            </div>
             <div class="flex gap-2">
               <StyledLink :href="`/dashboard/semester-courses/${course.id}/groups/${group.id}/grades`">
                 oceny
