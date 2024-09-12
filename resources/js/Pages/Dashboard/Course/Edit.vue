@@ -12,14 +12,12 @@ import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
 import TextAreaEditor from '../../../Shared/Forms/TextAreaEditor.vue'
 
-
 const props = defineProps({
   course: Object,
   classTypes: Array,
   fields: Array,
   semesterNames: Array,
 })
-
 
 const form = useForm({
   name: props.course.name,
@@ -58,7 +56,7 @@ function updateCourse() {
               <FormLabel for="id">
                 Id
               </FormLabel>
-              <TextInput class="opacity-75" placeholder="autogenerowany ulid" autocomplete="off" disabled />
+              <TextInput class="opacity-75" :placeholder="course.id" autocomplete="off" disabled />
             </FormGroup>
             <FormGroup>
               <FormLabel for="name">

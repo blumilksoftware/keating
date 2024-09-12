@@ -7,6 +7,7 @@ import TableWrapper from '@/Shared/Components/Table/Public/TableWrapper.vue'
 import TableHeader from '@/Shared/Components/Table/Public/TableHeader.vue'
 import TableRow from '@/Shared/Components/Table/Public/TableRow.vue'
 import TableCell from '@/Shared/Components/Table/Public/TableCell.vue'
+import { Head } from '@inertiajs/inertia-vue3'
 
 defineProps({
   courses: Object,
@@ -15,6 +16,8 @@ defineProps({
 </script>
 
 <template>
+  <Head title="Lista kursów" />
+
   <PublicLayout>
     <div class="relative isolate bg-white">
       <BackgroundGrid />
@@ -25,7 +28,7 @@ defineProps({
               Lista kursów
             </template>
             <template #subheader>
-              Szczegółowe informacje dotyczące kursów
+              Szczegółowe informacje dotyczące kursów.
             </template>
           </SectionHeader>
 
@@ -33,25 +36,25 @@ defineProps({
             <div v-if="courses.length" class="flex flex-col gap-8">
               <TableWrapper>
                 <template #header>
-                  <TableHeader class="w-1/5">
+                  <TableHeader class="w-1">
                     Kod
                   </TableHeader>
-                  <TableHeader class="w-1/5">
+                  <TableHeader class="w-full">
                     Pełna nazwa kursu
                   </TableHeader>
-                  <TableHeader class="w-1/5">
+                  <TableHeader class="w-1">
                     Specjalność
                   </TableHeader>
-                  <TableHeader class="w-1/5">
+                  <TableHeader class="w-1">
                     Semestr
                   </TableHeader>
-                  <TableHeader class="w-1/5">
+                  <TableHeader class="w-1">
                     Forma
                   </TableHeader>
-                  <TableHeader />
+                  <TableHeader class="w-1" />
                 </template>
                 <template #body>
-                  <TableRow v-for="course in courses" :key="course.id" :class="[course.active ? '' : 'bg-gray-100']">
+                  <TableRow v-for="course in courses" :key="course.id" :class="[course.active ? '' : 'opacity-50']">
                     <TableCell>
                       {{ course.abbreviation }}
                     </TableCell>
@@ -69,7 +72,7 @@ defineProps({
                     </TableCell>
                     <TableCell>
                       <InertiaLink :href="`kursy/${course.slug}`">
-                        <ArrowRightCircleIcon class="m-auto size-6 text-gray-500" />
+                        <ArrowRightCircleIcon class="m-auto my-3 size-6 text-gray-500" />
                       </InertiaLink>
                     </TableCell>
                   </TableRow>

@@ -13,7 +13,7 @@ class GroupFactory extends Factory
     public function definition(): array
     {
         return [
-            "name" => fake()->asciify("******"),
+            "name" => fake()->numerify("s#INF#"),
             "course_semester_id" => CourseSemester::factory(),
             "form" => StudyForm::Stationary->value,
         ];

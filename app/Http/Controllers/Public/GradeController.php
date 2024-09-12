@@ -47,19 +47,18 @@ class GradeController
                     ->where("active", true)
                     ->orderBy("priority")
                     ->get();
+
                 $students = $group->students()
                     ->whereNot("index_number", $index)
                     ->inRandomOrder()
-                    ->take(8)
                     ->get()
-                    ->push($studentByIndex)
-                    ->sortBy("index_number")
+                    ->prepend($studentByIndex)
                     ->map(fn(Student $student): StudentData => StudentData::fromModels($student, $studentByIndex, $gradeColumns));
             }
         }
 
         return inertia("Public/Grade", [
-            "semesters" => Semester::query()->get(["name", "id"]),
+            "semesters" => Semester::query()->orderByDesc("id")->get(["name", "id"]),
             "semester" => $semester,
             "courses" => $courses,
             "course" => $course,

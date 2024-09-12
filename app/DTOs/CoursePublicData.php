@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 use Keating\Enums\ClassType;
 use Keating\Enums\SemesterName;
 use Keating\Models\Course;
+use Keating\Models\CourseSemester;
 
 readonly class CoursePublicData
 {
@@ -40,7 +41,11 @@ readonly class CoursePublicData
             typeAbbreviation: ClassType::abbreviationLabels()[$course->type],
             field: $course->field->name,
             fieldAbbreviation: $course->field->abbreviation,
-            active: $activeSemesters && ($activeSemesters->contains($course->getRomanizedSemester()) || $activeSemesters->contains($course->semester)),
+            active: CourseSemester::query()
+                ->join("semesters", "course_semester.semester_id", "=", "semesters.id")
+                ->where("semesters.active", true)
+                ->where("course_semester.course_id", $course->id)
+                ->count() > 0,
         );
     }
 }

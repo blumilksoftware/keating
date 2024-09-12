@@ -24,6 +24,10 @@ class ActivateSemesterAction
 
             $semester->update(["active" => !$semester->active]);
 
+            if ($semester->active) {
+                Semester::query()->whereNot("id", $semester->id)->update(["active" => false]);
+            }
+
             $this->db->commit();
         } catch (Exception $exception) {
             $this->db->rollBack();

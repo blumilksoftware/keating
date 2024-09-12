@@ -11,7 +11,6 @@ import { ref } from 'vue'
 import { Method } from '@inertiajs/inertia'
 import ManagementHeader from '@/Shared/Components/ManagementHeader.vue'
 import ManagementHeaderItem from '@/Shared/Components/ManagementHeaderItem.vue'
-import { PencilSquareIcon, XCircleIcon, CheckIcon } from '@heroicons/vue/24/outline'
 import StyledLink from '@/Shared/Components/StyledLink.vue'
 
 defineProps({
@@ -41,11 +40,12 @@ const semesterToDeleteId = ref(0)
         <template #actions>
           <span class="hidden sm:block">
             <StyledLink :href="`/dashboard/semesters/create`">
-              Dodaj
+              dodaj
             </StyledLink>
           </span>
         </template>
       </ManagementHeader>
+
       <div v-if="semesters.length" class="flex flex-col gap-8">
         <TableWrapper>
           <template #header>
@@ -74,16 +74,15 @@ const semesterToDeleteId = ref(0)
                 {{ semester.active ? "aktywny" : "nieaktywny" }}
               </TableCell>
               <TableCell class="flex justify-end gap-2">
-                <Button v-if="semester.status !== true" :method="Method.POST"
-                        :href="`/dashboard/semesters/${semester.id}/activate`"
-                >
-                  <CheckIcon class="w-5" />
+                <Button v-if="semester.status !== true" :method="Method.POST" :href="`/dashboard/semesters/${semester.id}/activate`">
+                  <span v-if="semester.active !== true">aktywuj</span>
+                  <span v-else>deaktywuj</span>
                 </Button>
                 <StyledLink :href="`/dashboard/semesters/${semester.id}/edit`">
-                  <PencilSquareIcon class="w-5" />
+                  edytuj
                 </StyledLink>
                 <Button class="text-red-600" @click="[showModal = true, semesterToDeleteId = semester.id]">
-                  <XCircleIcon class="w-5" />
+                  usuń
                 </Button>
               </TableCell>
             </TableRow>

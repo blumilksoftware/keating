@@ -7,20 +7,15 @@ namespace Keating\Http\Controllers\Public;
 use Inertia\Response;
 use Keating\DTOs\CoursePublicData;
 use Keating\Models\Course;
-use Keating\Models\Semester;
 
 class CourseController
 {
     public function index(): Response
     {
-        $activeSemesters = Semester::query()
-            ->where("active", true)
-            ->pluck("name");
-
         $courses = Course::query()
             ->with("field")
             ->get()
-            ->map(fn(Course $course): CoursePublicData => CoursePublicData::fromModel($course, $activeSemesters))
+            ->map(fn(Course $course): CoursePublicData => CoursePublicData::fromModel($course))
             ->sortBy("semester")
             ->sortByDesc("active");
 

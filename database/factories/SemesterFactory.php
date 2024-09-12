@@ -11,7 +11,7 @@ class SemesterFactory extends Factory
     public function definition(): array
     {
         return [
-            "name" => fake()->numberBetween(1, 7),
+            "name" => fake()->randomElement(["zimowy", "letni"]) . " " . fake()->year(),
             "active" => fake()->boolean,
         ];
     }
