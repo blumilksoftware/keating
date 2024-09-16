@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 import { Dialog, DialogPanel } from '@headlessui/vue'
-import { Bars3Icon, EllipsisHorizontalIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { Bars3Icon, EllipsisHorizontalIcon, XMarkIcon, ArrowTopRightOnSquareIcon } from '@heroicons/vue/24/outline'
 
 const navigation = [
   { name: 'Strona główna', href: '/' },
@@ -30,6 +30,10 @@ const mobileMenuOpen = ref(false)
           <Link v-for="item in navigation" :key="item.name" :href="item.href" class="text-sm font-semibold leading-6 text-gray-900">
             {{ item.name }}
           </Link>
+          <a v-if="$page.props.settings.scheduleLink" :href="$page.props.settings.scheduleLink" target="_blank" class="flex items-center gap-2 text-sm font-semibold leading-6 text-gray-900">
+            Plan zajęć
+            <ArrowTopRightOnSquareIcon class="size-5" />
+          </a>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link v-if="$page.props.auth.user" href="/dashboard" class="text-sm font-semibold leading-6 text-gray-900">
@@ -57,6 +61,10 @@ const mobileMenuOpen = ref(false)
                 <Link v-for="item in navigation" :key="item.name" :href="item.href" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                   {{ item.name }}
                 </Link>
+                <a v-if="$page.props.settings.scheduleLink" :href="$page.props.settings.scheduleLink" target="_blank" class="-mx-3 flex items-center gap-2 rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                  Plan zajęć
+                  <ArrowTopRightOnSquareIcon class="size-5" />
+                </a>
               </div>
               <div class="py-6">
                 <Link v-if="$page.props.auth.user" href="/dashboard" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">

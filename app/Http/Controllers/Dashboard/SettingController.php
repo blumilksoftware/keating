@@ -28,6 +28,7 @@ class SettingController
             if ($settings->logo) {
                 $filesystem->disk("public")->delete($settings->logo);
             }
+
             $file = $request->file("logo");
             $fileName = $file->getClientOriginalName();
             $path = "/logo";

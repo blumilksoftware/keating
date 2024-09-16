@@ -16,6 +16,7 @@ class SettingFactory extends Factory
             "teacher_email" => fake()->email,
             "department_name" => "Zakład Informatyki, Wydział Nauk Technicznych i Ekonomicznych",
             "university_name" => "Collegium Witelona Uczelnia Państwowa",
+            "schedule_link" => fake()->url(),
             "primary_color" => "#000000",
             "secondary_color" => "#ffffff",
         ];

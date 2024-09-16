@@ -18,6 +18,10 @@ use Keating\Observers\SettingObserver;
  * @property string $teacher_titles
  * @property string $university_name
  * @property string $department_name
+ * @property string $schedule_link
+ * @property string $primary_color
+ * @property string $secondary_color
+ * @property string $logo
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
@@ -33,6 +37,7 @@ class Setting extends Model
         "teacher_titles",
         "university_name",
         "department_name",
+        "schedule_link",
         "primary_color",
         "secondary_color",
         "logo",
