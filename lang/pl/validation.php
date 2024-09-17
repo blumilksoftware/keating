@@ -128,6 +128,7 @@ return [
         "teacher_titles" => "tytuły/stopnie naukowe nauczyciela",
         "university_name" => "nazwa uczelni",
         "department_name" => "nazwa wydziału",
+        "schedule_link" => "link do planu zajęć",
         "title" => "tytuł",
         "content" => "treść",
         "value" => "opis",

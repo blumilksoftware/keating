@@ -15,5 +15,6 @@ class SettingObserver
     public function saved(): void
     {
         $this->cache->forget("pageTitle");
+        $this->cache->forget("scheduleLink");
     }
 }

@@ -23,6 +23,7 @@ const form = useForm({
   teacher_titles: props.settings.teacher_titles,
   university_name: props.settings.university_name,
   department_name: props.settings.department_name,
+  schedule_link: props.settings.schedule_link,
   primary_color: props.settings.primary_color,
   secondary_color: props.settings.secondary_color,
   logo: null,
@@ -99,6 +100,13 @@ function onFileSelected(event) {
               </FormLabel>
               <TextInput id="department_name" v-model="form.department_name" :error="form.errors.department_name" autocomplete="off" />
               <FormError :error="form.errors.department_name" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel for="department_name">
+                Link do planu zajęć
+              </FormLabel>
+              <TextInput id="schedule_link" v-model="form.schedule_link" :error="form.errors.schedule_link" autocomplete="off" />
+              <FormError :error="form.errors.schedule_link" />
             </FormGroup>
             <FormGroup>
               <FormLabel for="primary_color">
