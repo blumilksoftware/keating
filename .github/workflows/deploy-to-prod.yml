@@ -1,0 +1,116 @@
+name: Deploy to production Keating
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
+on:
+  workflow_dispatch:
+    inputs:
+      appName:
+        description: 'For whom app should be deployed?'
+        required: true
+        type: choice
+        options:
+          - krewak
+          - eskrzypacz
+          - kzygadlo
+          - kpiech
+
+jobs:
+  deploy:
+    environment: production
+    runs-on: ubuntu-22.04
+    name: Deploy to production - ${{ inputs.appName }}
+    env:
+      DOCKER_REGISTRY: registry.blumilk.pl
+      DOCKER_REGISTRY_USER_NAME: robot@blumilkbot-harbor
+      DOCKER_REGISTRY_PROJECT_NAME: internal-public
+      DOCKER_REGISTRY_REPO_NAME: keating
+      TARGET_DIR_ON_SERVER: /blumilk/production
+      APP_NAME: ${{ inputs.appName }}
+    steps:
+      - name: set branch name
+        run: echo "BRANCH_NAME=$GITHUB_REF_NAME" >> $GITHUB_ENV
+
+      - name: checkout
+        uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+          ref: ${{ env.BRANCH_NAME }}
+
+      - name: sync with main branch
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git merge --no-commit --no-ff origin/main
+
+      - name: set deployment project version
+        run: echo "DEPLOYMENT_PROJECT_VERSION=$(bash ./environment/prod/deployment/scripts/version.sh --long)" >> $GITHUB_ENV
+
+      - name: set up Docker Buildx
+        uses: docker/setup-buildx-action@v3.1.0
+
+      - name: login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.DOCKER_REGISTRY }}
+          username: ${{ env.DOCKER_REGISTRY_USER_NAME }}
+          password: ${{ secrets.BLUMILKBOT_HARBOR_TOKEN }}
+
+      - name: set docker image name
+        run: echo "DOCKER_IMAGE_NAME=${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_REGISTRY_PROJECT_NAME }}/${{ env.DOCKER_REGISTRY_REPO_NAME }}" >> $GITHUB_ENV
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5.5.1
+        with:
+          images: ${{ env.DOCKER_IMAGE_NAME }}
+          tags: |
+            type=raw,value=${{ env.APP_NAME }}
+          context: workflow
+
+      - name: build and push image
+        uses: docker/build-push-action@v5.1.0
+        with:
+          context: .
+          file: ./environment/prod/app/Dockerfile
+          build-args: |
+            DEPLOYMENT_PROJECT_VERSION_ARG=${{ env.DEPLOYMENT_PROJECT_VERSION }}
+            APP_ID_ARG=${{ env.APP_NAME }}
+          push: true
+          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta.outputs.tags }}
+          cache-from: type=gha, ref=${{ env.DOCKER_IMAGE_NAME }}-prod-build-cache
+          cache-to: type=gha, ref=${{ env.DOCKER_IMAGE_NAME }}-prod-build-cache, mode=max
+
+      - name: copy files via ssh
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          timeout: 10s
+          command_timeout: 10m
+          host: ${{ secrets.VPS_OVH_BF7EC892_HOST }}
+          port: ${{ secrets.VPS_OVH_BF7EC892_PORT }}
+          username: ${{ secrets.VPS_OVH_BF7EC892_USERNAME }}
+          key: ${{ secrets.VPS_OVH_BF7EC892_SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.VPS_OVH_BF7EC892_SSH_PRIVATE_KEY_PASSPHRASE }}
+          source: "./environment/prod/deployment/prod/apps/${{ env.APP_NAME }}/*,./environment/prod/deployment/scripts/*, ./environment/prod/deployment/prod/Makefile, ./environment/prod/deployment/prod/docker-compose.prod.yml"
+          target: ${{ env.TARGET_DIR_ON_SERVER }}/${{ env.DOCKER_REGISTRY_REPO_NAME }}/${{ env.APP_NAME }}
+          rm: true
+
+      - uses: appleboy/ssh-action@v1.0.3
+        with:
+          timeout: 10s
+          command_timeout: 10m
+          host: ${{ secrets.VPS_OVH_BF7EC892_HOST }}
+          port: ${{ secrets.VPS_OVH_BF7EC892_PORT }}
+          username: ${{ secrets.VPS_OVH_BF7EC892_USERNAME }}
+          key: ${{ secrets.VPS_OVH_BF7EC892_SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.VPS_OVH_BF7EC892_SSH_PRIVATE_KEY_PASSPHRASE }}
+          script_stop: true
+          script: |
+            cd ${{ env.TARGET_DIR_ON_SERVER }}/${{ env.DOCKER_REGISTRY_REPO_NAME }}/${{ env.APP_NAME }}/environment/prod/deployment/prod/
+            mv Makefile docker-compose.prod.yml apps/${{ env.APP_NAME }}/
+            cd apps/${{ env.APP_NAME }}
+            make prod-deploy SOPS_AGE_KEY=${{ secrets.SOPS_AGE_PROD_SECRET_KEY }}
+            docker images --filter dangling=true | grep "${{ env.DOCKER_IMAGE_NAME }}" | awk '{print $3}'| xargs --no-run-if-empty docker rmi

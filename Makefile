@@ -65,6 +65,30 @@ encrypt-beta-secrets:
 decrypt-beta-secrets:
 	@$(MAKE) decrypt-secrets SECRETS_ENV=beta AGE_SECRET_KEY=${SOPS_AGE_BETA_SECRET_KEY}
 
+encrypt-krewak-prod-secrets:
+	@$(MAKE) encrypt-secrets SECRETS_ENV=krewak
+
+decrypt-krewak-prod-secrets:
+	@$(MAKE) decrypt-secrets SECRETS_ENV=krewak
+
+encrypt-eskrzypacz-prod-secrets:
+	@$(MAKE) encrypt-secrets SECRETS_ENV=eskrzypacz
+
+decrypt-eskrzypacz-prod-secrets:
+	@$(MAKE) decrypt-secrets SECRETS_ENV=eskrzypacz
+
+encrypt-kzygadlo-prod-secrets:
+	@$(MAKE) encrypt-secrets SECRETS_ENV=kzygadlo
+
+decrypt-kzygadlo-prod-secrets:
+	@$(MAKE) decrypt-secrets SECRETS_ENV=kzygadlo
+
+encrypt-kpiech-prod-secrets:
+	@$(MAKE) encrypt-secrets SECRETS_ENV=kpiech
+
+decrypt-kpiech-prod-secrets:
+	@$(MAKE) decrypt-secrets SECRETS_ENV=kpiech
+
 decrypt-secrets:
 	@docker compose exec --user "${CURRENT_USER_ID}:${CURRENT_USER_GROUP_ID}" --env SOPS_AGE_KEY=${AGE_SECRET_KEY} ${DOCKER_COMPOSE_APP_CONTAINER} \
 		bash -c "echo 'Decrypting ${SECRETS_ENV} secrets' \
