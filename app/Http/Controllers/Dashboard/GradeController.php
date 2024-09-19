@@ -9,8 +9,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Keating\DTOs\CourseSemesterData;
-use Keating\Http\Requests\UpdateGrade;
-use Keating\Http\Requests\UpdateGradeColumn;
+use Keating\Http\Requests\UpdateGradeColumnRequest;
+use Keating\Http\Requests\UpdateGradeRequest;
 use Keating\Models\CourseSemester;
 use Keating\Models\GradeColumn;
 use Keating\Models\Group;
@@ -40,7 +40,7 @@ class GradeController
         ]);
     }
 
-    public function store(UpdateGradeColumn $request, CourseSemester $course, Group $group): RedirectResponse
+    public function store(UpdateGradeColumnRequest $request, CourseSemester $course, Group $group): RedirectResponse
     {
         $group->gradeColumns()->create($request->getData());
 
@@ -48,7 +48,7 @@ class GradeController
             ->with("success", "Dodano kolumnę");
     }
 
-    public function update(UpdateGradeColumn $request, CourseSemester $course, Group $group, GradeColumn $gradeColumn): RedirectResponse
+    public function update(UpdateGradeColumnRequest $request, CourseSemester $course, Group $group, GradeColumn $gradeColumn): RedirectResponse
     {
         $gradeColumn->update($request->getData());
 
@@ -56,7 +56,7 @@ class GradeController
             ->with("success", "Zaktualizowano kolumnę");
     }
 
-    public function storeGrade(UpdateGrade $request, CourseSemester $course, Group $group, GradeColumn $gradeColumn): RedirectResponse
+    public function storeGrade(UpdateGradeRequest $request, CourseSemester $course, Group $group, GradeColumn $gradeColumn): RedirectResponse
     {
         $gradeColumn->grades()
             ->create($request->getData());
@@ -64,7 +64,7 @@ class GradeController
         return redirect()->back();
     }
 
-    public function updateGrade(UpdateGrade $request, CourseSemester $course, Group $group, GradeColumn $gradeColumn): RedirectResponse
+    public function updateGrade(UpdateGradeRequest $request, CourseSemester $course, Group $group, GradeColumn $gradeColumn): RedirectResponse
     {
         $grade = $gradeColumn->grades()
             ->where("student_id", $request->get("student_id"))

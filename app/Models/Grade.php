@@ -15,6 +15,10 @@ use Keating\Observers\GradeObserver;
  * @property string $id
  * @property ?boolean $status
  * @property ?string $value
+ * @property string $student_id
+ * @property Student $student
+ * @property string $grade_column_id
+ * @property GradeColumn $gradeColumn
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
@@ -27,6 +31,7 @@ class Grade extends Model
         "status",
         "value",
         "student_id",
+        "grade_column_id",
     ];
     protected $casts = [
         "status" => "boolean",

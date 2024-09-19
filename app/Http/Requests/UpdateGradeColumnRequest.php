@@ -6,7 +6,7 @@ namespace Keating\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateGradeColumn extends FormRequest
+class UpdateGradeColumnRequest extends FormRequest
 {
     public function rules(): array
     {
