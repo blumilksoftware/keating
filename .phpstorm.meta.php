@@ -5,11 +5,11 @@ namespace Illuminate\Database\Eloquent {
 
     class Builder implements BuilderContract {
         public function whereLikeUnaccentInsensitive(string $column, mixed $value): static {
-            return $intance;
+            return $this;
         }
 
         public function orWhereLikeUnaccentInsensitive(string $column, mixed $value): static {
-            return $intance;
+            return $this;
         }
     }
 }
