@@ -112,5 +112,7 @@ jobs:
             cd ${{ env.TARGET_DIR_ON_SERVER }}/${{ env.DOCKER_REGISTRY_REPO_NAME }}/${{ env.APP_NAME }}/environment/prod/deployment/prod/
             mv Makefile docker-compose.prod.yml apps/${{ env.APP_NAME }}/
             cd apps/${{ env.APP_NAME }}
+            echo ${{ secrets.BLUMILKBOT_HARBOR_TOKEN }} | docker login ${{ env.DOCKER_REGISTRY }} --username ${{ env.DOCKER_REGISTRY_USER_NAME }} --password-stdin
             make prod-deploy SOPS_AGE_KEY=${{ secrets.SOPS_AGE_PROD_SECRET_KEY }}
             docker images --filter dangling=true | grep "${{ env.DOCKER_IMAGE_NAME }}" | awk '{print $3}'| xargs --no-run-if-empty docker rmi
+            docker logout ${{ env.DOCKER_REGISTRY }}
