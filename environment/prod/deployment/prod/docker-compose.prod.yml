@@ -5,9 +5,9 @@ networks:
     driver: bridge
 
 volumes:
-  keating-postgres-data:
+  keating-prod-postgres-data:
     name: keating-prod-postgres-data
-  keating-redis-data:
+  keating-prod-redis-data:
     name: keating-prod-redis-data
 
 services:
