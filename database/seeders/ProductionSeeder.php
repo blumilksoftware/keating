@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Keating\Models\Section;
 use Keating\Models\SectionSettings;
 use Keating\Models\Setting;
 use Keating\Models\User;
