@@ -94,7 +94,7 @@ jobs:
           username: ${{ secrets.VPS_OVH_BF7EC892_USERNAME }}
           key: ${{ secrets.VPS_OVH_BF7EC892_SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.VPS_OVH_BF7EC892_SSH_PRIVATE_KEY_PASSPHRASE }}
-          source: "./environment/prod/deployment/prod/apps/${{ env.APP_NAME }}/*,./environment/prod/deployment/scripts/*, ./environment/prod/deployment/prod/Makefile, ./environment/prod/deployment/prod/docker-compose.prod.yml"
+          source: "./environment/prod/deployment/prod/apps/${{ env.APP_NAME }}/*,./environment/prod/deployment/scripts/*, ./environment/prod/deployment/prod/Makefile, ./environment/prod/deployment/prod/docker-compose.prod.yml, ,./environment/prod/deployment/postgres/*"
           target: ${{ env.TARGET_DIR_ON_SERVER }}/${{ env.DOCKER_REGISTRY_REPO_NAME }}/${{ env.APP_NAME }}
           rm: true
 
