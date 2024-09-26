@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup>
 import { NoSymbolIcon } from '@heroicons/vue/24/outline'
 
 defineProps({
