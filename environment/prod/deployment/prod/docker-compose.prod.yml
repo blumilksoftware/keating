@@ -57,8 +57,7 @@ services:
       timeout: 3s
       retries: 5
     volumes:
-      - ./environment/dev/postgres/init-unaccent.sql:/docker-entrypoint-initdb.d/init-unaccent.sql
-      - ./environment/prod/deployment/scripts/multiple-database.sh:/docker-entrypoint-initdb.d/multiple-database.sh
+      - ../postgres/init-unaccent.sql:/docker-entrypoint-initdb.d/init-unaccent.sql
       - keating-prod-postgres-data:/var/lib/postgresql/data
     networks:
       - keating-prod
