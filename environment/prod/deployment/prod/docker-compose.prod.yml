@@ -12,8 +12,8 @@ volumes:
 
 services:
   keating-prod-app:
-    image: registry.blumilk.pl/internal-public/keating:${COMPOSE_PROJECT_NAME}
-    container_name: keating-${COMPOSE_PROJECT_NAME}-app-container
+    image: registry.blumilk.pl/internal-public/keating:${USER_PROJECT_NAME}
+    container_name: keating-${USER_PROJECT_NAME}-app-container
     pull_policy: always
     logging:
       driver: "json-file"
@@ -28,11 +28,11 @@ services:
           memory: 512M
     labels:
       - "traefik.enable=${TRAEFIK_ENABLED}"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=${TRAEFIK_ROUTER_RULE}"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.tls=true"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.tls.certresolver=lets-encrypt-resolver"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.middlewares=response-gzip-compress@file,no-index-robots-response-header@file"
+      - "traefik.http.routers.${USER_PROJECT_NAME}.rule=${TRAEFIK_ROUTER_RULE}"
+      - "traefik.http.routers.${USER_PROJECT_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${USER_PROJECT_NAME}.tls=true"
+      - "traefik.http.routers.${USER_PROJECT_NAME}.tls.certresolver=lets-encrypt-resolver"
+      - "traefik.http.routers.${USER_PROJECT_NAME}.middlewares=response-gzip-compress@file,no-index-robots-response-header@file"
     working_dir: /application
     volumes:
       - ./.env:/application/.env:ro

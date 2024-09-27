@@ -16,8 +16,8 @@ DOCKER_EXEC_SCRIPT = docker compose --file ${DOCKER_COMPOSE_FILENAME} exec --wor
 CURRENT_DIR = $(shell pwd)
 
 prod-deploy: decrypt-secrets create-deployment-file
-	@docker compose -p keating-prod --file ${DOCKER_COMPOSE_FILENAME} pull && \
-	docker compose -p keating-prod --file ${DOCKER_COMPOSE_FILENAME} up --detach && \
+	@docker compose --project-name keating-prod --file ${DOCKER_COMPOSE_FILENAME} pull && \
+	docker compose --project-name keating-prod --file ${DOCKER_COMPOSE_FILENAME} up --detach && \
 	sleep 5 && \
 	echo "App post deploy actions" && \
         ${DOCKER_EXEC_SCRIPT} post-deploy-actions.sh
