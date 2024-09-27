@@ -23,7 +23,7 @@ services:
         max-file: "5"
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 4
       resources:
         limits:
           memory: 512M
