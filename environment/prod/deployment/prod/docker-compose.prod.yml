@@ -3,6 +3,7 @@ networks:
     external: true
   keating-prod:
     driver: bridge
+    name: keating-prod
 
 volumes:
   keating-prod-postgres-data:

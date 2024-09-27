@@ -10,14 +10,15 @@ CURRENT_USER_GROUP_ID = $(shell id --group)
 
 DOCKER_COMPOSE_FILENAME = docker-compose.prod.yml
 DOCKER_COMPOSE_APP_SERVICE = keating-prod-app
+PROJECT_NAME=keating-prod
 
 DOCKER_EXEC_SCRIPT = docker compose --file ${DOCKER_COMPOSE_FILENAME} exec --workdir /application/environment/prod/deployment/scripts ${DOCKER_COMPOSE_APP_SERVICE} bash
 
 CURRENT_DIR = $(shell pwd)
 
 prod-deploy: decrypt-secrets create-deployment-file
-	@docker compose --project-name keating-prod --file ${DOCKER_COMPOSE_FILENAME} pull && \
-	docker compose --project-name keating-prod --file ${DOCKER_COMPOSE_FILENAME} up --detach && \
+	@docker compose --project-name ${PROJECT_NAME} --file ${DOCKER_COMPOSE_FILENAME} pull && \
+	docker compose --project-name ${PROJECT_NAME} --file ${DOCKER_COMPOSE_FILENAME} up --detach && \
 	sleep 5 && \
 	echo "App post deploy actions" && \
         ${DOCKER_EXEC_SCRIPT} post-deploy-actions.sh
