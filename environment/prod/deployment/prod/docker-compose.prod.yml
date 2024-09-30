@@ -7,7 +7,7 @@ networks:
 services:
   keating-prod-app:
     image: registry.blumilk.pl/internal-public/keating:prod
-    container_name: keating-${COMPOSE_PROJECT_NAME}-app-container
+    container_name: ${COMPOSE_PROJECT_NAME}-app-container
     pull_policy: always
     logging:
       driver: "json-file"
