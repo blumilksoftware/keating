@@ -1,0 +1,38 @@
+networks:
+  traefik-proxy:
+    external: true
+  keating-prod:
+    external: true
+
+services:
+  keating-prod-app:
+    image: registry.blumilk.pl/internal-public/keating:prod
+    container_name: keating-${USER_PROJECT_NAME}-app-container
+    pull_policy: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          memory: 512M
+    labels:
+      - "traefik.enable=${TRAEFIK_ENABLED}"
+      - "traefik.http.routers.${USER_PROJECT_NAME}.rule=${TRAEFIK_ROUTER_RULE}"
+      - "traefik.http.routers.${USER_PROJECT_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${USER_PROJECT_NAME}.tls=true"
+      - "traefik.http.routers.${USER_PROJECT_NAME}.tls.certresolver=lets-encrypt-resolver"
+      - "traefik.http.routers.${USER_PROJECT_NAME}.middlewares=response-gzip-compress@file,no-index-robots-response-header@file"
+    working_dir: /application
+    volumes:
+      - ./.env:/application/.env:ro
+    networks:
+      - keating-prod
+      - traefik-proxy
+    restart: unless-stopped
+    env_file:
+      - .deployment
