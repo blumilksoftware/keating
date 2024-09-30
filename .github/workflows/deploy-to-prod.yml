@@ -67,7 +67,7 @@ jobs:
         with:
           images: ${{ env.DOCKER_IMAGE_NAME }}
           tags: |
-            type=raw,value=${{ env.APP_NAME }}
+            type=raw,value=prod
           context: workflow
 
       - name: build and push image
