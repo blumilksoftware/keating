@@ -9,6 +9,7 @@ CURRENT_USER_ID = $(shell id --user)
 CURRENT_USER_GROUP_ID = $(shell id --group)
 
 DOCKER_COMPOSE_FILENAME = docker-compose.prod.yml
+DOCKER_COMPOSE_DB_FILENAME = docker-compose.dbprod.yml
 DOCKER_COMPOSE_APP_SERVICE = keating-prod-app
 PROJECT_NAME=keating-prod
 
@@ -19,6 +20,8 @@ CURRENT_DIR = $(shell pwd)
 prod-deploy: decrypt-secrets create-deployment-file
 	@docker compose --project-name ${PROJECT_NAME} --file ${DOCKER_COMPOSE_FILENAME} pull && \
 	docker compose --project-name ${PROJECT_NAME} --file ${DOCKER_COMPOSE_FILENAME} up --detach && \
+	@docker compose --project-name ${PROJECT_NAME} --file ${DOCKER_COMPOSE_DB_FILENAME} pull && \
+    docker compose --project-name ${PROJECT_NAME} --file ${DOCKER_COMPOSE_DB_FILENAME} up --detach && \
 	sleep 5 && \
 	echo "App post deploy actions" && \
         ${DOCKER_EXEC_SCRIPT} post-deploy-actions.sh
