@@ -19,3 +19,5 @@ To add a new Keating app, several steps must be completed:
 3. After a successful first deployment,you can execute the command in the application container:
    * ProductionSeeder to run for application installation: `php artisan db:seed --class=ProductionSeeder`
    * command `php artisan cache:flush` to flush cached page title and external schedule link
+
+`btw. if the first deployment has not yet taken place on the target server and there is no container, especially a database one, the first implementation will give a negative result in GHA - after the first start of the deployment, a database container will be created, then we can proceed to the steps contained in the instructions.`
