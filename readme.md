@@ -62,4 +62,4 @@ npm run lintf
 | redis    | keating-redis-dev   | 53852                           |
 
 ### Further reading
-* [Production deployment](./readme.prod.md)
+* [Production deployment](./production_deployment.md)
