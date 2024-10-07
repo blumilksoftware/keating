@@ -11,6 +11,7 @@ import TableWrapper from '@/Shared/Components/Table/Public/TableWrapper.vue'
 import TableRow from '@/Shared/Components/Table/Public/TableRow.vue'
 import TableCell from '@/Shared/Components/Table/Public/TableCell.vue'
 import GradeCell from '@/Shared/Components/GradeCell.vue'
+import TableHeader from "@/Shared/Components/Table/TableHeader.vue";
 
 const props = defineProps({
   course: Object,
@@ -72,6 +73,17 @@ function prepareStudentsList() {
             Lista ocen
           </FormLabel>
           <TableWrapper class="mt-2">
+            <template #header>
+              <TableHeader>
+                Numer indeksu
+              </TableHeader>
+              <TableHeader>
+                Obecna ocena
+              </TableHeader>
+              <TableHeader>
+                Proponowana
+              </TableHeader>
+            </template>
             <template #body>
               <TableRow v-for="data in gradesForm.grades" :key="data.student.id">
                 <TableCell class="h-[70px] w-1 cursor-pointer flex-row border-2">
@@ -82,10 +94,8 @@ function prepareStudentsList() {
                     ({{ data.student.indexNumber }})
                   </div>
                 </TableCell>
-                <GradeCell :grade="data" :grade-column="data.column" :student="data.student" class="cursor-pointer border-2" @create-grade="createGrade" @update-grade="updateGrade" />
-                <TableCell class="h-[70px] w-1 cursor-pointer flex-row border-2">
-                  <span v-if="data.imported">zaimportowane</span>
-                </TableCell>
+                <GradeCell :grade="data" :grade-column="data.column" :student="data.student" class="cursor-pointer border-2"/>
+                <GradeCell :grade="data" :grade-column="data.column" :student="data.student" class="cursor-pointer border-2"/>
               </TableRow>
             </template>
           </TableWrapper>
