@@ -11,6 +11,7 @@ To add a new Keating app, several steps must be completed:
    3. `GRANT ALL PRIVILEGES ON DATABASE database_name TO user_name;`
    4. `\c database_name`
    5. `GRANT CREATE ON SCHEMA public TO user_name;`
+   6. `CREATE EXTENSION IF NOT EXISTS unaccent;`
 2. Then follow a few steps to prepare the files for application deployment
    * add a new option in your workflow to be able to trigger a workflow for a specific Keating app user deployment - (example: pnowak);
    * create a new directory in the specified path - `environment/prod/deployment/prod/apps` - the directory must be named like AppName option from workflow (example: pnowak);
