@@ -24,6 +24,9 @@ use Keating\Enums\StudyForm;
  * @property Collection<GradeColumn> gradeColumns
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property-read CourseSemester $course
+ * @property-read Collection<Student> $students
+ * @property-read Collection<GradeColumn> $gradeColumns
  */
 class Group extends Model
 {
