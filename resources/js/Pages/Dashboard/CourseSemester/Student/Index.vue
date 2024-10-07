@@ -75,9 +75,9 @@ watch(form, debounce(() => {
         </template>
       </ManagementHeader>
       <div v-if="studentsFormOpen" class="border-2 border-dotted p-4 sm:rounded-lg">
-        <div class="flex items gap-4">
+        <div class="items flex gap-4">
           <TextInput id="search" v-model="form.search" placeholder="Szukaj studentów do dodania" type="search" class="mb-5 max-w-lg" />
-          <span class="mt-2 text-gray-500 text-sm">podaj imiona, nazwiska, numery indeksu lub zestawy numerów indeksów oddzielone spacjami</span>
+          <span class="mt-2 text-sm text-gray-500">podaj imiona, nazwiska, numery indeksu lub zestawy numerów indeksów oddzielone spacjami</span>
         </div>
         <div v-if="availableStudents.length" class="grid max-h-64 grid-cols-3 gap-4 overflow-y-auto">
           <div v-for="student in availableStudents" :key="student.id" class="flex h-max cursor-pointer items-center justify-between overflow-x-auto bg-white p-4 text-left sm:rounded-lg">
@@ -112,7 +112,7 @@ watch(form, debounce(() => {
           </template>
           <template #body>
             <TableRow v-for="student in students.data" :key="student.id">
-              <TableCell class="pr-12 text-nowrap opacity-75">
+              <TableCell class="text-nowrap pr-12 opacity-75">
                 {{ student.id }}
               </TableCell>
               <TableCell class="">

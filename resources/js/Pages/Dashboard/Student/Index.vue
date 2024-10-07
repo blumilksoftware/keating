@@ -86,7 +86,7 @@ watch(form, debounce(() => {
           </template>
           <template #body>
             <TableRow v-for="student in students.data" :key="student.id">
-              <TableCell class="pr-12 text-nowrap opacity-75">
+              <TableCell class="text-nowrap pr-12 opacity-75">
                 {{ student.id }}
               </TableCell>
               <TableCell>
