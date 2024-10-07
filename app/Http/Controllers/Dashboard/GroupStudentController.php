@@ -21,16 +21,22 @@ class GroupStudentController
         $students = $group->students()
             ->paginate()
             ->withQueryString();
-        $availableStudents = $searchText
-            ? Student::query()
+
+        $availableStudents = match(true) {
+            $searchText === null => [],
+            preg_match("/^(\d+\s?)+$/", $searchText) === 1 => Student::query()
+                ->whereNotIn("id", $group->students->pluck("id"))
+                ->whereIn("index_number", explode(" ", $searchText))
+                ->get(),
+            default => Student::query()
                 ->whereNotIn("id", $group->students->pluck("id"))
                 ->where(
                     fn(Builder $query): Builder => $query
                         ->where("first_name", "ILIKE", "%$searchText%")
                         ->orWhere("surname", "ILIKE", "%$searchText%")
                         ->orWhere("index_number", "LIKE", "%$searchText%"),
-                )->get()
-            : [];
+                )->get(),
+        };
 
         return inertia("Dashboard/CourseSemester/Student/Index", [
             "course" => CourseSemesterData::fromModel($course),
