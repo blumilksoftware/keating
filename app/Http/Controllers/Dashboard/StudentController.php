@@ -26,6 +26,7 @@ class StudentController
                     ->orWhereLikeUnaccentInsensitive("surname", $searchText)
                     ->orWhere("index_number", "LIKE", "%$searchText%"),
             )
+            ->orderBy("surname")
             ->paginate()
             ->withQueryString();
 

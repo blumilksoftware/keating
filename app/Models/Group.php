@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Keating\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,8 +19,14 @@ use Keating\Enums\StudyForm;
  * @property string $name
  * @property string $course_semester_id
  * @property StudyForm $form
+ * @property CourseSemester course
+ * @property Collection<Student> students
+ * @property Collection<GradeColumn> gradeColumns
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property-read CourseSemester $course
+ * @property-read Collection<Student> $students
+ * @property-read Collection<GradeColumn> $gradeColumns
  */
 class Group extends Model
 {

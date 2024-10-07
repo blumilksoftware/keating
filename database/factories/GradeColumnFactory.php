@@ -12,7 +12,7 @@ class GradeColumnFactory extends Factory
     public function definition(): array
     {
         return [
-            "name" => fake()->asciify("***"),
+            "name" => fake()->numerify("W#"),
             "active" => fake()->boolean,
             "priority" => fake()->numberBetween(1, 100),
             "group_id" => Group::factory(),

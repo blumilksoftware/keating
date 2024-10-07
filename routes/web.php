@@ -10,6 +10,7 @@ use Keating\Http\Controllers\Dashboard\DashboardController;
 use Keating\Http\Controllers\Dashboard\FaqController;
 use Keating\Http\Controllers\Dashboard\FieldController;
 use Keating\Http\Controllers\Dashboard\GradeController;
+use Keating\Http\Controllers\Dashboard\GradeImportController;
 use Keating\Http\Controllers\Dashboard\GroupController;
 use Keating\Http\Controllers\Dashboard\GroupStudentController;
 use Keating\Http\Controllers\Dashboard\LogoutController;
@@ -132,6 +133,11 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::post("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/store", "storeGrade")->name("course.semester.group.grades.store");
         Route::patch("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/update", "updateGrade")->name("course.semester.group.grades.update");
         Route::post("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/reorder/{down}", "reorder")->name("course.semester.group.grades.reorder");
+    });
+    Route::controller(GradeImportController::class)->group(function (): void {
+        Route::get("/semester-courses/{course}/groups/{group}/grades/{column}/import", "index")->name("course.semester.group.grade.column.import.index");
+        Route::get("/semester-courses/{course}/groups/{group}/grades/{column}/prepare", "prepare")->name("course.semester.group.grade.column.import.prepare");
+        Route::post("/semester-courses/{course}/groups/{group}/grades/{column}/import", "store")->name("course.semester.group.grade.column.import.store");
     });
     Route::controller(SettingController::class)->group(function (): void {
         Route::get("/settings", "edit")->name("settings.edit");

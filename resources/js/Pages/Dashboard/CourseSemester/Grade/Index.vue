@@ -17,7 +17,7 @@ import { ref, watch } from 'vue'
 import RemoveModal from '@/Shared/Modals/RemoveModal.vue'
 import Section from '@/Shared/Components/Section.vue'
 import Button from '@/Shared/Components/Buttons/Button.vue'
-import { ArrowLeftIcon, ArrowRightIcon, PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/outline'
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/vue/24/outline'
 import GradeCell from '@/Shared/Components/GradeCell.vue'
 import { debounce } from 'lodash'
 import Pagination from '@/Shared/Components/Pagination.vue'
@@ -35,7 +35,6 @@ const showEditForm = ref(false)
 const showCreateForm = ref(false)
 const columnToDeleteId = ref(0)
 const columnToEdit = ref({})
-const showColumnMenu = ref(false)
 const form = useForm({
   name: '',
   active: true,
@@ -113,8 +112,10 @@ watch(searchForm, debounce(() => {
     <div class="flex flex-col gap-8">
       <ManagementHeader>
         <template #header>
-          Zarządzanie ocenami w grupie <span class="text-gray-500">{{ group.name }}</span><br>
-          dla kursu <span class="text-gray-500">{{ course.course }}</span>
+          Zarządzanie ocenami w grupie
+          <span class="text-gray-500">{{ group.name }}</span>
+          <br> dla kursu
+          <span class="text-gray-500">{{ course.course }}</span>
         </template>
         <template #statistics>
           <ManagementHeaderItem>
@@ -189,49 +190,48 @@ watch(searchForm, debounce(() => {
         <TableWrapper>
           <template #header>
             <TableHeader>
-              Numer indeksu
+              Numer indeksu / zajęcia
             </TableHeader>
-            <TableHeader v-for="(column, index) in gradeColumns" :key="column.id"
-                         v-auto-animate="{ duration: 100 }"
-                         :class="[column.active ? '' : 'bg-gray-300 text-white']"
-                         class="w-[70px] cursor-pointer border-2 border-solid text-center"
-            >
-              <div v-if="showColumnMenu" class="mb-5 flex grow justify-between">
+            <TableHeader v-for="(column, index) in gradeColumns" :key="column.id" v-auto-animate="{ duration: 100 }" :class="[column.active ? '' : 'bg-gray-300 text-white']" class="cursor-pointer border-2 border-solid text-center">
+              <div class="mb-5 flex grow justify-between">
                 <ArrowLeftIcon v-if="index === 0" class="w-6 text-gray-400" />
-                <div v-else title="Move Up" @click="reorder(column.id, 1)"
-                     @keydown.prevent.stop.space="reorder(column.id, 1)"
-                >
+                <div v-else title="Move Up" @click="reorder(column.id, 1)" @keydown.prevent.stop.space="reorder(column.id, 1)">
                   <ArrowLeftIcon class="w-6 hover:text-gray-500" />
                 </div>
                 <ArrowRightIcon v-if="index === gradeColumns.length - 1" class="w-6 text-gray-400" />
-                <div v-else title="Move Down" @click="reorder(column.id, 0)"
-                     @keydown.prevent.stop.space="reorder(column.id, 0)"
-                >
+                <div v-else title="Move Down" @click="reorder(column.id, 0)" @keydown.prevent.stop.space="reorder(column.id, 0)">
                   <ArrowRightIcon class="w-6 hover:text-gray-500" />
                 </div>
               </div>
-              <span @click="showColumnMenu = !showColumnMenu">
+              <span>
                 {{ column.name }}
               </span>
-              <div v-if="showColumnMenu" class="mt-5 flex grow justify-between">
-                <PencilSquareIcon class="w-6" @click="editColumn(column)" />
-                <TrashIcon class="w-6" @click="[columnToDeleteId = column.id, showModal = true]" />
+              <div class="mt-5 flex grow flex-col gap-2">
+                <Button class="text-xs" @click="editColumn(column)">
+                  edytuj
+                </Button>
+                <Button class="text-xs" @click="[columnToDeleteId = column.id, showModal = true]">
+                  usuń
+                </Button>
+                <InertiaLink :href="`/dashboard/semester-courses/${course.id}/groups/${group.id}/grades/${column.id}/import`">
+                  <Button class="w-full text-xs">
+                    importuj
+                  </Button>
+                </InertiaLink>
               </div>
             </TableHeader>
           </template>
           <template #body>
             <TableRow v-for="student in students.data" :key="student?.id">
-              <TableCell class="h-[70px] w-[120px] min-w-[120px] cursor-pointer flex-row border-2">
-                <div class="font-bold">
+              <TableCell class="w-1 cursor-pointer flex-row border-2">
+                <div class="text-nowrap font-bold">
                   {{ student?.first_name }} {{ student?.surname }}
                 </div>
-                <div>({{ student?.index_number }})</div>
+                <div>
+                  ({{ student?.index_number }})
+                </div>
               </TableCell>
-              <GradeCell v-for="column in gradeColumns" :key="column.id"
-                         :grade="column.grades.find(obj => obj.student_id === student?.id)" :grade-column="column"
-                         :student="student" class="cursor-pointer border-2"
-                         @create-grade="createGrade" @update-grade="updateGrade"
-              />
+              <GradeCell v-for="column in gradeColumns" :key="column.id" :grade="column.grades.find(obj => obj.student_id === student?.id)" :grade-column="column" :student="student" class="cursor-pointer border-2" @create-grade="createGrade" @update-grade="updateGrade" />
             </TableRow>
           </template>
         </TableWrapper>
@@ -239,9 +239,5 @@ watch(searchForm, debounce(() => {
       </div>
     </div>
   </DashboardLayout>
-  <RemoveModal
-    :href="`/dashboard/semester-courses/${props.course.id}/groups/${props.group.id}/grades/${columnToDeleteId}`"
-    :show="showModal"
-    @close="showModal = false"
-  />
+  <RemoveModal :href="`/dashboard/semester-courses/${props.course.id}/groups/${props.group.id}/grades/${columnToDeleteId}`" :show="showModal" @close="showModal = false" />
 </template>
