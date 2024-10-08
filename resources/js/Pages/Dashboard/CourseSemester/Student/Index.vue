@@ -75,7 +75,10 @@ watch(form, debounce(() => {
         </template>
       </ManagementHeader>
       <div v-if="studentsFormOpen" class="border-2 border-dotted p-4 sm:rounded-lg">
-        <TextInput id="search" v-model="form.search" placeholder="Szukaj studentów do dodania" type="search" class="mb-5 max-w-lg" />
+        <div class="items flex gap-4">
+          <TextInput id="search" v-model="form.search" placeholder="Szukaj studentów do dodania" type="search" class="mb-5 max-w-lg" />
+          <span class="mt-2 text-sm text-gray-500">podaj imiona, nazwiska, numery indeksu lub zestawy numerów indeksów oddzielone spacjami</span>
+        </div>
         <div v-if="availableStudents.length" class="grid max-h-64 grid-cols-3 gap-4 overflow-y-auto">
           <div v-for="student in availableStudents" :key="student.id" class="flex h-max cursor-pointer items-center justify-between overflow-x-auto bg-white p-4 text-left sm:rounded-lg">
             <div>
@@ -93,10 +96,10 @@ watch(form, debounce(() => {
       <div v-if="students.data.length" class="flex flex-col gap-8">
         <TableWrapper>
           <template #header>
-            <TableHeader class="w-1/6">
+            <TableHeader class="w-1 text-nowrap">
               ID
             </TableHeader>
-            <TableHeader class="w-1/6">
+            <TableHeader class="w-1 text-nowrap">
               Numer indeksu
             </TableHeader>
             <TableHeader class="w-1/5">
@@ -109,10 +112,10 @@ watch(form, debounce(() => {
           </template>
           <template #body>
             <TableRow v-for="student in students.data" :key="student.id">
-              <TableCell class="pr-12 opacity-75">
+              <TableCell class="text-nowrap pr-12 opacity-75">
                 {{ student.id }}
               </TableCell>
-              <TableCell>
+              <TableCell class="">
                 {{ student.index_number }}
               </TableCell>
               <TableCell>
