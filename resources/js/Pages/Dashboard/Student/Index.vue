@@ -70,10 +70,10 @@ watch(form, debounce(() => {
       <div v-if="students.data.length" class="flex flex-col gap-8">
         <TableWrapper>
           <template #header>
-            <TableHeader class="w-1/6">
+            <TableHeader class="w-1 text-nowrap">
               ID
             </TableHeader>
-            <TableHeader class="w-1/6">
+            <TableHeader class="w-1 text-nowrap">
               Numer indeksu
             </TableHeader>
             <TableHeader class="w-1/5">
@@ -86,7 +86,7 @@ watch(form, debounce(() => {
           </template>
           <template #body>
             <TableRow v-for="student in students.data" :key="student.id">
-              <TableCell class="pr-12 opacity-75">
+              <TableCell class="text-nowrap pr-12 opacity-75">
                 {{ student.id }}
               </TableCell>
               <TableCell>
