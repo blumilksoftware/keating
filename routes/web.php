@@ -27,6 +27,7 @@ use Keating\Http\Controllers\Public\GradeController as PublicGradeController;
 use Keating\Http\Controllers\Public\HomeController;
 use Keating\Http\Controllers\Public\LoginController;
 use Keating\Http\Controllers\Public\NewsController;
+use Keating\Http\Controllers\Public\PasswordlessLoginController;
 
 Route::get("/", HomeController::class)->name("main");
 Route::get("/aktualnosci", [NewsController::class, "index"]);
@@ -40,6 +41,10 @@ Route::get("/kontakt", ContactController::class);
 Route::middleware("guest")->group(function (): void {
     Route::get("/login", [LoginController::class, "create"])->name("login");
     Route::post("/login", [LoginController::class, "store"]);
+    Route::get("/passwordless", [PasswordlessLoginController::class, "create"])->name("passwordless.create");
+    Route::post("/passwordless", [PasswordlessLoginController::class, "store"])->name("passwordless.store");
+    Route::get("/passwordless/{email}", [PasswordlessLoginController::class, "login"])->name("passwordless.login");
+    Route::post("/passwordless/check/{email}", [PasswordlessLoginController::class, "check"])->name("passwordless.check");
 });
 
 Route::middleware("auth")->prefix("dashboard")->group(function (): void {
