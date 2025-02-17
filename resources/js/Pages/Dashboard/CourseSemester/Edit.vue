@@ -203,7 +203,7 @@ function updateGroup() {
             <div class="flex">
               {{ group.name }}
             </div>
-            <div class="flex flex-col 2xl:flex-row gap-2">
+            <div class="flex flex-col gap-2 2xl:flex-row">
               <StyledLink :href="`/dashboard/semester-courses/${course.id}/groups/${group.id}/grades`">
                 oceny
               </StyledLink>
