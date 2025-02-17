@@ -60,3 +60,6 @@ npm run lintf
 | app      | keating-app-dev     | [53851](http://localhost:53851) |
 | database | keating-db-dev      | 53853                           |
 | redis    | keating-redis-dev   | 53852                           |
+
+### Further reading
+* [Production deployment](./production_deployment.md)
