@@ -21,7 +21,7 @@ class UpdateGrade extends FormRequest
         return [
             "student_id" => $this->get("student_id"),
             "status" => $this->get("status") === null ? null : $this->boolean("status"),
-            "value" => $this->get("value"),
+            "value" => $this->get("value") === true ? null : $this->get("value"),
         ];
     }
 }

@@ -41,8 +41,15 @@ class CourseSemesterController
     public function create(): Response
     {
         return inertia("Dashboard/CourseSemester/Create", [
-            "courses" => Course::all(["id", "name"]),
-            "semesters" => Semester::all(["id", "name"]),
+            "courses" => Course::query()
+                ->get(["id", "name", "type"])
+                ->map(function (Course $course): Course {
+                    $course->name = "$course->name $course->type_abbreviation";
+
+                    return $course;
+                }),
+            "semesters" => Semester::query()
+                ->get(["id", "name"]),
         ]);
     }
 

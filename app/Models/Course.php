@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Keating\Enums\ClassType;
 use Keating\Observers\CourseObserver;
 use Stevebauman\Purify\Facades\Purify;
 
@@ -21,6 +22,7 @@ use Stevebauman\Purify\Facades\Purify;
  * @property string $description
  * @property int $semester
  * @property string $type
+ * @property string $type_abbreviation
  * @property string $form
  * @property string $field_id
  * @property Field $field
@@ -66,6 +68,13 @@ class Course extends Model
     public function field(): BelongsTo
     {
         return $this->belongsTo(Field::class);
+    }
+
+    protected function typeAbbreviation(): Attribute
+    {
+        return Attribute::make(
+            get: fn(): string => ClassType::from($this->type)->abbreviationLabel(),
+        );
     }
 
     protected function description(): Attribute
