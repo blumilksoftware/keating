@@ -27,7 +27,8 @@ class GradeController
                 ->orWhereLikeUnaccentInsensitive("surname", $searchText)
                 ->orWhere("index_number", "LIKE", "%$searchText%"),
         )
-            ->paginate()
+            ->orderBy("surname")
+            ->paginate(100)
             ->withQueryString();
 
         return inertia("Dashboard/CourseSemester/Grade/Index", [

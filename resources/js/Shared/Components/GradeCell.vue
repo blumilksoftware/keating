@@ -21,7 +21,7 @@ const gradeInput = useForm({
     :class="[grade?.status
       ? 'bg-lime-200'
       : grade?.status !== null ? 'bg-rose-300' : 'bg-white']"
-    @dblclick="emit('updateGrade', gradeColumn.id, student.id, inputVal, !grade.status)"
+    @dblclick="emit('updateGrade', gradeColumn.id, student.id, gradeInput.value, !grade.status)"
   >
     <input
       v-model="gradeInput.value"
