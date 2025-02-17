@@ -21,7 +21,7 @@ readonly class CourseSemesterData
     {
         return new self(
             id: $course->id,
-            course: $course->course->name,
+            course: "{$course->course->name} {$course->course->type_abbreviation}",
             courseId: $course->course->id,
             semester: $course->semester->name,
             semesterId: $course->semester->id,
