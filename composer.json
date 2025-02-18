@@ -11,18 +11,18 @@
         "fakerphp/faker": "^1.24.1",
         "guzzlehttp/guzzle": "^7.9.2",
         "inertiajs/inertia-laravel": "^1.3.2",
-        "laravel/framework": "^11.25.0",
-        "laravel/sanctum": "^4.0.6",
-        "laravel/tinker": "^2.10.0",
-        "sentry/sentry-laravel": "^4.10.1",
+        "laravel/framework": "^11.42.1",
+        "laravel/sanctum": "^4.0.8",
+        "laravel/tinker": "^2.10.1",
+        "sentry/sentry-laravel": "^4.12.0",
         "spatie/laravel-options": "^1.1.1",
         "stevebauman/purify": "^6.2.2"
     },
     "require-dev": {
         "blumilksoftware/codestyle": "^3.3",
         "mockery/mockery": "^1.6.12",
-        "nunomaduro/collision": "^8.5.0",
-        "phpunit/phpunit": "^11.5.0",
+        "nunomaduro/collision": "^8.6.1",
+        "phpunit/phpunit": "^11.5.7",
         "spatie/laravel-ignition": "^2.9.0"
     },
     "autoload": {
