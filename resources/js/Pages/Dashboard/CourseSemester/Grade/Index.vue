@@ -20,7 +20,6 @@ import Button from '@/Shared/Components/Buttons/Button.vue'
 import { ArrowLeftIcon, ArrowRightIcon, PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import GradeCell from '@/Shared/Components/GradeCell.vue'
 import { debounce } from 'lodash'
-import Pagination from '@/Shared/Components/Pagination.vue'
 
 const props = defineProps({
   course: Object,
@@ -235,7 +234,6 @@ watch(searchForm, debounce(() => {
             </TableRow>
           </template>
         </TableWrapper>
-        <Pagination :pagination="students" />
       </div>
     </div>
   </DashboardLayout>

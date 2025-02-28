@@ -33,17 +33,17 @@ class Semester extends Model
         "active" => "boolean",
     ];
 
-    public function scopeActive(Builder $query): Builder
-    {
-        return $query->where("active", true);
-    }
-
     /**
      * @return ?Semester
      */
     public static function getActive(): ?Model
     {
         return self::active()->first();
+    }
+
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where("active", true);
     }
 
     public function courses(): HasMany
