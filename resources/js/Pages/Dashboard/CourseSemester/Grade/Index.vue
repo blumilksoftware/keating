@@ -20,6 +20,7 @@ import Button from '@/Shared/Components/Buttons/Button.vue'
 import { ArrowLeftIcon, ArrowRightIcon, PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import GradeCell from '@/Shared/Components/GradeCell.vue'
 import { debounce } from 'lodash'
+import GradeCellManipulator from '@/Shared/Components/GradeCellManipulator.vue'
 
 const props = defineProps({
   course: Object,
@@ -89,6 +90,12 @@ function editColumn(column) {
 
 function reorder(id, down) {
   Inertia.post(`/dashboard/semester-courses/${props.course.id}/groups/${props.group.id}/grades/${id}/reorder/${down}`, {}, {
+    preserveScroll: true,
+  })
+}
+
+function upgradeGradeColumn(id, status) {
+  Inertia.patch(`/dashboard/semester-courses/${props.course.id}/groups/${props.group.id}/grades/${id}/all/${status}`, {}, {
     preserveScroll: true,
   })
 }
@@ -215,6 +222,11 @@ watch(searchForm, debounce(() => {
               <div v-if="showColumnMenu" class="mt-5 flex grow justify-between">
                 <PencilSquareIcon class="w-6" @click="editColumn(column)" />
                 <TrashIcon class="w-6" @click="[columnToDeleteId = column.id, showModal = true]" />
+              </div>
+              <div class="mt-5 flex justify-center bg-white/50">
+                <GradeCellManipulator background="bg-lime-200" @click="upgradeGradeColumn(column.id, true)" />
+                <GradeCellManipulator background="bg-rose-300" @click="upgradeGradeColumn(column.id, false)" />
+                <GradeCellManipulator background="bg-white" @click="upgradeGradeColumn(column.id, null)" />
               </div>
             </TableHeader>
           </template>

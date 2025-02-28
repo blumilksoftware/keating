@@ -10,8 +10,10 @@ class GradeObserver
 {
     public function updating(Grade $grade): void
     {
-        if ($grade->status === true && $grade->getOriginal("status") === false) {
-            $grade->status = null;
+        if (!$grade->massUpdated) {
+            if ($grade->status === true && $grade->getOriginal("status") === false) {
+                $grade->status = null;
+            }
         }
     }
 }

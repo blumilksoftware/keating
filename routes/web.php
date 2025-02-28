@@ -132,6 +132,7 @@ Route::middleware("auth")->prefix("dashboard")->group(function (): void {
         Route::post("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/store", "storeGrade")->name("course.semester.group.grades.store");
         Route::patch("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/update", "updateGrade")->name("course.semester.group.grades.update");
         Route::post("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/reorder/{down}", "reorder")->name("course.semester.group.grades.reorder");
+        Route::patch("/semester-courses/{course}/groups/{group}/grades/{gradeColumn}/all/{status}", "updateAll")->name("course.semester.group.grades.update.all");
     });
     Route::controller(SettingController::class)->group(function (): void {
         Route::get("/settings", "edit")->name("settings.edit");
