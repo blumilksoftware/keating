@@ -12,8 +12,10 @@ use Keating\DTOs\CourseSemesterData;
 use Keating\Http\Requests\UpdateGrade;
 use Keating\Http\Requests\UpdateGradeColumn;
 use Keating\Models\CourseSemester;
+use Keating\Models\Grade;
 use Keating\Models\GradeColumn;
 use Keating\Models\Group;
+use Keating\Models\Student;
 
 class GradeController
 {
@@ -102,6 +104,40 @@ class GradeController
             $columnToUpdate->priority = $tempColumnOrder;
             $gradeColumn->save();
             $columnToUpdate->save();
+        }
+
+        return redirect()
+            ->back()
+            ->with(["success" => "Kolejność zaktualizowana"]);
+    }
+
+    public function updateAll(CourseSemester $course, Group $group, GradeColumn $gradeColumn, string $status): RedirectResponse
+    {
+        $status = match($status) {
+            "true" => true,
+            "false" => false,
+            default => null,
+        };
+
+        /** @var Grade $grade */
+        foreach ($gradeColumn->grades as $grade) {
+            $grade->massUpdated = true;
+
+            if ($grade->status !== $status) {
+                $grade->update(["status" => $status]);
+            }
+        }
+
+        $gradedStudents = $gradeColumn->grades->pluck("student_id")->toArray();
+
+        /** @var Student $student */
+        foreach ($group->students as $student) {
+            if (!in_array($student->id, $gradedStudents, true)) {
+                $gradeColumn->grades()->create([
+                    "student_id" => $student->id,
+                    "status" => $status,
+                ]);
+            }
         }
 
         return redirect()

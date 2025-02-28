@@ -19,7 +19,7 @@
         "stevebauman/purify": "^6.2.2"
     },
     "require-dev": {
-        "blumilksoftware/codestyle": "^3.3",
+        "blumilksoftware/codestyle": "^4.0",
         "mockery/mockery": "^1.6.12",
         "nunomaduro/collision": "^8.5.0",
         "phpunit/phpunit": "^11.5.0",
