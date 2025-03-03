@@ -22,6 +22,7 @@ const isMailable = (contact) => {
     <a v-else
        :href="contact.identifier"
        class="flex w-full items-center justify-center text-center text-xl font-bold tracking-tight text-gray-900 sm:text-2xl"
+       target="_blank"
     >
       {{ contact.identifier }}
     </a>
