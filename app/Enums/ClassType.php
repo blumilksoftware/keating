@@ -13,11 +13,6 @@ enum ClassType: string
     case Exercises = "exercises";
     case Project = "project";
 
-    public function abbreviationLabel(): string
-    {
-        return self::abbreviationLabels()[$this->value];
-    }
-
     public static function labels(): array
     {
         return [
@@ -40,5 +35,10 @@ enum ClassType: string
             "exercises" => __("C"),
             "project" => __("P"),
         ];
+    }
+
+    public function abbreviationLabel(): string
+    {
+        return self::abbreviationLabels()[$this->value];
     }
 }

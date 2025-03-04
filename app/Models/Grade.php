@@ -23,6 +23,7 @@ class Grade extends Model
     use HasFactory;
     use HasUlids;
 
+    public bool $massUpdated = false;
     protected $fillable = [
         "status",
         "value",
