@@ -16,7 +16,7 @@ jobs:
     name: Test & lint PHP codebase
     timeout-minutes: 10
     if: github.event.pull_request.draft == false
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     services:
       pgsql:
         image: postgres:15.5-alpine3.17@sha256:1961f9d61a86948fb3c02ef87a6616f74f3530d10a1cd299b84abba7ed6db791
