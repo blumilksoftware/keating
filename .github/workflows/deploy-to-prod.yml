@@ -84,6 +84,9 @@ jobs:
           cache-from: type=gha, ref=${{ env.DOCKER_IMAGE_NAME }}-prod-build-cache
           cache-to: type=gha, ref=${{ env.DOCKER_IMAGE_NAME }}-prod-build-cache, mode=max
 
+      - name: set deployment path on server
+        run: echo "DEPLOYMENT_PATH_ON_SERVER=${{ env.TARGET_DIR_ON_SERVER }}/${{ env.DOCKER_REGISTRY_REPO_NAME }}/${{ env.APP_NAME }}" >> $GITHUB_ENV
+
       - name: copy files via ssh
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -95,7 +98,7 @@ jobs:
           key: ${{ secrets.VPS_OVH_BF7EC892_SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.VPS_OVH_BF7EC892_SSH_PRIVATE_KEY_PASSPHRASE }}
           source: "./environment/prod/deployment/prod/apps/${{ env.APP_NAME }}/*,./environment/prod/deployment/scripts/*, ./environment/prod/deployment/prod/Makefile, ./environment/prod/deployment/prod/docker-compose.dbprod.yml, ./environment/prod/deployment/prod/docker-compose.prod.yml, ./environment/prod/deployment/postgres/*"
-          target: ${{ env.TARGET_DIR_ON_SERVER }}/${{ env.DOCKER_REGISTRY_REPO_NAME }}/${{ env.APP_NAME }}
+          target: ${{ env.DEPLOYMENT_PATH_ON_SERVER }}
           rm: true
 
       - uses: appleboy/ssh-action@v1.0.3
@@ -109,7 +112,7 @@ jobs:
           passphrase: ${{ secrets.VPS_OVH_BF7EC892_SSH_PRIVATE_KEY_PASSPHRASE }}
           script_stop: true
           script: |
-            cd ${{ env.TARGET_DIR_ON_SERVER }}/${{ env.DOCKER_REGISTRY_REPO_NAME }}/${{ env.APP_NAME }}/environment/prod/deployment/prod/
+            cd ${{ env.DEPLOYMENT_PATH_ON_SERVER }}/environment/prod/deployment/prod/
             mv Makefile docker-compose.prod.yml docker-compose.dbprod.yml apps/${{ env.APP_NAME }}/
             cd apps/${{ env.APP_NAME }}
             make prod-deploy SOPS_AGE_KEY=${{ secrets.SOPS_AGE_PROD_SECRET_KEY }}
