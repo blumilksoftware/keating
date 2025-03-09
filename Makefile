@@ -65,6 +65,30 @@ encrypt-beta-secrets:
 decrypt-beta-secrets:
 	@$(MAKE) decrypt-secrets SECRETS_ENV=beta AGE_SECRET_KEY=${SOPS_AGE_BETA_SECRET_KEY}
 
+encrypt-krewak-prod-secrets:
+	@$(MAKE) encrypt-secrets-prod SECRETS_ENV=krewak
+
+decrypt-krewak-prod-secrets:
+	@$(MAKE) decrypt-secrets-prod SECRETS_ENV=krewak AGE_SECRET_KEY=${SOPS_AGE_PROD_SECRET_KEY}
+
+encrypt-eskrzypacz-prod-secrets:
+	@$(MAKE) encrypt-secrets-prod SECRETS_ENV=eskrzypacz
+
+decrypt-eskrzypacz-prod-secrets:
+	@$(MAKE) decrypt-secrets-prod SECRETS_ENV=eskrzypacz AGE_SECRET_KEY=${SOPS_AGE_PROD_SECRET_KEY}
+
+encrypt-kzygadlo-prod-secrets:
+	@$(MAKE) encrypt-secrets-prod SECRETS_ENV=kzygadlo
+
+decrypt-kzygadlo-prod-secrets:
+	@$(MAKE) decrypt-secrets-prod SECRETS_ENV=kzygadlo AGE_SECRET_KEY=${SOPS_AGE_PROD_SECRET_KEY}
+
+encrypt-kpiech-prod-secrets:
+	@$(MAKE) encrypt-secrets-prod SECRETS_ENV=kpiech
+
+decrypt-kpiech-prod-secrets:
+	@$(MAKE) decrypt-secrets-prod SECRETS_ENV=kpiech AGE_SECRET_KEY=${SOPS_AGE_PROD_SECRET_KEY}
+
 decrypt-secrets:
 	@docker compose exec --user "${CURRENT_USER_ID}:${CURRENT_USER_GROUP_ID}" --env SOPS_AGE_KEY=${AGE_SECRET_KEY} ${DOCKER_COMPOSE_APP_CONTAINER} \
 		bash -c "echo 'Decrypting ${SECRETS_ENV} secrets' \
@@ -77,6 +101,20 @@ encrypt-secrets:
 		bash -c "echo 'Encrypting ${SECRETS_ENV} secrets' \
 			&& cd ./environment/prod/deployment/${SECRETS_ENV} \
 			&& sops --encrypt --input-type=dotenv --output-type=dotenv --output .env.${SECRETS_ENV}.secrets .env.${SECRETS_ENV}.secrets.decrypted \
+			&& echo 'Done'"
+
+decrypt-secrets-prod:
+	@docker compose exec --user "${CURRENT_USER_ID}:${CURRENT_USER_GROUP_ID}" --env SOPS_AGE_KEY=${AGE_SECRET_KEY} ${DOCKER_COMPOSE_APP_CONTAINER} \
+		bash -c "echo 'Decrypting ${SECRETS_ENV} secrets' \
+			&& cd ./environment/prod/deployment/prod/apps/${SECRETS_ENV} \
+			&& sops --decrypt --input-type=dotenv --output-type=dotenv --output .env.prod.secrets.decrypted .env.prod.secrets \
+			&& echo 'Done'"
+
+encrypt-secrets-prod:
+	@docker compose exec --user "${CURRENT_USER_ID}:${CURRENT_USER_GROUP_ID}" ${DOCKER_COMPOSE_APP_CONTAINER} \
+		bash -c "echo 'Encrypting ${SECRETS_ENV} secrets' \
+			&& cd ./environment/prod/deployment/prod/apps/${SECRETS_ENV} \
+			&& sops --encrypt --input-type=dotenv --output-type=dotenv --output .env.prod.secrets .env.prod.secrets.decrypted \
 			&& echo 'Done'"
 
 .PHONY: init check-env-file build run stop restart shell shell-root test fix create-test-db queue encrypt-beta-secrets decrypt-beta-secrets
