@@ -97,8 +97,8 @@ function getIndex() {
                   </td>
                   <td class="block px-5 sm:table-cell">
                     <div class="flex">
-                      <input v-model="searchIndex" autocomplete="off" class="border-1 mr-3 block w-32 px-4 py-2.5 opacity-75 focus:!border-blue-900 focus:!text-blue-900 focus:!ring-0 sm:w-48">
-                      <SubmitButton class="min-h-max" @click="getIndex">
+                      <input v-model="searchIndex" autocomplete="off" class="border-1 mr-3 block w-32 px-4 py-2.5 opacity-75 focus:!border-blue-900 focus:!text-blue-900 focus:!ring-0 sm:w-48" @keyup.enter="getIndex()" />
+                      <SubmitButton class="min-h-max" @click="getIndex()">
                         <MagnifyingGlassIcon class="size-6" />
                       </SubmitButton>
                     </div>
@@ -106,6 +106,7 @@ function getIndex() {
                 </tr>
               </tbody>
             </table>
+
             <div v-if="index && indexExists" class="mt-5">
               <h3 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
                 Arkusz ocen i obecności
