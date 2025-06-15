@@ -1,5 +1,5 @@
 ### PHP DEPENDENCIES ###
-FROM composer:2.8.3@sha256:26bbf85fccb36247181de6f4a2beddac47d4b352c0c19249a3b4fa2abf1e38ad AS vendor
+FROM composer:2.8.9@sha256:eec936bdc4364a9f3f5984ef8764f10f67a5c4ffb127ac7d151d651b3611b4a8 AS vendor
 
 WORKDIR /app_composer_dependencies
 
@@ -28,7 +28,7 @@ COPY resources/css ./resources/css/
 RUN npm run build
 
 ### APPLICATION ###
-FROM php:8.3.14-fpm-bullseye@sha256:0bd459a1077bcb18e6869c77c46cef20e83e754aa11a7036c36f0e6a5ea254c2 AS app
+FROM php:8.4.8-fpm-bullseye@sha256:a2e151ddefcfb66322b195892992c1a20f6a8284e2e7412568c30d56272f69cc AS app
 
 COPY --from=vendor /usr/bin/composer /usr/local/bin/composer
 

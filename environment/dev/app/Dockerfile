@@ -1,4 +1,4 @@
-FROM alpine:3.21.0@sha256:21dc6063fd678b478f57c0e13f47560d0ea4eeba26dfc947b2a4f81f686b9f45 AS secops-tools
+FROM alpine:3.22.0@sha256:8a1f59ffb675680d47db6337b49d22281a139e9d709335b492be023728e11715 AS secops-tools
 
 # https://github.com/FiloSottile/age/releases
 ARG AGE_VERSION="1.1.1"
@@ -13,11 +13,11 @@ RUN wget --output-document age.tar.gz "https://github.com/FiloSottile/age/releas
     && wget --output-document /usr/local/bin/sops "https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.amd64" \
     && chmod +x /usr/local/bin/sops
 
-FROM composer/composer:2.8.3-bin@sha256:9f83907ae037ada989775f462a19932cdd388fefcbf3b697780363bba1767f94 AS composer-bin
+FROM composer/composer:2.8.9-bin@sha256:c9bda63056674836406cacfbbdd8ef770fb4692ac419c967034225213c64e11b AS composer-bin
 
 FROM node:21.7.3-bullseye-slim@sha256:50adaf5a166e4e3dc01e77e9bdb4c35e34ef32a1e9e26200019cddb2b154fb34 AS node
 
-FROM php:8.3.14-fpm-bullseye@sha256:0bd459a1077bcb18e6869c77c46cef20e83e754aa11a7036c36f0e6a5ea254c2
+FROM php:8.4.8-fpm-bullseye@sha256:a2e151ddefcfb66322b195892992c1a20f6a8284e2e7412568c30d56272f69cc
 
 COPY --from=composer-bin ./composer /usr/bin/composer
 COPY --from=secops-tools /usr/local/bin/age /usr/local/bin/age
