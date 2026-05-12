@@ -23,7 +23,7 @@ permissions:
 jobs:
   deploy:
     environment: production
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     name: Deploy to production - ${{ inputs.appName }}
     env:
       DOCKER_REGISTRY: registry.blumilk.pl
