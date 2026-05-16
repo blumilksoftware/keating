@@ -70,6 +70,25 @@ services:
             - keating-dev
         restart: unless-stopped
 
+    mailpit:
+      image: axllent/mailpit:v1.19.3@sha256:8fbe10f22c09c769ad678bd14e2f9858e41d5e199ea043efe207f85f279fd594
+      container_name: keating-mailpit-dev
+      labels:
+        - "traefik.enable=true"
+        - "traefik.blumilk.environment=true"
+        - "traefik.http.routers.keating-mailpit-http-router.rule=Host(`keating-mailpit.blumilk.localhost`)"
+        - "traefik.http.routers.keating-mailpit-http-router.entrypoints=web"
+        - "traefik.http.routers.keating-mailpit-https-router.rule=Host(`keating-mailpit.blumilk.localhost`)"
+        - "traefik.http.routers.keating-mailpit-https-router.entrypoints=websecure"
+        - "traefik.http.routers.keating-mailpit-https-router.tls=true"
+        - "traefik.http.services.keating-mailpit.loadbalancer.server.port=8025"
+      networks:
+        - keating-dev
+        - traefik-proxy-blumilk-local
+      ports:
+        - ${DOCKER_MAILPIT_DASHBOARD_HOST_PORT:-3854}:8025
+      restart: unless-stopped
+
     redis:
         image: redis:7.0.11-alpine3.17@sha256:cbcf5bfbc3eaa232b1fa99e539459f46915a41334d46b54bf894f8837a7f071e
         container_name: keating-redis-dev
