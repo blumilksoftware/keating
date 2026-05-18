@@ -1,5 +1,5 @@
 ### PHP DEPENDENCIES ###
-FROM composer:2.8.3@sha256:26bbf85fccb36247181de6f4a2beddac47d4b352c0c19249a3b4fa2abf1e38ad AS vendor
+FROM composer:2.8.12@sha256:5248900ab8b5f7f880c2d62180e40960cd87f60149ec9a1abfd62ac72a02577c AS vendor
 
 WORKDIR /app_composer_dependencies
 
