@@ -28,18 +28,18 @@ COPY resources/css ./resources/css/
 RUN npm run build
 
 ### APPLICATION ###
-FROM php:8.3.14-fpm-bullseye@sha256:0bd459a1077bcb18e6869c77c46cef20e83e754aa11a7036c36f0e6a5ea254c2 AS app
+FROM php:8.3.36-fpm-bookworm@sha256:873477b804576792889aac5b055e8e92077596b19d42747c0cf85a12229d06dd AS app
 
 COPY --from=vendor /usr/bin/composer /usr/local/bin/composer
 
 # For other versions check: http://nginx.org/packages/mainline/debian/pool/nginx/n/nginx/
-ARG NGINX_VERSION="1.25.0-1~bullseye"
+ARG NGINX_VERSION="1.25.2-1~bookworm"
 ARG PHPREDIS_VERSION=6.0.2
 
 RUN apt-get update \
     && apt-get install --assume-yes gpg \
     && curl https://nginx.org/keys/nginx_signing.key | gpg --dearmour --output /etc/apt/trusted.gpg.d/apt.nginx.org.gpg > /dev/null \
-    && echo "deb https://nginx.org/packages/mainline/debian bullseye nginx" | tee /etc/apt/sources.list.d/nginx.list \
+    && echo "deb https://nginx.org/packages/mainline/debian bookworm nginx" | tee /etc/apt/sources.list.d/nginx.list \
     && apt-get update && apt-get install --assume-yes \
         nginx=${NGINX_VERSION} \
         libzip-dev \
