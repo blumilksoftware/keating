@@ -33,7 +33,7 @@ FROM php:8.3.36-fpm-bookworm@sha256:873477b804576792889aac5b055e8e92077596b19d42
 COPY --from=vendor /usr/bin/composer /usr/local/bin/composer
 
 # For other versions check: http://nginx.org/packages/mainline/debian/pool/nginx/n/nginx/
-ARG NGINX_VERSION="1.25.2-1~bookworm"
+ARG NGINX_VERSION="1.31.9-1~bookworm"
 ARG PHPREDIS_VERSION=6.0.2
 
 RUN apt-get update \
