@@ -28,7 +28,7 @@ COPY resources/css ./resources/css/
 RUN npm run build
 
 ### APPLICATION ###
-FROM php:8.3.36-fpm-bookworm@sha256:873477b804576792889aac5b055e8e92077596b19d42747c0cf85a12229d06dd AS app
+FROM php:8.3.37-fpm-bookworm@sha256:ff3db7724750bf02a3c7d65be2790feb63f6173c2fb201328eb0a2295ca32041 AS app
 
 COPY --from=vendor /usr/bin/composer /usr/local/bin/composer
 
